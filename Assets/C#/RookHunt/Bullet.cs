@@ -15,8 +15,8 @@ public class Bullet : MonoBehaviour
         RookHuntGameController RHControllerCS = _BridgeForLinks.BF_RookHuntGameController;
         StartCoroutine(WaitDelete());
         
-        CollidersInZone = Physics2D.OverlapCircleAll(transform.position, 0.015f);
-        if (CollidersInZone .Length==0  ) return;
+        CollidersInZone = Physics2D.OverlapCircleAll(transform.position, 0.005f);
+        if (CollidersInZone.Length == 0) return;
         switch (CollidersInZone[0].gameObject.tag)
         {
             case "RankedPlayButton":
@@ -27,21 +27,17 @@ public class Bullet : MonoBehaviour
                 break;
 
             default:
-                if (CollidersInZone == null) return;
-
                 RHControllerCS.Shoots--;
                 Collider2D cover = null;
                 foreach (Collider2D _coll in CollidersInZone)
                 {
-                    if (!_coll.gameObject.CompareTag("Enemy"))
-                    {
-                        cover = _coll;
-                    }
+                    if (_coll.gameObject.CompareTag("Cover"))
+                        cover = cover == null ? _coll : cover.transform.position.z < _coll.transform.position.z? cover : _coll;
                 }
                 foreach (Collider2D _coll in CollidersInZone)
                 {
-                    if (_coll.tag == "Enemy" && _coll.transform.position.z < (cover ? cover.transform.position.z : 0))
-                        Destroy(_coll.gameObject);
+                    if (_coll.GetComponentInParent<Enemy>() != null && _coll.transform.position.z < (cover == null ? 0 : cover.transform.position.z))
+                        Destroy(_coll.gameObject.GetComponentInParent<Enemy>().gameObject);
                 }
                 break;
         }

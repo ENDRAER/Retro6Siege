@@ -10,6 +10,7 @@ TagManager:
   - InfModePlayButton
   - Spawn
   - Enemy
+  - Cover
   layers:
   - Default
   - TransparentFX
