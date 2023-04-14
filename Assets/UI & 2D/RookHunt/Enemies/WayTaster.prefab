@@ -53,11 +53,18 @@ MonoBehaviour:
   Step: 0
   Speed: 35
   RepeatAfterDone: 1
+  WalkType: 0
   _SpriteRenderer: {fileID: 1317718087024333303}
   SpritesAnim:
   - {fileID: 741299083, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
   - {fileID: 550845709, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
   AnimDelay: 0.2
+  a: 1
+  b: 1
+  c: 1
+  AlertGO: {fileID: 0}
+  ShootingDelay: 0
+  PostShootingDelay: 0
 --- !u!50 &1317718086435399976
 Rigidbody2D:
   serializedVersion: 4

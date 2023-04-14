@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 using System;
+using System.Data.SqlTypes;
 
 public class Enemy : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private SpriteRenderer _SpriteRenderer;
     [SerializeField] private Sprite[] SpritesAnim;
     [SerializeField] private float AnimDelay;
-
+    
     [Header("Shooting")]
     [SerializeField] private GameObject AlertGO;
     [SerializeField] private float ShootingDelay;
@@ -28,9 +29,9 @@ public class Enemy : MonoBehaviour
 
     private void FixedUpdate()
     {
-        transform.position = new Vector3(transform.position.x, transform.position.y, -0.2f + 0.15f / 5f * transform.position.y);
-        transform.localScale = new Vector3(1, 1, 1) * (1.53f - (0.7f / 2.91f * transform.position.y));
-        
+        transform.position = new Vector3(transform.position.x, transform.position.y, -1 + 1 / 6.5f * transform.position.y);
+        transform.localScale = new Vector3(1, 1, 1) * (1.56f - (1.91f / 7.24f * transform.position.y));
+
         if (WalkType != _WalkType.Stop)
         {
             if (!_WayCreator) return;

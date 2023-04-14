@@ -369,27 +369,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BulletSprite_0
-      rect:
-        serializedVersion: 2
-        x: 35
-        y: 0
-        width: 5
-        height: 2
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a1429113c6228e744a348a0493aa0eb8
-      internalID: -735625053
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Hit
       rect:
         serializedVersion: 2
@@ -411,56 +390,14 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: BulletSprite_1
-      rect:
-        serializedVersion: 2
-        x: 35
-        y: 0
-        width: 5
-        height: 4
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e8bebedca0e91fc49af00269fafca7f1
-      internalID: -1939119282
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BulletSprite_2
-      rect:
-        serializedVersion: 2
-        x: 35
-        y: 0
-        width: 5
-        height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 76d8583d4f282744a94143576d259e8a
-      internalID: -1632961517
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: BulletSprite_3
+      name: BulletSprite
       rect:
         serializedVersion: 2
         x: 35
         y: 0
         width: 5
         height: 8
-      alignment: 0
+      alignment: 9
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
@@ -469,6 +406,27 @@ TextureImporter:
       bones: []
       spriteID: ee95ed3ccb591ae41bdb7663f78c4c40
       internalID: 1322744840
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sace
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 54
+        width: 1
+        height: 1
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 965c549664a9b6d48856e2bc1fbde5a2
+      internalID: 531420674
       vertices: []
       indices: 
       edges: []
@@ -484,10 +442,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      BulletSprite: 1322744840
       BulletSprite_0: -735625053
       BulletSprite_1: -1939119282
       BulletSprite_2: -1632961517
-      BulletSprite_3: 1322744840
       BulletSprite_4: 861801798
       Bullets: 572752722
       Hit: -965777936
@@ -501,6 +459,7 @@ TextureImporter:
       Op_Thermite: 701628921
       Op_Zoofilia: 2128054813
       PerfectScore: 2137462454
+      Sace: 531420674
       Score: -1836107458
   spritePackingTag: 
   pSDRemoveMatte: 0

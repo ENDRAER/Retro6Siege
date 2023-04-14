@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Collections;
+using UnityEngine.UI;
 using UnityEngine;
 using System;
 
@@ -16,7 +17,7 @@ public class RookHuntGameController : MonoBehaviour
     [SerializeField] public double Shoots;
 
     [Header("UI")]
-    [SerializeField] public GameObject[] ShootsUI;
+    [SerializeField] public Image[] BulletsImg;
 
 
     [Header("Ranked")]
@@ -83,6 +84,9 @@ public class RookHuntGameController : MonoBehaviour
 
     public void MagazineUpdate()
     {
-
+        for (int i = 0; i < BulletsImg.Length; i++)
+        {
+            BulletsImg[i].fillAmount = i + (float)Shoots;
+        }
     }
 }
