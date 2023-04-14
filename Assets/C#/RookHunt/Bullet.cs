@@ -27,7 +27,6 @@ public class Bullet : MonoBehaviour
                 break;
 
             default:
-                RHControllerCS.Shoots--;
                 Collider2D cover = null;
                 foreach (Collider2D _coll in CollidersInZone)
                 {
@@ -37,7 +36,16 @@ public class Bullet : MonoBehaviour
                 foreach (Collider2D _coll in CollidersInZone)
                 {
                     if (_coll.GetComponentInParent<Enemy>() != null && _coll.transform.position.z < (cover == null ? 0 : cover.transform.position.z))
+                    {
                         Destroy(_coll.gameObject.GetComponentInParent<Enemy>().gameObject);
+                        RHControllerCS.Shoots += 0.5;
+                        RHControllerCS.MagazineUpdate();
+                    }
+                    else
+                    {
+                        RHControllerCS.Shoots--;
+                        RHControllerCS.MagazineUpdate();
+                    }
                 }
                 break;
         }

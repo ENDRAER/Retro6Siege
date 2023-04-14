@@ -12,8 +12,12 @@ public class RookHuntGameController : MonoBehaviour
     [SerializeField] private Dictionary<string, WayCreator> WaysKey;
     [SerializeField] private GameObject[] EnemyPF;
     [SerializeField] private GameObject[] SpecialEnemyPF;
-    [SerializeField] public int Shoots;
     [SerializeField] private float SpawnSpeed;
+    [SerializeField] public double Shoots;
+
+    [Header("UI")]
+    [SerializeField] public GameObject[] ShootsUI;
+
 
     [Header("Ranked")]
     [SerializeField] private GameObject[] Enemies;
@@ -76,4 +80,9 @@ public class RookHuntGameController : MonoBehaviour
         StartCoroutine(EnemySpawn());
     }
     #endregion
+
+    public void MagazineUpdate()
+    {
+
+    }
 }
