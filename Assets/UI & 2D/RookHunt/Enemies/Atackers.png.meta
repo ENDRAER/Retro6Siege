@@ -557,6 +557,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Ping
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 71
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9a6b4d16dee1ea4ebdd9fc25f01ef11
+      internalID: 1996243770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -585,6 +606,7 @@ TextureImporter:
       Montagne_0: -597427337
       Montagne_1: -1969868684
       Montagne_2: 756153483
+      Ping: 1996243770
       Sledge_0: 1907749874
       Sledge_1: -603458648
       Ying_0: 741299083

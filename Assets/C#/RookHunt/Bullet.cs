@@ -1,11 +1,15 @@
-using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
+using System;
+using TMPro;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] private float waitTime;
-    [SerializeField] private BridgeForLinks _BridgeForLinks;
+    [SerializeField] private float TimeToDestroy;
+    [SerializeField] private GameObject UpScorePF;
+    [NonSerialized] private BridgeForLinks _BridgeForLinks;
+
 
     private Collider2D[] CollidersInZone;
 
@@ -14,11 +18,11 @@ public class Bullet : MonoBehaviour
         _BridgeForLinks = GameObject.Find("3D Camera").gameObject.GetComponent<BridgeForLinks>();
         RookHuntGameController RHControllerCS = _BridgeForLinks.BF_RookHuntGameController;
         RHControllerCS.Shoots--;
-        RHControllerCS.MagazineUpdate();
-        StartCoroutine(WaitDelete());
+        StartCoroutine(TimeToDestroyCor());
+        bool resetMultiplier = true;
         
         CollidersInZone = Physics2D.OverlapCircleAll(transform.position, 0.005f);
-        if (CollidersInZone.Length == 0)
+        if (CollidersInZone.Length != 0)
         {
             switch (CollidersInZone[0].gameObject.tag)
             {
@@ -40,21 +44,31 @@ public class Bullet : MonoBehaviour
                     {
                         if (_coll.GetComponentInParent<Enemy>() != null && _coll.transform.position.z < (cover == null ? 0 : cover.transform.position.z))
                         {
-                            Destroy(_coll.gameObject.GetComponentInParent<Enemy>().gameObject);
+                            resetMultiplier = false;
+                            GameObject UpScoreGO = Instantiate(UpScorePF, transform.position, Quaternion.identity);
+                            UpScoreGO.transform.SetParent(GameObject.Find("CenterForUI").transform);
+                            UpScoreGO.GetComponent<RectTransform>().position = new Vector2(_coll.transform.position.x, _coll.transform.position.y);
+                            UpScoreGO.GetComponent<TextMeshProUGUI>().text = "+" + (100 * (1 + RHControllerCS.KillStreak * 0.2)).ToString();
+
+                            RHControllerCS.Score += (int)(100 * (1 + RHControllerCS.KillStreak * 0.2));
+                            RHControllerCS.KillStreak++;
                             RHControllerCS.Shoots += 1.5;
+
+                            UpScoreGO.GetComponent<TextMeshProUGUI>().color = Color.white;
+                            Destroy(_coll.gameObject.GetComponentInParent<Enemy>().gameObject);
                         }
                     }
                     break;
             }
         }
-        RHControllerCS.MagazineUpdate();
+        if (resetMultiplier)
+            RHControllerCS.KillStreak = 0;
+        RHControllerCS.StatUpdate();
     }
 
-    private IEnumerator WaitDelete()
+    private IEnumerator TimeToDestroyCor()
     {
-        yield return new WaitForSeconds(0.2f);
-        Destroy(gameObject.GetComponent<CircleCollider2D>());
-        yield return new WaitForSeconds(waitTime - 0.2f);
+        yield return new WaitForSeconds(TimeToDestroy);
         Destroy(gameObject);
     }
 }

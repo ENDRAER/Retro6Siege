@@ -45,8 +45,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b043b88472d459c428c832edbcc066f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waitTime: 0.5
-  _BridgeForLinks: {fileID: 0}
+  TimeToDestroy: 0.5
+  TimeToDestroyAfterKill: 2
+  UpScorePF: {fileID: 6169367417636358497, guid: 9f24c874fa910954fbcc0e143809ebe2, type: 3}
+  MovementLenght: 0.05
+  MovementSpeed: 0.02
 --- !u!212 &2645367442998763702
 SpriteRenderer:
   m_ObjectHideFlags: 0

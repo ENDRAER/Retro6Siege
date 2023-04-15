@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 using System;
-using System.Data.SqlTypes;
+using Unity.VisualScripting;
 
 public class Enemy : MonoBehaviour
 {
@@ -27,10 +27,17 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float PostShootingDelay;
 
 
+    private void Start()
+    {
+        if(!RepeatAfterDone)
+            StartCoroutine(YouShouldKillUrSelf());
+        StartCoroutine(Animation());
+    }
+
     private void FixedUpdate()
     {
         transform.position = new Vector3(transform.position.x, transform.position.y, -1 + 1 / 6.5f * transform.position.y);
-        transform.localScale = new Vector3(1, 1, 1) * (1.56f - (1.91f / 7.24f * transform.position.y));
+        transform.localScale = new Vector3(1, 1, 1) * (1.77f - (5.08f / 23.6f * transform.position.y));
 
         if (WalkType != _WalkType.Stop)
         {
@@ -66,6 +73,9 @@ public class Enemy : MonoBehaviour
     {
         AlertGO.SetActive(true);
         yield return new WaitForSeconds(ShootingDelay);
+        RookHuntGameController _RHC = GameObject.Find("CenterForUI").GetComponent<RookHuntGameController>();
+        _RHC.Shoots--;
+        _RHC.MagazineUpdate();
         AlertGO.SetActive(false);
         yield return new WaitForSeconds(PostShootingDelay);
     }
@@ -77,5 +87,11 @@ public class Enemy : MonoBehaviour
         _SpriteRenderer.sprite = SpritesAnim[1];
         yield return new WaitForSeconds(AnimDelay);
         StartCoroutine(Animation());
+    }
+
+    public IEnumerator YouShouldKillUrSelf()
+    {
+        yield return new WaitForSeconds(10);
+        Destroy(gameObject);
     }
 }

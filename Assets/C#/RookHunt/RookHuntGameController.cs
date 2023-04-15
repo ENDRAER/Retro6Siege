@@ -3,21 +3,24 @@ using System.Collections;
 using UnityEngine.UI;
 using UnityEngine;
 using System;
+using TMPro;
 
 public class RookHuntGameController : MonoBehaviour
 {
     [SerializeField] private GameObject MenuGO;
     [SerializeField] private GameObject[] MapsPF;
-    [SerializeField] private WayCreator[] Ways;
-    [SerializeField] private bool IsKaliWayExist;
-    [SerializeField] private Dictionary<string, WayCreator> WaysKey;
+    [NonSerialized]  private WayCreator[] Ways;
+    [NonSerialized] private bool IsKaliWayExist;
     [SerializeField] private GameObject[] EnemyPF;
     [SerializeField] private GameObject[] SpecialEnemyPF;
     [SerializeField] private float SpawnSpeed;
     [SerializeField] public double Shoots;
-
+    [SerializeField] public int KillStreak;
+    [SerializeField] public int Score;
     [Header("UI")]
     [SerializeField] public Image[] BulletsImg;
+    [SerializeField] public TextMeshProUGUI MultiplierText;
+    [SerializeField] public TextMeshProUGUI ScoreText;
 
 
     [Header("Ranked")]
@@ -48,9 +51,11 @@ public class RookHuntGameController : MonoBehaviour
         foreach (GameObject obj in _GO)
         {
             Ways[a] = obj.GetComponent<WayCreator>();
+            IsKaliWayExist = Ways[a].KaliWay;
             a++;
         }
         #endregion
+
         MenuGO.SetActive(false);
         StartCoroutine(EnemySpawn());
     }
@@ -73,7 +78,6 @@ public class RookHuntGameController : MonoBehaviour
             GameObject _EnemyGO = Instantiate(SpecialEnemyPF[enemyID], Ways[wayID].transform.position, Quaternion.identity);
 
             Enemy _EnemyCS = _EnemyGO.GetComponent<Enemy>();
-            _EnemyCS.StartCoroutine(_EnemyCS.Animation());
             _EnemyCS._WayCreator = Ways[wayID];
         }
 
@@ -82,11 +86,21 @@ public class RookHuntGameController : MonoBehaviour
     }
     #endregion
 
+    #region UpdateValues
+    public void StatUpdate()
+    {
+        MagazineUpdate();
+        MultiplierText.text = KillStreak + " STREAK (" + (1 + KillStreak * 0.2f) + "x Multiplier)";
+        ScoreText.text = Score.ToString();
+    }
+
     public void MagazineUpdate()
     {
+        Shoots = Shoots > 1 ? 1 : Shoots < -3 ? -3 : Shoots;
         for (int i = 0; i < BulletsImg.Length; i++)
         {
             BulletsImg[i].fillAmount = i + (float)Shoots;
         }
     }
+    #endregion
 }
