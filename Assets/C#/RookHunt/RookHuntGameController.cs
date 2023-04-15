@@ -11,8 +11,8 @@ public class RookHuntGameController : MonoBehaviour
     [SerializeField] private GameObject[] MapsPF;
     [NonSerialized]  private WayCreator[] Ways;
     [NonSerialized] private bool IsKaliWayExist;
-    [SerializeField] private GameObject[] EnemyPF;
-    [SerializeField] private GameObject[] SpecialEnemyPF;
+    [SerializeField] private List<GameObject> EnemyPF;
+    [SerializeField] private List<GameObject> SpecialEnemyPF;
     [SerializeField] private float SpawnSpeed;
     [SerializeField] public double Shoots;
     [SerializeField] public int KillStreak;
@@ -21,6 +21,7 @@ public class RookHuntGameController : MonoBehaviour
     [SerializeField] public Image[] BulletsImg;
     [SerializeField] public TextMeshProUGUI MultiplierText;
     [SerializeField] public TextMeshProUGUI ScoreText;
+    public List<GameObject> ASS;
 
 
     [Header("Ranked")]
@@ -62,10 +63,10 @@ public class RookHuntGameController : MonoBehaviour
 
     private IEnumerator EnemySpawn()
     {
-        if (UnityEngine.Random.Range(0, 100) < 80)
+        if (UnityEngine.Random.Range(0, 100) < 90)
         {
             int wayID = UnityEngine.Random.Range(0, Ways.Length - (IsKaliWayExist? 1 : 0));
-            GameObject _EnemyGO = Instantiate(EnemyPF[UnityEngine.Random.Range(0, EnemyPF.Length)], Ways[wayID].transform.position, Quaternion.identity);
+            GameObject _EnemyGO = Instantiate(EnemyPF[UnityEngine.Random.Range(0, EnemyPF.Count)], Ways[wayID].transform.position, Quaternion.identity);
 
             Enemy _EnemyCS = _EnemyGO.GetComponent<Enemy>();
             _EnemyCS.StartCoroutine(_EnemyCS.Animation());
@@ -73,7 +74,7 @@ public class RookHuntGameController : MonoBehaviour
         }
         else
         {
-            int enemyID = UnityEngine.Random.Range(0, SpecialEnemyPF.Length); 
+            int enemyID = UnityEngine.Random.Range(0, SpecialEnemyPF.Count); 
             int wayID = UnityEngine.Random.Range(enemyID == 0 ? (IsKaliWayExist == true ? Ways.Length - 1 : 0) : 0, Ways.Length - (IsKaliWayExist? 1 : 0));
             GameObject _EnemyGO = Instantiate(SpecialEnemyPF[enemyID], Ways[wayID].transform.position, Quaternion.identity);
 
