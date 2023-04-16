@@ -15,8 +15,15 @@ public class InputBridge : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    private void Update()
+    void FixedUpdate() 
     {
+        transform.eulerAngles += new Vector3(-Input.GetAxis("Mouse Y") * RotSpeed, Input.GetAxis("Mouse X") * RotSpeed);
+        if (transform.eulerAngles.x < MaxRot && transform.eulerAngles.x > 180)
+            transform.eulerAngles = new Vector3(MaxRot, transform.eulerAngles.y);
+        if (transform.eulerAngles.x > MinRot && transform.eulerAngles.x <= 180)
+            transform.eulerAngles = new Vector3(MinRot, transform.eulerAngles.y);
+
+        Application.targetFrameRate = maxFPS;
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
         {
             RaycastHit hit;
@@ -29,15 +36,5 @@ public class InputBridge : MonoBehaviour
             }
         }
     }
-
-    void LateUpdate() 
-    {
-        Application.targetFrameRate = maxFPS;
-        transform.eulerAngles += new Vector3(-Input.GetAxis("Mouse Y") * RotSpeed, Input.GetAxis("Mouse X") * RotSpeed);
-        if (transform.eulerAngles.x < MaxRot && transform.eulerAngles.x > 180)
-            transform.eulerAngles = new Vector3(MaxRot, transform.eulerAngles.y);
-        if (transform.eulerAngles.x > MinRot && transform.eulerAngles.x <= 180)
-            transform.eulerAngles = new Vector3(MinRot, transform.eulerAngles.y);
-    }
 }
-// 2d scene = screen * 3.365
+// 2d scene = TV screen * 3.365
