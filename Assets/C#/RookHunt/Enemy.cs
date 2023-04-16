@@ -1,17 +1,16 @@
-using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
 using System;
-using Unity.VisualScripting;
+using System.Collections.Generic;
 
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private GameObject GOTexture;
     [SerializeField] private Rigidbody2D RB2D;
-    [SerializeField] private Collider2D[] Colliders;
     [SerializeField] public WayCreator _WayCreator;
     [SerializeField] private enum _WalkType { Straigh, Stop, BetweenPoints }
     [SerializeField] private _WalkType WalkType = _WalkType.Straigh;
+    [SerializeField] private bool ShootingStarted;
     [SerializeField] private bool Invincible;
     [SerializeField] private int Step;
     [SerializeField] private float Speed;
@@ -20,6 +19,7 @@ public class Enemy : MonoBehaviour
     [Header("Animation")]
     [SerializeField] private SpriteRenderer _SpriteRenderer;
     [SerializeField] private Sprite[] SpritesAnim;
+    [SerializeField] private List<Sprite[]> SpritesAni23131231m;
     [SerializeField] private float AnimDelay;
 
     [Header("Shooting")]
@@ -69,7 +69,12 @@ public class Enemy : MonoBehaviour
             }
             else if (WalkType == _WalkType.BetweenPoints && _WayCreator.ShootingMoment == Step)
             {
-                Speed /= 2;
+                if (!ShootingStarted)
+                {
+                    Speed /= 2;
+                    ShootingStarted = true;
+                    StartCoroutine(EnemyShoot());
+                }
                 StartCoroutine(GoBackWhenISay());
                 WalkType = _WalkType.Straigh;
             }
@@ -78,7 +83,7 @@ public class Enemy : MonoBehaviour
 
     public IEnumerator GoBackWhenISay()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         Step--;
         WalkType = _WalkType.BetweenPoints;
     }

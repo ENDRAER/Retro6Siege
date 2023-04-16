@@ -53,7 +53,7 @@ public class Bullet : MonoBehaviour
                             RHControllerCS.KillStreak++;
                             RHControllerCS.Shoots += 1.5;
 
-                            UpScoreGO.GetComponent<TextMeshProUGUI>().color = new Color(1, 1 - (0.1f * RHControllerCS.KillStreak), 1 - (0.1f * RHControllerCS.KillStreak));
+                            UpScoreGO.GetComponent<TextMeshProUGUI>().color = new Color(1, 1 - (0.05f * RHControllerCS.KillStreak), 1 - (0.05f * RHControllerCS.KillStreak));
                             Destroy(_coll.gameObject.GetComponentInParent<Enemy>().gameObject);
                         }
                     }

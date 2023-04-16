@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Collections;
+using Unity.Mathematics;
 using UnityEngine.UI;
 using UnityEngine;
 using System;
@@ -21,7 +22,6 @@ public class RookHuntGameController : MonoBehaviour
     [SerializeField] public Image[] BulletsImg;
     [SerializeField] public TextMeshProUGUI MultiplierText;
     [SerializeField] public TextMeshProUGUI ScoreText;
-    public List<GameObject> ASS;
 
 
     [Header("Ranked")]
@@ -31,7 +31,7 @@ public class RookHuntGameController : MonoBehaviour
 
     private void Start()
     {
-        MenuGO.SetActive(true);
+        //MenuGO.SetActive(true);
     }
 
     #region Ranked
@@ -97,7 +97,7 @@ public class RookHuntGameController : MonoBehaviour
 
     public void MagazineUpdate()
     {
-        Shoots = Shoots > 1 ? 1 : Shoots < -3 ? -3 : Shoots;
+        Shoots = math.clamp(Shoots, -3, 1);
         for (int i = 0; i < BulletsImg.Length; i++)
         {
             BulletsImg[i].fillAmount = i + (float)Shoots;

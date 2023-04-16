@@ -1,3 +1,4 @@
+using Unity.Mathematics;
 using UnityEngine;
 
 public class InputBridge : MonoBehaviour
@@ -15,13 +16,10 @@ public class InputBridge : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    void FixedUpdate() 
+    void LateUpdate() 
     {
         transform.eulerAngles += new Vector3(-Input.GetAxis("Mouse Y") * RotSpeed, Input.GetAxis("Mouse X") * RotSpeed);
-        if (transform.eulerAngles.x < MaxRot && transform.eulerAngles.x > 180)
-            transform.eulerAngles = new Vector3(MaxRot, transform.eulerAngles.y);
-        if (transform.eulerAngles.x > MinRot && transform.eulerAngles.x <= 180)
-            transform.eulerAngles = new Vector3(MinRot, transform.eulerAngles.y);
+        transform.eulerAngles = new Vector3(Mathf.Clamp((transform.eulerAngles.x > 200? -(360 - transform.eulerAngles.x) : transform.eulerAngles.x), MinRot, MaxRot), transform.eulerAngles.y);
 
         Application.targetFrameRate = maxFPS;
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
@@ -31,7 +29,7 @@ public class InputBridge : MonoBehaviour
             {
                 if (hit.transform.gameObject.tag == "Screen")
                 {
-                    GameObject HitColider = Instantiate(HitColiderGO, new Vector3(Zero2.position.x + (hit.point.x * 3.365f), Zero2.position.y + (hit.point.y * 3.365f), -2), new Quaternion(0, 0, 0, 0)); 
+                    GameObject HitColider = Instantiate(HitColiderGO, new Vector3(Zero2.position.x + (hit.point.x * 3.365f), Zero2.position.y + (hit.point.y * 3.365f), -2), new Quaternion(0, 0, 0, 0));
                 }
             }
         }
