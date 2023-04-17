@@ -19,7 +19,8 @@ public class Enemy : MonoBehaviour
     [Header("Animation")]
     [SerializeField] private SpriteRenderer _SpriteRenderer;
     [SerializeField] private Sprite[] SpritesAnim;
-    [SerializeField] private List<Sprite[]> SpritesAni23131231m;
+    [SerializeField] private byte BackWalkTimes;
+    [SerializeField] private byte AnimID;
     [SerializeField] private float AnimDelay;
 
     [Header("Shooting")]
@@ -39,6 +40,7 @@ public class Enemy : MonoBehaviour
     {
         transform.position = new Vector3(transform.position.x, transform.position.y, -1 + 1 / 6.5f * transform.position.y);
         transform.localScale = new Vector3(1, 1, 1) * (1.77f - (5.08f / 23.6f * transform.position.y));
+        AlertGO.transform.rotation = Quaternion.Euler(0, 0, 0);
 
         if (WalkType != _WalkType.Stop)
         {
@@ -56,7 +58,6 @@ public class Enemy : MonoBehaviour
                         Destroy(gameObject);
                     else if (gameObject.name == "Kali(Clone)" && _WayCreator.KaliWay)
                     {
-                        AlertGO.transform.rotation = Quaternion.Euler(0, 0, 0);
                         WalkType = _WalkType.Stop;
                         StartCoroutine(EnemyShoot());
                     }
@@ -67,11 +68,18 @@ public class Enemy : MonoBehaviour
                     }
                 }
             }
-            else if (WalkType == _WalkType.BetweenPoints && _WayCreator.ShootingMoment == Step)
+            else if (WalkType == _WalkType.BetweenPoints && _WayCreator.ShootingMoment + 1 == Step)
             {
                 if (!ShootingStarted)
                 {
-                    Speed /= 2;
+                    if (gameObject.name == "Blitz(Clone)")
+                    {
+                        AnimID += 2;
+                        Invincible = false;
+                        Speed *= 1.5f;
+                    }
+                    else
+                        Speed /= 2;
                     ShootingStarted = true;
                     StartCoroutine(EnemyShoot());
                 }
@@ -83,9 +91,23 @@ public class Enemy : MonoBehaviour
 
     public IEnumerator GoBackWhenISay()
     {
-        yield return new WaitForSeconds(1f);
-        Step--;
-        WalkType = _WalkType.BetweenPoints;
+        BackWalkTimes--;
+        if (BackWalkTimes != 0)
+        {
+            yield return new WaitForSeconds(Speed / 15);
+            Step--;
+            WalkType = _WalkType.BetweenPoints;
+        }
+        else if (gameObject.name == "Blitz(Clone)")
+        {
+            AnimID -= 2;
+            Invincible = true;
+            Speed /= 1.5f;
+        }
+        else
+        {
+            Speed *= 2;
+        }
     }
 
     public IEnumerator EnemyShoot()
@@ -99,18 +121,18 @@ public class Enemy : MonoBehaviour
         yield return new WaitForSeconds(PostShootingDelay);
     }
 
-    public IEnumerator Animation()
-    {
-        _SpriteRenderer.sprite = SpritesAnim[0];
-        yield return new WaitForSeconds(AnimDelay);
-        _SpriteRenderer.sprite = SpritesAnim[1];
-        yield return new WaitForSeconds(AnimDelay);
-        StartCoroutine(Animation());
-    }
-
     public IEnumerator YouShouldKillUrSelf()
     {
         yield return new WaitForSeconds(10);
         Destroy(gameObject);
+    }
+
+    public IEnumerator Animation()
+    {
+        _SpriteRenderer.sprite = SpritesAnim[0 + AnimID];
+        yield return new WaitForSeconds(AnimDelay);
+        _SpriteRenderer.sprite = SpritesAnim[1 + AnimID];
+        yield return new WaitForSeconds(AnimDelay);
+        StartCoroutine(Animation());
     }
 }

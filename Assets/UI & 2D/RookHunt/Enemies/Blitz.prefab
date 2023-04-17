@@ -206,9 +206,9 @@ MonoBehaviour:
   _WayCreator: {fileID: 0}
   WalkType: 2
   ShootingStarted: 0
-  Invincible: 0
+  Invincible: 1
   Step: 0
-  Speed: 20
+  Speed: 10
   RepeatAfterDone: 0
   _SpriteRenderer: {fileID: 956186686806893845}
   SpritesAnim:
@@ -216,9 +216,11 @@ MonoBehaviour:
   - {fileID: -1600914372, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
   - {fileID: -1686677651, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
   - {fileID: 2099738546, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
+  BackWalkTimes: 3
+  AnimID: 0
   AnimDelay: 0.2
   AlertGO: {fileID: 1674855937548124617}
-  ShootingDelay: 1
+  ShootingDelay: 3
   PostShootingDelay: 200
 --- !u!50 &956186687328918986
 Rigidbody2D:
