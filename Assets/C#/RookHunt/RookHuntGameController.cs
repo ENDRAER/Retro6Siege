@@ -63,7 +63,7 @@ public class RookHuntGameController : MonoBehaviour
 
     private IEnumerator EnemySpawn()
     {
-        if (UnityEngine.Random.Range(0, 100) < 90)
+        if (UnityEngine.Random.Range(90, 100) < 90)
         {
             int wayID = UnityEngine.Random.Range(0, Ways.Length - (IsKaliWayExist? 1 : 0));
             GameObject _EnemyGO = Instantiate(EnemyPF[UnityEngine.Random.Range(0, EnemyPF.Count)], Ways[wayID].transform.position, Quaternion.identity);

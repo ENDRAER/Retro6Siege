@@ -1,11 +1,10 @@
 using System.Collections;
 using UnityEngine;
 using System;
-using System.Collections.Generic;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private GameObject GOTexture;
+    [SerializeField] private GameObject BalancerGO;
     [SerializeField] private Rigidbody2D RB2D;
     [SerializeField] public WayCreator _WayCreator;
     [SerializeField] private enum _WalkType { Straigh, Stop, BetweenPoints }
@@ -31,27 +30,17 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        if (!RepeatAfterDone)
-            StartCoroutine(YouShouldKillUrSelf());
         StartCoroutine(Animation());
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        transform.position = new Vector3(transform.position.x, transform.position.y, -1 + 1 / 6.5f * transform.position.y);
-        transform.localScale = new Vector3(1, 1, 1) * (1.77f - (5.08f / 23.6f * transform.position.y));
-        if (AlertGO != null) 
-            AlertGO.transform.rotation = Quaternion.Euler(0, 0, 0);
-
-        if (WalkType != _WalkType.Stop)
+        if (WalkType != _WalkType.Stop && _WayCreator)
         {
-            if (!_WayCreator) return;
             transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(_WayCreator.PathPoints[Step].x - transform.position.x, -(_WayCreator.PathPoints[Step].y - transform.position.y)) * Mathf.Rad2Deg);
-            GOTexture.transform.rotation = Quaternion.Euler(0, 0, 0);
-            RB2D.AddForce(-transform.up * Speed);
-            if (Math.Round(transform.position.x, 2) == Math.Round(_WayCreator.PathPoints[Step].x, 2) && Math.Round(transform.position.y, 2) == Math.Round(_WayCreator.PathPoints[Step].y, 2))
+            RB2D.AddForce(-transform.up * Speed * Time.deltaTime);
+            if (Math.Round(transform.position.x, 1) == _WayCreator.PathPoints[Step].x && Math.Round(transform.position.y, 1) == _WayCreator.PathPoints[Step].y)
             {
-                transform.position = _WayCreator.PathPoints[Step];
                 Step++;
                 if (Step == _WayCreator.PathPoints.Length)
                 {
@@ -59,6 +48,7 @@ public class Enemy : MonoBehaviour
                         Destroy(gameObject);
                     else if (gameObject.name == "Kali(Clone)" && _WayCreator.KaliWay)
                     {
+                        StartCoroutine(YouShouldKillUrSelf());
                         WalkType = _WalkType.Stop;
                         StartCoroutine(EnemyShoot());
                     }
@@ -88,12 +78,16 @@ public class Enemy : MonoBehaviour
                 WalkType = _WalkType.Straigh;
             }
         }
+        transform.position = new Vector3(transform.position.x, transform.position.y, -1 + (1 / 6.5f * transform.position.y));
+        transform.localScale = new Vector3(1, 1, 1) * (1.77f - (5.08f / 23.6f * transform.position.y));
+        BalancerGO.transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 
     public IEnumerator GoBackWhenISay()
     {
         BackWalkTimes--;
-        if (BackWalkTimes != 0)
+        if (BackWalkTimes != 0) yield break;
+        if (gameObject.name == "Blitz(Clone)")
         {
             yield return new WaitForSeconds(Speed / 15);
             Step--;
@@ -124,7 +118,7 @@ public class Enemy : MonoBehaviour
 
     public IEnumerator YouShouldKillUrSelf()
     {
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(8);
         Destroy(gameObject);
     }
 
