@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 956186686806893844}
   - component: {fileID: 956186686806893845}
   - component: {fileID: 9003569113923015614}
-  - component: {fileID: 560848343918794053}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Enemy
@@ -75,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2099738546, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
+  m_Sprite: {fileID: -1686677651, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -93,7 +92,7 @@ PolygonCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 956186686806893846}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -122,31 +121,6 @@ PolygonCollider2D:
       - {x: -0.008052826, y: 0.3608495}
       - {x: -0.045768738, y: 0.3612691}
       - {x: -0.09637451, y: 0.29512188}
---- !u!60 &560848343918794053
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 956186686806893846}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.55, y: 0.72}
-    newSize: {x: 0.66, y: 0.93}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
     - - {x: -0.056174684, y: -0.06471191}
       - {x: -0.11520631, y: -0.32595724}
       - {x: -0.11216617, y: -0.35951927}
@@ -200,15 +174,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21095960e2641f046af35cad99842490, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Step: 0
+  _WayCreator: {fileID: 0}
   BalancerGO: {fileID: 7070847921039017594}
   RB2D: {fileID: 956186687328918986}
-  _WayCreator: {fileID: 0}
+  HitCollider: {fileID: 9003569113923015614}
   WalkType: 2
-  ShootingStarted: 0
-  Invincible: 1
-  Step: 0
-  Speed: 4000
-  RepeatAfterDone: 0
+  Speed: 600
   _SpriteRenderer: {fileID: 956186686806893845}
   SpritesAnim:
   - {fileID: -1600914372, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
@@ -219,8 +191,10 @@ MonoBehaviour:
   AnimID: 0
   AnimDelay: 0.2
   AlertGO: {fileID: 1674855937548124617}
+  ShootingStarted: 0
   ShootingDelay: 3
   PostShootingDelay: 200
+  ShieldGO: {fileID: 5203992943117732631}
 --- !u!50 &956186687328918986
 Rigidbody2D:
   serializedVersion: 4
@@ -274,38 +248,6 @@ Transform:
   m_Father: {fileID: 3777186125352549891}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2605503549724814014
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8142259277096093917}
-  m_Layer: 0
-  m_Name: CenterForShield
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8142259277096093917
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2605503549724814014}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 5973472440316041996}
-  m_Father: {fileID: 3777186125352549891}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5203992943117732631
 GameObject:
   m_ObjectHideFlags: 0
@@ -318,7 +260,7 @@ GameObject:
   - component: {fileID: 1081420847496693848}
   m_Layer: 0
   m_Name: ShieldColl
-  m_TagString: Untagged
+  m_TagString: Shield
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -330,13 +272,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5203992943117732631}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.002, y: 0.085, z: -0.10206349}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8142259277096093917}
-  m_RootOrder: 0
+  m_Father: {fileID: 3777186125352549891}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!60 &1081420847496693848
 PolygonCollider2D:
@@ -351,7 +293,7 @@ PolygonCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.11}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -363,18 +305,18 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.0044999123, y: 0.17426652}
-      - {x: -0.039173625, y: 0.14841592}
-      - {x: -0.14530867, y: 0.18858072}
-      - {x: -0.2029493, y: 0.1889769}
-      - {x: -0.27201056, y: 0.07030432}
-      - {x: -0.2654447, y: 0.019872986}
-      - {x: -0.13428426, y: -0.051504392}
-      - {x: -0.13392872, y: -0.09085408}
-      - {x: 0.10115212, y: -0.2226873}
-      - {x: 0.18111673, y: -0.21076837}
-      - {x: 0.24162957, y: -0.09758462}
-      - {x: 0.28187853, y: 0.041516297}
+    - - {x: 0.15644157, y: 0.04930803}
+      - {x: 0.12763608, y: 0.07960295}
+      - {x: 0.107079506, y: 0.2096255}
+      - {x: 0.07641205, y: 0.24997686}
+      - {x: -0.06254801, y: 0.25010586}
+      - {x: -0.09100766, y: 0.22013338}
+      - {x: -0.104725525, y: 0.11310066}
+      - {x: -0.15176305, y: 0.049493916}
+      - {x: -0.15305246, y: -0.20871}
+      - {x: -0.11165758, y: -0.24928026}
+      - {x: 0.10690767, y: -0.2512062}
+      - {x: 0.1583472, y: -0.21019322}
 --- !u!1 &7070847921039017594
 GameObject:
   m_ObjectHideFlags: 0
@@ -404,7 +346,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 956186686806893844}
-  - {fileID: 8142259277096093917}
+  - {fileID: 5973472440316041996}
   - {fileID: 349171012285894081}
   m_Father: {fileID: 956186687328918984}
   m_RootOrder: 0

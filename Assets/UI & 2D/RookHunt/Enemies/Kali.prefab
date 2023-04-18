@@ -147,26 +147,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21095960e2641f046af35cad99842490, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Step: 0
+  _WayCreator: {fileID: 0}
   BalancerGO: {fileID: 2569134703749257043}
   RB2D: {fileID: 956186687328918986}
-  _WayCreator: {fileID: 0}
-  WalkType: 0
-  ShootingStarted: 0
-  Invincible: 0
-  Step: 0
-  Speed: 10000
-  RepeatAfterDone: 0
+  HitCollider: {fileID: 0}
+  WalkType: 2
+  Speed: 1000
   _SpriteRenderer: {fileID: 956186686806893845}
   SpritesAnim:
   - {fileID: -1856265088, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
   - {fileID: 1157215369, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
   - {fileID: 444760114, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
+  - {fileID: 444760114, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
   BackWalkTimes: 0
   AnimID: 0
   AnimDelay: 0.2
   AlertGO: {fileID: 6648476660633975428}
+  ShootingStarted: 0
   ShootingDelay: 1
   PostShootingDelay: 3
+  ShieldGO: {fileID: 0}
 --- !u!50 &956186687328918986
 Rigidbody2D:
   serializedVersion: 4

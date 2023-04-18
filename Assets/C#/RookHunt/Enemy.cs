@@ -1,19 +1,18 @@
 using System.Collections;
 using UnityEngine;
 using System;
+using Unity.VisualScripting;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] private int Step;
+    [SerializeField] public WayCreator _WayCreator;
     [SerializeField] private GameObject BalancerGO;
     [SerializeField] private Rigidbody2D RB2D;
-    [SerializeField] public WayCreator _WayCreator;
+    [SerializeField] private Collider2D HitCollider;
     [SerializeField] private enum _WalkType { Straigh, Stop, BetweenPoints }
     [SerializeField] private _WalkType WalkType = _WalkType.Straigh;
-    [SerializeField] private bool ShootingStarted;
-    [SerializeField] private bool Invincible;
-    [SerializeField] private int Step;
     [SerializeField] private float Speed;
-    [SerializeField] private bool RepeatAfterDone;
 
     [Header("Animation")]
     [SerializeField] private SpriteRenderer _SpriteRenderer;
@@ -24,8 +23,12 @@ public class Enemy : MonoBehaviour
 
     [Header("Shooting")]
     [SerializeField] private GameObject AlertGO;
+    [SerializeField] private bool ShootingStarted;
     [SerializeField] private float ShootingDelay;
     [SerializeField] private float PostShootingDelay;
+
+    [Header("Shielders")]
+    [SerializeField] private GameObject ShieldGO;
 
 
     private void Start()
@@ -39,14 +42,14 @@ public class Enemy : MonoBehaviour
         {
             transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(_WayCreator.PathPoints[Step].x - transform.position.x, -(_WayCreator.PathPoints[Step].y - transform.position.y)) * Mathf.Rad2Deg);
             RB2D.AddForce(-transform.up * Speed * Time.deltaTime);
-            if (Math.Round(transform.position.x, 1) == _WayCreator.PathPoints[Step].x && Math.Round(transform.position.y, 1) == _WayCreator.PathPoints[Step].y)
+            if (Math.Round(transform.position.x, 1) == Math.Round(_WayCreator.PathPoints[Step].x, 1) && Math.Round(transform.position.y, 1) == Math.Round(_WayCreator.PathPoints[Step].y, 1))
             {
                 Step++;
                 if (Step == _WayCreator.PathPoints.Length)
                 {
-                    if (gameObject.name != "Kali(Clone)" && !RepeatAfterDone)
+                    if (gameObject.name.StartsWith("Kali") && gameObject.name.StartsWith("WayTaster"))
                         Destroy(gameObject);
-                    else if (gameObject.name == "Kali(Clone)" && _WayCreator.KaliWay)
+                    else if (gameObject.name.StartsWith("Kali") && _WayCreator.KaliWay)
                     {
                         StartCoroutine(YouShouldKillUrSelf());
                         WalkType = _WalkType.Stop;
@@ -63,10 +66,12 @@ public class Enemy : MonoBehaviour
             {
                 if (!ShootingStarted)
                 {
-                    if (gameObject.name == "Blitz(Clone)")
+                    if (gameObject.name.StartsWith("Blitz"))
                     {
+                        ShieldGO.transform.localPosition = new Vector3(-0.11f, 0.13f, ShieldGO.transform.position.z);
+                        ShieldGO.transform.localRotation = Quaternion.Euler(0, 0, 66);
+                        HitCollider.enabled = true;
                         AnimID += 2;
-                        Invincible = false;
                         Speed *= 1.5f;
                     }
                     else
@@ -86,22 +91,26 @@ public class Enemy : MonoBehaviour
     public IEnumerator GoBackWhenISay()
     {
         BackWalkTimes--;
-        if (BackWalkTimes != 0) yield break;
-        if (gameObject.name == "Blitz(Clone)")
+        if (BackWalkTimes != 0)
         {
-            yield return new WaitForSeconds(Speed / 15);
-            Step--;
+            yield return new WaitForSeconds(1);
+            Step = _WayCreator.ShootingMoment;
             WalkType = _WalkType.BetweenPoints;
-        }
-        else if (gameObject.name == "Blitz(Clone)")
-        {
-            AnimID -= 2;
-            Invincible = true;
-            Speed /= 1.5f;
         }
         else
         {
-            Speed *= 2;
+            if (gameObject.name.StartsWith("Blitz"))
+            {
+                ShieldGO.transform.localPosition = new Vector3(0, 0, ShieldGO.transform.position.z);
+                ShieldGO.transform.localRotation = Quaternion.Euler(0, 0, 0);
+                HitCollider.enabled = false;
+                AnimID -= 2;
+                Speed /= 1.5f;
+            }
+            else
+            {
+                Speed /= 2;
+            }
         }
     }
 

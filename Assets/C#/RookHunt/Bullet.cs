@@ -36,8 +36,9 @@ public class Bullet : MonoBehaviour
                     Collider2D cover = null;
                     foreach (Collider2D _coll in CollidersInZone)
                     {
-                        if (_coll.gameObject.CompareTag("Cover"))
+                        if (_coll.gameObject.CompareTag("Cover") || _coll.gameObject.CompareTag("Shield"))
                             cover = cover == null ? _coll : cover.transform.position.z < _coll.transform.position.z? cover : _coll;
+
                     }
                     foreach (Collider2D _coll in CollidersInZone)
                     {

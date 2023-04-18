@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1188,7 +1188,7 @@ MonoBehaviour:
   - {x: 53, y: -0.9}
   - {x: 48.2, y: -2.3}
   - {x: 42.3, y: -2.5}
-  ShootingMoment: 0
+  ShootingMoment: 3
   KaliWay: 0
 --- !u!1 &442879557
 GameObject:
@@ -3423,7 +3423,7 @@ MonoBehaviour:
   - {x: 54.8, y: -1.6}
   - {x: 47.7, y: -2.6}
   - {x: 42.4, y: -2.4}
-  ShootingMoment: 4
+  ShootingMoment: 9
   KaliWay: 0
 --- !u!1 &1398342507
 GameObject:
@@ -4423,8 +4423,8 @@ MonoBehaviour:
   PathPoints:
   - {x: 47.5, y: 1.8}
   - {x: 49.2, y: 2.9}
-  - {x: 48.6, y: 2.9}
-  ShootingMoment: 0
+  - {x: 48.6, y: 2.8}
+  ShootingMoment: 4
   KaliWay: 1
 --- !u!1 &2004939395
 GameObject:
