@@ -10,7 +10,7 @@ public class RookHuntGameController : MonoBehaviour
 {
     [SerializeField] private GameObject MenuGO;
     [SerializeField] private GameObject[] MapsPF;
-    [NonSerialized]  private WayCreator[] Ways;
+    [NonSerialized] public WayCreator[] Ways;
     [NonSerialized] private bool IsKaliWayExist;
     [SerializeField] private List<GameObject> EnemyPF;
     [SerializeField] private List<GameObject> SpecialEnemyPF;
@@ -31,7 +31,7 @@ public class RookHuntGameController : MonoBehaviour
 
     private void Start()
     {
-        //MenuGO.SetActive(true);
+        MenuGO.SetActive(true);
     }
 
     #region Ranked

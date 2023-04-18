@@ -40,7 +40,8 @@ public class Enemy : MonoBehaviour
     {
         transform.position = new Vector3(transform.position.x, transform.position.y, -1 + 1 / 6.5f * transform.position.y);
         transform.localScale = new Vector3(1, 1, 1) * (1.77f - (5.08f / 23.6f * transform.position.y));
-        AlertGO.transform.rotation = Quaternion.Euler(0, 0, 0);
+        if (AlertGO != null) 
+            AlertGO.transform.rotation = Quaternion.Euler(0, 0, 0);
 
         if (WalkType != _WalkType.Stop)
         {
