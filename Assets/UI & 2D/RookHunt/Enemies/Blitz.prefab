@@ -141,7 +141,7 @@ GameObject:
   - component: {fileID: 956186687328918986}
   m_Layer: 0
   m_Name: Blitz
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -175,7 +175,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Step: 0
-  _WayCreator: {fileID: 0}
   BalancerGO: {fileID: 7070847921039017594}
   RB2D: {fileID: 956186687328918986}
   HitCollider: {fileID: 9003569113923015614}

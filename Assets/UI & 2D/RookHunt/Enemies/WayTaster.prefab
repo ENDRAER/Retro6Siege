@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1317718086435399976}
   m_Layer: 0
   m_Name: WayTaster
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,25 +46,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21095960e2641f046af35cad99842490, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _WayCreator: {fileID: 0}
-  GOTexture: {fileID: 1317718087024333300}
-  RB2D: {fileID: 1317718086435399976}
-  Colliders: []
   Step: 0
-  Speed: 35
-  RepeatAfterDone: 1
+  BalancerGO: {fileID: 0}
+  RB2D: {fileID: 1317718086435399976}
+  HitCollider: {fileID: 0}
   WalkType: 0
+  Speed: 1600
   _SpriteRenderer: {fileID: 1317718087024333303}
   SpritesAnim:
   - {fileID: 741299083, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
   - {fileID: 550845709, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
+  BackWalkTimes: 0
+  AnimID: 0
   AnimDelay: 0.2
-  a: 1
-  b: 1
-  c: 1
   AlertGO: {fileID: 0}
+  ShootingStarted: 0
   ShootingDelay: 0
   PostShootingDelay: 0
+  ShieldGO: {fileID: 0}
 --- !u!50 &1317718086435399976
 Rigidbody2D:
   serializedVersion: 4

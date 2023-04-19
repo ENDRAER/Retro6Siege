@@ -10,7 +10,7 @@ public class RookHuntGameController : MonoBehaviour
 {
     [SerializeField] private GameObject MenuGO;
     [SerializeField] private GameObject[] MapsPF;
-    [NonSerialized] public WayCreator[] Ways;
+    [SerializeField] public WayCreator[] Ways;
     [NonSerialized] private bool IsKaliWayExist;
     [SerializeField] private List<GameObject> EnemyPF;
     [SerializeField] private List<GameObject> SpecialEnemyPF;
@@ -18,6 +18,7 @@ public class RookHuntGameController : MonoBehaviour
     [SerializeField] public double Shoots;
     [SerializeField] public int KillStreak;
     [SerializeField] public int Score;
+    [SerializeField] private GameObject CavLaughsGO;
     [Header("UI")]
     [SerializeField] public Image[] BulletsImg;
     [SerializeField] public TextMeshProUGUI MultiplierText;
@@ -61,7 +62,7 @@ public class RookHuntGameController : MonoBehaviour
 
     private IEnumerator EnemySpawn()
     {
-        if (UnityEngine.Random.Range(90, 100) < 90)
+        if (UnityEngine.Random.Range(0, 100) < 80)
         {
             int wayID = UnityEngine.Random.Range(0, Ways.Length - (IsKaliWayExist? 1 : 0));
             GameObject _EnemyGO = Instantiate(EnemyPF[UnityEngine.Random.Range(0, EnemyPF.Count)], Ways[wayID].transform.position, Quaternion.identity);
@@ -99,6 +100,18 @@ public class RookHuntGameController : MonoBehaviour
         for (int i = 0; i < BulletsImg.Length; i++)
         {
             BulletsImg[i].fillAmount = i + (float)Shoots;
+        }
+
+        if (Shoots == -3)
+        {
+            StopAllCoroutines();
+            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Enemy"))
+            {
+                go.GetComponentInParent<Enemy>().Speed = 0;
+                go.GetComponentInParent<Enemy>().StopAllCoroutines();
+            }
+            CavLaughsGO.transform.localPosition = new Vector3(0,600,-50);
+            CavLaughsGO.SetActive(true);
         }
     }
     #endregion

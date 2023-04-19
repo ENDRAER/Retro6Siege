@@ -114,7 +114,7 @@ GameObject:
   - component: {fileID: 956186687328918986}
   m_Layer: 0
   m_Name: Kali
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -148,7 +148,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Step: 0
-  _WayCreator: {fileID: 0}
   BalancerGO: {fileID: 2569134703749257043}
   RB2D: {fileID: 956186687328918986}
   HitCollider: {fileID: 0}
@@ -200,7 +199,7 @@ GameObject:
   - component: {fileID: 5862457575434298953}
   m_Layer: 0
   m_Name: Balancer
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

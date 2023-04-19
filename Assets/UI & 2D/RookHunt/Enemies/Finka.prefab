@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6316989873102447415}
   m_Layer: 0
   m_Name: Finka
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,18 +46,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21095960e2641f046af35cad99842490, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _WayCreator: {fileID: 0}
-  GOTexture: {fileID: 6316989874765650923}
-  RB2D: {fileID: 6316989873102447415}
-  Colliders: []
   Step: 0
-  Speed: 20
-  RepeatAfterDone: 0
+  BalancerGO: {fileID: 6316989874765650923}
+  RB2D: {fileID: 6316989873102447415}
+  HitCollider: {fileID: 0}
+  WalkType: 0
+  Speed: 1300
   _SpriteRenderer: {fileID: 6316989874765650920}
   SpritesAnim:
   - {fileID: 173145109, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
   - {fileID: -1897521442, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
+  BackWalkTimes: 0
+  AnimID: 0
   AnimDelay: 0.2
+  AlertGO: {fileID: 0}
+  ShootingStarted: 0
+  ShootingDelay: 0
+  PostShootingDelay: 0
+  ShieldGO: {fileID: 0}
 --- !u!50 &6316989873102447415
 Rigidbody2D:
   serializedVersion: 4

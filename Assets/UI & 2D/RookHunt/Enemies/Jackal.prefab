@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 609459524493533095}
   m_Layer: 0
   m_Name: Sprite
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -114,7 +114,7 @@ GameObject:
   - component: {fileID: 956186687328918986}
   m_Layer: 0
   m_Name: Jackal
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -147,18 +147,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21095960e2641f046af35cad99842490, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _WayCreator: {fileID: 0}
-  GOTexture: {fileID: 956186686806893846}
-  RB2D: {fileID: 956186687328918986}
-  Colliders: []
   Step: 0
-  Speed: 20
-  RepeatAfterDone: 0
+  BalancerGO: {fileID: 956186686806893846}
+  RB2D: {fileID: 956186687328918986}
+  HitCollider: {fileID: 0}
+  WalkType: 0
+  Speed: 1300
   _SpriteRenderer: {fileID: 956186686806893845}
   SpritesAnim:
   - {fileID: 1408242986, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
   - {fileID: 2116855010, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
+  BackWalkTimes: 0
+  AnimID: 0
   AnimDelay: 0.2
+  AlertGO: {fileID: 0}
+  ShootingStarted: 0
+  ShootingDelay: 0
+  PostShootingDelay: 0
+  ShieldGO: {fileID: 0}
 --- !u!50 &956186687328918986
 Rigidbody2D:
   serializedVersion: 4

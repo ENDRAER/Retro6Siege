@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Collider2D HitCollider;
     [SerializeField] private enum _WalkType { Straigh, Stop, BetweenPoints }
     [SerializeField] private _WalkType WalkType = _WalkType.Straigh;
-    [SerializeField] private float Speed;
+    [SerializeField] public float Speed;
 
     [Header("Animation")]
     [SerializeField] private SpriteRenderer _SpriteRenderer;
