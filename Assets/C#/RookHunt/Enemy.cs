@@ -1,12 +1,11 @@
 using System.Collections;
 using UnityEngine;
 using System;
-using Unity.VisualScripting;
 
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private int Step;
-    [SerializeField] public WayCreator _WayCreator;
+    [NonSerialized] public WayCreator _WayCreator;
     [SerializeField] private GameObject BalancerGO;
     [SerializeField] private Rigidbody2D RB2D;
     [SerializeField] private Collider2D HitCollider;
@@ -47,13 +46,13 @@ public class Enemy : MonoBehaviour
                 Step++;
                 if (Step == _WayCreator.PathPoints.Length)
                 {
-                    if (gameObject.name.StartsWith("Kali") && gameObject.name.StartsWith("WayTaster"))
+                    if (!gameObject.name.StartsWith("Kali") && !gameObject.name.StartsWith("WayTaster"))
                         Destroy(gameObject);
-                    else if (gameObject.name.StartsWith("Kali") && _WayCreator.KaliWay)
+                    else if (gameObject.name.StartsWith("Kali"))
                     {
                         StartCoroutine(YouShouldKillUrSelf());
-                        WalkType = _WalkType.Stop;
                         StartCoroutine(EnemyShoot());
+                        WalkType = _WalkType.Stop;
                     }
                     else
                     {
@@ -61,31 +60,31 @@ public class Enemy : MonoBehaviour
                         Step = 0;
                     }
                 }
-            }
-            else if (WalkType == _WalkType.BetweenPoints && _WayCreator.ShootingMoment + 1 == Step)
-            {
-                if (!ShootingStarted)
+                else if (WalkType == _WalkType.BetweenPoints && _WayCreator.ShootingMoment + 1 == Step)
                 {
-                    if (gameObject.name.StartsWith("Blitz"))
+                    if (!ShootingStarted)
                     {
-                        ShieldGO.transform.localPosition = new Vector3(-0.11f, 0.13f, ShieldGO.transform.position.z);
-                        ShieldGO.transform.localRotation = Quaternion.Euler(0, 0, 66);
-                        HitCollider.enabled = true;
-                        AnimID += 2;
-                        Speed *= 1.5f;
+                        if (gameObject.name.StartsWith("Blitz"))
+                        {
+                            ShieldGO.transform.localPosition = new Vector3(-0.11f, 0.13f, ShieldGO.transform.position.z);
+                            ShieldGO.transform.localRotation = Quaternion.Euler(0, 0, 66);
+                            HitCollider.enabled = true;
+                            AnimID += 2;
+                            Speed *= 1.5f;
+                        }
+                        else
+                            Speed /= 2;
+                        ShootingStarted = true;
+                        StartCoroutine(EnemyShoot());
                     }
-                    else
-                        Speed /= 2;
-                    ShootingStarted = true;
-                    StartCoroutine(EnemyShoot());
+                    StartCoroutine(GoBackWhenISay());
+                    WalkType = _WalkType.Straigh;
                 }
-                StartCoroutine(GoBackWhenISay());
-                WalkType = _WalkType.Straigh;
             }
+            transform.position = new Vector3(transform.position.x, transform.position.y, -1 + (1 / 6.5f * transform.position.y));
+            transform.localScale = new Vector3(1, 1, 1) * (1.77f - (5.08f / 23.6f * transform.position.y));
+            BalancerGO.transform.rotation = Quaternion.Euler(0, 0, 0);
         }
-        transform.position = new Vector3(transform.position.x, transform.position.y, -1 + (1 / 6.5f * transform.position.y));
-        transform.localScale = new Vector3(1, 1, 1) * (1.77f - (5.08f / 23.6f * transform.position.y));
-        BalancerGO.transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 
     public IEnumerator GoBackWhenISay()
@@ -122,20 +121,24 @@ public class Enemy : MonoBehaviour
         _RHC.Shoots--;
         _RHC.MagazineUpdate();
         AlertGO.SetActive(false);
-        yield return new WaitForSeconds(PostShootingDelay);
+        if (PostShootingDelay != 0)
+        {
+            yield return new WaitForSeconds(PostShootingDelay);
+            StartCoroutine(EnemyShoot());
+        }
     }
 
     public IEnumerator YouShouldKillUrSelf()
     {
-        yield return new WaitForSeconds(8);
+        yield return new WaitForSeconds(10);
         Destroy(gameObject);
     }
 
     public IEnumerator Animation()
     {
-        _SpriteRenderer.sprite = SpritesAnim[0 + AnimID];
+        _SpriteRenderer.sprite = SpritesAnim[AnimID];
         yield return new WaitForSeconds(AnimDelay);
-        _SpriteRenderer.sprite = SpritesAnim[1 + AnimID];
+        _SpriteRenderer.sprite = SpritesAnim[AnimID + 1];
         yield return new WaitForSeconds(AnimDelay);
         StartCoroutine(Animation());
     }

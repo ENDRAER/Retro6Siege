@@ -8,9 +8,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float TimeToDestroy;
     [SerializeField] private GameObject UpScorePF;
     [NonSerialized] private BridgeForLinks _BridgeForLinks;
-
-
-    private Collider2D[] CollidersInZone;
+    [NonSerialized] private Collider2D[] CollidersInZone;
 
     void Start()
     {

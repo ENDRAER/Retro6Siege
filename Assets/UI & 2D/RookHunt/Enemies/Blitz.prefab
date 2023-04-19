@@ -180,7 +180,7 @@ MonoBehaviour:
   RB2D: {fileID: 956186687328918986}
   HitCollider: {fileID: 9003569113923015614}
   WalkType: 2
-  Speed: 600
+  Speed: 800
   _SpriteRenderer: {fileID: 956186686806893845}
   SpritesAnim:
   - {fileID: -1600914372, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
@@ -193,7 +193,7 @@ MonoBehaviour:
   AlertGO: {fileID: 1674855937548124617}
   ShootingStarted: 0
   ShootingDelay: 3
-  PostShootingDelay: 200
+  PostShootingDelay: 0
   ShieldGO: {fileID: 5203992943117732631}
 --- !u!50 &956186687328918986
 Rigidbody2D:

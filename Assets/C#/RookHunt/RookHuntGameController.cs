@@ -22,8 +22,6 @@ public class RookHuntGameController : MonoBehaviour
     [SerializeField] public Image[] BulletsImg;
     [SerializeField] public TextMeshProUGUI MultiplierText;
     [SerializeField] public TextMeshProUGUI ScoreText;
-
-
     [Header("Ranked")]
     [SerializeField] private GameObject[] Enemies;
     [SerializeField] private int Round;
