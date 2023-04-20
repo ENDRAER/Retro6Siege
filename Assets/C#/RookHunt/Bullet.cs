@@ -14,7 +14,7 @@ public class Bullet : MonoBehaviour
     {
         _BridgeForLinks = BridgeForLinks.MainBridge_instance;
         RookHuntGameController RHControllerCS = _BridgeForLinks.BF_RookHuntGameController;
-        RHControllerCS.Shoots--;
+        RHControllerCS.Shoots  -= RHControllerCS.GameStarted == true? 1 : 0;
         StartCoroutine(TimeToDestroyCor());
         bool resetMultiplier = true;
         
@@ -55,7 +55,7 @@ public class Bullet : MonoBehaviour
                             RHControllerCS.Shoots += 1.5;
 
                             UpScoreGO.GetComponent<TextMeshProUGUI>().color = new Color(1, 1 - (0.05f * RHControllerCS.KillStreak), 1 - (0.05f * RHControllerCS.KillStreak));
-                            Destroy(_coll.GetComponentInParent<Enemy>().gameObject);
+                            _coll.GetComponentInParent<Enemy>().YouShouldKillUrSelfNOW();
                         }
                     }
                     break;

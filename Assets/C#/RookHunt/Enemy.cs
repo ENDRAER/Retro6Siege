@@ -5,7 +5,7 @@ using System;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private int Step;
-    [NonSerialized] public WayCreator _WayCreator;
+    [SerializeField] public WayCreator _WayCreator;
     [SerializeField] private GameObject BalancerGO;
     [SerializeField] private Rigidbody2D RB2D;
     [SerializeField] private Collider2D HitCollider;
@@ -48,7 +48,11 @@ public class Enemy : MonoBehaviour
                 if (Step == _WayCreator.PathPoints.Length)
                 {
                     if (!gameObject.name.StartsWith("Kali") && !gameObject.name.StartsWith("WayTaster"))
-                        Destroy(gameObject);
+                    {
+                        HRGC.Shoots--;
+                        HRGC.MagazineUpdate();
+                        YouShouldKillUrSelfNOW();
+                    }
                     else if (gameObject.name.StartsWith("Kali"))
                     {
                         StartCoroutine(YouShouldKillUrSelf());
@@ -131,6 +135,13 @@ public class Enemy : MonoBehaviour
     public IEnumerator YouShouldKillUrSelf()
     {
         yield return new WaitForSeconds(10);
+        HRGC.Enemies.Remove(gameObject);
+        Destroy(gameObject);
+    }
+
+    public void YouShouldKillUrSelfNOW()
+    {
+        HRGC.Enemies.Remove(gameObject);
         Destroy(gameObject);
     }
 

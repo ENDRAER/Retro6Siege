@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.17796983, g: 0.22282629, b: 0.30494565, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1304,12 +1304,14 @@ MonoBehaviour:
   SpecialEnemyPF:
   - {fileID: 956186687328918987, guid: c9501e0fdd78eb14c8bf893030e6998f, type: 3}
   - {fileID: 956186687328918987, guid: fc0c2fc2fbc7d594182ec5ac96eab097, type: 3}
-  SpawnSpeed: 1
+  Enemies: []
+  SpawnSpeed: 1.5
   Shoots: 3
   KillStreak: 0
   Score: 0
   CavLaughsGO: {fileID: 1077768619}
   CavLaughsAnimator: {fileID: 1077768623}
+  GameStarted: 0
   GameOver: 0
   BulletsImg:
   - {fileID: 1687364222}
@@ -1319,7 +1321,6 @@ MonoBehaviour:
   MultiplierText: {fileID: 150267378}
   ScoreText: {fileID: 1454946227}
   TopRecordText: {fileID: 242614969}
-  Enemies: []
   Round: 0
 --- !u!1 &533034983
 GameObject:
@@ -1593,14 +1594,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: 0.57827896, y: -0.08215378, z: -0.24807127, w: 0.77285504}
   m_LocalPosition: {x: 10, y: 10, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 58.55, y: -52.492, z: -66.493}
 --- !u!1 &727308222
 GameObject:
   m_ObjectHideFlags: 0

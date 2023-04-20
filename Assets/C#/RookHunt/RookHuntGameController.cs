@@ -16,12 +16,14 @@ public class RookHuntGameController : MonoBehaviour
     [SerializeField] private GameObject[] MapsPF;
     [SerializeField] private List<GameObject> EnemyPF;
     [SerializeField] private List<GameObject> SpecialEnemyPF;
+    [SerializeField] public List<GameObject> Enemies;
     [SerializeField] private float SpawnSpeed;
     [SerializeField] public double Shoots;
     [SerializeField] public int KillStreak;
     [SerializeField] public int Score;
     [SerializeField] public GameObject CavLaughsGO;
     [SerializeField] public Animator CavLaughsAnimator;
+    [SerializeField] public bool GameStarted;
     [SerializeField] private bool GameOver;
     [Header("UI")]
     [SerializeField] public Image[] BulletsImg;
@@ -29,7 +31,6 @@ public class RookHuntGameController : MonoBehaviour
     [SerializeField] public TextMeshProUGUI ScoreText;
     [SerializeField] public TextMeshProUGUI TopRecordText;
     [Header("Ranked")]
-    [SerializeField] private List<GameObject> Enemies;
     [SerializeField] private int Round;
 
 
@@ -54,30 +55,29 @@ public class RookHuntGameController : MonoBehaviour
         Ways = MapCS.Ways;
         IsKaliWayExist = MapCS.IsKaliWayExist;
         MenuGO.SetActive(false);
+        GameStarted = true;
         StartCoroutine(EnemySpawn());
     }
 
     private IEnumerator EnemySpawn()
     {
+        GameObject _EnemyGO;
+        int wayID;
         if (UnityEngine.Random.Range(0, 100) < 80)
         {
-            int wayID = UnityEngine.Random.Range(0, Ways.Length - (IsKaliWayExist? 1 : 0));
-            GameObject _EnemyGO = Instantiate(EnemyPF[UnityEngine.Random.Range(0, EnemyPF.Count)], Ways[wayID].transform.position, Quaternion.identity);
-
-            Enemy _EnemyCS = _EnemyGO.GetComponent<Enemy>();
-            _EnemyCS.StartCoroutine(_EnemyCS.Animation());
-            _EnemyCS._WayCreator = Ways[wayID];
+            wayID = UnityEngine.Random.Range(0, Ways.Length - (IsKaliWayExist? 1 : 0));
+            _EnemyGO = Instantiate(EnemyPF[UnityEngine.Random.Range(0, EnemyPF.Count)], Ways[wayID].transform.position, Quaternion.identity);
         }
         else
         {
             int enemyID = UnityEngine.Random.Range(0, SpecialEnemyPF.Count); 
-            int wayID = UnityEngine.Random.Range(enemyID == 0 ? (IsKaliWayExist == true ? Ways.Length - 1 : 0) : 0, Ways.Length - (IsKaliWayExist? 1 : 0));
-            GameObject _EnemyGO = Instantiate(SpecialEnemyPF[enemyID], Ways[wayID].transform.position, Quaternion.identity);
-
-            Enemy _EnemyCS = _EnemyGO.GetComponent<Enemy>();
-            _EnemyCS.HRGC = this;
-            _EnemyCS._WayCreator = Ways[wayID];
+            wayID = UnityEngine.Random.Range(enemyID == 0 ? (IsKaliWayExist == true ? Ways.Length - 1 : 0) : 0, Ways.Length - (IsKaliWayExist? 1 : 0));
+            _EnemyGO = Instantiate(SpecialEnemyPF[enemyID], Ways[wayID].transform.position, Quaternion.identity);
         }
+        Enemy _EnemyCS = _EnemyGO.GetComponent<Enemy>();
+        _EnemyCS.HRGC = this;
+        _EnemyCS._WayCreator = Ways[wayID];
+        Enemies.Add(_EnemyGO);
 
         yield return new WaitForSeconds(SpawnSpeed);
         StartCoroutine(EnemySpawn());
@@ -102,10 +102,10 @@ public class RookHuntGameController : MonoBehaviour
 
         if (Shoots == -3 && !GameOver)
         {
+            GameStarted = false;
             GameOver = true;
             StopAllCoroutines();
-            Enemies.Remove(gameObject4);
-            foreach (GameObject go in GameObject.FindGameObjectsWithTag("Enemy"))
+            foreach (GameObject go in Enemies)
             {
                 go.GetComponentInParent<Enemy>().Speed = 0;
                 go.GetComponentInParent<Enemy>().StopAllCoroutines();
@@ -120,13 +120,20 @@ public class RookHuntGameController : MonoBehaviour
 
     public void ResetAllVallues()
     {
-        CavLaughsAnimator.SetTrigger("Restart");
-        CavLaughsGO.SetActive(false);
-
         MenuGO.SetActive(true);
         TopRecordText.text = "TOP SCORE = " + PlayerPrefs.GetInt("TopScore");
+        GameOver = false;
         Shoots = 1;
         Score = 0;
+
+        foreach (GameObject go in Enemies)
+        {
+            Destroy(go);
+        }
+        Enemies.Clear();
+
+        CavLaughsAnimator.SetTrigger("Restart");
+        CavLaughsGO.SetActive(false);
 
         Destroy(MapGO);
     }
