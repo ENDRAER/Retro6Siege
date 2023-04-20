@@ -12,7 +12,7 @@ public class Bullet : MonoBehaviour
 
     void Start()
     {
-        _BridgeForLinks = GameObject.Find("3D Camera").gameObject.GetComponent<BridgeForLinks>();
+        _BridgeForLinks = BridgeForLinks.MainBridge_instance;
         RookHuntGameController RHControllerCS = _BridgeForLinks.BF_RookHuntGameController;
         RHControllerCS.Shoots--;
         StartCoroutine(TimeToDestroyCor());
@@ -21,20 +21,22 @@ public class Bullet : MonoBehaviour
         CollidersInZone = Physics2D.OverlapCircleAll(transform.position, 0.005f);
         if (CollidersInZone.Length != 0)
         {
-            switch (CollidersInZone[0].gameObject.tag)
+            switch (CollidersInZone[0].gameObject.name)
             {
-                case "RankedPlayButton":
+                case "RANKED_PlayList":
                     RHControllerCS.RankedGameStart();
                     break;
-                case "InfModePlayButton":
+                case "INFINITE_PlayList":
                     RHControllerCS.InfiniteModeStart();
                     break;
-
+                case "ShootToRestart":
+                    RHControllerCS.ResetAllVallues();
+                    break;
                 default:
                     Collider2D cover = null;
                     foreach (Collider2D _coll in CollidersInZone)
                     {
-                        if (_coll.gameObject.CompareTag("Cover") || _coll.gameObject.CompareTag("Shield"))
+                        if (_coll.CompareTag("Cover") || _coll.CompareTag("Shield"))
                             cover = cover == null ? _coll : cover.transform.position.z < _coll.transform.position.z? cover : _coll;
 
                     }
@@ -44,7 +46,7 @@ public class Bullet : MonoBehaviour
                         {
                             resetMultiplier = false;
                             GameObject UpScoreGO = Instantiate(UpScorePF, transform.position, Quaternion.identity);
-                            UpScoreGO.transform.SetParent(GameObject.Find("CenterForUI").transform);
+                            UpScoreGO.transform.SetParent(BridgeForLinks.MainBridge_instance.CenterForUI.transform);
                             UpScoreGO.GetComponent<RectTransform>().position = new Vector2(_coll.transform.position.x, _coll.transform.position.y);
                             UpScoreGO.GetComponent<TextMeshProUGUI>().text = "+" + (100 * (1 + RHControllerCS.KillStreak * 0.2)).ToString();
 
@@ -53,7 +55,7 @@ public class Bullet : MonoBehaviour
                             RHControllerCS.Shoots += 1.5;
 
                             UpScoreGO.GetComponent<TextMeshProUGUI>().color = new Color(1, 1 - (0.05f * RHControllerCS.KillStreak), 1 - (0.05f * RHControllerCS.KillStreak));
-                            Destroy(_coll.gameObject.GetComponentInParent<Enemy>().gameObject);
+                            Destroy(_coll.GetComponentInParent<Enemy>().gameObject);
                         }
                     }
                     break;

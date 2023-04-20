@@ -6,8 +6,6 @@ TagManager:
   tags:
   - Screen
   - Hit
-  - RankedPlayButton
-  - InfModePlayButton
   - Spawn
   - Enemy
   - Cover

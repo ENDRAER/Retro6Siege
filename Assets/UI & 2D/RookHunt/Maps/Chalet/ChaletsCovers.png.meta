@@ -225,12 +225,12 @@ TextureImporter:
       name: ChaletsCovers_2
       rect:
         serializedVersion: 2
-        x: 285
+        x: 280
         y: 48
-        width: 23
+        width: 28
         height: 65
       alignment: 9
-      pivot: {x: -5.6956525, y: 1.0230769}
+      pivot: {x: -4.5, y: 1.0230769}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

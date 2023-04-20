@@ -8,28 +8,34 @@ using TMPro;
 
 public class RookHuntGameController : MonoBehaviour
 {
-    [SerializeField] private GameObject MenuGO;
-    [SerializeField] private GameObject[] MapsPF;
-    [SerializeField] public WayCreator[] Ways;
+    [SerializeField] public GameObject MenuGO;
+    [NonSerialized] public GameObject MapGO;
+    [NonSerialized] private MapScript MapCS;
+    [NonSerialized] public WayCreator[] Ways;
     [NonSerialized] private bool IsKaliWayExist;
+    [SerializeField] private GameObject[] MapsPF;
     [SerializeField] private List<GameObject> EnemyPF;
     [SerializeField] private List<GameObject> SpecialEnemyPF;
     [SerializeField] private float SpawnSpeed;
     [SerializeField] public double Shoots;
     [SerializeField] public int KillStreak;
     [SerializeField] public int Score;
-    [SerializeField] private GameObject CavLaughsGO;
+    [SerializeField] public GameObject CavLaughsGO;
+    [SerializeField] public Animator CavLaughsAnimator;
+    [SerializeField] private bool GameOver;
     [Header("UI")]
     [SerializeField] public Image[] BulletsImg;
     [SerializeField] public TextMeshProUGUI MultiplierText;
     [SerializeField] public TextMeshProUGUI ScoreText;
+    [SerializeField] public TextMeshProUGUI TopRecordText;
     [Header("Ranked")]
-    [SerializeField] private GameObject[] Enemies;
+    [SerializeField] private List<GameObject> Enemies;
     [SerializeField] private int Round;
 
 
     private void Start()
     {
+        TopRecordText.text = "TOP SCORE = " + PlayerPrefs.GetInt("TopScore");
         MenuGO.SetActive(true);
     }
 
@@ -43,19 +49,10 @@ public class RookHuntGameController : MonoBehaviour
     #region Infinite Mode
     public void InfiniteModeStart()
     {
-        //Instantiate(MapsPF[UnityEngine.Random.Range(1, 1)], new Vector3(50, 0, 0), Quaternion.identity);
-        #region FindAllSpawns
-        int a = 0;
-        GameObject[] _GO = GameObject.FindGameObjectsWithTag("Spawn");
-        Ways = new WayCreator[_GO.Length];
-        foreach (GameObject obj in _GO)
-        {
-            Ways[a] = obj.GetComponent<WayCreator>();
-            IsKaliWayExist = Ways[a].KaliWay;
-            a++;
-        }
-        #endregion
-
+        MapGO = Instantiate(MapsPF[UnityEngine.Random.Range(0, MapsPF.Length - 1)], new Vector3(50, 1.5f, 0), Quaternion.identity);
+        MapCS = MapGO.GetComponent<MapScript>();
+        Ways = MapCS.Ways;
+        IsKaliWayExist = MapCS.IsKaliWayExist;
         MenuGO.SetActive(false);
         StartCoroutine(EnemySpawn());
     }
@@ -78,6 +75,7 @@ public class RookHuntGameController : MonoBehaviour
             GameObject _EnemyGO = Instantiate(SpecialEnemyPF[enemyID], Ways[wayID].transform.position, Quaternion.identity);
 
             Enemy _EnemyCS = _EnemyGO.GetComponent<Enemy>();
+            _EnemyCS.HRGC = this;
             _EnemyCS._WayCreator = Ways[wayID];
         }
 
@@ -102,17 +100,34 @@ public class RookHuntGameController : MonoBehaviour
             BulletsImg[i].fillAmount = i + (float)Shoots;
         }
 
-        if (Shoots == -3)
+        if (Shoots == -3 && !GameOver)
         {
+            GameOver = true;
             StopAllCoroutines();
+            Enemies.Remove(gameObject4);
             foreach (GameObject go in GameObject.FindGameObjectsWithTag("Enemy"))
             {
                 go.GetComponentInParent<Enemy>().Speed = 0;
                 go.GetComponentInParent<Enemy>().StopAllCoroutines();
             }
-            CavLaughsGO.transform.localPosition = new Vector3(0,600,-50);
+            if(Score > PlayerPrefs.GetInt("TopScore"))
+                PlayerPrefs.SetInt("TopScore", Score);
+            CavLaughsGO.transform.localPosition = new Vector3(0,-1200,-50);
             CavLaughsGO.SetActive(true);
         }
     }
     #endregion
+
+    public void ResetAllVallues()
+    {
+        CavLaughsAnimator.SetTrigger("Restart");
+        CavLaughsGO.SetActive(false);
+
+        MenuGO.SetActive(true);
+        TopRecordText.text = "TOP SCORE = " + PlayerPrefs.GetInt("TopScore");
+        Shoots = 1;
+        Score = 0;
+
+        Destroy(MapGO);
+    }
 }

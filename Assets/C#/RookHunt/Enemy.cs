@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private GameObject BalancerGO;
     [SerializeField] private Rigidbody2D RB2D;
     [SerializeField] private Collider2D HitCollider;
+    [NonSerialized] public RookHuntGameController HRGC;
     [SerializeField] private enum _WalkType { Straigh, Stop, BetweenPoints }
     [SerializeField] private _WalkType WalkType = _WalkType.Straigh;
     [SerializeField] public float Speed;
@@ -117,9 +118,8 @@ public class Enemy : MonoBehaviour
     {
         AlertGO.SetActive(true);
         yield return new WaitForSeconds(ShootingDelay);
-        RookHuntGameController _RHC = GameObject.Find("CenterForUI").GetComponent<RookHuntGameController>();
-        _RHC.Shoots--;
-        _RHC.MagazineUpdate();
+        HRGC.Shoots--;
+        HRGC.MagazineUpdate();
         AlertGO.SetActive(false);
         if (PostShootingDelay != 0)
         {
