@@ -1295,8 +1295,6 @@ MonoBehaviour:
   MapsPF:
   - {fileID: 8152739404876176560, guid: 521da0d2fecebdf4ea07cff445e3db07, type: 3}
   EnemyPF:
-  - {fileID: 956186687328918987, guid: 5ff984e82ab099b4caf3ee071403f790, type: 3}
-  - {fileID: 6316989873102447414, guid: af264d84c0c237140a9a8cd68dd74301, type: 3}
   - {fileID: 956186687328918987, guid: d609cac16ef6ebb4484a473113f68e69, type: 3}
   - {fileID: 956186687328918987, guid: c1500b60d5be56c47b9a7127273115b5, type: 3}
   - {fileID: 956186687328918987, guid: f21418dfc105441469aac17cec6b9867, type: 3}
@@ -1304,6 +1302,8 @@ MonoBehaviour:
   SpecialEnemyPF:
   - {fileID: 956186687328918987, guid: c9501e0fdd78eb14c8bf893030e6998f, type: 3}
   - {fileID: 956186687328918987, guid: fc0c2fc2fbc7d594182ec5ac96eab097, type: 3}
+  - {fileID: 956186687328918987, guid: 5ff984e82ab099b4caf3ee071403f790, type: 3}
+  - {fileID: 6316989873102447414, guid: af264d84c0c237140a9a8cd68dd74301, type: 3}
   Enemies: []
   SpawnSpeed: 1.5
   Shoots: 3
@@ -1321,7 +1321,8 @@ MonoBehaviour:
   MultiplierText: {fileID: 150267378}
   ScoreText: {fileID: 1454946227}
   TopRecordText: {fileID: 242614969}
-  Round: 0
+  RoundCallerGO: {fileID: 0}
+  RoundCallerAnimator: {fileID: 0}
 --- !u!1 &533034983
 GameObject:
   m_ObjectHideFlags: 0

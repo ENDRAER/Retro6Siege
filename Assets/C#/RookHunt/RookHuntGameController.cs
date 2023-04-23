@@ -31,7 +31,12 @@ public class RookHuntGameController : MonoBehaviour
     [SerializeField] public TextMeshProUGUI ScoreText;
     [SerializeField] public TextMeshProUGUI TopRecordText;
     [Header("Ranked")]
-    [SerializeField] private int Round;
+    [NonSerialized] private int Round = 1;
+    [NonSerialized] public List<GameObject> OutedEnemies;
+    [NonSerialized] public List<WayCreator> OutedWays;
+    [NonSerialized] public int[] RatioOfOperatives = { 5, 0 };
+    [SerializeField] public GameObject RoundCallerGO;
+    [SerializeField] public Animator RoundCallerAnimator;
 
 
     private void Start()
@@ -40,15 +45,7 @@ public class RookHuntGameController : MonoBehaviour
         MenuGO.SetActive(true);
     }
 
-    #region Ranked
-    public void RankedGameStart()
-    {
-
-    }
-    #endregion
-
-    #region Infinite Mode
-    public void InfiniteModeStart()
+    private void MapCreator()
     {
         MapGO = Instantiate(MapsPF[UnityEngine.Random.Range(0, MapsPF.Length - 1)], new Vector3(50, 1.5f, 0), Quaternion.identity);
         MapCS = MapGO.GetComponent<MapScript>();
@@ -56,6 +53,19 @@ public class RookHuntGameController : MonoBehaviour
         IsKaliWayExist = MapCS.IsKaliWayExist;
         MenuGO.SetActive(false);
         GameStarted = true;
+    }
+
+    #region Ranked
+    public void RankedGameStart()
+    {
+        MapCreator();
+    }
+    #endregion
+
+    #region Infinite Mode
+    public void InfiniteModeStart()
+    {
+        MapCreator();
         StartCoroutine(EnemySpawn());
     }
 
@@ -116,7 +126,6 @@ public class RookHuntGameController : MonoBehaviour
             CavLaughsGO.SetActive(true);
         }
     }
-    #endregion
 
     public void ResetAllVallues()
     {
@@ -137,4 +146,5 @@ public class RookHuntGameController : MonoBehaviour
 
         Destroy(MapGO);
     }
+    #endregion
 }
