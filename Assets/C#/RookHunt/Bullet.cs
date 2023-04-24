@@ -46,7 +46,7 @@ public class Bullet : MonoBehaviour
                         {
                             resetMultiplier = false;
                             GameObject UpScoreGO = Instantiate(UpScorePF, transform.position, Quaternion.identity);
-                            UpScoreGO.transform.SetParent(BridgeForLinks.MainBridge_instance.CenterForUI.transform);
+                            UpScoreGO.transform.SetParent(BridgeForLinks.MainBridge_instance.WorldCanvas.transform);
                             UpScoreGO.GetComponent<RectTransform>().position = new Vector2(_coll.transform.position.x, _coll.transform.position.y);
                             UpScoreGO.GetComponent<TextMeshProUGUI>().text = "+" + (100 * (1 + RHControllerCS.KillStreak * 0.2)).ToString();
 
