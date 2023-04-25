@@ -3,9 +3,6 @@ using UnityEngine;
 
 public class UpScoreText : MonoBehaviour
 {
-    [SerializeField] private float TimeToDestroy;
-    [SerializeField] private float FloatSpeed;
-
     private void Start()
     {
         StartCoroutine(TimeToDestroyCor());
@@ -13,12 +10,12 @@ public class UpScoreText : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(0, FloatSpeed * Time.deltaTime, 0);
+        transform.Translate(0, 1 * Time.deltaTime, 0);
     }
 
     private IEnumerator TimeToDestroyCor()
     {
-        yield return new WaitForSeconds(TimeToDestroy);
+        yield return new WaitForSeconds(1);
         Destroy(gameObject);
     }
 }

@@ -5,7 +5,6 @@ using TMPro;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] private float TimeToDestroy;
     [SerializeField] private GameObject UpScorePF;
     [NonSerialized] private BridgeForLinks _BridgeForLinks;
     [NonSerialized] private Collider2D[] CollidersInZone;
@@ -68,7 +67,7 @@ public class Bullet : MonoBehaviour
 
     private IEnumerator TimeToDestroyCor()
     {
-        yield return new WaitForSeconds(TimeToDestroy);
+        yield return new WaitForSeconds(0.5f);
         Destroy(gameObject);
     }
 }

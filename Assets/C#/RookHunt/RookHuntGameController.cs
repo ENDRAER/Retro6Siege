@@ -16,15 +16,14 @@ public class RookHuntGameController : MonoBehaviour
     [SerializeField] private GameObject[] MapsPF;
     [SerializeField] private List<GameObject> EnemyPF;
     [SerializeField] private List<GameObject> SpecialEnemyPF;
-    [SerializeField] public List<GameObject> Enemies;
-    [SerializeField] private float SpawnSpeed;
-    [SerializeField] public double Shoots;
-    [SerializeField] public int KillStreak;
-    [SerializeField] public int Score;
+    [NonSerialized] public List<GameObject> Enemies = new List<GameObject>();
     [SerializeField] public GameObject CavLaughsGO;
-    [SerializeField] public Animator CavLaughsAnimator;
-    [SerializeField] public bool GameStarted;
-    [SerializeField] private bool GameOver;
+    [SerializeField] public GameObject CavLaughsHeadGO;
+    [NonSerialized] public double Shoots = 3;
+    [NonSerialized] public int KillStreak = 1;
+    [NonSerialized] public int Score;
+    [NonSerialized] public bool GameStarted;
+    [NonSerialized] private bool GameOver;
     [Header("UI")]
     [SerializeField] public Image[] BulletsImg;
     [SerializeField] public TextMeshProUGUI MultiplierText;
@@ -34,9 +33,7 @@ public class RookHuntGameController : MonoBehaviour
     [NonSerialized] private int Round = 1;
     [NonSerialized] public List<GameObject> OutedEnemies;
     [NonSerialized] public List<WayCreator> OutedWays;
-    [NonSerialized] public int[] RatioOfOperatives = { 5, 0 };
-    [SerializeField] public GameObject RoundCallerGO;
-    [SerializeField] public Animator RoundCallerAnimator;
+    [NonSerialized] public double RatioOfOperatives = 5.0;
 
 
     private void Start()
@@ -75,13 +72,13 @@ public class RookHuntGameController : MonoBehaviour
         int wayID;
         if (UnityEngine.Random.Range(0, 100) < 80)
         {
-            wayID = UnityEngine.Random.Range(0, Ways.Length - (IsKaliWayExist? 1 : 0));
+            wayID = UnityEngine.Random.Range(0, Ways.Length - (IsKaliWayExist ? 1 : 0));
             _EnemyGO = Instantiate(EnemyPF[UnityEngine.Random.Range(0, EnemyPF.Count)], Ways[wayID].transform.position, Quaternion.identity);
         }
         else
         {
-            int enemyID = UnityEngine.Random.Range(0, SpecialEnemyPF.Count); 
-            wayID = UnityEngine.Random.Range(enemyID == 0 ? (IsKaliWayExist == true ? Ways.Length - 1 : 0) : 0, Ways.Length - (IsKaliWayExist? 1 : 0));
+            int enemyID = UnityEngine.Random.Range(0, SpecialEnemyPF.Count);
+            wayID = UnityEngine.Random.Range(enemyID == 0 ? (IsKaliWayExist == true ? Ways.Length - 1 : 0) : 0, Ways.Length - (IsKaliWayExist ? 1 : 0));
             _EnemyGO = Instantiate(SpecialEnemyPF[enemyID], Ways[wayID].transform.position, Quaternion.identity);
         }
         Enemy _EnemyCS = _EnemyGO.GetComponent<Enemy>();
@@ -89,7 +86,7 @@ public class RookHuntGameController : MonoBehaviour
         _EnemyCS._WayCreator = Ways[wayID];
         Enemies.Add(_EnemyGO);
 
-        yield return new WaitForSeconds(SpawnSpeed);
+        yield return new WaitForSeconds(1.5f);
         StartCoroutine(EnemySpawn());
     }
     #endregion
@@ -120,10 +117,10 @@ public class RookHuntGameController : MonoBehaviour
                 go.GetComponentInParent<Enemy>().Speed = 0;
                 go.GetComponentInParent<Enemy>().StopAllCoroutines();
             }
-            if(Score > PlayerPrefs.GetInt("TopScore"))
+            if (Score > PlayerPrefs.GetInt("TopScore"))
                 PlayerPrefs.SetInt("TopScore", Score);
-            CavLaughsGO.transform.localPosition = new Vector3(0,-1200,-50);
             CavLaughsGO.SetActive(true);
+            StartCoroutine(CavLaughANIM());
         }
     }
 
@@ -135,16 +132,51 @@ public class RookHuntGameController : MonoBehaviour
         Shoots = 1;
         Score = 0;
 
-        foreach (GameObject go in Enemies)
+        if (Enemies != null)
         {
-            Destroy(go);
+            foreach (GameObject go in Enemies)
+            {
+                Destroy(go);
+            }
+            Enemies.Clear();
         }
-        Enemies.Clear();
 
-        CavLaughsAnimator.SetTrigger("Restart");
         CavLaughsGO.SetActive(false);
-
+        CavLaughsGO.transform.localPosition = new Vector2(0, -1200);
+        StopAllCoroutines();
         Destroy(MapGO);
+    }
+    #endregion
+
+    #region Animations
+    private IEnumerator CavLaughANIM()
+    {
+        yield return new WaitForSeconds(1);
+        while (true)
+        {
+            CavLaughsGO.transform.localPosition += new Vector3(0, 5000 * Time.deltaTime);
+            if (CavLaughsGO.transform.localPosition.y >= -501)
+            {
+                CavLaughsGO.transform.localPosition = new Vector3(0, -501); 
+                goto CavLaughANIM_exit;
+            }
+            else
+                yield return new WaitForSeconds(0.03f);
+        }
+        CavLaughANIM_exit:
+        int a = 0;
+        while (true)
+        {
+            a++;
+            if (a == 8)
+            {
+                CavLaughsGO.GetComponentInChildren<BoxCollider2D>().enabled = true;
+                CavLaughsGO.GetComponentInChildren<TextMeshProUGUI>().fontSize = 44;
+                a++;
+            }
+            CavLaughsHeadGO.transform.localPosition = new Vector3(0, CavLaughsHeadGO.transform.localPosition.y == 280? 300 : 280);
+            yield return new WaitForSeconds(0.12f);
+        }
     }
     #endregion
 }

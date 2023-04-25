@@ -5,7 +5,7 @@ using System;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private int Step;
-    [SerializeField] public WayCreator _WayCreator;
+    [NonSerialized] public WayCreator _WayCreator;
     [SerializeField] private GameObject BalancerGO;
     [SerializeField] private Rigidbody2D RB2D;
     [SerializeField] private Collider2D HitCollider;
