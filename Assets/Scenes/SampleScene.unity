@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 13276984}
   - component: {fileID: 13276983}
   m_Layer: 5
-  m_Name: ComandText
+  m_Name: ComandRoleText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1302,7 +1302,7 @@ GameObject:
   - component: {fileID: 259252849}
   - component: {fileID: 259252848}
   m_Layer: 5
-  m_Name: Image (3)
+  m_Name: AtackLogo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2085,7 +2085,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e38f7319870aed479e3b6af15e4960d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MenuGO: {fileID: 764522649}
   MapsPF:
   - {fileID: 8152739404876176560, guid: 521da0d2fecebdf4ea07cff445e3db07, type: 3}
   EnemyPF:
@@ -2100,6 +2099,7 @@ MonoBehaviour:
   - {fileID: 6316989873102447414, guid: af264d84c0c237140a9a8cd68dd74301, type: 3}
   CavLaughsGO: {fileID: 1077768619}
   CavLaughsHeadGO: {fileID: 1757949754}
+  CavLaughsRestartColl: {fileID: 1397571997}
   BulletsImg:
   - {fileID: 1687364222}
   - {fileID: 621261797}
@@ -2107,7 +2107,15 @@ MonoBehaviour:
   - {fileID: 1729669162}
   MultiplierText: {fileID: 150267378}
   ScoreText: {fileID: 1454946227}
+  MenuGO: {fileID: 764522649}
   TopRecordText: {fileID: 242614969}
+  LoadingScreen: {fileID: 1361878776}
+  LSRounds: {fileID: 1237166966}
+  LSTeamRole: {fileID: 13276983}
+  LSRoundsForChangeDuty: {fileID: 2097054060}
+  LSTeamIconCenter: {fileID: 140638900}
+  LSDefendersIcon: {fileID: 1263417815}
+  LSAtatckersIcon: {fileID: 259252846}
 --- !u!1 &533034983
 GameObject:
   m_ObjectHideFlags: 0
@@ -2873,7 +2881,6 @@ GameObject:
   - component: {fileID: 1077768620}
   - component: {fileID: 1077768622}
   - component: {fileID: 1077768621}
-  - component: {fileID: 1077768623}
   - component: {fileID: 1077768624}
   m_Layer: 5
   m_Name: CaveiraLaughs
@@ -2881,7 +2888,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1077768620
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2943,27 +2950,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1077768619}
   m_CullTransparentMesh: 1
---- !u!95 &1077768623
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1077768619}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1a1f6b0303a2ea44b8edda6921217c43, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!61 &1077768624
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2971,13 +2957,13 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1077768619}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.44470215, y: 1325.3169}
+  m_Offset: {x: 0, y: 863}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2988,7 +2974,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1740.4609, y: 2981.0518}
+  m_Size: {x: 1740.4609, y: 2043.3}
   m_EdgeRadius: 0
 --- !u!1 &1178882511
 GameObject:
@@ -3237,7 +3223,7 @@ GameObject:
   - component: {fileID: 1263417818}
   - component: {fileID: 1263417817}
   m_Layer: 5
-  m_Name: Image
+  m_Name: DefenceLogo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3318,7 +3304,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1361878777
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3337,7 +3323,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.4942017, y: -3.1675}
+  m_AnchoredPosition: {x: 0, y: 2000}
   m_SizeDelta: {x: 1628.4, y: 1233}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1361878778
@@ -3391,7 +3377,7 @@ GameObject:
   - component: {fileID: 1397571998}
   - component: {fileID: 1397571997}
   m_Layer: 5
-  m_Name: ShootToRestart
+  m_Name: ShootToRestartText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3414,7 +3400,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 668.5}
+  m_AnchoredPosition: {x: 0, y: 798}
   m_SizeDelta: {x: 1291.82, y: 120.99}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!61 &1397571997
@@ -3424,7 +3410,7 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1397571995}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -3961,7 +3947,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.4941405, y: 231.8675}
+  m_AnchoredPosition: {x: 0, y: 231.8675}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1687364219

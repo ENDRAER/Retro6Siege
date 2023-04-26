@@ -8,17 +8,17 @@ using TMPro;
 
 public class RookHuntGameController : MonoBehaviour
 {
-    [SerializeField] public GameObject MenuGO;
     [NonSerialized] public GameObject MapGO;
     [NonSerialized] private MapScript MapCS;
     [NonSerialized] public WayCreator[] Ways;
-    [NonSerialized] private bool IsKaliWayExist;
     [SerializeField] private GameObject[] MapsPF;
     [SerializeField] private List<GameObject> EnemyPF;
     [SerializeField] private List<GameObject> SpecialEnemyPF;
     [NonSerialized] public List<GameObject> Enemies = new List<GameObject>();
     [SerializeField] public GameObject CavLaughsGO;
     [SerializeField] public GameObject CavLaughsHeadGO;
+    [SerializeField] public Collider2D CavLaughsRestartColl;
+    [NonSerialized] private bool IsKaliWayExist;
     [NonSerialized] public double Shoots = 3;
     [NonSerialized] public int KillStreak = 1;
     [NonSerialized] public int Score;
@@ -28,8 +28,17 @@ public class RookHuntGameController : MonoBehaviour
     [SerializeField] public Image[] BulletsImg;
     [SerializeField] public TextMeshProUGUI MultiplierText;
     [SerializeField] public TextMeshProUGUI ScoreText;
+    [SerializeField] public GameObject MenuGO;
     [SerializeField] public TextMeshProUGUI TopRecordText;
+    [SerializeField] public GameObject LoadingScreen;
+    [SerializeField] public TextMeshProUGUI LSRounds;
+    [SerializeField] public TextMeshProUGUI LSTeamRole;
+    [SerializeField] public TextMeshProUGUI LSRoundsForChangeDuty;
+    [SerializeField] public GameObject LSTeamIconCenter;
+    [SerializeField] public GameObject LSDefendersIcon;
+    [SerializeField] public GameObject LSAtatckersIcon;
     [Header("Ranked")]
+    [NonSerialized] private bool IsDefender;
     [NonSerialized] private int Round = 1;
     [NonSerialized] public List<GameObject> OutedEnemies;
     [NonSerialized] public List<WayCreator> OutedWays;
@@ -49,13 +58,23 @@ public class RookHuntGameController : MonoBehaviour
         Ways = MapCS.Ways;
         IsKaliWayExist = MapCS.IsKaliWayExist;
         MenuGO.SetActive(false);
-        GameStarted = true;
     }
 
     #region Ranked
     public void RankedGameStart()
     {
         MapCreator();
+        StartCoroutine(RankedRoundLauncher());
+    }
+
+    public IEnumerator RankedRoundLauncher()
+    {
+        LSRounds.text = "round " + Round;
+        LSTeamRole.text = IsDefender == true ? "defend" : "atack";
+        LoadingScreen.transform.localPosition = Vector2.zero;
+        yield return new WaitForSeconds(3);
+        LoadingScreen.transform.localPosition = new Vector2(0, 2000);
+        GameStarted = true;
     }
     #endregion
 
@@ -64,6 +83,7 @@ public class RookHuntGameController : MonoBehaviour
     {
         MapCreator();
         StartCoroutine(EnemySpawn());
+        GameStarted = true;
     }
 
     private IEnumerator EnemySpawn()
@@ -141,8 +161,11 @@ public class RookHuntGameController : MonoBehaviour
             Enemies.Clear();
         }
 
-        CavLaughsGO.SetActive(false);
+        CavLaughsGO.GetComponent<BoxCollider2D>().enabled = false;
+        CavLaughsRestartColl.enabled = false;
+        CavLaughsGO.GetComponentInChildren<TextMeshProUGUI>().fontSize = 0;
         CavLaughsGO.transform.localPosition = new Vector2(0, -1200);
+
         StopAllCoroutines();
         Destroy(MapGO);
     }
@@ -151,6 +174,7 @@ public class RookHuntGameController : MonoBehaviour
     #region Animations
     private IEnumerator CavLaughANIM()
     {
+        CavLaughsGO.GetComponent<BoxCollider2D>().enabled = true;
         yield return new WaitForSeconds(1);
         while (true)
         {
@@ -170,7 +194,7 @@ public class RookHuntGameController : MonoBehaviour
             a++;
             if (a == 8)
             {
-                CavLaughsGO.GetComponentInChildren<BoxCollider2D>().enabled = true;
+                CavLaughsRestartColl.enabled = true;
                 CavLaughsGO.GetComponentInChildren<TextMeshProUGUI>().fontSize = 44;
                 a++;
             }
