@@ -2,23 +2,23 @@ using UnityEngine;
 
 public class InputBridge : MonoBehaviour
 {
-    [SerializeField] public GameObject HitColiderGO;
-    [SerializeField] public Transform Zero1;
-    [SerializeField] public Transform Zero2;
-    [SerializeField] public float RotSpeed;
-    [SerializeField] public float MinRot;
-    [SerializeField] public float MaxRot;
-    [SerializeField] public int maxFPS;
+    [SerializeField] private GameObject HitColiderGO;
+    [SerializeField] private Transform Zero1;
+    [SerializeField] private Transform Zero2;
+    [SerializeField] private float RotSpeed;
+    [SerializeField] private float MinRot;
+    [SerializeField] private float MaxRot;
+    [SerializeField] private int maxFPS;
 
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
     }
 
-    void LateUpdate() 
+    void LateUpdate()
     {
         transform.eulerAngles += new Vector3(-Input.GetAxis("Mouse Y") * RotSpeed, Input.GetAxis("Mouse X") * RotSpeed);
-        transform.eulerAngles = new Vector3(Mathf.Clamp((transform.eulerAngles.x > 200? -(360 - transform.eulerAngles.x) : transform.eulerAngles.x), MinRot, MaxRot), transform.eulerAngles.y);
+        transform.eulerAngles = new Vector3(Mathf.Clamp((transform.eulerAngles.x > 200 ? -(360 - transform.eulerAngles.x) : transform.eulerAngles.x), MinRot, MaxRot), transform.eulerAngles.y);
 
         Application.targetFrameRate = maxFPS;
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
@@ -28,7 +28,7 @@ public class InputBridge : MonoBehaviour
             {
                 if (hit.transform.gameObject.tag == "Screen")
                 {
-                    GameObject HitColider = Instantiate(HitColiderGO, new Vector3(Zero2.position.x + (hit.point.x * 3.365f), Zero2.position.y + (hit.point.y * 3.365f), -2), new Quaternion(0, 0, 0, 0));
+                    Instantiate(HitColiderGO, new Vector3((hit.point.x - Zero1.position.x) * 3.365f + Zero2.position.x, (hit.point.y - Zero1.position.y) * 3.365f + Zero2.position.y, -2), new Quaternion(0, 0, 0, 0));
                 }
             }
         }

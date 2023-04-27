@@ -39,7 +39,7 @@ public class RookHuntGameController : MonoBehaviour
     [SerializeField] public GameObject LSAtatckersIcon;
     [Header("Ranked")]
     [NonSerialized] private bool IsDefender;
-    [NonSerialized] private int Round = 1;
+    [NonSerialized] private int Round = 3;
     [NonSerialized] public List<GameObject> OutedEnemies;
     [NonSerialized] public List<WayCreator> OutedWays;
     [NonSerialized] public double RatioOfOperatives = 5.0;
@@ -72,7 +72,24 @@ public class RookHuntGameController : MonoBehaviour
         LSRounds.text = "round " + Round;
         LSTeamRole.text = IsDefender == true ? "defend" : "atack";
         LoadingScreen.transform.localPosition = Vector2.zero;
-        yield return new WaitForSeconds(3);
+        if (Round % 2 == 1 && Round != 1)
+        {
+            yield return new WaitForSeconds(1);
+            for (int i = 0; i != 18; i++)
+            {
+                print(1);
+                LSTeamIconCenter.transform.Rotate(0, 0, 10);
+                LSDefendersIcon.transform.rotation = Quaternion.identity;
+                LSAtatckersIcon.transform.rotation = Quaternion.identity;
+                yield return new WaitForSeconds(0.12f);
+            }
+            yield return new WaitForSeconds(3);
+        }
+        else
+        {
+            LSRoundsForChangeDuty.text = Round == 1 ? "2" : "0";
+            yield return new WaitForSeconds(3);
+        }
         LoadingScreen.transform.localPosition = new Vector2(0, 2000);
         GameStarted = true;
     }
@@ -181,13 +198,13 @@ public class RookHuntGameController : MonoBehaviour
             CavLaughsGO.transform.localPosition += new Vector3(0, 5000 * Time.deltaTime);
             if (CavLaughsGO.transform.localPosition.y >= -501)
             {
-                CavLaughsGO.transform.localPosition = new Vector3(0, -501); 
+                CavLaughsGO.transform.localPosition = new Vector3(0, -501);
                 goto CavLaughANIM_exit;
             }
             else
                 yield return new WaitForSeconds(0.03f);
         }
-        CavLaughANIM_exit:
+    CavLaughANIM_exit:
         int a = 0;
         while (true)
         {
@@ -198,7 +215,7 @@ public class RookHuntGameController : MonoBehaviour
                 CavLaughsGO.GetComponentInChildren<TextMeshProUGUI>().fontSize = 44;
                 a++;
             }
-            CavLaughsHeadGO.transform.localPosition = new Vector3(0, CavLaughsHeadGO.transform.localPosition.y == 280? 300 : 280);
+            CavLaughsHeadGO.transform.localPosition = new Vector3(0, CavLaughsHeadGO.transform.localPosition.y == 280 ? 300 : 280);
             yield return new WaitForSeconds(0.12f);
         }
     }

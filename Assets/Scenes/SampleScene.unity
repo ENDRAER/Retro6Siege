@@ -3377,7 +3377,7 @@ GameObject:
   - component: {fileID: 1397571998}
   - component: {fileID: 1397571997}
   m_Layer: 5
-  m_Name: ShootToRestartText
+  m_Name: ShootToRestart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
