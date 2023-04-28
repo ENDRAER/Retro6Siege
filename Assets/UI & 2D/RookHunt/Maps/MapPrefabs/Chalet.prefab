@@ -502,8 +502,7 @@ MonoBehaviour:
   - {fileID: 8152739404570266060}
   - {fileID: 8152739404947621041}
   - {fileID: 8152739404182947942}
-  - {fileID: 8152739404705235339}
-  IsKaliWayExist: 1
+  SnipersWay: {fileID: 8152739404705235339}
 --- !u!212 &8152739404876176574
 SpriteRenderer:
   m_ObjectHideFlags: 0

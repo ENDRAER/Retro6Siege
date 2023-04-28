@@ -6,12 +6,14 @@ using UnityEngine;
 using System;
 using TMPro;
 using Unity.VisualScripting;
+using Unity.Burst.CompilerServices;
 
 public class RookHuntGameController : MonoBehaviour
 {
     [NonSerialized] public GameObject MapGO;
     [NonSerialized] private MapScript MapCS;
     [NonSerialized] public List<WayCreator> Ways;
+    [NonSerialized] private WayCreator SnipersWay;
     [SerializeField] private GameObject[] MapsPF;
     [SerializeField] private List<GameObject> EnemyPF;
     [SerializeField] private List<GameObject> SpecialEnemyPF;
@@ -19,7 +21,6 @@ public class RookHuntGameController : MonoBehaviour
     [SerializeField] public GameObject CavLaughsGO;
     [SerializeField] public GameObject CavLaughsHeadGO;
     [SerializeField] public Collider2D CavLaughsRestartColl;
-    [NonSerialized] private bool IsKaliWayExist;
     [NonSerialized] public double Shoots = 3;
     [NonSerialized] public int KillStreak = 1;
     [NonSerialized] public int Score;
@@ -40,11 +41,8 @@ public class RookHuntGameController : MonoBehaviour
     [SerializeField] public GameObject LSAtatckersIcon;
     [Header("Ranked")]
     [NonSerialized] private bool IsDefender = true;
-    [NonSerialized] private int Round;
-    [NonSerialized] public List<GameObject> OutedEnemies;
-    [NonSerialized] public List<GameObject> OutedSpecialEnemies;
-    [NonSerialized] public List<WayCreator> OutedWays;
-    [NonSerialized] public double RatioOfOperatives = 5.0;
+    [NonSerialized] private int Round = 0;
+    [NonSerialized] public int SpecialOp = 3;
 
 
     private void Start()
@@ -58,7 +56,7 @@ public class RookHuntGameController : MonoBehaviour
         MapGO = Instantiate(MapsPF[UnityEngine.Random.Range(0, MapsPF.Length - 1)], new Vector3(50, 1.5f, 0), Quaternion.identity);
         MapCS = MapGO.GetComponent<MapScript>();
         Ways = MapCS.Ways;
-        IsKaliWayExist = MapCS.IsKaliWayExist;
+        SnipersWay = MapCS.SnipersWay;
         MenuGO.transform.localPosition = new Vector2(0, 2000);
     }
 
@@ -95,14 +93,18 @@ public class RookHuntGameController : MonoBehaviour
         LoadingScreen.transform.localPosition = new Vector2(0, 2000);
         GameStarted = true;
 
+        List<WayCreator> OutedWays = new List<WayCreator>();
+        List<GameObject> OutedEnemies = new List<GameObject>();
+        List<GameObject> OutedSpecialEnemies = new List<GameObject>();
         for (int a = 0; a != 5; a++)
         {
             GameObject _EnemyGO;
-            int wayID;
-            if ((int)RatioOfOperatives != 0)
+            int wayID = 0;
+            Enemy _EnemyCS;
+            if (SpecialOp == 0)
             {
-                int enemyID = UnityEngine.Random.Range(0, SpecialEnemyPF.Count);
-                wayID = UnityEngine.Random.Range(0, Ways.Count - (IsKaliWayExist ? 1 : 0));
+                int enemyID = UnityEngine.Random.Range(0, EnemyPF.Count);
+                wayID = UnityEngine.Random.Range(0, Ways.Count);
                 _EnemyGO = Instantiate(EnemyPF[enemyID], Ways[wayID].transform.position, Quaternion.identity);
 
                 OutedWays.Add(Ways[wayID]);
@@ -114,20 +116,34 @@ public class RookHuntGameController : MonoBehaviour
             else
             {
                 int enemyID = UnityEngine.Random.Range(0, SpecialEnemyPF.Count);
-                wayID = UnityEngine.Random.Range(enemyID == 0 ? (IsKaliWayExist == true ? Ways.Count - 1 : 0) : 0, Ways.Count - (IsKaliWayExist ? 1 : 0));
-                _EnemyGO = Instantiate(SpecialEnemyPF[enemyID], Ways[wayID].transform.position, Quaternion.identity);
-
-                OutedWays.Add(Ways[wayID]);
-                Ways.Remove(Ways[wayID]);
+                if ((SpecialEnemyPF[enemyID].name == "Kali" || SpecialEnemyPF[enemyID].name == "Glaz") && SnipersWay != null)
+                {
+                    _EnemyGO = Instantiate(SpecialEnemyPF[enemyID], SnipersWay.transform.position, Quaternion.identity);
+                    _EnemyCS = _EnemyGO.GetComponent<Enemy>();
+                    _EnemyCS._WayCreator = SnipersWay;
+                }
+                else
+                {
+                    wayID = UnityEngine.Random.Range(0, Ways.Count);
+                    _EnemyGO = Instantiate(SpecialEnemyPF[enemyID], Ways[wayID].transform.position, Quaternion.identity);
+                    OutedWays.Add(Ways[wayID]);
+                    Ways.Remove(Ways[wayID]);
+                }
+                SpecialOp--;
 
                 OutedSpecialEnemies.Add(SpecialEnemyPF[enemyID]);
                 SpecialEnemyPF.Remove(SpecialEnemyPF[enemyID]);
             }
-            Enemy _EnemyCS = _EnemyGO.GetComponent<Enemy>();
+            _EnemyCS = _EnemyGO.GetComponent<Enemy>();
+            if(SnipersWay == null)
+                _EnemyCS._WayCreator = Ways[wayID];
             _EnemyCS.HRGC = this;
-            _EnemyCS._WayCreator = Ways[wayID];
             Enemies.Add(_EnemyGO);
         }
+        SnipersWay = MapCS.SnipersWay;
+        Ways.AddRange(OutedWays);
+        EnemyPF.AddRange(OutedEnemies);
+        SpecialEnemyPF.AddRange(OutedSpecialEnemies);
     }
     #endregion
 
@@ -142,21 +158,34 @@ public class RookHuntGameController : MonoBehaviour
     private IEnumerator EnemySpawn()
     {
         GameObject _EnemyGO;
-        int wayID;
+        int wayID = 0;
+        Enemy _EnemyCS;
         if (UnityEngine.Random.Range(0, 100) < 80)
         {
-            wayID = UnityEngine.Random.Range(0, Ways.Count - (IsKaliWayExist ? 1 : 0));
-            _EnemyGO = Instantiate(EnemyPF[UnityEngine.Random.Range(0, EnemyPF.Count)], Ways[wayID].transform.position, Quaternion.identity);
+            int enemyID = UnityEngine.Random.Range(0, EnemyPF.Count);
+            wayID = UnityEngine.Random.Range(0, Ways.Count);
+            _EnemyGO = Instantiate(EnemyPF[enemyID], Ways[wayID].transform.position, Quaternion.identity);
         }
         else
         {
             int enemyID = UnityEngine.Random.Range(0, SpecialEnemyPF.Count);
-            wayID = UnityEngine.Random.Range(enemyID == 0 ? (IsKaliWayExist == true ? Ways.Count - 1 : 0) : 0, Ways.Count - (IsKaliWayExist ? 1 : 0));
-            _EnemyGO = Instantiate(SpecialEnemyPF[enemyID], Ways[wayID].transform.position, Quaternion.identity);
+            if ((SpecialEnemyPF[enemyID].name == "Kali" || SpecialEnemyPF[enemyID].name == "Glaz") && SnipersWay != null)
+            {
+                _EnemyGO = Instantiate(SpecialEnemyPF[enemyID], SnipersWay.transform.position, Quaternion.identity);
+                _EnemyCS = _EnemyGO.GetComponent<Enemy>();
+                _EnemyCS._WayCreator = SnipersWay;
+                goto SkipWaySetter_Infinite; // from here
+            }
+            else
+            {
+                wayID = UnityEngine.Random.Range(0, Ways.Count);
+                _EnemyGO = Instantiate(SpecialEnemyPF[enemyID], Ways[wayID].transform.position, Quaternion.identity);
+            }
         }
-        Enemy _EnemyCS = _EnemyGO.GetComponent<Enemy>();
-        _EnemyCS.HRGC = this;
+        _EnemyCS = _EnemyGO.GetComponent<Enemy>();
         _EnemyCS._WayCreator = Ways[wayID];
+        SkipWaySetter_Infinite: // to there
+        _EnemyCS.HRGC = this;
         Enemies.Add(_EnemyGO);
 
         yield return new WaitForSeconds(1.5f);

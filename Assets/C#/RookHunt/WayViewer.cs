@@ -20,7 +20,7 @@ public class WayViewer : MonoBehaviour
                     Destroy(GO.gameObject);
                 AllSquares.Clear();
 
-                WayID = Math.Clamp(WayID += Input.GetKeyDown(KeyCode.Equals) ? 1 : Input.GetKeyDown(KeyCode.Minus) ? -1 : 0, 0, RHCcs.Ways.Length - 1);
+                WayID = Math.Clamp(WayID += Input.GetKeyDown(KeyCode.Equals) ? 1 : Input.GetKeyDown(KeyCode.Minus) ? -1 : 0, 0, RHCcs.Ways.Count - 1);
                 print(WayID);
                 Vector2 prevV2 = RHCcs.Ways[WayID].gameObject.transform.position;
                 foreach (Vector2 v2 in RHCcs.Ways[WayID].PathPoints)
