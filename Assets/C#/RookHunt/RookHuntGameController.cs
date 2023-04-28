@@ -5,12 +5,13 @@ using UnityEngine.UI;
 using UnityEngine;
 using System;
 using TMPro;
+using Unity.VisualScripting;
 
 public class RookHuntGameController : MonoBehaviour
 {
     [NonSerialized] public GameObject MapGO;
     [NonSerialized] private MapScript MapCS;
-    [NonSerialized] public WayCreator[] Ways;
+    [NonSerialized] public List<WayCreator> Ways;
     [SerializeField] private GameObject[] MapsPF;
     [SerializeField] private List<GameObject> EnemyPF;
     [SerializeField] private List<GameObject> SpecialEnemyPF;
@@ -38,9 +39,10 @@ public class RookHuntGameController : MonoBehaviour
     [SerializeField] public GameObject LSDefendersIcon;
     [SerializeField] public GameObject LSAtatckersIcon;
     [Header("Ranked")]
-    [NonSerialized] private bool IsDefender;
-    [NonSerialized] private int Round = 3;
+    [NonSerialized] private bool IsDefender = true;
+    [NonSerialized] private int Round;
     [NonSerialized] public List<GameObject> OutedEnemies;
+    [NonSerialized] public List<GameObject> OutedSpecialEnemies;
     [NonSerialized] public List<WayCreator> OutedWays;
     [NonSerialized] public double RatioOfOperatives = 5.0;
 
@@ -48,7 +50,7 @@ public class RookHuntGameController : MonoBehaviour
     private void Start()
     {
         TopRecordText.text = "TOP SCORE = " + PlayerPrefs.GetInt("TopScore");
-        MenuGO.SetActive(true);
+        MenuGO.transform.localPosition = Vector2.zero;
     }
 
     private void MapCreator()
@@ -57,7 +59,7 @@ public class RookHuntGameController : MonoBehaviour
         MapCS = MapGO.GetComponent<MapScript>();
         Ways = MapCS.Ways;
         IsKaliWayExist = MapCS.IsKaliWayExist;
-        MenuGO.SetActive(false);
+        MenuGO.transform.localPosition = new Vector2(0, 2000);
     }
 
     #region Ranked
@@ -69,29 +71,63 @@ public class RookHuntGameController : MonoBehaviour
 
     public IEnumerator RankedRoundLauncher()
     {
+        Round++;
         LSRounds.text = "round " + Round;
-        LSTeamRole.text = IsDefender == true ? "defend" : "atack";
         LoadingScreen.transform.localPosition = Vector2.zero;
         if (Round % 2 == 1 && Round != 1)
         {
             yield return new WaitForSeconds(1);
             for (int i = 0; i != 18; i++)
             {
-                print(1);
                 LSTeamIconCenter.transform.Rotate(0, 0, 10);
                 LSDefendersIcon.transform.rotation = Quaternion.identity;
                 LSAtatckersIcon.transform.rotation = Quaternion.identity;
                 yield return new WaitForSeconds(0.12f);
             }
-            yield return new WaitForSeconds(3);
+            IsDefender = !IsDefender;
         }
         else
         {
             LSRoundsForChangeDuty.text = Round == 1 ? "2" : "0";
-            yield return new WaitForSeconds(3);
         }
+        LSTeamRole.text = IsDefender == true ? "defend" : "atack";
+        yield return new WaitForSeconds(3);
         LoadingScreen.transform.localPosition = new Vector2(0, 2000);
         GameStarted = true;
+
+        for (int a = 0; a != 5; a++)
+        {
+            GameObject _EnemyGO;
+            int wayID;
+            if ((int)RatioOfOperatives != 0)
+            {
+                int enemyID = UnityEngine.Random.Range(0, SpecialEnemyPF.Count);
+                wayID = UnityEngine.Random.Range(0, Ways.Count - (IsKaliWayExist ? 1 : 0));
+                _EnemyGO = Instantiate(EnemyPF[enemyID], Ways[wayID].transform.position, Quaternion.identity);
+
+                OutedWays.Add(Ways[wayID]);
+                Ways.Remove(Ways[wayID]);
+
+                OutedEnemies.Add(EnemyPF[enemyID]);
+                EnemyPF.Remove(EnemyPF[enemyID]);
+            }
+            else
+            {
+                int enemyID = UnityEngine.Random.Range(0, SpecialEnemyPF.Count);
+                wayID = UnityEngine.Random.Range(enemyID == 0 ? (IsKaliWayExist == true ? Ways.Count - 1 : 0) : 0, Ways.Count - (IsKaliWayExist ? 1 : 0));
+                _EnemyGO = Instantiate(SpecialEnemyPF[enemyID], Ways[wayID].transform.position, Quaternion.identity);
+
+                OutedWays.Add(Ways[wayID]);
+                Ways.Remove(Ways[wayID]);
+
+                OutedSpecialEnemies.Add(SpecialEnemyPF[enemyID]);
+                SpecialEnemyPF.Remove(SpecialEnemyPF[enemyID]);
+            }
+            Enemy _EnemyCS = _EnemyGO.GetComponent<Enemy>();
+            _EnemyCS.HRGC = this;
+            _EnemyCS._WayCreator = Ways[wayID];
+            Enemies.Add(_EnemyGO);
+        }
     }
     #endregion
 
@@ -109,13 +145,13 @@ public class RookHuntGameController : MonoBehaviour
         int wayID;
         if (UnityEngine.Random.Range(0, 100) < 80)
         {
-            wayID = UnityEngine.Random.Range(0, Ways.Length - (IsKaliWayExist ? 1 : 0));
+            wayID = UnityEngine.Random.Range(0, Ways.Count - (IsKaliWayExist ? 1 : 0));
             _EnemyGO = Instantiate(EnemyPF[UnityEngine.Random.Range(0, EnemyPF.Count)], Ways[wayID].transform.position, Quaternion.identity);
         }
         else
         {
             int enemyID = UnityEngine.Random.Range(0, SpecialEnemyPF.Count);
-            wayID = UnityEngine.Random.Range(enemyID == 0 ? (IsKaliWayExist == true ? Ways.Length - 1 : 0) : 0, Ways.Length - (IsKaliWayExist ? 1 : 0));
+            wayID = UnityEngine.Random.Range(enemyID == 0 ? (IsKaliWayExist == true ? Ways.Count - 1 : 0) : 0, Ways.Count - (IsKaliWayExist ? 1 : 0));
             _EnemyGO = Instantiate(SpecialEnemyPF[enemyID], Ways[wayID].transform.position, Quaternion.identity);
         }
         Enemy _EnemyCS = _EnemyGO.GetComponent<Enemy>();
@@ -163,7 +199,7 @@ public class RookHuntGameController : MonoBehaviour
 
     public void ResetAllVallues()
     {
-        MenuGO.SetActive(true);
+        MenuGO.transform.localPosition = Vector2.zero;
         TopRecordText.text = "TOP SCORE = " + PlayerPrefs.GetInt("TopScore");
         GameOver = false;
         Shoots = 1;
