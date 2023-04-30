@@ -2069,10 +2069,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unLocker: 0
-  RHCcs: {fileID: 0}
+  "RHC\u0421s": {fileID: 498249123}
   Square: {fileID: 4126051907481572850, guid: 1d07276dd7033f84e9c2ccf07e4b3c5d, type: 3}
-  AllSquares: []
-  WayID: 0
 --- !u!114 &498249123
 MonoBehaviour:
   m_ObjectHideFlags: 0
