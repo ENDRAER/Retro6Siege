@@ -24,8 +24,8 @@ public class RookHuntGameController : MonoBehaviour
     [NonSerialized] public double Shoots = 3;
     [NonSerialized] public int KillStreak = 1;
     [NonSerialized] public int Score;
-    [NonSerialized] public bool GameStarted;
-    [NonSerialized] private bool GameOver;
+    [SerializeField] public enum _CurrentMode { Menu, GameOver, Ranked, Infinite }
+    [SerializeField] public _CurrentMode CurrentMode = _CurrentMode.Menu;
     [Header("UI")]
     [SerializeField] public Image[] BulletsImg;
     [SerializeField] public TextMeshProUGUI MultiplierText;
@@ -91,7 +91,7 @@ public class RookHuntGameController : MonoBehaviour
         LSTeamRole.text = IsDefender == true ? "defend" : "atack";
         yield return new WaitForSeconds(3);
         LoadingScreen.transform.localPosition = new Vector2(0, 2000);
-        GameStarted = true;
+        CurrentMode = _CurrentMode.Ranked;
 
         List<WayCreator> OutedWays = new List<WayCreator>();
         List<GameObject> OutedEnemies = new List<GameObject>();
@@ -104,7 +104,7 @@ public class RookHuntGameController : MonoBehaviour
             if (SpecialOp == 0)
             {
                 int enemyID = UnityEngine.Random.Range(0, EnemyPF.Count - 1);
-                wayID = UnityEngine.Random.Range(0, Ways.Count - 1);
+                wayID = UnityEngine.Random.Range(0, Ways.Count - 1); 
                 _EnemyGO = Instantiate(EnemyPF[enemyID], Ways[wayID].transform.position, Quaternion.identity);
 
                 OutedWays.Add(Ways[wayID]);
@@ -141,6 +141,7 @@ public class RookHuntGameController : MonoBehaviour
             _EnemyCS.HRGC = this;
             Enemies.Add(_EnemyGO);
         }
+        SpecialOp = 3;
         SnipersWay = MapCS.SnipersWay;
         Ways.AddRange(OutedWays);
         EnemyPF.AddRange(OutedEnemies);
@@ -153,7 +154,7 @@ public class RookHuntGameController : MonoBehaviour
     {
         MapCreator();
         StartCoroutine(EnemySpawn());
-        GameStarted = true;
+        CurrentMode = _CurrentMode.Infinite;
     }
 
     private IEnumerator EnemySpawn()
@@ -210,10 +211,9 @@ public class RookHuntGameController : MonoBehaviour
             BulletsImg[i].fillAmount = i + (float)Shoots;
         }
 
-        if (Shoots == -3 && !GameOver)
+        if (Shoots == -3 && CurrentMode != _CurrentMode.GameOver)
         {
-            GameStarted = false;
-            GameOver = true;
+            CurrentMode = _CurrentMode.GameOver;
             StopAllCoroutines();
             foreach (GameObject go in Enemies)
             {
@@ -231,7 +231,7 @@ public class RookHuntGameController : MonoBehaviour
     {
         MenuGO.transform.localPosition = Vector2.zero;
         TopRecordText.text = "TOP SCORE = " + PlayerPrefs.GetInt("TopScore");
-        GameOver = false;
+        CurrentMode = _CurrentMode.Menu;
         Shoots = 1;
         Score = 0;
 

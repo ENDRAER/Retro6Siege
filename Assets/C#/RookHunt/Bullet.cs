@@ -13,7 +13,7 @@ public class Bullet : MonoBehaviour
     {
         _BridgeForLinks = BridgeForLinks.MainBridge_instance;
         RookHuntGameController RHControllerCS = _BridgeForLinks.BF_RookHuntGameController;
-        RHControllerCS.Shoots  -= RHControllerCS.GameStarted == true? 1 : 0;
+        RHControllerCS.Shoots  -= RHControllerCS.CurrentMode != RHControllerCS._CurrentMode.Menu? 1 : 0;
         StartCoroutine(TimeToDestroyCor());
         bool resetMultiplier = true;
         
