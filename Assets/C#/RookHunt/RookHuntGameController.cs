@@ -42,6 +42,7 @@ public class RookHuntGameController : MonoBehaviour
     [Header("Ranked")]
     [NonSerialized] private bool IsDefender = true;
     [NonSerialized] private int Round = 0;
+    [NonSerialized] private int[] TeamScore = { 0, 0 };
     [NonSerialized] public int SpecialOp = 3;
 
 
@@ -147,10 +148,17 @@ public class RookHuntGameController : MonoBehaviour
         EnemyPF.AddRange(OutedEnemies);
         SpecialEnemyPF.AddRange(OutedSpecialEnemies);
     }
+
+
+    public void EndOfTheRankedRound()
+    {
+        if(Round == 5)
+        Round++;
+    }
     #endregion
 
-    #region Infinite Mode
-    public void InfiniteModeStart()
+        #region Infinite Mode
+        public void InfiniteModeStart()
     {
         MapCreator();
         StartCoroutine(EnemySpawn());

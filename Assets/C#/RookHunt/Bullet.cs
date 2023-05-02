@@ -1,3 +1,4 @@
+using static RookHuntGameController;
 using System.Collections;
 using UnityEngine;
 using System;
@@ -13,7 +14,7 @@ public class Bullet : MonoBehaviour
     {
         _BridgeForLinks = BridgeForLinks.MainBridge_instance;
         RookHuntGameController RHControllerCS = _BridgeForLinks.BF_RookHuntGameController;
-        RHControllerCS.Shoots  -= RHControllerCS.CurrentMode != RHControllerCS._CurrentMode.Menu? 1 : 0;
+        RHControllerCS.Shoots  -= RHControllerCS.CurrentMode != _CurrentMode.GameOver ? (RHControllerCS.CurrentMode != _CurrentMode.Menu? 1 : 0) : 0;
         StartCoroutine(TimeToDestroyCor());
         bool resetMultiplier = true;
         
@@ -55,6 +56,14 @@ public class Bullet : MonoBehaviour
 
                             UpScoreGO.GetComponent<TextMeshProUGUI>().color = new Color(1, 1 - (0.05f * RHControllerCS.KillStreak), 1 - (0.05f * RHControllerCS.KillStreak));
                             _coll.GetComponentInParent<Enemy>().YouShouldKillUrSelfNOW();
+
+                            if (RHControllerCS.CurrentMode != _CurrentMode.Ranked)
+                            {
+                                if (RHControllerCS.Enemies.Count == 0)
+                                {
+                                    RHControllerCS.EndOfTheRankedRound();
+                                }
+                            }
                         }
                     }
                     break;

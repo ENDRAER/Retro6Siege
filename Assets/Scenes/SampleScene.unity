@@ -2015,6 +2015,7 @@ MonoBehaviour:
   CavLaughsGO: {fileID: 1077768619}
   CavLaughsHeadGO: {fileID: 1757949754}
   CavLaughsRestartColl: {fileID: 1397571997}
+  CurrentMode: 0
   BulletsImg:
   - {fileID: 1687364222}
   - {fileID: 621261797}
