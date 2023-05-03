@@ -57,13 +57,8 @@ public class Bullet : MonoBehaviour
                             UpScoreGO.GetComponent<TextMeshProUGUI>().color = new Color(1, 1 - (0.05f * RHControllerCS.KillStreak), 1 - (0.05f * RHControllerCS.KillStreak));
                             _coll.GetComponentInParent<Enemy>().YouShouldKillUrSelfNOW();
 
-                            if (RHControllerCS.CurrentMode != _CurrentMode.Ranked)
-                            {
-                                if (RHControllerCS.Enemies.Count == 0)
-                                {
+                            if (RHControllerCS.CurrentMode == _CurrentMode.Ranked && RHControllerCS.Enemies.Count == 0)
                                     RHControllerCS.EndOfTheRankedRound();
-                                }
-                            }
                         }
                     }
                     break;

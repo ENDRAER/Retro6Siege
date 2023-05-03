@@ -157,7 +157,7 @@ public class RookHuntGameController : MonoBehaviour
     }
     #endregion
 
-        #region Infinite Mode
+    #region Infinite Mode
         public void InfiniteModeStart()
     {
         MapCreator();

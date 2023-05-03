@@ -121,7 +121,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 82
+        y: 207
         width: 24
         height: 66
       alignment: 9
@@ -142,7 +142,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 25
-        y: 82
+        y: 207
         width: 23
         height: 66
       alignment: 9
@@ -163,7 +163,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 49
-        y: 82
+        y: 207
         width: 23
         height: 66
       alignment: 9
@@ -184,7 +184,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 73
-        y: 82
+        y: 207
         width: 23
         height: 66
       alignment: 9
@@ -205,7 +205,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 97
-        y: 82
+        y: 207
         width: 25
         height: 66
       alignment: 9
@@ -226,7 +226,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 123
-        y: 82
+        y: 207
         width: 25
         height: 66
       alignment: 9
@@ -247,7 +247,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 149
-        y: 82
+        y: 207
         width: 22
         height: 66
       alignment: 9
@@ -268,7 +268,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 172
-        y: 82
+        y: 207
         width: 21
         height: 66
       alignment: 9
@@ -289,7 +289,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 194
-        y: 82
+        y: 207
         width: 28
         height: 66
       alignment: 9
@@ -310,7 +310,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 246
-        y: 82
+        y: 207
         width: 20
         height: 66
       alignment: 9
@@ -331,7 +331,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 223
-        y: 82
+        y: 207
         width: 22
         height: 66
       alignment: 9
@@ -352,7 +352,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 267
-        y: 82
+        y: 207
         width: 18
         height: 66
       alignment: 9
@@ -373,7 +373,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 286
-        y: 82
+        y: 207
         width: 18
         height: 66
       alignment: 9
@@ -394,7 +394,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 9
+        y: 67
         width: 55
         height: 72
       alignment: 9
@@ -415,7 +415,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 56
-        y: 9
+        y: 67
         width: 55
         height: 72
       alignment: 9
@@ -436,11 +436,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 112
-        y: 9
+        y: 67
         width: 31
-        height: 50
-      alignment: 9
-      pivot: {x: 0.5, y: 0.72}
+        height: 72
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -457,7 +457,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 144
-        y: 0
+        y: 58
         width: 39
         height: 81
       alignment: 9
@@ -478,11 +478,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 184
-        y: 0
+        y: 58
         width: 31
-        height: 70
-      alignment: 9
-      pivot: {x: 0.5, y: 0.58}
+        height: 81
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -498,12 +498,12 @@ TextureImporter:
       name: Montagne_2
       rect:
         serializedVersion: 2
-        x: 217
-        y: 0
+        x: 216
+        y: 58
         width: 50
-        height: 70
-      alignment: 9
-      pivot: {x: 0.5, y: 0.58}
+        height: 81
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -519,9 +519,9 @@ TextureImporter:
       name: Sledge_1
       rect:
         serializedVersion: 2
-        x: 293
-        y: 9
-        width: 23
+        x: 291
+        y: 67
+        width: 24
         height: 72
       alignment: 9
       pivot: {x: 0.5, y: 0.5}
@@ -540,8 +540,8 @@ TextureImporter:
       name: Sledge_0
       rect:
         serializedVersion: 2
-        x: 268
-        y: 9
+        x: 267
+        y: 67
         width: 23
         height: 72
       alignment: 9
@@ -561,12 +561,12 @@ TextureImporter:
       name: Ping
       rect:
         serializedVersion: 2
-        x: 112
-        y: 71
+        x: 306
+        y: 262
         width: 7
         height: 10
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -574,6 +574,363 @@ TextureImporter:
       bones: []
       spriteID: b9a6b4d16dee1ea4ebdd9fc25f01ef11
       internalID: 1996243770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Osa_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 27
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1a5d4a89289a944ea78febf78a53179
+      internalID: 439382807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Osa_1
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 0
+        width: 27
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8c741d78d9092b47a56f800fe98bfdc
+      internalID: -815487650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Osa_2
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 0
+        width: 30
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b36aea3f770e684468d10363aba0ee85
+      internalID: -2083588180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Iana_0
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 0
+        width: 27
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ccde72adca28504db710b417bee7114
+      internalID: -1494205783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Iana_1
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 0
+        width: 21
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 007694f2538fd0446bd25507cb3f031b
+      internalID: -1673058585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alabai_1
+      rect:
+        serializedVersion: 2
+        x: 293
+        y: 0
+        width: 22
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5821bbd4cb1125d47b4d69bf4e928429
+      internalID: 1432129522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alabai_0
+      rect:
+        serializedVersion: 2
+        x: 267
+        y: 0
+        width: 25
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 747ec69ad7e30294ca4048f17099ac40
+      internalID: -1632359523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IQ_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 140
+        width: 21
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9a1530a271cd764b901c8c9a32de964
+      internalID: 1774637508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IQ_1
+      rect:
+        serializedVersion: 2
+        x: 22
+        y: 140
+        width: 22
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4fef89f1f1d1adb459ee9f4ad33c8208
+      internalID: 1334387999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glaz_0
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 140
+        width: 26
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4dfb4288331dac54d964b22509fef5e3
+      internalID: -1731441650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Glaz_1
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 140
+        width: 24
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6f7db94caa573448b44533decbc4eb2
+      internalID: 1893194609
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gridlock_0
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 140
+        width: 26
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26a4b40cca1bf3449972b913d97434cd
+      internalID: 678744326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thermite_1
+      rect:
+        serializedVersion: 2
+        x: 124
+        y: 140
+        width: 36
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d5ad22b5d3d9b04fbea69ac6da7e65d
+      internalID: -1094779467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thermite_0
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 140
+        width: 25
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f01ee7e0e50f1e4438b42b619e993fee
+      internalID: 2110899675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Thermite_
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 140
+        width: 23
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 349b188aaf176d8498c26efc98e99c0d
+      internalID: -1675518919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hibana_0
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 140
+        width: 34
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cbc349fa3ccff87418baf101add1d4ee
+      internalID: 1038502080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hibana_1
+      rect:
+        serializedVersion: 2
+        x: 246
+        y: 140
+        width: 23
+        height: 66
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76d8393e1c6ae8e408b88aa9ad6a20c4
+      internalID: -1002951984
       vertices: []
       indices: 
       edges: []
@@ -589,8 +946,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
+      Alabai_0: -1632359523
+      Alabai_1: 1432129522
       Ash_0: -1079574712
       Ash_1: -959169714
+      Atackers_0: -1632504857
       Blitz_0: -1600914372
       Blitz_1: -1686677651
       Blitz_2: 2099738546
@@ -598,6 +958,15 @@ TextureImporter:
       Finka_1: -1897521442
       Fuze_0: -1994050798
       Fuze_1: 505128392
+      Glaz_0: -1731441650
+      Glaz_1: 1893194609
+      Gridlock_0: 678744326
+      Hibana_0: 1038502080
+      Hibana_1: -1002951984
+      IQ_0: 1774637508
+      IQ_1: 1334387999
+      Iana_0: -1494205783
+      Iana_1: -1673058585
       Jackal_0: 1408242986
       Jackal_1: 2116855010
       Kali_0: -1856265088
@@ -606,9 +975,15 @@ TextureImporter:
       Montagne_0: -597427337
       Montagne_1: -1969868684
       Montagne_2: 756153483
+      Osa_0: -1919345776
+      Osa_1: -815487650
+      Osa_2: -2083588180
       Ping: 1996243770
       Sledge_0: 1907749874
       Sledge_1: -603458648
+      Thermite_: -1675518919
+      Thermite_0: 2110899675
+      Thermite_1: -1094779467
       Ying_0: 741299083
       Ying_1: 550845709
   spritePackingTag: 
