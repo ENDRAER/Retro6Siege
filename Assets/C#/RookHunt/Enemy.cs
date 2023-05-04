@@ -4,6 +4,8 @@ using System;
 
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] public enum _EnemyType { Standart, Kali, Blitz, Ying, Finka }
+    [SerializeField] public _EnemyType EnemyType;
     [SerializeField] private int Step;
     [NonSerialized] public WayCreator _WayCreator;
     [SerializeField] private GameObject BalancerGO;
@@ -34,6 +36,10 @@ public class Enemy : MonoBehaviour
     private void Start()
     {
         StartCoroutine(Animation());
+        if (EnemyType == _EnemyType.Ying)
+        {
+
+        }
     }
 
     private void Update()
@@ -47,29 +53,24 @@ public class Enemy : MonoBehaviour
                 Step++;
                 if (Step == _WayCreator.PathPoints.Length)
                 {
-                    if (!gameObject.name.StartsWith("Kali") && !gameObject.name.StartsWith("WayTaster"))
+                    if (EnemyType != _EnemyType.Kali)
                     {
                         HRGC.Shoots--;
                         HRGC.MagazineUpdate();
                         YouShouldKillUrSelfNOW();
                     }
-                    else if (gameObject.name.StartsWith("Kali"))
+                    else if (EnemyType == _EnemyType.Kali)
                     {
                         StartCoroutine(YouShouldKillUrSelf());
                         StartCoroutine(EnemyShoot());
                         WalkType = _WalkType.Stop;
-                    }
-                    else
-                    {
-                        transform.position = _WayCreator.transform.position;
-                        Step = 0;
                     }
                 }
                 else if (WalkType == _WalkType.BetweenPoints && _WayCreator.ShootingMoment + 1 == Step)
                 {
                     if (!ShootingStarted)
                     {
-                        if (gameObject.name.StartsWith("Blitz"))
+                        if (EnemyType == _EnemyType.Blitz)
                         {
                             ShieldGO.transform.localPosition = new Vector3(-0.11f, 0.13f, ShieldGO.transform.position.z);
                             ShieldGO.transform.localRotation = Quaternion.Euler(0, 0, 66);
@@ -103,7 +104,7 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            if (gameObject.name.StartsWith("Blitz"))
+            if (EnemyType == _EnemyType.Blitz)
             {
                 ShieldGO.transform.localPosition = new Vector3(0, 0, ShieldGO.transform.position.z);
                 ShieldGO.transform.localRotation = Quaternion.Euler(0, 0, 0);

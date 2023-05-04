@@ -176,12 +176,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21095960e2641f046af35cad99842490, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EnemyType: 2
   Step: 0
   BalancerGO: {fileID: 956186686806893846}
   RB2D: {fileID: 956186687328918986}
   HitCollider: {fileID: 9003569113923015614}
   WalkType: 2
-  Speed: 1800
+  Speed: 2000
   _SpriteRenderer: {fileID: 956186686806893845}
   SpritesAnim:
   - {fileID: -1600914372, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}

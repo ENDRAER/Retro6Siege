@@ -14,7 +14,6 @@ public class WayTester : MonoBehaviour
     [SerializeField] private SpriteRenderer _SpriteRenderer;
     [SerializeField] private Sprite[] SpritesAnim;
     [SerializeField] private byte AnimID;
-    [SerializeField] private float AnimDelay;
 
 
     private void Start()
@@ -45,9 +44,9 @@ public class WayTester : MonoBehaviour
     public IEnumerator Animation()
     {
         _SpriteRenderer.sprite = SpritesAnim[0 + AnimID];
-        yield return new WaitForSeconds(AnimDelay);
+        yield return new WaitForSeconds(0.2f);
         _SpriteRenderer.sprite = SpritesAnim[1 + AnimID];
-        yield return new WaitForSeconds(AnimDelay);
+        yield return new WaitForSeconds(0.2f);
         StartCoroutine(Animation());
     }
 }

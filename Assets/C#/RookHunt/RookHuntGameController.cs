@@ -5,8 +5,6 @@ using UnityEngine.UI;
 using UnityEngine;
 using System;
 using TMPro;
-using Unity.VisualScripting;
-using Unity.Burst.CompilerServices;
 
 public class RookHuntGameController : MonoBehaviour
 {
@@ -117,7 +115,7 @@ public class RookHuntGameController : MonoBehaviour
             else
             {
                 int enemyID = UnityEngine.Random.Range(0, SpecialEnemyPF.Count - 1);
-                if ((SpecialEnemyPF[enemyID].name == "Kali" || SpecialEnemyPF[enemyID].name == "Glaz") && SnipersWay != null)
+                if ((SpecialEnemyPF[enemyID].name.StartsWith("Kali")|| SpecialEnemyPF[enemyID].name.StartsWith("Glaz")) && SnipersWay != null)
                 {
                     _EnemyGO = Instantiate(SpecialEnemyPF[enemyID], SnipersWay.transform.position, Quaternion.identity);
                     _EnemyCS = _EnemyGO.GetComponent<Enemy>();
@@ -179,7 +177,7 @@ public class RookHuntGameController : MonoBehaviour
         else
         {
             int enemyID = UnityEngine.Random.Range(0, SpecialEnemyPF.Count - 1);
-            if ((SpecialEnemyPF[enemyID].name == "Kali" || SpecialEnemyPF[enemyID].name == "Glaz") && SnipersWay != null)
+            if ((SpecialEnemyPF[enemyID].name.StartsWith("Kali") || SpecialEnemyPF[enemyID].name.StartsWith("Kali")) && SnipersWay != null)
             {
                 _EnemyGO = Instantiate(SpecialEnemyPF[enemyID], SnipersWay.transform.position, Quaternion.identity);
                 _EnemyCS = _EnemyGO.GetComponent<Enemy>();
