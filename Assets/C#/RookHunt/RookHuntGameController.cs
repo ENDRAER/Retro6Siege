@@ -47,6 +47,7 @@ public class RookHuntGameController : MonoBehaviour
 
     private void Start()
     {
+        print(EnemyPF[].coout);
         TopRecordText.text = "TOP SCORE = " + PlayerPrefs.GetInt("TopScore");
         MenuGO.transform.localPosition = Vector2.zero;
     }
@@ -103,8 +104,8 @@ public class RookHuntGameController : MonoBehaviour
             Enemy _EnemyCS;
             if (SpecialOp == 0)
             {
-                int enemyID = UnityEngine.Random.Range(0, EnemyPF.Count - 1);
-                wayID = UnityEngine.Random.Range(0, Ways.Count - 1); 
+                int enemyID = UnityEngine.Random.Range(0, EnemyPF.Count);
+                wayID = UnityEngine.Random.Range(0, Ways.Count); 
                 _EnemyGO = Instantiate(EnemyPF[enemyID], Ways[wayID].transform.position, Quaternion.identity);
 
                 OutedWays.Add(Ways[wayID]);
@@ -115,7 +116,7 @@ public class RookHuntGameController : MonoBehaviour
             }
             else
             {
-                int enemyID = UnityEngine.Random.Range(0, SpecialEnemyPF.Count - 1);
+                int enemyID = UnityEngine.Random.Range(0, SpecialEnemyPF.Count);
                 if ((SpecialEnemyPF[enemyID].name.StartsWith("Kali")|| SpecialEnemyPF[enemyID].name.StartsWith("Glaz")) && SnipersWay != null)
                 {
                     _EnemyGO = Instantiate(SpecialEnemyPF[enemyID], SnipersWay.transform.position, Quaternion.identity);
@@ -125,7 +126,7 @@ public class RookHuntGameController : MonoBehaviour
                 }
                 else
                 {
-                    wayID = UnityEngine.Random.Range(0, Ways.Count - 1);
+                    wayID = UnityEngine.Random.Range(0, Ways.Count);
                     _EnemyGO = Instantiate(SpecialEnemyPF[enemyID], Ways[wayID].transform.position, Quaternion.identity);
                     OutedWays.Add(Ways[wayID]);
                     Ways.Remove(Ways[wayID]);
@@ -167,17 +168,17 @@ public class RookHuntGameController : MonoBehaviour
     private IEnumerator EnemySpawn()
     {
         GameObject _EnemyGO;
-        int wayID = 0;
+        int wayID = 0;        
         Enemy _EnemyCS;
         if (UnityEngine.Random.Range(0, 100) < 80)
         {
-            int enemyID = UnityEngine.Random.Range(0, EnemyPF.Count - 1);
-            wayID = UnityEngine.Random.Range(0, Ways.Count - 1);
+            int enemyID = UnityEngine.Random.Range(0, EnemyPF.Count);
+            wayID = UnityEngine.Random.Range(0, Ways.Count);
             _EnemyGO = Instantiate(EnemyPF[enemyID], Ways[wayID].transform.position, Quaternion.identity);
         }
         else
         {
-            int enemyID = UnityEngine.Random.Range(0, SpecialEnemyPF.Count - 1);
+            int enemyID = UnityEngine.Random.Range(0, SpecialEnemyPF.Count);
             if ((SpecialEnemyPF[enemyID].name.StartsWith("Kali") || SpecialEnemyPF[enemyID].name.StartsWith("Kali")) && SnipersWay != null)
             {
                 _EnemyGO = Instantiate(SpecialEnemyPF[enemyID], SnipersWay.transform.position, Quaternion.identity);
@@ -187,7 +188,7 @@ public class RookHuntGameController : MonoBehaviour
             }
             else
             {
-                wayID = UnityEngine.Random.Range(0, Ways.Count - 1);
+                wayID = UnityEngine.Random.Range(0, Ways.Count);
                 _EnemyGO = Instantiate(SpecialEnemyPF[enemyID], Ways[wayID].transform.position, Quaternion.identity);
             }
         }
@@ -198,6 +199,7 @@ public class RookHuntGameController : MonoBehaviour
         Enemies.Add(_EnemyGO);
 
         yield return new WaitForSeconds(1.5f);
+
         StartCoroutine(EnemySpawn());
     }
     #endregion

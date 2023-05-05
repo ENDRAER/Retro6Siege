@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.17796983, g: 0.22282629, b: 0.30494565, a: 1}
+  m_IndirectSpecularColor: {r: 0.17797005, g: 0.22282669, b: 0.30494624, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2648,7 +2648,7 @@ MonoBehaviour:
   HitColiderGO: {fileID: 4060668376003707211, guid: 1d4b532917e8fe34db5ce364a47113b5, type: 3}
   Zero1: {fileID: 1643090456}
   Zero2: {fileID: 498249121}
-  RotSpeed: 1.5
+  RotSpeed: 1
   MinRot: -50
   MaxRot: 50
   maxFPS: 120
