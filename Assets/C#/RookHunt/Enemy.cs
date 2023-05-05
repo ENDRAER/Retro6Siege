@@ -38,7 +38,7 @@ public class Enemy : MonoBehaviour
         StartCoroutine(Animation());
         if (EnemyType == _EnemyType.Ying)
         {
-
+            HRGC.FlashScreenAnim.SetTrigger("FlashNOW");
         }
     }
 

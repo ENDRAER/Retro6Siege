@@ -16,20 +16,21 @@ public class RookHuntGameController : MonoBehaviour
     [SerializeField] private List<GameObject> EnemyPF;
     [SerializeField] private List<GameObject> SpecialEnemyPF;
     [NonSerialized] public List<GameObject> Enemies = new List<GameObject>();
-    [SerializeField] public GameObject CavLaughsGO;
-    [SerializeField] public GameObject CavLaughsHeadGO;
-    [SerializeField] public Collider2D CavLaughsRestartColl;
     [NonSerialized] public double Shoots = 3;
     [NonSerialized] public int KillStreak = 1;
     [NonSerialized] public int Score;
     [SerializeField] public enum _CurrentMode { Menu, GameOver, Ranked, Infinite }
     [SerializeField] public _CurrentMode CurrentMode = _CurrentMode.Menu;
     [Header("UI")]
+    [SerializeField] public GameObject MenuGO;
+    [SerializeField] public TextMeshProUGUI TopRecordText;
+    [SerializeField] public GameObject CavLaughsGO;
+    [SerializeField] public GameObject CavLaughsHeadGO;
+    [SerializeField] public Collider2D CavLaughsRestartColl;
     [SerializeField] public Image[] BulletsImg;
     [SerializeField] public TextMeshProUGUI MultiplierText;
     [SerializeField] public TextMeshProUGUI ScoreText;
-    [SerializeField] public GameObject MenuGO;
-    [SerializeField] public TextMeshProUGUI TopRecordText;
+    [SerializeField] public Animator FlashScreenAnim;
     [SerializeField] public GameObject LoadingScreen;
     [SerializeField] public TextMeshProUGUI LSRounds;
     [SerializeField] public TextMeshProUGUI LSTeamRole;
