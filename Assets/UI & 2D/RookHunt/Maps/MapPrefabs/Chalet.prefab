@@ -600,8 +600,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PathPoints:
-  - {x: 44.5, y: -2.5}
-  - {x: 48.9, y: -2}
+  - {x: 48.3, y: -2.5}
   - {x: 50.2, y: 0.5}
   - {x: 52.7, y: -1.4}
   - {x: 56.3, y: -1}

@@ -7,7 +7,7 @@ public class WayViewer : MonoBehaviour
     [SerializeField] private bool unLocker;
     [SerializeField] private RookHuntGameController RHCСs;
     [SerializeField] private GameObject Square;
-    [NonSerialized] private List<GameObject> AllSquares;
+    [NonSerialized] private List<GameObject> AllSquares = new List<GameObject>();
     [NonSerialized] private int WayID;
 
     void Update()

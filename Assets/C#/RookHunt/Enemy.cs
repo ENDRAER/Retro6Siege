@@ -38,7 +38,7 @@ public class Enemy : MonoBehaviour
         StartCoroutine(Animation());
         if (EnemyType == _EnemyType.Ying)
         {
-            HRGC.FlashScreenAnim.SetTrigger("FlashNOW");
+            StartCoroutine(StartYingFlashingThrough(1f));
         }
     }
 
@@ -153,5 +153,11 @@ public class Enemy : MonoBehaviour
         _SpriteRenderer.sprite = SpritesAnim[AnimID + 1];
         yield return new WaitForSeconds(AnimDelay);
         StartCoroutine(Animation());
+    }
+
+    public IEnumerator StartYingFlashingThrough(float Time)
+    {
+        yield return new WaitForSeconds(Time);
+        HRGC.FlashScreenAnim.SetTrigger("FlashNOW");
     }
 }
