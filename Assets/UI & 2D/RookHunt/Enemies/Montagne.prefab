@@ -147,6 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21095960e2641f046af35cad99842490, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EnemyType: 0
   Step: 0
   BalancerGO: {fileID: 0}
   RB2D: {fileID: 956186687328918986}
@@ -180,7 +181,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 10
+  m_LinearDrag: 20
   m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}

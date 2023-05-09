@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using System;
 using TMPro;
+using Unity.VisualScripting;
 
 public class RookHuntGameController : MonoBehaviour
 {
@@ -30,14 +31,18 @@ public class RookHuntGameController : MonoBehaviour
     [SerializeField] public Image[] BulletsImg;
     [SerializeField] public TextMeshProUGUI MultiplierText;
     [SerializeField] public TextMeshProUGUI ScoreText;
+    [SerializeField] public TextMeshProUGUI TeamScoreText;
     [SerializeField] public Animator FlashScreenAnim;
-    [SerializeField] public GameObject LoadingScreen;
+    [SerializeField] public GameObject LoadingScreen; // LS - LoadingScreen
     [SerializeField] public TextMeshProUGUI LSRounds;
     [SerializeField] public TextMeshProUGUI LSTeamRole;
     [SerializeField] public TextMeshProUGUI LSRoundsForChangeDuty;
     [SerializeField] public GameObject LSTeamIconCenter;
     [SerializeField] public GameObject LSDefendersIcon;
     [SerializeField] public GameObject LSAtatckersIcon;
+    [SerializeField] public GameObject Outro;
+    [SerializeField] public TextMeshProUGUI OutroRoundStatusText;
+    [SerializeField] public TextMeshProUGUI OutroReasonOfEndText;
     [Header("Ranked")]
     [NonSerialized] private bool IsDefender = true;
     [NonSerialized] private int Round = 0;
@@ -77,16 +82,13 @@ public class RookHuntGameController : MonoBehaviour
             yield return new WaitForSeconds(1);
             for (int i = 0; i != 18; i++)
             {
+                LSRoundsForChangeDuty.text = "1";
                 LSTeamIconCenter.transform.Rotate(0, 0, 10);
                 LSDefendersIcon.transform.rotation = Quaternion.identity;
                 LSAtatckersIcon.transform.rotation = Quaternion.identity;
-                yield return new WaitForSeconds(0.12f);
+                yield return new WaitForSeconds(0.06f);
             }
             IsDefender = !IsDefender;
-        }
-        else
-        {
-            LSRoundsForChangeDuty.text = Round == 1 ? "2" : "0";
         }
         LSTeamRole.text = IsDefender == true ? "defend" : "atack";
         yield return new WaitForSeconds(3);
@@ -113,9 +115,10 @@ public class RookHuntGameController : MonoBehaviour
             else
             {
                 int enemyID = UnityEngine.Random.Range(0, SpecialEnemyPF.Count - 1);
-                if ((SpecialEnemyPF[enemyID].name.StartsWith("Kali") || SpecialEnemyPF[enemyID].name.StartsWith("Glaz")) && SnipersWay != null)
+                _EnemyGO = Instantiate(SpecialEnemyPF[enemyID], new Vector3(50, 50), Quaternion.identity);
+                if ((_EnemyGO.name.StartsWith("Kali") || _EnemyGO.name.StartsWith("Glaz")) && SnipersWay != null)
                 {
-                    _EnemyGO = Instantiate(SpecialEnemyPF[enemyID], SnipersWay.transform.position, Quaternion.identity);
+                    _EnemyGO.transform.position = SnipersWay.transform.position;
                     _EnemyCS = _EnemyGO.GetComponent<Enemy>();
                     _EnemyCS._WayCreator = SnipersWay;
                     SnipersWay = null;
@@ -123,7 +126,7 @@ public class RookHuntGameController : MonoBehaviour
                 else
                 {
                     wayID = UnityEngine.Random.Range(0, Ways.Count - 1);
-                    _EnemyGO = Instantiate(SpecialEnemyPF[enemyID], Ways[wayID].transform.position, Quaternion.identity);
+                    _EnemyGO.transform.position = Ways[wayID].transform.position;
                 }
                 SpecialOp--;
 
@@ -145,13 +148,33 @@ public class RookHuntGameController : MonoBehaviour
         Ways.AddRange(OutedWays);
         EnemyPF.AddRange(OutedEnemies);
         SpecialEnemyPF.AddRange(OutedSpecialEnemies);
+
+        TeamScoreText.text = TeamScore[0] + ":" + TeamScore[1];
+        yield return new WaitForSeconds(0.7f);
+        TeamScoreText.text = null;
     }
 
 
-    public void EndOfTheRankedRound()
+    public IEnumerator EndOfTheRankedRound(bool IsWinner)
     {
-        if (Round == 5)
-            Round++;
+        foreach (GameObject go in Enemies)
+        {
+            go.GetComponentInParent<Enemy>().Speed = 0;
+            go.GetComponentInParent<Enemy>().StopAllCoroutines();
+        }
+        OutroRoundStatusText.text = IsWinner ? "ROUND" + Round + "WON" : "ROUND" + Round + "LOST";
+        OutroReasonOfEndText.text = IsWinner ? "Enemies eliminated" : "no ammunition left";
+        for (int i = 1; Outro.transform.localScale.y < 1; i++)
+        {
+            Outro.transform.localScale = new Vector3(1, (float)i /10,1);
+            yield return new WaitForSeconds(0.06f);
+        }
+        Outro.transform.localScale = new Vector3(1, 1, 1);
+        yield return new WaitForSeconds(2);
+        Outro.transform.localScale = new Vector3(1, 0, 1);
+
+        ResetAllVallues();
+        StartCoroutine(RankedRoundLauncher());
     }
     #endregion
 
@@ -211,15 +234,16 @@ public class RookHuntGameController : MonoBehaviour
 
     public void MagazineUpdate()
     {
-        Shoots = math.clamp(Shoots, -3, 1);
+        Shoots = math.clamp(Shoots, -2, 1);
         for (int i = 0; i < BulletsImg.Length; i++)
         {
             BulletsImg[i].fillAmount = i + (float)Shoots;
         }
 
-        if (Shoots == -3 && CurrentMode != _CurrentMode.GameOver)
+        if (CurrentMode == _CurrentMode.Infinite && Shoots == -2)
         {
             CurrentMode = _CurrentMode.GameOver;
+            TeamScoreText.text = null;
             StopAllCoroutines();
             foreach (GameObject go in Enemies)
             {
@@ -231,13 +255,33 @@ public class RookHuntGameController : MonoBehaviour
             CavLaughsGO.SetActive(true);
             StartCoroutine(CavLaughANIM());
         }
+
+        if (CurrentMode == _CurrentMode.Ranked)
+        {
+            if (Enemies.Count == 0)
+                StartCoroutine(EndOfTheRankedRound(true));
+            else if (Shoots == -2)
+                StartCoroutine(EndOfTheRankedRound(false));
+        }
+    }
+
+    public void ExitInMainMenu()
+    {
+        TopRecordText.text = "TOP SCORE = " + PlayerPrefs.GetInt("TopScore");
+        CurrentMode = _CurrentMode.Menu;
+        ResetAllVallues();
+        CavLaughsGO.GetComponent<BoxCollider2D>().enabled = false;
+        CavLaughsRestartColl.enabled = false;
+        CavLaughsGO.GetComponentInChildren<TextMeshProUGUI>().fontSize = 0;
+        CavLaughsGO.transform.localPosition = new Vector2(0, -1200);
+
+        StopAllCoroutines();
+        Destroy(MapGO);
+        MenuGO.transform.localPosition = Vector2.zero;
     }
 
     public void ResetAllVallues()
     {
-        MenuGO.transform.localPosition = Vector2.zero;
-        TopRecordText.text = "TOP SCORE = " + PlayerPrefs.GetInt("TopScore");
-        CurrentMode = _CurrentMode.Menu;
         Shoots = 1;
         Score = 0;
 
@@ -250,13 +294,6 @@ public class RookHuntGameController : MonoBehaviour
             Enemies.Clear();
         }
 
-        CavLaughsGO.GetComponent<BoxCollider2D>().enabled = false;
-        CavLaughsRestartColl.enabled = false;
-        CavLaughsGO.GetComponentInChildren<TextMeshProUGUI>().fontSize = 0;
-        CavLaughsGO.transform.localPosition = new Vector2(0, -1200);
-
-        StopAllCoroutines();
-        Destroy(MapGO);
     }
     #endregion
 
@@ -265,18 +302,12 @@ public class RookHuntGameController : MonoBehaviour
     {
         CavLaughsGO.GetComponent<BoxCollider2D>().enabled = true;
         yield return new WaitForSeconds(1);
-        while (true)
+        while (CavLaughsGO.transform.localPosition.y < -502)
         {
+            yield return new WaitForSeconds(0.03f);
             CavLaughsGO.transform.localPosition += new Vector3(0, 5000 * Time.deltaTime);
-            if (CavLaughsGO.transform.localPosition.y >= -501)
-            {
-                CavLaughsGO.transform.localPosition = new Vector3(0, -501);
-                goto CavLaughANIM_exit;
-            }
-            else
-                yield return new WaitForSeconds(0.03f);
         }
-    CavLaughANIM_exit:
+        CavLaughsGO.transform.localPosition = new Vector3(0, -501);
         int a = 0;
         while (true)
         {

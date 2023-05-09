@@ -10,7 +10,7 @@ public class Bullet : MonoBehaviour
     [NonSerialized] private BridgeForLinks _BridgeForLinks;
     [NonSerialized] private Collider2D[] CollidersInZone;
 
-    void Start()
+    void Awake()
     {
         _BridgeForLinks = BridgeForLinks.MainBridge_instance;
         RookHuntGameController RHControllerCS = _BridgeForLinks.BF_RookHuntGameController;
@@ -30,7 +30,7 @@ public class Bullet : MonoBehaviour
                     RHControllerCS.InfiniteModeStart();
                     break;
                 case "ShootToRestart":
-                    RHControllerCS.ResetAllVallues();
+                    RHControllerCS.ExitInMainMenu();
                     break;
                 default:
                     Collider2D cover = null;
@@ -56,9 +56,6 @@ public class Bullet : MonoBehaviour
 
                             UpScoreGO.GetComponent<TextMeshProUGUI>().color = new Color(1, 1 - (0.05f * RHControllerCS.KillStreak), 1 - (0.05f * RHControllerCS.KillStreak));
                             _coll.GetComponentInParent<Enemy>().YouShouldKillUrSelfNOW();
-
-                            if (RHControllerCS.CurrentMode == _CurrentMode.Ranked && RHControllerCS.Enemies.Count == 0)
-                                    RHControllerCS.EndOfTheRankedRound();
                         }
                     }
                     break;

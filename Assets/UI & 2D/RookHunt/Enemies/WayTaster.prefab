@@ -50,11 +50,10 @@ MonoBehaviour:
   _WayCreator: {fileID: 0}
   BalancerGO: {fileID: 1317718087024333300}
   RB2D: {fileID: 1317718086435399976}
-  Speed: 2300
+  Speed: 5000
   _SpriteRenderer: {fileID: 1317718087024333303}
   SpritesAnim: []
   AnimID: 0
-  AnimDelay: 0
 --- !u!50 &1317718086435399976
 Rigidbody2D:
   serializedVersion: 4
@@ -68,7 +67,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 10
+  m_LinearDrag: 20
   m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}

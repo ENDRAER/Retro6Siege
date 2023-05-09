@@ -52,7 +52,7 @@ MonoBehaviour:
   RB2D: {fileID: 6316989873102447415}
   HitCollider: {fileID: 0}
   WalkType: 0
-  Speed: 2500
+  Speed: 5000
   _SpriteRenderer: {fileID: 6316989874765650920}
   SpritesAnim:
   - {fileID: 173145109, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
@@ -78,7 +78,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 10
+  m_LinearDrag: 20
   m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
