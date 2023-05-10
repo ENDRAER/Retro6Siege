@@ -33,6 +33,8 @@ public class Bullet : MonoBehaviour
                     RHControllerCS.ExitInMainMenu();
                     break;
                 default:
+                    if (RHControllerCS.InvincibleEnemies)
+                        return;
                     Collider2D cover = null;
                     foreach (Collider2D _coll in CollidersInZone)
                     {

@@ -831,7 +831,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Thermite_1
+      name: Gridlock_1
       rect:
         serializedVersion: 2
         x: 124
@@ -873,7 +873,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Thermite_
+      name: Thermite_1
       rect:
         serializedVersion: 2
         x: 187
@@ -961,6 +961,7 @@ TextureImporter:
       Glaz_0: -1731441650
       Glaz_1: 1893194609
       Gridlock_0: 678744326
+      Gridlock_1: -1094779467
       Hibana_0: 1038502080
       Hibana_1: -1002951984
       IQ_0: 1774637508
@@ -981,9 +982,8 @@ TextureImporter:
       Ping: 1996243770
       Sledge_0: 1907749874
       Sledge_1: -603458648
-      Thermite_: -1675518919
       Thermite_0: 2110899675
-      Thermite_1: -1094779467
+      Thermite_1: -1675518919
       Ying_0: 741299083
       Ying_1: 550845709
   spritePackingTag: 

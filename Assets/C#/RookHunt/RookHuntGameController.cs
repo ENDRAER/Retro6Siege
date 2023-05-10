@@ -5,7 +5,6 @@ using UnityEngine.UI;
 using UnityEngine;
 using System;
 using TMPro;
-using Unity.VisualScripting;
 
 public class RookHuntGameController : MonoBehaviour
 {
@@ -17,6 +16,7 @@ public class RookHuntGameController : MonoBehaviour
     [SerializeField] private List<GameObject> EnemyPF;
     [SerializeField] private List<GameObject> SpecialEnemyPF;
     [NonSerialized] public List<GameObject> Enemies = new List<GameObject>();
+    [NonSerialized] public bool InvincibleEnemies;
     [NonSerialized] public double Shoots = 3;
     [NonSerialized] public int KillStreak = 1;
     [NonSerialized] public int Score;
@@ -31,8 +31,13 @@ public class RookHuntGameController : MonoBehaviour
     [SerializeField] public Image[] BulletsImg;
     [SerializeField] public TextMeshProUGUI MultiplierText;
     [SerializeField] public TextMeshProUGUI ScoreText;
-    [SerializeField] public TextMeshProUGUI TeamScoreText;
     [SerializeField] public Animator FlashScreenAnim;
+    [Header("Ranked")]
+    [SerializeField] public TextMeshProUGUI TeamScoreText;
+    [NonSerialized] private bool IsDefender = true;
+    [NonSerialized] private int Round = 0;
+    [NonSerialized] private int[] TeamScore = { 0, 0 };
+    [NonSerialized] public int SpecialOp = 3;
     [SerializeField] public GameObject LoadingScreen; // LS - LoadingScreen
     [SerializeField] public TextMeshProUGUI LSRounds;
     [SerializeField] public TextMeshProUGUI LSTeamRole;
@@ -43,11 +48,6 @@ public class RookHuntGameController : MonoBehaviour
     [SerializeField] public GameObject Outro;
     [SerializeField] public TextMeshProUGUI OutroRoundStatusText;
     [SerializeField] public TextMeshProUGUI OutroReasonOfEndText;
-    [Header("Ranked")]
-    [NonSerialized] private bool IsDefender = true;
-    [NonSerialized] private int Round = 0;
-    [NonSerialized] private int[] TeamScore = { 0, 0 };
-    [NonSerialized] public int SpecialOp = 3;
 
 
     private void Start()
@@ -93,77 +93,94 @@ public class RookHuntGameController : MonoBehaviour
         LSTeamRole.text = IsDefender == true ? "defend" : "atack";
         yield return new WaitForSeconds(3);
         LoadingScreen.transform.localPosition = new Vector2(0, 2000);
-        CurrentMode = _CurrentMode.Ranked;
 
-        List<WayCreator> OutedWays = new List<WayCreator>();
-        List<GameObject> OutedEnemies = new List<GameObject>();
-        List<GameObject> OutedSpecialEnemies = new List<GameObject>();
-        for (int a = 0; a != 5; a++)
+        #region defend
+        if (IsDefender)
         {
-            GameObject _EnemyGO;
-            int wayID = 0;
-            Enemy _EnemyCS;
-            if (SpecialOp == 0)
+            List<WayCreator> OutedWays = new List<WayCreator>();
+            List<GameObject> OutedEnemies = new List<GameObject>();
+            List<GameObject> OutedSpecialEnemies = new List<GameObject>();
+            for (int a = 0; a != 5; a++)
             {
-                int enemyID = UnityEngine.Random.Range(0, EnemyPF.Count - 1);
-                wayID = UnityEngine.Random.Range(0, Ways.Count - 1);
-                _EnemyGO = Instantiate(EnemyPF[enemyID], Ways[wayID].transform.position, Quaternion.identity);
-
-                OutedEnemies.Add(EnemyPF[enemyID]);
-                EnemyPF.Remove(EnemyPF[enemyID]);
-            }
-            else
-            {
-                int enemyID = UnityEngine.Random.Range(0, SpecialEnemyPF.Count - 1);
-                _EnemyGO = Instantiate(SpecialEnemyPF[enemyID], new Vector3(50, 50), Quaternion.identity);
-                if ((_EnemyGO.name.StartsWith("Kali") || _EnemyGO.name.StartsWith("Glaz")) && SnipersWay != null)
+                GameObject _EnemyGO;
+                int wayID = 0;
+                Enemy _EnemyCS;
+                if (SpecialOp == 0)
                 {
-                    _EnemyGO.transform.position = SnipersWay.transform.position;
-                    _EnemyCS = _EnemyGO.GetComponent<Enemy>();
-                    _EnemyCS._WayCreator = SnipersWay;
-                    SnipersWay = null;
+                    int enemyID = UnityEngine.Random.Range(0, EnemyPF.Count - 1);
+                    wayID = UnityEngine.Random.Range(0, Ways.Count - 1);
+                    _EnemyGO = Instantiate(EnemyPF[enemyID], Ways[wayID].transform.position, Quaternion.identity);
+
+                    OutedEnemies.Add(EnemyPF[enemyID]);
+                    EnemyPF.Remove(EnemyPF[enemyID]);
                 }
                 else
                 {
-                    wayID = UnityEngine.Random.Range(0, Ways.Count - 1);
-                    _EnemyGO.transform.position = Ways[wayID].transform.position;
+                    int enemyID = UnityEngine.Random.Range(0, SpecialEnemyPF.Count - 1);
+                    _EnemyGO = Instantiate(SpecialEnemyPF[enemyID], new Vector3(50, 50), Quaternion.identity);
+                    if ((_EnemyGO.name.StartsWith("Kali") || _EnemyGO.name.StartsWith("Glaz")) && SnipersWay != null)
+                    {
+                        _EnemyGO.transform.position = SnipersWay.transform.position;
+                        _EnemyCS = _EnemyGO.GetComponent<Enemy>();
+                        _EnemyCS._WayCreator = SnipersWay;
+                        SnipersWay = null;
+                    }
+                    else
+                    {
+                        wayID = UnityEngine.Random.Range(0, Ways.Count - 1);
+                        _EnemyGO.transform.position = Ways[wayID].transform.position;
+                    }
+                    SpecialOp--;
+
+                    OutedSpecialEnemies.Add(SpecialEnemyPF[enemyID]);
+                    SpecialEnemyPF.Remove(SpecialEnemyPF[enemyID]);
                 }
-                SpecialOp--;
+                _EnemyCS = _EnemyGO.GetComponent<Enemy>();
+                if (_EnemyCS._WayCreator == null)
+                {
+                    _EnemyCS._WayCreator = Ways[wayID];
+                    OutedWays.Add(Ways[wayID]);
+                    Ways.Remove(Ways[wayID]);
+                }
+                _EnemyCS.HRGC = this;
+                Enemies.Add(_EnemyGO);
+            }
+            SpecialOp = 3;
+            SnipersWay = MapCS.SnipersWay;
+            Ways.AddRange(OutedWays);
+            EnemyPF.AddRange(OutedEnemies);
+            SpecialEnemyPF.AddRange(OutedSpecialEnemies);
 
-                OutedSpecialEnemies.Add(SpecialEnemyPF[enemyID]);
-                SpecialEnemyPF.Remove(SpecialEnemyPF[enemyID]);
-            }
-            _EnemyCS = _EnemyGO.GetComponent<Enemy>();
-            if (_EnemyCS._WayCreator == null)
-            {
-                _EnemyCS._WayCreator = Ways[wayID];
-                OutedWays.Add(Ways[wayID]);
-                Ways.Remove(Ways[wayID]);
-            }
-            _EnemyCS.HRGC = this;
-            Enemies.Add(_EnemyGO);
+            CurrentMode = _CurrentMode.Ranked;
+            InvincibleEnemies = false;
+
+            TeamScoreText.text = TeamScore[0] + ":" + TeamScore[1];
+            yield return new WaitForSeconds(0.7f);
+            TeamScoreText.text = null;
         }
-        SpecialOp = 3;
-        SnipersWay = MapCS.SnipersWay;
-        Ways.AddRange(OutedWays);
-        EnemyPF.AddRange(OutedEnemies);
-        SpecialEnemyPF.AddRange(OutedSpecialEnemies);
+        #endregion
 
-        TeamScoreText.text = TeamScore[0] + ":" + TeamScore[1];
-        yield return new WaitForSeconds(0.7f);
-        TeamScoreText.text = null;
+        #region atack
+        else
+        {
+
+        }
+        #endregion
     }
 
 
     public IEnumerator EndOfTheRankedRound(bool IsWinner)
     {
+        InvincibleEnemies = true;
+        CurrentMode = _CurrentMode.Menu;
         foreach (GameObject go in Enemies)
         {
             go.GetComponentInParent<Enemy>().Speed = 0;
             go.GetComponentInParent<Enemy>().StopAllCoroutines();
         }
-        OutroRoundStatusText.text = IsWinner ? "ROUND" + Round + "WON" : "ROUND" + Round + "LOST";
+        OutroRoundStatusText.text = IsWinner ? "ROUND " + Round + " WON" : "ROUND " + Round + " LOST";
         OutroReasonOfEndText.text = IsWinner ? "Enemies eliminated" : "no ammunition left";
+        TeamScore[IsWinner ? 0 : 1]++;
         for (int i = 1; Outro.transform.localScale.y < 1; i++)
         {
             Outro.transform.localScale = new Vector3(1, (float)i /10,1);
@@ -269,8 +286,8 @@ public class RookHuntGameController : MonoBehaviour
     {
         TopRecordText.text = "TOP SCORE = " + PlayerPrefs.GetInt("TopScore");
         CurrentMode = _CurrentMode.Menu;
-        ResetAllVallues();
-        CavLaughsGO.GetComponent<BoxCollider2D>().enabled = false;
+        ResetAllVallues(); 
+        InvincibleEnemies = false;
         CavLaughsRestartColl.enabled = false;
         CavLaughsGO.GetComponentInChildren<TextMeshProUGUI>().fontSize = 0;
         CavLaughsGO.transform.localPosition = new Vector2(0, -1200);
@@ -300,7 +317,7 @@ public class RookHuntGameController : MonoBehaviour
     #region Animations
     private IEnumerator CavLaughANIM()
     {
-        CavLaughsGO.GetComponent<BoxCollider2D>().enabled = true;
+        InvincibleEnemies = true;
         yield return new WaitForSeconds(1);
         while (CavLaughsGO.transform.localPosition.y < -502)
         {
