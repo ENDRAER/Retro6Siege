@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.17796983, g: 0.22282629, b: 0.30494565, a: 1}
+  m_IndirectSpecularColor: {r: 0.17797005, g: 0.22282669, b: 0.30494624, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2025,8 +2025,8 @@ MonoBehaviour:
   - {fileID: 1729669162}
   MultiplierText: {fileID: 150267378}
   ScoreText: {fileID: 1454946227}
-  TeamScoreText: {fileID: 1590132335}
   FlashScreenAnim: {fileID: 1695424713}
+  TeamScoreText: {fileID: 1590132335}
   LoadingScreen: {fileID: 1361878776}
   LSRounds: {fileID: 1237166966}
   LSTeamRole: {fileID: 13276983}

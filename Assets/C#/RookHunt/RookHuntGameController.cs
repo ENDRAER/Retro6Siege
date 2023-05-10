@@ -97,6 +97,8 @@ public class RookHuntGameController : MonoBehaviour
         #region defend
         if (IsDefender)
         {
+            MapCS.Inside.SetActive(true);
+            MapCS.Outside.SetActive(false);
             List<WayCreator> OutedWays = new List<WayCreator>();
             List<GameObject> OutedEnemies = new List<GameObject>();
             List<GameObject> OutedSpecialEnemies = new List<GameObject>();
@@ -163,7 +165,8 @@ public class RookHuntGameController : MonoBehaviour
         #region atack
         else
         {
-
+            MapCS.Inside.SetActive(false);
+            MapCS.Outside.SetActive(true);
         }
         #endregion
     }
@@ -241,7 +244,7 @@ public class RookHuntGameController : MonoBehaviour
     }
     #endregion
 
-    #region UpdateValues
+    #region Update Values
     public void StatUpdate()
     {
         MagazineUpdate();
@@ -257,7 +260,7 @@ public class RookHuntGameController : MonoBehaviour
             BulletsImg[i].fillAmount = i + (float)Shoots;
         }
 
-        if (CurrentMode == _CurrentMode.Infinite && Shoots == -2)
+        if (CurrentMode == _CurrentMode.Infinite && Shoots < -1)
         {
             CurrentMode = _CurrentMode.GameOver;
             TeamScoreText.text = null;
@@ -277,7 +280,7 @@ public class RookHuntGameController : MonoBehaviour
         {
             if (Enemies.Count == 0)
                 StartCoroutine(EndOfTheRankedRound(true));
-            else if (Shoots == -2)
+            else if (Shoots < -1)
                 StartCoroutine(EndOfTheRankedRound(false));
         }
     }

@@ -42,13 +42,13 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (WalkType != _WalkType.Stop && _WayCreator)
         {
             transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(_WayCreator.PathPoints[Step].x - transform.position.x, -(_WayCreator.PathPoints[Step].y - transform.position.y)) * Mathf.Rad2Deg);
-            RB2D.AddForce(-transform.up * Speed * Time.deltaTime);
-            if (Math.Round(transform.position.x, 1) == Math.Round(_WayCreator.PathPoints[Step].x, 1) && Math.Round(transform.position.y, 1) == Math.Round(_WayCreator.PathPoints[Step].y, 1))
+            RB2D.AddForce(-transform.up * Speed);
+            if (Math.Round(transform.position.x, 2) == Math.Round(_WayCreator.PathPoints[Step].x, 2) && Math.Round(transform.position.y, 2) == Math.Round(_WayCreator.PathPoints[Step].y, 2))
             {
                 Step++;
                 if (Step == _WayCreator.PathPoints.Length)

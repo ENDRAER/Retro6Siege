@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 956186686806893844}
   - component: {fileID: 956186686806893845}
-  - component: {fileID: 2063498222541025599}
+  - component: {fileID: 49819650863833369}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Enemy
@@ -74,8 +74,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1079574712, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
-  m_Color: {r: 0.8018868, g: 0.8018868, b: 0.8018868, a: 1}
+  m_Sprite: {fileID: -1994050798, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!70 &2063498222541025599
+--- !u!70 &49819650863833369
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -113,7 +113,7 @@ GameObject:
   - component: {fileID: 956186687328918985}
   - component: {fileID: 956186687328918986}
   m_Layer: 0
-  m_Name: Ash
+  m_Name: Fuze
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -153,11 +153,11 @@ MonoBehaviour:
   RB2D: {fileID: 956186687328918986}
   HitCollider: {fileID: 0}
   WalkType: 0
-  Speed: 6000
+  Speed: 44
   _SpriteRenderer: {fileID: 956186686806893845}
   SpritesAnim:
-  - {fileID: -1079574712, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
-  - {fileID: -959169714, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
+  - {fileID: -1994050798, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
+  - {fileID: 505128392, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
   BackWalkTimes: 0
   AnimID: 0
   AnimDelay: 0.2
