@@ -2013,6 +2013,8 @@ MonoBehaviour:
   - {fileID: 956186687328918987, guid: 5ff984e82ab099b4caf3ee071403f790, type: 3}
   - {fileID: 6316989873102447414, guid: af264d84c0c237140a9a8cd68dd74301, type: 3}
   - {fileID: 956186687328918987, guid: 195ba4ec28476c74cab9087b6bc22e7e, type: 3}
+  EnemyDefPF:
+  - {fileID: 956186687328918987, guid: 479aa203f05d1da4586314395ee9ed7b, type: 3}
   CurrentMode: 0
   MenuGO: {fileID: 764522649}
   TopRecordText: {fileID: 242614969}

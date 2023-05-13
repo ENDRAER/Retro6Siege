@@ -46,6 +46,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cee85c34fcae2094ca30f7f9dd8ebc49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Perspective:
+  - 1.77
+  - 5.08
   Step: 0
   _WayCreator: {fileID: 0}
   BalancerGO: {fileID: 1317718087024333300}

@@ -10,11 +10,13 @@ public class RookHuntGameController : MonoBehaviour
 {
     [NonSerialized] public GameObject MapGO;
     [NonSerialized] private MapScript MapCS;
-    [NonSerialized] public List<WayCreator> Ways;
+    [NonSerialized] public List<WayCreator> Ways; 
+    [NonSerialized] public List<WayCreator> WaysDef;
     [NonSerialized] private WayCreator SnipersWay;
     [SerializeField] private GameObject[] MapsPF;
     [SerializeField] private List<GameObject> EnemyPF;
     [SerializeField] private List<GameObject> SpecialEnemyPF;
+    [SerializeField] private List<GameObject> EnemyDefPF;
     [NonSerialized] public List<GameObject> Enemies = new List<GameObject>();
     [NonSerialized] public bool InvincibleEnemies;
     [NonSerialized] public double Shoots = 3;
@@ -61,6 +63,7 @@ public class RookHuntGameController : MonoBehaviour
         MapGO = Instantiate(MapsPF[UnityEngine.Random.Range(0, MapsPF.Length - 1)], new Vector3(50, 1.5f, 0), Quaternion.identity);
         MapCS = MapGO.GetComponent<MapScript>();
         Ways = MapCS.Ways;
+        WaysDef = MapCS.WaysDef;
         SnipersWay = MapCS.SnipersWay;
         MenuGO.transform.localPosition = new Vector2(0, 2000);
     }
@@ -93,20 +96,23 @@ public class RookHuntGameController : MonoBehaviour
         LSTeamRole.text = IsDefender == true ? "defend" : "atack";
         yield return new WaitForSeconds(3);
         LoadingScreen.transform.localPosition = new Vector2(0, 2000);
+        StartCoroutine(TurnOfRoundTeamScoreStats());
 
         #region defend
         if (IsDefender)
         {
             MapCS.Inside.SetActive(true);
             MapCS.Outside.SetActive(false);
+            TeamScoreText.text = TeamScore[0] + ":" + TeamScore[1];
+
+            int wayID = 0;
+            Enemy _EnemyCS;
+            GameObject _EnemyGO;
             List<WayCreator> OutedWays = new List<WayCreator>();
             List<GameObject> OutedEnemies = new List<GameObject>();
             List<GameObject> OutedSpecialEnemies = new List<GameObject>();
             for (int a = 0; a != 5; a++)
             {
-                GameObject _EnemyGO;
-                int wayID = 0;
-                Enemy _EnemyCS;
                 if (SpecialOp == 0)
                 {
                     int enemyID = UnityEngine.Random.Range(0, EnemyPF.Count - 1);
@@ -137,6 +143,7 @@ public class RookHuntGameController : MonoBehaviour
                     OutedSpecialEnemies.Add(SpecialEnemyPF[enemyID]);
                     SpecialEnemyPF.Remove(SpecialEnemyPF[enemyID]);
                 }
+
                 _EnemyCS = _EnemyGO.GetComponent<Enemy>();
                 if (_EnemyCS._WayCreator == null)
                 {
@@ -145,6 +152,7 @@ public class RookHuntGameController : MonoBehaviour
                     Ways.Remove(Ways[wayID]);
                 }
                 _EnemyCS.HRGC = this;
+                _EnemyCS.Perspective = MapCS.Perspective;
                 Enemies.Add(_EnemyGO);
             }
             SpecialOp = 3;
@@ -155,22 +163,52 @@ public class RookHuntGameController : MonoBehaviour
 
             CurrentMode = _CurrentMode.Ranked;
             InvincibleEnemies = false;
-
-            TeamScoreText.text = TeamScore[0] + ":" + TeamScore[1];
-            yield return new WaitForSeconds(0.7f);
-            TeamScoreText.text = null;
         }
         #endregion
 
         #region atack
         else
         {
+            Shoots = 0;
+            MagazineUpdate();
             MapCS.Inside.SetActive(false);
             MapCS.Outside.SetActive(true);
+            TeamScoreText.text = TeamScore[0] + ":" + TeamScore[1];
+
+            yield return new WaitForSeconds(UnityEngine.Random.Range(0.7f, 8));
+
+            List<GameObject> OutedEnemies = new List<GameObject>();
+            List<WayCreator> OutedWays = new List<WayCreator>();
+            GameObject _EnemyGO;
+            int wayID = 0;
+            for (int i = 0; i != 1; i++)
+            {
+                int enemyID = UnityEngine.Random.Range(0, EnemyDefPF.Count - 1);
+                wayID = UnityEngine.Random.Range(0, WaysDef.Count - 1);
+                _EnemyGO = Instantiate(EnemyDefPF[enemyID], WaysDef[wayID].transform.position, Quaternion.identity);
+
+                Enemy _EnemyCS = _EnemyGO.GetComponent<Enemy>();
+                _EnemyCS.HRGC = this;
+                _EnemyCS._WayCreator = WaysDef[wayID];
+                _EnemyCS.Perspective = MapCS.PerspectiveDef;
+
+                OutedEnemies.Add(EnemyPF[enemyID]);
+                EnemyDefPF.Remove(EnemyPF[enemyID]);
+                Enemies.Add(_EnemyGO);
+            }
+            WaysDef.AddRange(OutedWays);
+            EnemyPF.AddRange(OutedEnemies);
+
+            CurrentMode = _CurrentMode.Ranked;
+            InvincibleEnemies = false;
         }
         #endregion
     }
-
+    public IEnumerator TurnOfRoundTeamScoreStats()
+    {
+        yield return new WaitForSeconds(0.7f);
+        TeamScoreText.text = null;
+    }
 
     public IEnumerator EndOfTheRankedRound(bool IsWinner)
     {
@@ -235,8 +273,9 @@ public class RookHuntGameController : MonoBehaviour
         }
         _EnemyCS = _EnemyGO.GetComponent<Enemy>();
         _EnemyCS._WayCreator = Ways[wayID];
-    SkipWaySetter_Infinite: // to there
+        SkipWaySetter_Infinite: // to there
         _EnemyCS.HRGC = this;
+        _EnemyCS.Perspective = MapCS.Perspective;
         Enemies.Add(_EnemyGO);
 
         yield return new WaitForSeconds(1.5f);
@@ -313,7 +352,7 @@ public class RookHuntGameController : MonoBehaviour
             }
             Enemies.Clear();
         }
-
+        StatUpdate();
     }
     #endregion
 

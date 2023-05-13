@@ -4,9 +4,10 @@ using System;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] public enum _EnemyType { Standart, Kali, Blitz, Ying, Finka }
+    [SerializeField] public enum _EnemyType { Standart, Sniper, Blitz, Ying, Finka }
     [SerializeField] public _EnemyType EnemyType;
     [SerializeField] private int Step;
+    [SerializeField] public float[] Perspective = { 1.77f, 0.2f}; // default values
     [NonSerialized] public WayCreator _WayCreator;
     [SerializeField] private GameObject BalancerGO;
     [SerializeField] private Rigidbody2D RB2D;
@@ -38,7 +39,7 @@ public class Enemy : MonoBehaviour
         StartCoroutine(Animation());
         if (EnemyType == _EnemyType.Ying)
         {
-            StartCoroutine(StartYingFlashingThrough(1f));
+            StartCoroutine(StartYingFlashingThrough());
         }
     }
 
@@ -53,13 +54,13 @@ public class Enemy : MonoBehaviour
                 Step++;
                 if (Step == _WayCreator.PathPoints.Length)
                 {
-                    if (EnemyType != _EnemyType.Kali)
+                    if (EnemyType != _EnemyType.Sniper)
                     {
                         HRGC.Shoots--;
                         HRGC.MagazineUpdate();
                         YouShouldKillUrSelfNOW();
                     }
-                    else if (EnemyType == _EnemyType.Kali)
+                    else if (EnemyType == _EnemyType.Sniper)
                     {
                         StartCoroutine(YouShouldKillUrSelf());
                         StartCoroutine(EnemyShoot());
@@ -88,7 +89,7 @@ public class Enemy : MonoBehaviour
                 }
             }
             transform.position = new Vector3(transform.position.x, transform.position.y, -1 + (1 / 6.5f * transform.position.y));
-            transform.localScale = new Vector3(1, 1, 1) * (1.77f - (5.08f / 23.6f * transform.position.y));
+            transform.localScale = new Vector3(1, 1, 1) * (Perspective[0] - (Perspective[1] * transform.position.y));
             BalancerGO.transform.rotation = Quaternion.Euler(0, 0, 0);
         }
     }
@@ -155,9 +156,9 @@ public class Enemy : MonoBehaviour
         StartCoroutine(Animation());
     }
 
-    public IEnumerator StartYingFlashingThrough(float Time)
+    public IEnumerator StartYingFlashingThrough()
     {
-        yield return new WaitForSeconds(Time);
+        yield return new WaitForSeconds(1);
         HRGC.FlashScreenAnim.SetTrigger("FlashNOW");
     }
 }

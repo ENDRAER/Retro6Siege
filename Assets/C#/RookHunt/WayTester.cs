@@ -4,6 +4,7 @@ using System;
 
 public class WayTester : MonoBehaviour
 {
+    [SerializeField] public float[] Perspective;
     [SerializeField] private int Step;
     [SerializeField] public WayCreator _WayCreator;
     [SerializeField] private GameObject BalancerGO;
@@ -24,20 +25,21 @@ public class WayTester : MonoBehaviour
     private void Update()
     {
         if (_WayCreator)
-            return;
-        transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(_WayCreator.PathPoints[Step].x - transform.position.x, -(_WayCreator.PathPoints[Step].y - transform.position.y)) * Mathf.Rad2Deg);
-        RB2D.AddForce(-transform.up * Speed * Time.deltaTime);
-        if (Math.Round(transform.position.x, 1) == Math.Round(_WayCreator.PathPoints[Step].x, 1) && Math.Round(transform.position.y, 1) == Math.Round(_WayCreator.PathPoints[Step].y, 1))
         {
-            Step++;
-            if (Step == _WayCreator.PathPoints.Length)
+            transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(_WayCreator.PathPoints[Step].x - transform.position.x, -(_WayCreator.PathPoints[Step].y - transform.position.y)) * Mathf.Rad2Deg);
+            RB2D.AddForce(-transform.up * Speed * Time.deltaTime);
+            if (Math.Round(transform.position.x, 1) == Math.Round(_WayCreator.PathPoints[Step].x, 1) && Math.Round(transform.position.y, 1) == Math.Round(_WayCreator.PathPoints[Step].y, 1))
             {
-                transform.position = _WayCreator.transform.position;
-                Step = 0;
+                Step++;
+                if (Step == _WayCreator.PathPoints.Length)
+                {
+                    transform.position = _WayCreator.transform.position;
+                    Step = 0;
+                }
             }
         }
         transform.position = new Vector3(transform.position.x, transform.position.y, -1 + (1 / 6.5f * transform.position.y));
-        transform.localScale = new Vector3(1, 1, 1) * (1.77f - (5.08f / 23.6f * transform.position.y));
+        transform.localScale = new Vector3(1, 1, 1) * (Perspective[0] - (Perspective[1] * transform.position.y));
         BalancerGO.transform.rotation = Quaternion.Euler(0, 0, 0);
     }
 
