@@ -121,12 +121,12 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 52
-        width: 134
+        y: 101
+        width: 133
         height: 25
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 31, y: 0, z: 20, w: 0}
+      border: {x: 32, y: 0, z: 20, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -142,7 +142,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 26
+        y: 75
         width: 63
         height: 25
       alignment: 0
@@ -159,32 +159,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PerfectScore
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 12
-        width: 87
-        height: 39
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ac95446085c665247ba28b0d54d89592
-      internalID: -1766918556
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: Bullets
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
+        x: 64
+        y: 75
         width: 34
         height: 25
       alignment: 0
@@ -204,8 +183,8 @@ TextureImporter:
       name: Hit
       rect:
         serializedVersion: 2
-        x: 35
-        y: 9
+        x: 105
+        y: 85
         width: 5
         height: 5
       alignment: 0
@@ -225,8 +204,8 @@ TextureImporter:
       name: BulletSprite
       rect:
         serializedVersion: 2
-        x: 35
-        y: 0
+        x: 99
+        y: 82
         width: 5
         height: 8
       alignment: 9
@@ -246,8 +225,8 @@ TextureImporter:
       name: Sace
       rect:
         serializedVersion: 2
-        x: 41
-        y: 13
+        x: 108
+        y: 95
         width: 1
         height: 1
       alignment: 0
@@ -267,8 +246,8 @@ TextureImporter:
       name: UI_Atack
       rect:
         serializedVersion: 2
-        x: 35
-        y: 16
+        x: 99
+        y: 91
         width: 9
         height: 9
       alignment: 0
@@ -288,8 +267,8 @@ TextureImporter:
       name: UI_Defence
       rect:
         serializedVersion: 2
-        x: 45
-        y: 16
+        x: 109
+        y: 91
         width: 9
         height: 9
       alignment: 0
@@ -309,8 +288,8 @@ TextureImporter:
       name: UI_CircleArrow
       rect:
         serializedVersion: 2
-        x: 44
-        y: 6
+        x: 119
+        y: 91
         width: 10
         height: 9
       alignment: 9
@@ -322,6 +301,1098 @@ TextureImporter:
       bones: []
       spriteID: 3c049e7570293f54ab7c808efcf5c1ff
       internalID: 902617437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rang_1
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 112
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1e0db0be97069f4a8d004bd095afb8b
+      internalID: -680270694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rang_2
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 112
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d464fa0d52d72f46a0a869598d03e3f
+      internalID: 773527933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rang_3
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 112
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9de70cc6d50390b4eb39261fc615aed1
+      internalID: 721190626
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rang_4
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 112
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 271e7eea94af330498fc87d3bfe7800c
+      internalID: 792017965
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rang_5
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 112
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2169f9f421f6eac459ef0ed3ca8c5b1d
+      internalID: -1175716731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rang_6
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 96
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f32ffcb15f480144a1d1d8d444f0e92
+      internalID: -366393249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rang_7
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 96
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbf8c7bde0b417a4280f5542404af32a
+      internalID: 1596011921
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rang_8
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 96
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10025efb1c8854c41865d1309100f90e
+      internalID: -594396128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rang_9
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 96
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d26e6da5d6683044086c1e4a7376bda0
+      internalID: 1943681779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rang_10
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 96
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc0665154c740f44abd26a86501c5b37
+      internalID: 887471903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rang_11
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 80
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b09cf3edc92c2d34aafa54e4b2e9fc95
+      internalID: 656438802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rang_12
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 80
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c598b5c481961af478a347c0fbaa421d
+      internalID: -1197061768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rang_13
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 80
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1003cf23dfa88704f8fff2be7a55745b
+      internalID: 1065782548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rang_14
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 80
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e7fd4aa0bff41b4dbcad9f869ca2f62
+      internalID: 970610204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rang_15
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 80
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec01052c14ed01143808eb19902b80d6
+      internalID: -1838665183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rang_16
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 64
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9714c3a47b828a4dafb94fc9149b939
+      internalID: -1197708382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rang_17
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 64
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b716bb19eb80174ca0861d539b57a6b
+      internalID: -1077985139
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rang_18
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 64
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9fc1f80445d0c9c4e8ce4583ba3e5654
+      internalID: -302627780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rang_19
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 64
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c46f07d10e70e61449a786036337df50
+      internalID: 1089116558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rang_20
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 64
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 50b0019e41736ef44a9ed35e68a09431
+      internalID: -37123209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rang_21
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 48
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bbdbc224c79791d4d9ca30419972cb60
+      internalID: 398426603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rang_22
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 48
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd40e29201961ce4cae792949a2fd71e
+      internalID: 1505929098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rang_23
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 48
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e2a4e82c11044847826c869242eedbd
+      internalID: -1326525244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rang_24
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 48
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 70830fd286b18c74e9edcdd507c6e30c
+      internalID: 2122108293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rang_25
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 48
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57a69e4a1bcf85f4caa0743f23a403c9
+      internalID: -1854710962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rang_26
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 32
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 234834cc163eab04a82dbe92e6a643c0
+      internalID: 135032143
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rang_27
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 32
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69a96d1b3eb28c14aaee98aeb4a93267
+      internalID: -478218212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rang_28
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 32
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a6405e43a2db4f41b1faf3fc9a7f448
+      internalID: 1579089690
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rang_29
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 32
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01a3c8c393ee0324ca6c36819fe3321c
+      internalID: 1433878492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rang_30
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 32
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0333ed3187914c4cbf0e422ac5a531a
+      internalID: 629602837
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rang_31
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 16
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bba23ae79e030174e9da69bf7a244260
+      internalID: 1477625895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rang_32
+      rect:
+        serializedVersion: 2
+        x: 149
+        y: 16
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 12e4b7d507ea3a04cac4fb7f939cc01c
+      internalID: 1170877224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rang_33
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 16
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 701d173dbdeda834ca7b9d420e2a6248
+      internalID: 1320015452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rang_34
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 16
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be668ce7c6cc9c94898a894116b60610
+      internalID: 1415629010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rang_35
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 16
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb401eaa927588142a2895ff9f3ad804
+      internalID: -473725239
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rang_36
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 0
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 993a50e7c6e27cf44872198f1659e839
+      internalID: -157659844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ico_Blitz
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 61
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cee0b7f33bcb2a44d9fdc67d1ace5be6
+      internalID: -911920089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ico_Ash
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 61
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c508f709a1664054c962015d20047c15
+      internalID: 1394945848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ico_Kali
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 61
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 255c21297cd8c6a41a7bb9346e36c074
+      internalID: -1346977042
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ico_Gridlock
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 61
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22e7009c65370844b81e727260859e34
+      internalID: 131966861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ico_Iana
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 61
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b64972f7f0b8674ea2877ba7a6ad024
+      internalID: 740789459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ico_Finka
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 61
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31cf4300b6120364c935653fb35e6b81
+      internalID: -2030989045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ico_Sledge
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 61
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a31df507e82b77b45a8fc33ae449cdcc
+      internalID: -605040357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ico_IQ
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 47
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5bd25ea0c5ad508489774f779b98574e
+      internalID: 2119358180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ico_Osa
+      rect:
+        serializedVersion: 2
+        x: 14
+        y: 47
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc4e1080302e6e64a8bff351acc62b5f
+      internalID: -63919416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ico_Jackal
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 47
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ad4fe1ada2dc864c93ecd0f0b36988a
+      internalID: -1761951126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ico_Hibana
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 47
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e1c5726740087e4da55ab696712e26a
+      internalID: -1460310731
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ico_Thermite
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 47
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5de0ba59da1e8749ae59f06aabd1d82
+      internalID: 1402995793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ico_Montagne
+      rect:
+        serializedVersion: 2
+        x: 70
+        y: 47
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c324be4c76fe3264f900cc6a197b19e9
+      internalID: -496168671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ico_Fuze
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 47
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbbfda0177249b949940df54eb92c801
+      internalID: -2039862531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ico_Glaz
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 47
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2131793d66fd4ef488736dd84f43b17b
+      internalID: 741040752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ico_Ying
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 61
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8afdbd89f6388740bd9a76ee2f81ce1
+      internalID: -208025927
       vertices: []
       indices: 
       edges: []
@@ -344,6 +1415,22 @@ TextureImporter:
       BulletSprite_4: 861801798
       Bullets: 572752722
       Hit: -965777936
+      Ico_Ash: 1394945848
+      Ico_Blitz: -911920089
+      Ico_Finka: -2030989045
+      Ico_Fuze: -2039862531
+      Ico_Glaz: 741040752
+      Ico_Gridlock: 131966861
+      Ico_Hibana: -1460310731
+      Ico_IQ: 2119358180
+      Ico_Iana: 740789459
+      Ico_Jackal: -1761951126
+      Ico_Kali: -1346977042
+      Ico_Montagne: -496168671
+      Ico_Osa: -63919416
+      Ico_Sledge: -605040357
+      Ico_Thermite: 1402995793
+      Ico_Ying: -208025927
       KillStrak: 246229653
       Op_Capitao: 432410216
       Op_Glaz: 432410216
@@ -354,6 +1441,42 @@ TextureImporter:
       Op_Thermite: 701628921
       Op_Zoofilia: 2128054813
       PerfectScore: 2137462454
+      Rang_1: -680270694
+      Rang_10: 887471903
+      Rang_11: 656438802
+      Rang_12: -1197061768
+      Rang_13: 1065782548
+      Rang_14: 970610204
+      Rang_15: -1838665183
+      Rang_16: -1197708382
+      Rang_17: -1077985139
+      Rang_18: -302627780
+      Rang_19: 1089116558
+      Rang_2: 773527933
+      Rang_20: -37123209
+      Rang_21: 398426603
+      Rang_22: 1505929098
+      Rang_23: -1326525244
+      Rang_24: 2122108293
+      Rang_25: -1854710962
+      Rang_26: 135032143
+      Rang_27: -478218212
+      Rang_28: 1579089690
+      Rang_29: 1433878492
+      Rang_3: 721190626
+      Rang_30: 629602837
+      Rang_31: 1477625895
+      Rang_32: 1170877224
+      Rang_33: 1320015452
+      Rang_34: 1415629010
+      Rang_35: -473725239
+      Rang_36: -157659844
+      Rang_4: 792017965
+      Rang_5: -1175716731
+      Rang_6: -366393249
+      Rang_7: 1596011921
+      Rang_8: -594396128
+      Rang_9: 1943681779
       Sace: 531420674
       Score: -1836107458
       UI_Atack: 1045636388
