@@ -149,11 +149,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyType: 0
   Step: 0
+  Perspective:
+  - 1.77
+  - 0.2
   BalancerGO: {fileID: 956186686806893846}
   RB2D: {fileID: 956186687328918986}
   HitCollider: {fileID: 0}
   WalkType: 0
   Speed: 60
+  IcoSprite: {fileID: 1394945848, guid: 6768a988f7ce75a49a0a5c751b915630, type: 3}
   _SpriteRenderer: {fileID: 956186686806893845}
   SpritesAnim:
   - {fileID: -1079574712, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}

@@ -57,14 +57,19 @@ public class Bullet : MonoBehaviour
                             RHControllerCS.Shoots += 1.5;
 
                             UpScoreGO.GetComponent<TextMeshProUGUI>().color = new Color(1, 1 - (0.05f * RHControllerCS.KillStreak), 1 - (0.05f * RHControllerCS.KillStreak));
-                            _coll.GetComponentInParent<Enemy>().YouShouldKillUrSelfNOW();
+                            _coll.GetComponentInParent<Enemy>().YouShouldKillUrSelfNOW(true);
                         }
                     }
                     break;
             }
         }
         if (resetMultiplier)
+        {
+            if (RHControllerCS.KillStreak > RHControllerCS.StatsMaxKillStreak)
+                RHControllerCS.StatsMaxKillStreak = RHControllerCS.KillStreak;
             RHControllerCS.KillStreak = 0;
+            RHControllerCS.StatsShootsMissed++;
+        }
         RHControllerCS.StatUpdate();
     }
 

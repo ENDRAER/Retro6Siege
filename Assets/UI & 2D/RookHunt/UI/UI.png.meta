@@ -222,7 +222,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Sace
+      name: Space
       rect:
         serializedVersion: 2
         x: 108
@@ -1397,6 +1397,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Ico_killed
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 75
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2caa46d8d4e68f84cb068f4b305fa902
+      internalID: 1233959208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -1431,6 +1452,7 @@ TextureImporter:
       Ico_Sledge: -605040357
       Ico_Thermite: 1402995793
       Ico_Ying: -208025927
+      Ico_killed: 1233959208
       KillStrak: 246229653
       Op_Capitao: 432410216
       Op_Glaz: 432410216
@@ -1477,8 +1499,8 @@ TextureImporter:
       Rang_7: 1596011921
       Rang_8: -594396128
       Rang_9: 1943681779
-      Sace: 531420674
       Score: -1836107458
+      Space: 531420674
       UI_Atack: 1045636388
       UI_CircleArrow: 902617437
       UI_Defence: 1516727277

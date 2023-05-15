@@ -4,18 +4,20 @@ using System;
 
 public class Enemy : MonoBehaviour
 {
+    [NonSerialized] public int id;
+    [NonSerialized] public RookHuntGameController HRGC;
+    [NonSerialized] private int Step;
+    [NonSerialized] public float[] Perspective = { 1.77f, 0.2f}; // default values
+    [NonSerialized] public WayCreator _WayCreator;
     [SerializeField] public enum _EnemyType { Standart, Sniper, Blitz, Ying, Finka }
     [SerializeField] public _EnemyType EnemyType;
-    [SerializeField] private int Step;
-    [SerializeField] public float[] Perspective = { 1.77f, 0.2f}; // default values
-    [NonSerialized] public WayCreator _WayCreator;
     [SerializeField] private GameObject BalancerGO;
     [SerializeField] private Rigidbody2D RB2D;
     [SerializeField] private Collider2D HitCollider;
-    [NonSerialized] public RookHuntGameController HRGC;
-    [SerializeField] private enum _WalkType { Straigh, Stop, BetweenPoints }
-    [SerializeField] private _WalkType WalkType = _WalkType.Straigh;
+    [SerializeField] public enum _WalkType { Straigh, Stop, BetweenPoints }
+    [SerializeField] public _WalkType WalkType = _WalkType.Straigh;
     [SerializeField] public float Speed;
+    [SerializeField] public Sprite IcoSprite;
 
     [Header("Animation")]
     [SerializeField] private SpriteRenderer _SpriteRenderer;
@@ -58,7 +60,8 @@ public class Enemy : MonoBehaviour
                     {
                         HRGC.Shoots--;
                         HRGC.MagazineUpdate();
-                        YouShouldKillUrSelfNOW();
+                        HRGC.StatsEnemyMissed++;
+                        YouShouldKillUrSelfNOW(false);
                     }
                     else if (EnemyType == _EnemyType.Sniper)
                     {
@@ -136,13 +139,14 @@ public class Enemy : MonoBehaviour
 
     public IEnumerator YouShouldKillUrSelf()
     {
-        yield return new WaitForSeconds(10);
-        HRGC.Enemies.Remove(gameObject);
-        Destroy(gameObject);
+        yield return new WaitForSeconds(10); 
+        YouShouldKillUrSelfNOW(false);
     }
 
-    public void YouShouldKillUrSelfNOW()
+    public void YouShouldKillUrSelfNOW(bool setkillico)
     {
+        if(HRGC.CurrentMode == RookHuntGameController._CurrentMode.Ranked && setkillico)
+            HRGC.OpIcos[id].sprite = HRGC.KilledIcon;
         HRGC.Enemies.Remove(gameObject);
         Destroy(gameObject);
     }
