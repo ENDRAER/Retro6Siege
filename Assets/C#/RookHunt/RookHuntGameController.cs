@@ -44,7 +44,6 @@ public class RookHuntGameController : MonoBehaviour
     [SerializeField] public GameObject LoadingScreen; // LS - LoadingScreen
     [SerializeField] public TextMeshProUGUI LSRounds;
     [SerializeField] public TextMeshProUGUI LSTeamRole;
-    [SerializeField] public TextMeshProUGUI LSRoundsForChangeDuty;
     [SerializeField] public GameObject LSTeamIconCenter;
     [SerializeField] public GameObject LSDefendersIcon;
     [SerializeField] public GameObject LSAtatckersIcon;
@@ -57,6 +56,7 @@ public class RookHuntGameController : MonoBehaviour
     [SerializeField] public Sprite[] RangImages;
     [SerializeField] public Image RSGradiend;
     [SerializeField] public TextMeshProUGUI RSMatchReport;
+    [SerializeField] public GameObject RSNextButton;
     [NonSerialized] private bool IsDefender = true;
     [NonSerialized] private int Round = 0;
     [NonSerialized] private int[] TeamScore = { 0, 0 };
@@ -89,6 +89,7 @@ public class RookHuntGameController : MonoBehaviour
     {
         CurrentRang--;
         PlayerPrefs.SetInt("CurrentRang", CurrentRang);
+        IsDefender = UnityEngine.Random.Range(0, 1) == 0 ? true : false;
         MapCreator();
         StartCoroutine(RankedRoundLauncher());
     }
@@ -98,12 +99,11 @@ public class RookHuntGameController : MonoBehaviour
         Round++;
         LSRounds.text = "round " + Round;
         LoadingScreen.transform.localPosition = Vector2.zero;
-        if (Round % 3 == 1 && Round != 1)
+        if (Round == 3 || Round >= 6)
         {
             yield return new WaitForSeconds(1);
             for (int i = 0; i != 18; i++)
             {
-                LSRoundsForChangeDuty.text = "1";
                 LSTeamIconCenter.transform.Rotate(0, 0, 10);
                 LSDefendersIcon.transform.rotation = Quaternion.identity;
                 LSAtatckersIcon.transform.rotation = Quaternion.identity;
@@ -273,9 +273,9 @@ public class RookHuntGameController : MonoBehaviour
             Enemies.Clear();
         }
         StatUpdate();
-        if (TeamScore[0] == 4 && TeamScore[1] < 3 || TeamScore[0] == 5 || TeamScore[0] == 2)
+        if (TeamScore[0] == 4 && TeamScore[1] < 3 || TeamScore[0] == 5)
             EndOfTheRankedMatch(true);
-        else if (TeamScore[1] == 4 && TeamScore[0] < 3 || TeamScore[1] == 5 || TeamScore[1] == 2)
+        else if (TeamScore[1] == 4 && TeamScore[0] < 3 || TeamScore[1] == 5)
             EndOfTheRankedMatch(false);
         else
             StartCoroutine(RankedRoundLauncher());
@@ -284,7 +284,7 @@ public class RookHuntGameController : MonoBehaviour
     public void EndOfTheRankedMatch(bool IsWinner)
     {
         CurrentRang += IsWinner ? 2 : 0;
-        RSGradiend.color = IsWinner ? new Color(0, 0.6141224f, 1) : new Color(1, 0.2441347f, 0);
+        RSGradiend.color = IsWinner ? new Color(0, 0.6f, 1) : new Color(1, 0.2441347f, 0);
         bool HasntMoved = false;
         if (CurrentRang < 0 || CurrentRang > 35)
         {
@@ -311,7 +311,7 @@ public class RookHuntGameController : MonoBehaviour
             RangsRange++;
         }
         RewardScreen.transform.localPosition = Vector3.zero;
-        StartCoroutine(CavLaughANIM(-428, -530, 0.7f, IsWinner));
+        StartCoroutine(CavLaughANIM(-428, -530, 0.7f, true,IsWinner));
         RSMatchReport.text = "SCORE: " + Score + "\r\nMax killstreak: " + (StatsMaxKillStreak > KillStreak? StatsMaxKillStreak : KillStreak) + "\r\nenemy missed: " + StatsEnemyMissed + "\r\nshoots missed: " + StatsShootsMissed;
     }
     #endregion
@@ -392,7 +392,7 @@ public class RookHuntGameController : MonoBehaviour
             if (Score > PlayerPrefs.GetInt("TopScore"))
                 PlayerPrefs.SetInt("TopScore", Score);
             InvincibleEnemies = true;
-            StartCoroutine(CavLaughANIM(0, -500, 1, false));
+            StartCoroutine(CavLaughANIM(0, -500, 1, false, false));
         }
 
         if (CurrentMode == _CurrentMode.Ranked)
@@ -406,24 +406,12 @@ public class RookHuntGameController : MonoBehaviour
 
     public void ExitInMainMenu()
     {
-        TopRecordText.text = "TOP SCORE = " + PlayerPrefs.GetInt("TopScore");
-        CurrentMode = _CurrentMode.Menu;
-        ResetAllVallues();
-        InvincibleEnemies = false;
-        CavLaughsRestartColl.enabled = false;
-        CavLaughsGO.GetComponentInChildren<TextMeshProUGUI>().fontSize = 0;
-        CavLaughsGO.transform.localPosition = new Vector2(0, -1200);
-
-        StopAllCoroutines();
-        Destroy(MapGO);
-        MenuGO.transform.localPosition = Vector2.zero;
-    }
-
-    public void ResetAllVallues()
-    {
         Shoots = 1;
         Score = 0;
-
+        KillStreak = 1;
+        Round = 0;
+        TeamScore[0] = 0;
+        TeamScore[1] = 0;
         if (Enemies != null)
         {
             foreach (GameObject go in Enemies)
@@ -432,12 +420,28 @@ public class RookHuntGameController : MonoBehaviour
             }
             Enemies.Clear();
         }
+        StatsEnemyMissed = 0;
+        StatsShootsMissed = 0;
+        StatsMaxKillStreak = 0;
+        InvincibleEnemies = false;
+        CurrentRangImg.sprite = RangImages[CurrentRang];
+
+        RSNextButton.transform.localPosition = new Vector3(1232, -486.71f);
+        RewardScreen.transform.localPosition = new Vector3(0, 2000);
+        CavLaughsRestartColl.enabled = false;
+        CavLaughsGO.GetComponentInChildren<TextMeshProUGUI>().fontSize = 0;
+        CavLaughsGO.transform.localPosition = new Vector2(0, -1200);
+
         StatUpdate();
+        StopAllCoroutines();
+        Destroy(MapGO);
+        MenuGO.transform.localPosition = Vector2.zero;
+        CurrentMode = _CurrentMode.Menu;
     }
     #endregion
 
     #region Animations
-    private IEnumerator CavLaughANIM(float posX, float posY, float scale,bool notBad)
+    private IEnumerator CavLaughANIM(float posX, float posY, float scale,bool isRanked,bool notBad)
     {
         CavLaughsGO.transform.localPosition = new Vector3(posX, -1200);
         CavLaughsGO.transform.localScale = new Vector3(scale, scale);
@@ -455,7 +459,10 @@ public class RookHuntGameController : MonoBehaviour
             if (a == 8)
             {
                 CavLaughsRestartColl.enabled = true;
-                CavLaughsGO.GetComponentInChildren<TextMeshProUGUI>().fontSize = 44;
+                if (isRanked)
+                    RSNextButton.transform.localPosition = new Vector3(540, -486.71f);
+                else
+                    CavLaughsGO.GetComponentInChildren<TextMeshProUGUI>().fontSize = 44;
                 a++;
             }
             CavLaughsHeadGO.transform.localPosition = new Vector3(0, CavLaughsHeadGO.transform.localPosition.y == 280 ? 300 : 280);

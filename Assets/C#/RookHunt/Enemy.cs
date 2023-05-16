@@ -59,9 +59,10 @@ public class Enemy : MonoBehaviour
                     if (EnemyType != _EnemyType.Sniper)
                     {
                         HRGC.Shoots--;
-                        HRGC.MagazineUpdate();
                         HRGC.StatsEnemyMissed++;
-                        YouShouldKillUrSelfNOW(false);
+                        HRGC.Enemies.Remove(gameObject);
+                        HRGC.MagazineUpdate();
+                        Destroy(gameObject);
                     }
                     else if (EnemyType == _EnemyType.Sniper)
                     {

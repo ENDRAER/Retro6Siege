@@ -1406,7 +1406,7 @@ TextureImporter:
         width: 13
         height: 13
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1414,6 +1414,27 @@ TextureImporter:
       bones: []
       spriteID: 2caa46d8d4e68f84cb068f4b305fa902
       internalID: 1233959208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NextButton
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 21
+        width: 59
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f92929020b4f0a43af47eca8a896f6b
+      internalID: -498895211
       vertices: []
       indices: 
       edges: []
@@ -1454,6 +1475,7 @@ TextureImporter:
       Ico_Ying: -208025927
       Ico_killed: 1233959208
       KillStrak: 246229653
+      NextButton: -498895211
       Op_Capitao: 432410216
       Op_Glaz: 432410216
       Op_IQ: 2044566855

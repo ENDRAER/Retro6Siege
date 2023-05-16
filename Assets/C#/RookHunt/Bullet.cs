@@ -12,10 +12,10 @@ public class Bullet : MonoBehaviour
 
     void Awake()
     {
+        StartCoroutine(TimeToDestroyCor());
         _BridgeForLinks = BridgeForLinks.MainBridge_instance;
         RookHuntGameController RHControllerCS = _BridgeForLinks.BF_RookHuntGameController;
         RHControllerCS.Shoots  -= RHControllerCS.CurrentMode != _CurrentMode.GameOver ? (RHControllerCS.CurrentMode != _CurrentMode.Menu? 1 : 0) : 0;
-        StartCoroutine(TimeToDestroyCor());
         bool resetMultiplier = true;
         
         CollidersInZone = Physics2D.OverlapCircleAll(transform.position, 0.005f);
@@ -63,7 +63,7 @@ public class Bullet : MonoBehaviour
                     break;
             }
         }
-        if (resetMultiplier)
+        if (resetMultiplier && RHControllerCS.CurrentMode != _CurrentMode.Menu)
         {
             if (RHControllerCS.KillStreak > RHControllerCS.StatsMaxKillStreak)
                 RHControllerCS.StatsMaxKillStreak = RHControllerCS.KillStreak;

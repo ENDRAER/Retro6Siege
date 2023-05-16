@@ -1014,7 +1014,7 @@ MonoBehaviour:
   - {x: 52.7, y: -1.4}
   - {x: 56.3, y: -1}
   - {x: 57.7, y: -1.9}
-  ShootingMoment: 3
+  ShootingMoment: 2
   KaliWay: 0
 --- !u!1 &8152739405124521498
 GameObject:
