@@ -311,8 +311,8 @@ public class RookHuntGameController : MonoBehaviour
             RangsRange++;
         }
         RewardScreen.transform.localPosition = Vector3.zero;
-        StartCoroutine(CavLaughANIM(-428, -530, 0.7f, true,IsWinner));
-        RSMatchReport.text = "SCORE: " + Score + "\r\nMax killstreak: " + (StatsMaxKillStreak > KillStreak? StatsMaxKillStreak : KillStreak) + "\r\nenemy missed: " + StatsEnemyMissed + "\r\nshoots missed: " + StatsShootsMissed;
+        StartCoroutine(CavLaughANIM(-428, -530, 0.7f, true, IsWinner));
+        RSMatchReport.text = "SCORE: " + Score + "\r\nMax killstreak: " + (StatsMaxKillStreak > KillStreak ? StatsMaxKillStreak : KillStreak) + "\r\nenemy missed: " + StatsEnemyMissed + "\r\nshoots missed: " + StatsShootsMissed;
     }
     #endregion
 
@@ -441,7 +441,7 @@ public class RookHuntGameController : MonoBehaviour
     #endregion
 
     #region Animations
-    private IEnumerator CavLaughANIM(float posX, float posY, float scale,bool isRanked,bool notBad)
+    private IEnumerator CavLaughANIM(float posX, float posY, float scale, bool isRanked, bool notBad)
     {
         CavLaughsGO.transform.localPosition = new Vector3(posX, -1200);
         CavLaughsGO.transform.localScale = new Vector3(scale, scale);
