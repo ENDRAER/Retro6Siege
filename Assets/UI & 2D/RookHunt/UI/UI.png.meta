@@ -309,7 +309,7 @@ TextureImporter:
       name: Rang_1
       rect:
         serializedVersion: 2
-        x: 134
+        x: 149
         y: 112
         width: 14
         height: 14
@@ -330,7 +330,7 @@ TextureImporter:
       name: Rang_2
       rect:
         serializedVersion: 2
-        x: 149
+        x: 164
         y: 112
         width: 14
         height: 14
@@ -351,7 +351,7 @@ TextureImporter:
       name: Rang_3
       rect:
         serializedVersion: 2
-        x: 164
+        x: 179
         y: 112
         width: 14
         height: 14
@@ -372,7 +372,7 @@ TextureImporter:
       name: Rang_4
       rect:
         serializedVersion: 2
-        x: 179
+        x: 194
         y: 112
         width: 14
         height: 14
@@ -393,8 +393,8 @@ TextureImporter:
       name: Rang_5
       rect:
         serializedVersion: 2
-        x: 194
-        y: 112
+        x: 134
+        y: 96
         width: 14
         height: 14
       alignment: 0
@@ -414,7 +414,7 @@ TextureImporter:
       name: Rang_6
       rect:
         serializedVersion: 2
-        x: 134
+        x: 149
         y: 96
         width: 14
         height: 14
@@ -435,7 +435,7 @@ TextureImporter:
       name: Rang_7
       rect:
         serializedVersion: 2
-        x: 149
+        x: 164
         y: 96
         width: 14
         height: 14
@@ -456,7 +456,7 @@ TextureImporter:
       name: Rang_8
       rect:
         serializedVersion: 2
-        x: 164
+        x: 179
         y: 96
         width: 14
         height: 14
@@ -477,7 +477,7 @@ TextureImporter:
       name: Rang_9
       rect:
         serializedVersion: 2
-        x: 179
+        x: 194
         y: 96
         width: 14
         height: 14
@@ -498,8 +498,8 @@ TextureImporter:
       name: Rang_10
       rect:
         serializedVersion: 2
-        x: 194
-        y: 96
+        x: 134
+        y: 80
         width: 14
         height: 14
       alignment: 0
@@ -519,7 +519,7 @@ TextureImporter:
       name: Rang_11
       rect:
         serializedVersion: 2
-        x: 134
+        x: 149
         y: 80
         width: 14
         height: 14
@@ -540,7 +540,7 @@ TextureImporter:
       name: Rang_12
       rect:
         serializedVersion: 2
-        x: 149
+        x: 164
         y: 80
         width: 14
         height: 14
@@ -561,7 +561,7 @@ TextureImporter:
       name: Rang_13
       rect:
         serializedVersion: 2
-        x: 164
+        x: 179
         y: 80
         width: 14
         height: 14
@@ -582,7 +582,7 @@ TextureImporter:
       name: Rang_14
       rect:
         serializedVersion: 2
-        x: 179
+        x: 194
         y: 80
         width: 14
         height: 14
@@ -603,8 +603,8 @@ TextureImporter:
       name: Rang_15
       rect:
         serializedVersion: 2
-        x: 194
-        y: 80
+        x: 134
+        y: 64
         width: 14
         height: 14
       alignment: 0
@@ -624,7 +624,7 @@ TextureImporter:
       name: Rang_16
       rect:
         serializedVersion: 2
-        x: 134
+        x: 149
         y: 64
         width: 14
         height: 14
@@ -645,7 +645,7 @@ TextureImporter:
       name: Rang_17
       rect:
         serializedVersion: 2
-        x: 149
+        x: 164
         y: 64
         width: 14
         height: 14
@@ -666,7 +666,7 @@ TextureImporter:
       name: Rang_18
       rect:
         serializedVersion: 2
-        x: 164
+        x: 179
         y: 64
         width: 14
         height: 14
@@ -687,7 +687,7 @@ TextureImporter:
       name: Rang_19
       rect:
         serializedVersion: 2
-        x: 179
+        x: 194
         y: 64
         width: 14
         height: 14
@@ -708,8 +708,8 @@ TextureImporter:
       name: Rang_20
       rect:
         serializedVersion: 2
-        x: 194
-        y: 64
+        x: 134
+        y: 48
         width: 14
         height: 14
       alignment: 0
@@ -729,7 +729,7 @@ TextureImporter:
       name: Rang_21
       rect:
         serializedVersion: 2
-        x: 134
+        x: 149
         y: 48
         width: 14
         height: 14
@@ -750,7 +750,7 @@ TextureImporter:
       name: Rang_22
       rect:
         serializedVersion: 2
-        x: 149
+        x: 164
         y: 48
         width: 14
         height: 14
@@ -771,7 +771,7 @@ TextureImporter:
       name: Rang_23
       rect:
         serializedVersion: 2
-        x: 164
+        x: 179
         y: 48
         width: 14
         height: 14
@@ -792,7 +792,7 @@ TextureImporter:
       name: Rang_24
       rect:
         serializedVersion: 2
-        x: 179
+        x: 194
         y: 48
         width: 14
         height: 14
@@ -813,8 +813,8 @@ TextureImporter:
       name: Rang_25
       rect:
         serializedVersion: 2
-        x: 194
-        y: 48
+        x: 134
+        y: 32
         width: 14
         height: 14
       alignment: 0
@@ -834,7 +834,7 @@ TextureImporter:
       name: Rang_26
       rect:
         serializedVersion: 2
-        x: 134
+        x: 149
         y: 32
         width: 14
         height: 14
@@ -855,7 +855,7 @@ TextureImporter:
       name: Rang_27
       rect:
         serializedVersion: 2
-        x: 149
+        x: 164
         y: 32
         width: 14
         height: 14
@@ -876,7 +876,7 @@ TextureImporter:
       name: Rang_28
       rect:
         serializedVersion: 2
-        x: 164
+        x: 179
         y: 32
         width: 14
         height: 14
@@ -897,7 +897,7 @@ TextureImporter:
       name: Rang_29
       rect:
         serializedVersion: 2
-        x: 179
+        x: 194
         y: 32
         width: 14
         height: 14
@@ -918,8 +918,8 @@ TextureImporter:
       name: Rang_30
       rect:
         serializedVersion: 2
-        x: 194
-        y: 32
+        x: 134
+        y: 16
         width: 14
         height: 14
       alignment: 0
@@ -939,7 +939,7 @@ TextureImporter:
       name: Rang_31
       rect:
         serializedVersion: 2
-        x: 134
+        x: 149
         y: 16
         width: 14
         height: 14
@@ -960,7 +960,7 @@ TextureImporter:
       name: Rang_32
       rect:
         serializedVersion: 2
-        x: 149
+        x: 164
         y: 16
         width: 14
         height: 14
@@ -981,7 +981,7 @@ TextureImporter:
       name: Rang_33
       rect:
         serializedVersion: 2
-        x: 164
+        x: 179
         y: 16
         width: 14
         height: 14
@@ -1002,7 +1002,7 @@ TextureImporter:
       name: Rang_34
       rect:
         serializedVersion: 2
-        x: 179
+        x: 194
         y: 16
         width: 14
         height: 14
@@ -1024,27 +1024,6 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 194
-        y: 16
-        width: 14
-        height: 14
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fb401eaa927588142a2895ff9f3ad804
-      internalID: -473725239
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Rang_36
-      rect:
-        serializedVersion: 2
-        x: 194
         y: 0
         width: 14
         height: 15
@@ -1055,8 +1034,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 993a50e7c6e27cf44872198f1659e839
-      internalID: -157659844
+      spriteID: fb401eaa927588142a2895ff9f3ad804
+      internalID: -473725239
       vertices: []
       indices: 
       edges: []
@@ -1427,7 +1406,7 @@ TextureImporter:
         width: 59
         height: 25
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1435,6 +1414,27 @@ TextureImporter:
       bones: []
       spriteID: 8f92929020b4f0a43af47eca8a896f6b
       internalID: -498895211
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rang_0
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 112
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01b85a35fc26bbe4fa87800833cb7a85
+      internalID: -1116773185
       vertices: []
       indices: 
       edges: []
@@ -1485,6 +1485,7 @@ TextureImporter:
       Op_Thermite: 701628921
       Op_Zoofilia: 2128054813
       PerfectScore: 2137462454
+      Rang_0: -1116773185
       Rang_1: -680270694
       Rang_10: 887471903
       Rang_11: 656438802
@@ -1523,6 +1524,7 @@ TextureImporter:
       Rang_9: 1943681779
       Score: -1836107458
       Space: 531420674
+      UI_0: 1085980892
       UI_Atack: 1045636388
       UI_CircleArrow: 902617437
       UI_Defence: 1516727277

@@ -8,7 +8,7 @@ using TMPro;
 
 public class RookHuntGameController : MonoBehaviour
 {
-    [NonSerialized] private int CurrentRang = 0;
+    [NonSerialized] public int CurrentRang = 0;
     [NonSerialized] public GameObject MapGO;
     [NonSerialized] private MapScript MapCS;
     [NonSerialized] public List<WayCreator> Ways;
@@ -60,7 +60,6 @@ public class RookHuntGameController : MonoBehaviour
     [NonSerialized] private bool IsDefender = true;
     [NonSerialized] private int Round = 0;
     [NonSerialized] private int[] TeamScore = { 0, 0 };
-    [NonSerialized] private int SpecialOp = 3;
     [NonSerialized] public int StatsMaxKillStreak;
     [NonSerialized] public int StatsShootsMissed;
     [NonSerialized] public int StatsEnemyMissed;
@@ -68,7 +67,8 @@ public class RookHuntGameController : MonoBehaviour
 
     private void Start()
     {
-        CurrentRang = math.clamp(PlayerPrefs.GetInt("CurrentRang"), 0, 35);
+        CurrentRang = math.clamp(PlayerPrefs.GetInt("CurrentRang"), 0, RangImages.Length - 1);
+        CurrentRang = RangImages.Length - 1;
         CurrentRangImg.sprite = RangImages[CurrentRang];
         TopRecordText.text = "TOP SCORE = " + PlayerPrefs.GetInt("TopScore");
         MenuGO.transform.localPosition = Vector2.zero;
@@ -89,7 +89,7 @@ public class RookHuntGameController : MonoBehaviour
     {
         CurrentRang--;
         PlayerPrefs.SetInt("CurrentRang", CurrentRang);
-        IsDefender = UnityEngine.Random.Range(0, 1) == 0 ? true : false;
+        IsDefender = UnityEngine.Random.Range(0, 2) == 0 ? true : false;
         MapCreator();
         StartCoroutine(RankedRoundLauncher());
     }
@@ -112,7 +112,7 @@ public class RookHuntGameController : MonoBehaviour
             IsDefender = !IsDefender;
         }
         LSTeamRole.text = IsDefender == true ? "defend" : "atack";
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(1.5f);
         LoadingScreen.transform.localPosition = new Vector2(0, 2000);
         StartCoroutine(TurnOfRoundTeamScoreStats());
 
@@ -129,7 +129,12 @@ public class RookHuntGameController : MonoBehaviour
             List<WayCreator> OutedWays = new List<WayCreator>();
             List<GameObject> OutedEnemies = new List<GameObject>();
             List<GameObject> OutedSpecialEnemies = new List<GameObject>();
-            for (int a = 0; a != 5; a++)
+            int SpecialOp = CurrentRang < 5 ? 0 :
+                CurrentRang < 15 ? 1:
+                CurrentRang < 20 ? 2:
+                CurrentRang < 25 ? 3:
+                CurrentRang < 30 ? 4 : 5;
+            for (int id = 0; id != 5; id++)
             {
                 if (SpecialOp == 0)
                 {
@@ -169,13 +174,18 @@ public class RookHuntGameController : MonoBehaviour
                     OutedWays.Add(Ways[wayID]);
                     Ways.Remove(Ways[wayID]);
                 }
-                _EnemyCS.id = a;
-                OpIcos[a].sprite = _EnemyCS.IcoSprite;
+                _EnemyCS.id = id;
+                OpIcos[id].sprite = _EnemyCS.IcoSprite;
                 _EnemyCS.HRGC = this;
                 _EnemyCS.Perspective = MapCS.Perspective;
+
+                float _Speed = UnityEngine.Random.Range(0.7f, 0.9f) + (0.6f / (RangImages.Length - 1) * CurrentRang);
+                _EnemyCS.Speed *= _Speed;
+                _EnemyCS.AnimDelay *= _Speed;
+                _EnemyCS.ShootingDelay *= 1 - (0.4f / (RangImages.Length - 1) * CurrentRang);
+
                 Enemies.Add(_EnemyGO);
             }
-            SpecialOp = 3;
             SnipersWay = MapCS.SnipersWay;
             Ways.AddRange(OutedWays);
             EnemyPF.AddRange(OutedEnemies);
@@ -288,7 +298,7 @@ public class RookHuntGameController : MonoBehaviour
         bool HasntMoved = false;
         if (CurrentRang < 0 || CurrentRang > 35)
         {
-            CurrentRang = math.clamp(CurrentRang, 0, 35);
+            CurrentRang = math.clamp(CurrentRang, 0, RangImages.Length - 1);
             RSAnimator.SetTrigger("HasNotMoved");
             HasntMoved = true;
         }
@@ -458,11 +468,13 @@ public class RookHuntGameController : MonoBehaviour
             a++;
             if (a == 8)
             {
-                CavLaughsRestartColl.enabled = true;
                 if (isRanked)
                     RSNextButton.transform.localPosition = new Vector3(540, -486.71f);
                 else
+                {
                     CavLaughsGO.GetComponentInChildren<TextMeshProUGUI>().fontSize = 44;
+                    CavLaughsRestartColl.enabled = true;
+                }
                 a++;
             }
             CavLaughsHeadGO.transform.localPosition = new Vector3(0, CavLaughsHeadGO.transform.localPosition.y == 280 ? 300 : 280);

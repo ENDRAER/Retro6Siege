@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.17796983, g: 0.22282629, b: 0.30494565, a: 1}
+  m_IndirectSpecularColor: {r: 0.17797005, g: 0.22282669, b: 0.30494624, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2252,14 +2252,21 @@ MonoBehaviour:
   - {fileID: 956186687328918987, guid: d609cac16ef6ebb4484a473113f68e69, type: 3}
   - {fileID: 956186687328918987, guid: c1500b60d5be56c47b9a7127273115b5, type: 3}
   - {fileID: 956186687328918987, guid: f21418dfc105441469aac17cec6b9867, type: 3}
+  - {fileID: 956186687328918987, guid: 4c97563e48b41414f9fd47c5ee44616d, type: 3}
+  - {fileID: 956186687328918987, guid: ad2ad5329fdab3a44b5fe4102564ae65, type: 3}
+  - {fileID: 956186687328918987, guid: e454d4c4fa446404888d5058768c868e, type: 3}
+  - {fileID: 956186687328918987, guid: 5cfb36cec393c624490da8041147b36a, type: 3}
+  - {fileID: 6316989873102447414, guid: af264d84c0c237140a9a8cd68dd74301, type: 3}
   SpecialEnemyPF:
   - {fileID: 956186687328918987, guid: c9501e0fdd78eb14c8bf893030e6998f, type: 3}
-  - {fileID: 956186687328918987, guid: fc0c2fc2fbc7d594182ec5ac96eab097, type: 3}
+  - {fileID: 956186687328918987, guid: 68bc997576a20984b85868ead32091d5, type: 3}
   - {fileID: 956186687328918987, guid: 5ff984e82ab099b4caf3ee071403f790, type: 3}
-  - {fileID: 6316989873102447414, guid: af264d84c0c237140a9a8cd68dd74301, type: 3}
+  - {fileID: 956186687328918987, guid: fc0c2fc2fbc7d594182ec5ac96eab097, type: 3}
   - {fileID: 956186687328918987, guid: 195ba4ec28476c74cab9087b6bc22e7e, type: 3}
+  - {fileID: 956186687328918987, guid: 5df9dc0a9173e304d8d9653ecfa0eda6, type: 3}
   EnemyDefPF:
   - {fileID: 956186687328918987, guid: 479aa203f05d1da4586314395ee9ed7b, type: 3}
+  - {fileID: 956186687328918987, guid: fa4801529441164488fc906ee63f8694, type: 3}
   CurrentMode: 0
   MenuGO: {fileID: 764522649}
   CurrentRangImg: {fileID: 1969973890}
@@ -2302,6 +2309,7 @@ MonoBehaviour:
   - {fileID: 645671902}
   - {fileID: 508954725}
   RangImages:
+  - {fileID: -1116773185, guid: 6768a988f7ce75a49a0a5c751b915630, type: 3}
   - {fileID: -680270694, guid: 6768a988f7ce75a49a0a5c751b915630, type: 3}
   - {fileID: 773527933, guid: 6768a988f7ce75a49a0a5c751b915630, type: 3}
   - {fileID: 721190626, guid: 6768a988f7ce75a49a0a5c751b915630, type: 3}
@@ -2337,7 +2345,6 @@ MonoBehaviour:
   - {fileID: 1320015452, guid: 6768a988f7ce75a49a0a5c751b915630, type: 3}
   - {fileID: 1415629010, guid: 6768a988f7ce75a49a0a5c751b915630, type: 3}
   - {fileID: -473725239, guid: 6768a988f7ce75a49a0a5c751b915630, type: 3}
-  - {fileID: -157659844, guid: 6768a988f7ce75a49a0a5c751b915630, type: 3}
   RSGradiend: {fileID: 577004194}
   RSMatchReport: {fileID: 121297442}
   RSNextButton: {fileID: 1736488297}

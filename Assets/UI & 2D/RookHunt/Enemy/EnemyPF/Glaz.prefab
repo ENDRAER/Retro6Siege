@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -1856265088, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
+  m_Sprite: {fileID: -1731441650, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -114,7 +114,7 @@ GameObject:
   - component: {fileID: 956186687328918985}
   - component: {fileID: 956186687328918986}
   m_Layer: 0
-  m_Name: Kali
+  m_Name: Glaz
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -154,13 +154,13 @@ MonoBehaviour:
   HitCollider: {fileID: 0}
   WalkType: 2
   Speed: 50
-  IcoSprite: {fileID: -1346977042, guid: 6768a988f7ce75a49a0a5c751b915630, type: 3}
+  IcoSprite: {fileID: 741040752, guid: 6768a988f7ce75a49a0a5c751b915630, type: 3}
   _SpriteRenderer: {fileID: 956186686806893845}
   SpritesAnim:
-  - {fileID: -1856265088, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
-  - {fileID: 1157215369, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
-  - {fileID: 444760114, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
-  - {fileID: 444760114, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
+  - {fileID: 1893194609, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
+  - {fileID: -1731441650, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
+  - {fileID: -1731441650, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
+  - {fileID: -1731441650, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
   BackWalkTimes: 5
   AlertGO: {fileID: 6648476660633975428}
   ShootingDelay: 1
