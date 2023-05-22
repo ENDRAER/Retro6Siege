@@ -2,9 +2,21 @@ using UnityEngine;
 
 public class SoundMaker : MonoBehaviour
 {
-    public GameObject CreateSound(GameObject AudioSource, Vector3 Position)
+    public enum _defaultPos {Custom, TV};
+
+    public GameObject CreateSoundGetGO(GameObject AudioSource, AudioClip audioClip, _defaultPos defaultPos, bool shouldKillUrSelf, Vector3 Position = new Vector3())
     {
-        GameObject e = new GameObject();
-        return e;
+        Vector3 v3 = Position;
+        switch (defaultPos)
+        {
+            case _defaultPos.TV:
+                new Vector3(0, 0, 0);
+                break;
+        }
+        GameObject AU = Instantiate(AudioSource, v3, Quaternion.identity);
+        if(shouldKillUrSelf)
+            AU.GetComponent<SoundPlayer>().enebled = true;
+        AU.GetComponent<AudioSource>().clip = audioClip;
+        return AU;
     }
 }
