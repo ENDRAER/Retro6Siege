@@ -61,7 +61,7 @@ public class RookHuntGameController : MonoBehaviour
     [NonSerialized] private bool IsDefender = true;
     [NonSerialized] private int Round = 0;
     [NonSerialized] private int[] TeamScore = { 0, 0 };
-    [NonSerialized] public int StatsMaxKillStreak;
+    [NonSerialized] public int StatsMaxKillStreak;            
     [NonSerialized] public int StatsShootsMissed;
     [NonSerialized] public int StatsEnemyMissed;
 
@@ -135,7 +135,7 @@ public class RookHuntGameController : MonoBehaviour
                 CurrentRang < 20 ? 2 :
                 CurrentRang < 25 ? 3 :
                 CurrentRang < 30 ? 4 : 5;
-            for (int id = 0; id != 1; id++)
+            for (int id = 0; id != 5; id++)
             {
                 if (SpecialOp == 0)
                 {

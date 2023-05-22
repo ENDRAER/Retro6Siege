@@ -1446,12 +1446,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 254872469}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99253051680a44a43ae6062063364b99, type: 3}
+  m_Script: {fileID: 11500000, guid: 0afef3c85abe9504eaf6a4bae84ef8ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   BF_RookHuntGameController: {fileID: 498249123}
   Canvas2D: {fileID: 316010996}
   WorldCanvas: {fileID: 1178882511}
+  HitColiderGO: {fileID: 4060668376003707211, guid: 1d4b532917e8fe34db5ce364a47113b5, type: 3}
+  Camera: {fileID: 963194225}
+  Zero1: {fileID: 1643090456}
+  Zero2: {fileID: 498249121}
+  RotSpeed: 1
+  MinRot: -50
+  MaxRot: 50
+  maxFPS: 120
 --- !u!1 &259252846
 GameObject:
   m_ObjectHideFlags: 0
@@ -3391,7 +3399,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 963194228}
-  - component: {fileID: 963194229}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
   m_Layer: 0
@@ -3468,25 +3475,6 @@ Transform:
   m_Father: {fileID: 254872470}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &963194229
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09f068b0aadfd3743b8cb0f1412373ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  HitColiderGO: {fileID: 4060668376003707211, guid: 1d4b532917e8fe34db5ce364a47113b5, type: 3}
-  Zero1: {fileID: 1643090456}
-  Zero2: {fileID: 498249121}
-  RotSpeed: 1
-  MinRot: -50
-  MaxRot: 50
-  maxFPS: 120
 --- !u!1 &1059530123
 GameObject:
   m_ObjectHideFlags: 0

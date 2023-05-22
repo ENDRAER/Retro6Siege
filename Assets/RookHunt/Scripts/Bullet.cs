@@ -8,13 +8,13 @@ using static Enemy;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private GameObject UpScorePF;
-    [NonSerialized] private BridgeForLinks _BridgeForLinks;
+    [NonSerialized] private ScriptKing _BridgeForLinks;
     [NonSerialized] private Collider2D[] CollidersInZone;
 
     void Awake()
     {
         StartCoroutine(TimeToDestroyCor());
-        _BridgeForLinks = BridgeForLinks.MainBridge_instance;
+        _BridgeForLinks = ScriptKing.MainBridge;
         RookHuntGameController HRGC = _BridgeForLinks.BF_RookHuntGameController;
         HRGC.Shoots  -= HRGC.CurrentMode != _CurrentMode.GameOver ? (HRGC.CurrentMode != _CurrentMode.Menu? 1 : 0) : 0;
         bool resetMultiplier = true;
@@ -57,7 +57,7 @@ public class Bullet : MonoBehaviour
                                 HRGC.Shoots += 1.5;
 
                                 GameObject UpScoreGO = Instantiate(UpScorePF, transform.position, Quaternion.identity);
-                                UpScoreGO.transform.SetParent(BridgeForLinks.MainBridge_instance.WorldCanvas.transform);
+                                UpScoreGO.transform.SetParent(ScriptKing.MainBridge.WorldCanvas.transform);
                                 UpScoreGO.GetComponent<RectTransform>().position = new Vector2(_coll.transform.position.x, _coll.transform.position.y);
                                 UpScoreGO.GetComponent<TextMeshProUGUI>().text = "+" + (100 * (1 + HRGC.KillStreak * 0.2)).ToString();
                                 UpScoreGO.GetComponent<TextMeshProUGUI>().color = new Color(1, 1 - (0.05f * HRGC.KillStreak), 1 - (0.05f * HRGC.KillStreak));
