@@ -1,9 +1,10 @@
 using static RookHuntGameController;
+using static ScriptKing;
+using static Enemy;
 using System.Collections;
 using UnityEngine;
 using System;
 using TMPro;
-using static Enemy;
 
 public class Bullet : MonoBehaviour
 {
@@ -74,13 +75,14 @@ public class Bullet : MonoBehaviour
                                 {
                                     HRGC.OpIcos[EnemyCS.id].sprite = HRGC.KilledIcon;
                                     HRGC.Enemies.Remove(EnemyCS.gameObject);
-                                    Destroy(EnemyCS.gameObject);
+                                    _BridgeForLinks.CreateSoundGetGO(_BridgeForLinks.BF_RookHuntGameController.TVAudioSource, _BridgeForLinks.ShootSound, _defaultPos.TV, true);
+                                    Destroy(EnemyCS.gameObject.transform.parent.gameObject);
                                 }
                             }
                             else
                             {
                                 HRGC.Enemies.Remove(EnemyCS.gameObject);
-                                Destroy(EnemyCS.gameObject);
+                                Destroy(EnemyCS.gameObject.transform.parent.gameObject);
                             }
                         }
                     }

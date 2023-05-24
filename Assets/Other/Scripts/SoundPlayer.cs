@@ -12,7 +12,7 @@ public class SoundPlayer : MonoBehaviour
 
     public IEnumerator TimerToDeath()
     {
-        yield return new WaitForSeconds(AU.time + 0.2f);
+        yield return new WaitForSeconds(AU.clip.length);
         Destroy(gameObject);
     }
 }

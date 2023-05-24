@@ -160,9 +160,14 @@ MonoBehaviour:
   - {fileID: -1094779467, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
   BackWalkTimes: 0
   AlertGO: {fileID: 0}
+  Damage: 0
   ShootingDelay: 0
   PostShootingDelay: 0
   ShieldGO: {fileID: 0}
+  ShieldCol: {fileID: 0}
+  ShieldDestroyed: 0
+  RunningAUGO: {fileID: 0}
+  RunningSound: {fileID: 8300000, guid: 469df7d19f376f542a93af6e4653cfde, type: 3}
 --- !u!50 &956186687328918986
 Rigidbody2D:
   serializedVersion: 4

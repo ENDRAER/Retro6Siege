@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.17796983, g: 0.22282629, b: 0.30494565, a: 1}
+  m_IndirectSpecularColor: {r: 0.17797005, g: 0.22282669, b: 0.30494624, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1414,7 +1414,7 @@ GameObject:
   - component: {fileID: 254872470}
   - component: {fileID: 254872471}
   m_Layer: 0
-  m_Name: 3D
+  m_Name: TheRoom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1432,10 +1432,12 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 705507995}
+  - {fileID: 1178882515}
   - {fileID: 963194228}
   - {fileID: 1643090456}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &254872471
 MonoBehaviour:
@@ -1452,6 +1454,7 @@ MonoBehaviour:
   BF_RookHuntGameController: {fileID: 498249123}
   Canvas2D: {fileID: 316010996}
   WorldCanvas: {fileID: 1178882511}
+  ReadyToShoot: 1
   HitColiderGO: {fileID: 4060668376003707211, guid: 1d4b532917e8fe34db5ce364a47113b5, type: 3}
   Camera: {fileID: 963194225}
   Zero1: {fileID: 1643090456}
@@ -1460,6 +1463,7 @@ MonoBehaviour:
   MinRot: -50
   MaxRot: 50
   maxFPS: 120
+  ShootSound: {fileID: 8300000, guid: 8e6ceafeb777db746ad7587337d659a3, type: 3}
 --- !u!1 &259252846
 GameObject:
   m_ObjectHideFlags: 0
@@ -2204,7 +2208,7 @@ GameObject:
   - component: {fileID: 498249123}
   - component: {fileID: 498249122}
   m_Layer: 0
-  m_Name: 2D
+  m_Name: RookHunt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2226,7 +2230,7 @@ Transform:
   - {fileID: 316010997}
   - {fileID: 1695424715}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &498249122
 MonoBehaviour:
@@ -2255,6 +2259,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e38f7319870aed479e3b6af15e4960d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _ScriptKing: {fileID: 254872471}
   MapsPF:
   - {fileID: 8152739404876176560, guid: 521da0d2fecebdf4ea07cff445e3db07, type: 3}
   EnemyPF:
@@ -2360,6 +2365,8 @@ MonoBehaviour:
   RSGradiend: {fileID: 577004194}
   RSMatchReport: {fileID: 121297442}
   RSNextButton: {fileID: 1736488297}
+  TVAudioSource: {fileID: 6469655515661458829, guid: 8b878ad0d2cdd944c8980721537cae55, type: 3}
+  InicialMusic: {fileID: 8300000, guid: 64a39b368bc40ba45bcc9bde154b6992, type: 3}
 --- !u!1 &508954723
 GameObject:
   m_ObjectHideFlags: 0
@@ -3001,7 +3008,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 254872470}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 58.55, y: -52.492, z: -66.493}
 --- !u!1 &721011200
@@ -3473,7 +3480,7 @@ Transform:
   m_Children:
   - {fileID: 2103134735}
   m_Father: {fileID: 254872470}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1059530123
 GameObject:
@@ -3782,8 +3789,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 126333193}
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_Father: {fileID: 254872470}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4912,7 +4919,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 254872470}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &1643090457
 MeshCollider:
@@ -5029,7 +5036,7 @@ GameObject:
   - component: {fileID: 1695424714}
   - component: {fileID: 1695424713}
   m_Layer: 0
-  m_Name: ' FlashPanel'
+  m_Name: FlashPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

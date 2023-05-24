@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ScriptKing : MonoBehaviour
@@ -19,6 +18,8 @@ public class ScriptKing : MonoBehaviour
     [SerializeField] private float MinRot;
     [SerializeField] private float MaxRot;
     [SerializeField] private int maxFPS;
+    [Header("Sound")]
+    [SerializeField] public AudioClip ShootSound;
 
     public enum _defaultPos { Custom, TV };
 
@@ -65,9 +66,12 @@ public class ScriptKing : MonoBehaviour
                 break;
         }
         GameObject AU = Instantiate(AudioSource, v3, Quaternion.identity);
-        if (shouldKillUrSelf)
-            AU.GetComponent<SoundPlayer>().enabled = true;
         AU.GetComponent<AudioSource>().clip = audioClip;
+        if (shouldKillUrSelf)
+        {
+            AU.GetComponent<SoundPlayer>().enabled = true;
+        }
+        AU.GetComponent<AudioSource>().Play();
         return AU;
     }
 }

@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using System;
-using Unity.VisualScripting;
 
 public class Enemy : MonoBehaviour
 {
@@ -39,6 +38,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] public Collider2D ShieldCol;
     [SerializeField] public bool ShieldDestroyed;
 
+    [Header("Shielders")]
+    [SerializeField] public AudioClip RunningSound;
+
 
     private void Start()
     {
@@ -57,6 +59,7 @@ public class Enemy : MonoBehaviour
                 EnemyCloneCS.HRGC = HRGC;
                 HRGC.Enemies.Add(clone);
                 WalkType = _WalkType.Stop;
+                gameObject.GetComponentInParent<AudioSource>().Stop();
                 StartCoroutine(GoAfterXSec(3));
                 break;
         }
@@ -82,7 +85,7 @@ public class Enemy : MonoBehaviour
                         }
                         HRGC.Enemies.Remove(gameObject);
                         HRGC.MagazineUpdate();
-                        Destroy(gameObject);
+                        Destroy(gameObject.transform.parent.gameObject);
                     }
                     else if (EnemyType == _EnemyType.Sniper)
                     {
@@ -90,6 +93,7 @@ public class Enemy : MonoBehaviour
                         StartCoroutine(YouShouldKillUrSelf(10));
                         StartCoroutine(EnemyShoot());
                         WalkType = _WalkType.Stop;
+                        gameObject.GetComponentInParent<AudioSource>().Stop();
                     }
                 }
                 else if (WalkType == _WalkType.BetweenPoints && _WayCreator.ShootingMoment + 1 == Step)
@@ -163,7 +167,7 @@ public class Enemy : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         HRGC.Enemies.Remove(gameObject);
-        Destroy(gameObject);
+        Destroy(gameObject.transform.parent.gameObject);
     }
 
     public IEnumerator Animation()
@@ -184,5 +188,6 @@ public class Enemy : MonoBehaviour
     {
         yield return new WaitForSeconds(time);
         WalkType = _WalkType.Straigh;
+        gameObject.GetComponentInParent<AudioSource>().Play();
     }
 }

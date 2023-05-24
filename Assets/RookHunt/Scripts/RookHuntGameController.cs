@@ -14,6 +14,7 @@ public class RookHuntGameController : MonoBehaviour
     [NonSerialized] public List<WayCreator> Ways;
     [NonSerialized] public List<WayCreator> WaysDef;
     [NonSerialized] private WayCreator SnipersWay;
+    [SerializeField] public ScriptKing _ScriptKing;
     [SerializeField] private GameObject[] MapsPF;
     [SerializeField] public List<GameObject> EnemyPF;
     [SerializeField] private List<GameObject> SpecialEnemyPF;
@@ -64,6 +65,9 @@ public class RookHuntGameController : MonoBehaviour
     [NonSerialized] public int StatsMaxKillStreak;            
     [NonSerialized] public int StatsShootsMissed;
     [NonSerialized] public int StatsEnemyMissed;
+    [Header("Audios")]
+    [SerializeField] public GameObject TVAudioSource;
+    [SerializeField] public AudioClip InicialMusic;
 
 
     private void Start()
@@ -130,11 +134,28 @@ public class RookHuntGameController : MonoBehaviour
             List<WayCreator> OutedWays = new List<WayCreator>();
             List<GameObject> OutedEnemies = new List<GameObject>();
             List<GameObject> OutedSpecialEnemies = new List<GameObject>();
-            int SpecialOp = CurrentRang < 5 ? 0 :
-                CurrentRang < 15 ? 1 :
-                CurrentRang < 20 ? 2 :
-                CurrentRang < 25 ? 3 :
-                CurrentRang < 30 ? 4 : 5;
+            int SpecialOp;
+            switch(CurrentRang)
+            {
+                case < 5:
+                    SpecialOp = 0;
+                    break;
+                case < 15:
+                    SpecialOp = 1;
+                    break;
+                case < 20:
+                    SpecialOp = 2;
+                    break;
+                case < 25:
+                    SpecialOp = 3;
+                    break;
+                case < 30:
+                    SpecialOp = 4;
+                    break;
+                default:
+                    SpecialOp = 5;
+                    break;
+            }
             for (int id = 0; id != 5; id++)
             {
                 if (SpecialOp == 0)
@@ -179,6 +200,11 @@ public class RookHuntGameController : MonoBehaviour
                 OpIcos[id].sprite = _EnemyCS.IcoSprite;
                 _EnemyCS.HRGC = this;
                 _EnemyCS.Perspective = MapCS.Perspective;
+
+                GameObject AUGO = _ScriptKing.CreateSoundGetGO(TVAudioSource, _EnemyCS.RunningSound, ScriptKing._defaultPos.TV, false);
+                AudioSource AUAU = AUGO.GetComponent<AudioSource>();
+                AUAU.GetComponent<AudioSource>().clip = _EnemyCS.RunningSound;
+                _EnemyGO.gameObject.transform.SetParent(AUAU.transform);
 
                 float _Speed = UnityEngine.Random.Range(0.7f, 0.9f) + (0.6f / (RangImages.Length - 1) * CurrentRang);
                 _EnemyCS.Speed *= _Speed;
@@ -261,6 +287,7 @@ public class RookHuntGameController : MonoBehaviour
         foreach (GameObject go in Enemies)
         {
             go.GetComponentInParent<Enemy>().Speed = 0;
+            go.GetComponentInParent<AudioSource>().Stop();
             go.GetComponentInParent<Enemy>().StopAllCoroutines();
         }
         OutroRoundStatusText.text = IsWinner ? "ROUND " + Round + " WON" : "ROUND " + Round + " LOST";
@@ -284,7 +311,7 @@ public class RookHuntGameController : MonoBehaviour
         {
             foreach (GameObject go in Enemies)
             {
-                Destroy(go);
+                Destroy(go.transform.parent.gameObject);
             }
             Enemies.Clear();
         }
@@ -364,7 +391,6 @@ public class RookHuntGameController : MonoBehaviour
                 _EnemyGO = Instantiate(SpecialEnemyPF[enemyID], SnipersWay.transform.position, Quaternion.identity);
                 _EnemyCS = _EnemyGO.GetComponent<Enemy>();
                 _EnemyCS._WayCreator = SnipersWay;
-                goto SkipWaySetter_Infinite; // from here
             }
             else
             {
@@ -373,8 +399,14 @@ public class RookHuntGameController : MonoBehaviour
             }
         }
         _EnemyCS = _EnemyGO.GetComponent<Enemy>();
-        _EnemyCS._WayCreator = Ways[wayID];
-    SkipWaySetter_Infinite: // to there
+
+        GameObject AUGO = _ScriptKing.CreateSoundGetGO(TVAudioSource, _EnemyCS.RunningSound, ScriptKing._defaultPos.TV, false);
+        AudioSource AUAU = AUGO.GetComponent<AudioSource>();
+        AUAU.GetComponent<AudioSource>().clip = _EnemyCS.RunningSound;
+        _EnemyGO.gameObject.transform.SetParent(AUAU.transform);
+
+        if (_EnemyCS._WayCreator == null)
+            _EnemyCS._WayCreator = Ways[wayID];
         _EnemyCS.HRGC = this;
         _EnemyCS.Perspective = MapCS.Perspective;
         Enemies.Add(_EnemyGO);
@@ -407,6 +439,7 @@ public class RookHuntGameController : MonoBehaviour
             StopAllCoroutines();
             foreach (GameObject go in Enemies)
             {
+                go.GetComponentInParent<AudioSource>().Stop();
                 go.GetComponentInParent<Enemy>().Speed = 0;
                 go.GetComponentInParent<Enemy>().StopAllCoroutines();
             }
@@ -437,7 +470,7 @@ public class RookHuntGameController : MonoBehaviour
         {
             foreach (GameObject go in Enemies)
             {
-                Destroy(go);
+                Destroy(go.transform.parent.gameObject.gameObject);
             }
             Enemies.Clear();
         }

@@ -148,10 +148,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyType: 3
-  Step: 0
-  Perspective:
-  - 1.77
-  - 0.2
   BalancerGO: {fileID: 956186686806893846}
   RB2D: {fileID: 956186687328918986}
   HitCollider: {fileID: 0}
@@ -163,13 +159,15 @@ MonoBehaviour:
   - {fileID: 741299083, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
   - {fileID: 550845709, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
   BackWalkTimes: 0
-  AnimID: 0
-  AnimDelay: 0.2
   AlertGO: {fileID: 0}
-  ShootingStarted: 0
+  Damage: 0
   ShootingDelay: 0
   PostShootingDelay: 0
   ShieldGO: {fileID: 0}
+  ShieldCol: {fileID: 0}
+  ShieldDestroyed: 0
+  RunningAUGO: {fileID: 0}
+  RunningSound: {fileID: 8300000, guid: 469df7d19f376f542a93af6e4653cfde, type: 3}
 --- !u!50 &956186687328918986
 Rigidbody2D:
   serializedVersion: 4
