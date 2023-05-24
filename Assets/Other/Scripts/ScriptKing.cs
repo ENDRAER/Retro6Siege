@@ -18,8 +18,6 @@ public class ScriptKing : MonoBehaviour
     [SerializeField] private float MinRot;
     [SerializeField] private float MaxRot;
     [SerializeField] private int maxFPS;
-    [Header("Sound")]
-    [SerializeField] public AudioClip ShootSound;
 
     public enum _defaultPos { Custom, TV };
 
@@ -44,6 +42,7 @@ public class ScriptKing : MonoBehaviour
             {
                 if (hit.transform.gameObject.tag == "Screen")
                 {
+                    CreateSoundGetGO(BF_RookHuntGameController.TVAudioSource, BF_RookHuntGameController.ShootSound, _defaultPos.TV, true);
                     Instantiate(HitColiderGO, new Vector3((hit.point.x - Zero1.position.x) * 3.365f + Zero2.position.x, (hit.point.y - Zero1.position.y) * 3.365f + Zero2.position.y, -2), new Quaternion(0, 0, 0, 0));
                 }
             }

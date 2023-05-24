@@ -16,8 +16,8 @@ public class Bullet : MonoBehaviour
     {
         StartCoroutine(TimeToDestroyCor());
         _BridgeForLinks = ScriptKing.MainBridge;
-        RookHuntGameController HRGC = _BridgeForLinks.BF_RookHuntGameController;
-        HRGC.Shoots  -= HRGC.CurrentMode != _CurrentMode.GameOver ? (HRGC.CurrentMode != _CurrentMode.Menu? 1 : 0) : 0;
+        RookHuntGameController RHGC = _BridgeForLinks.BF_RookHuntGameController;
+        RHGC.Shoots  -= RHGC.CurrentMode != _CurrentMode.GameOver ? (RHGC.CurrentMode != _CurrentMode.Menu? 1 : 0) : 0;
         bool resetMultiplier = true;
         
         CollidersInZone = Physics2D.OverlapCircleAll(transform.position, 0.005f);
@@ -26,16 +26,16 @@ public class Bullet : MonoBehaviour
             switch (CollidersInZone[0].gameObject.name)
             {
                 case "RANKED_PlayList":
-                    HRGC.RankedGameStart();
+                    RHGC.RankedGameStart();
                     break;
                 case "INFINITE_PlayList":
-                    HRGC.InfiniteModeStart();
+                    RHGC.InfiniteModeStart();
                     break;
                 case "ShootToRestart":
-                    HRGC.ExitInMainMenu();
+                    RHGC.ExitInMainMenu();
                     break;
                 default:
-                    if (HRGC.InvincibleEnemies)
+                    if (RHGC.InvincibleEnemies)
                         return;
                     Collider2D cover = null;
                     foreach (Collider2D _coll in CollidersInZone)
@@ -53,15 +53,15 @@ public class Bullet : MonoBehaviour
                             {
                                 resetMultiplier = false;
 
-                                HRGC.Score += (int)(100 * (1 + HRGC.KillStreak * 0.2));
-                                HRGC.KillStreak++;
-                                HRGC.Shoots += 1.5;
+                                RHGC.Score += (int)(100 * (1 + RHGC.KillStreak * 0.2));
+                                RHGC.KillStreak++;
+                                RHGC.Shoots += 1.5;
 
                                 GameObject UpScoreGO = Instantiate(UpScorePF, transform.position, Quaternion.identity);
                                 UpScoreGO.transform.SetParent(ScriptKing.MainBridge.WorldCanvas.transform);
                                 UpScoreGO.GetComponent<RectTransform>().position = new Vector2(_coll.transform.position.x, _coll.transform.position.y);
-                                UpScoreGO.GetComponent<TextMeshProUGUI>().text = "+" + (100 * (1 + HRGC.KillStreak * 0.2)).ToString();
-                                UpScoreGO.GetComponent<TextMeshProUGUI>().color = new Color(1, 1 - (0.05f * HRGC.KillStreak), 1 - (0.05f * HRGC.KillStreak));
+                                UpScoreGO.GetComponent<TextMeshProUGUI>().text = "+" + (100 * (1 + RHGC.KillStreak * 0.2)).ToString();
+                                UpScoreGO.GetComponent<TextMeshProUGUI>().color = new Color(1, 1 - (0.05f * RHGC.KillStreak), 1 - (0.05f * RHGC.KillStreak));
 
                                 if (EnemyCS.EnemyType == _EnemyType.Osa && !EnemyCS.ShieldDestroyed)
                                 {
@@ -73,15 +73,16 @@ public class Bullet : MonoBehaviour
                                 }
                                 else
                                 {
-                                    HRGC.OpIcos[EnemyCS.id].sprite = HRGC.KilledIcon;
-                                    HRGC.Enemies.Remove(EnemyCS.gameObject);
-                                    _BridgeForLinks.CreateSoundGetGO(_BridgeForLinks.BF_RookHuntGameController.TVAudioSource, _BridgeForLinks.ShootSound, _defaultPos.TV, true);
+                                    if(RHGC.CurrentMode == _CurrentMode.Ranked)
+                                        RHGC.OpIcos[EnemyCS.id].sprite = RHGC.KilledIcon;
+                                    RHGC.Enemies.Remove(EnemyCS.gameObject);
+                                    _BridgeForLinks.CreateSoundGetGO(_BridgeForLinks.BF_RookHuntGameController.TVAudioSource, RHGC.HitSound, _defaultPos.TV, true);
                                     Destroy(EnemyCS.gameObject.transform.parent.gameObject);
                                 }
                             }
                             else
                             {
-                                HRGC.Enemies.Remove(EnemyCS.gameObject);
+                                RHGC.Enemies.Remove(EnemyCS.gameObject);
                                 Destroy(EnemyCS.gameObject.transform.parent.gameObject);
                             }
                         }
@@ -89,14 +90,14 @@ public class Bullet : MonoBehaviour
                     break;
             }
         }
-        if (resetMultiplier && HRGC.CurrentMode != _CurrentMode.Menu)
+        if (resetMultiplier && RHGC.CurrentMode != _CurrentMode.Menu)
         {
-            if (HRGC.KillStreak > HRGC.StatsMaxKillStreak)
-                HRGC.StatsMaxKillStreak = HRGC.KillStreak;
-            HRGC.KillStreak = 0;
-            HRGC.StatsShootsMissed++;
+            if (RHGC.KillStreak > RHGC.StatsMaxKillStreak)
+                RHGC.StatsMaxKillStreak = RHGC.KillStreak;
+            RHGC.KillStreak = 0;
+            RHGC.StatsShootsMissed++;
         }
-        HRGC.StatUpdate();
+        RHGC.StatUpdate();
     }
 
     private IEnumerator TimeToDestroyCor()

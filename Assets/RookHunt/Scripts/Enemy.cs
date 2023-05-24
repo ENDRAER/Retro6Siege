@@ -1,11 +1,12 @@
 using System.Collections;
 using UnityEngine;
 using System;
+using static ScriptKing;
 
 public class Enemy : MonoBehaviour
 {
     [NonSerialized] public int id;
-    [NonSerialized] public RookHuntGameController HRGC;
+    [NonSerialized] public RookHuntGameController RHGC;
     [NonSerialized] private int Step;
     [NonSerialized] public float[] Perspective = { 1.77f, 0.2f}; // default values
     [NonSerialized] public WayCreator _WayCreator;
@@ -38,9 +39,6 @@ public class Enemy : MonoBehaviour
     [SerializeField] public Collider2D ShieldCol;
     [SerializeField] public bool ShieldDestroyed;
 
-    [Header("Shielders")]
-    [SerializeField] public AudioClip RunningSound;
-
 
     private void Start()
     {
@@ -56,8 +54,9 @@ public class Enemy : MonoBehaviour
                 EnemyCloneCS._WayCreator = _WayCreator;
                 EnemyCloneCS.EnemyType = _EnemyType.IanaClone;
                 EnemyCloneCS._WayCreator = _WayCreator;
-                EnemyCloneCS.HRGC = HRGC;
-                HRGC.Enemies.Add(clone);
+                EnemyCloneCS.RHGC = RHGC;
+                EnemyCloneCS.transform.SetParent(new GameObject().AddComponent<AudioSource>().transform);
+                RHGC.Enemies.Add(clone);
                 WalkType = _WalkType.Stop;
                 gameObject.GetComponentInParent<AudioSource>().Stop();
                 StartCoroutine(GoAfterXSec(3));
@@ -80,11 +79,11 @@ public class Enemy : MonoBehaviour
                     {
                         if (EnemyType != _EnemyType.IanaClone)
                         {
-                            HRGC.Shoots--;
-                            HRGC.StatsEnemyMissed++;
+                            RHGC.Shoots--;
+                            RHGC.StatsEnemyMissed++;
                         }
-                        HRGC.Enemies.Remove(gameObject);
-                        HRGC.MagazineUpdate();
+                        RHGC.Enemies.Remove(gameObject);
+                        RHGC.MagazineUpdate();
                         Destroy(gameObject.transform.parent.gameObject);
                     }
                     else if (EnemyType == _EnemyType.Sniper)
@@ -153,8 +152,9 @@ public class Enemy : MonoBehaviour
     {
         AlertGO.SetActive(true);
         yield return new WaitForSeconds(ShootingDelay);
-        HRGC.Shoots -= Damage;
-        HRGC.MagazineUpdate();
+        MainBridge.CreateSoundGetGO(RHGC.TVAudioSource, RHGC.EnemyHitSound, _defaultPos.TV, true);
+        RHGC.Shoots -= Damage;
+        RHGC.MagazineUpdate();
         AlertGO.SetActive(false);
         if (PostShootingDelay != 0)
         {
@@ -166,7 +166,7 @@ public class Enemy : MonoBehaviour
     public IEnumerator YouShouldKillUrSelf(float time)
     {
         yield return new WaitForSeconds(time);
-        HRGC.Enemies.Remove(gameObject);
+        RHGC.Enemies.Remove(gameObject);
         Destroy(gameObject.transform.parent.gameObject);
     }
 
@@ -182,7 +182,7 @@ public class Enemy : MonoBehaviour
     public IEnumerator StartYingFlashingThrough()
     {
         yield return new WaitForSeconds(1);
-        HRGC.FlashScreenAnim.SetTrigger("FlashNOW");
+        RHGC.FlashScreenAnim.SetTrigger("FlashNOW");
     }
     public IEnumerator GoAfterXSec(float time)
     {

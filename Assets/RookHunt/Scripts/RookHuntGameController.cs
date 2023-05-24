@@ -19,7 +19,7 @@ public class RookHuntGameController : MonoBehaviour
     [SerializeField] public List<GameObject> EnemyPF;
     [SerializeField] private List<GameObject> SpecialEnemyPF;
     [SerializeField] private List<GameObject> EnemyDefPF;
-    [SerializeField] public List<GameObject> Enemies = new List<GameObject>();
+    [NonSerialized] public List<GameObject> Enemies = new List<GameObject>();
     [NonSerialized] public bool InvincibleEnemies;
     [NonSerialized] public double Shoots = 3;
     [NonSerialized] public int KillStreak = 1;
@@ -36,7 +36,6 @@ public class RookHuntGameController : MonoBehaviour
     [SerializeField] public Image[] BulletsImg;
     [SerializeField] public TextMeshProUGUI MultiplierText;
     [SerializeField] public TextMeshProUGUI ScoreText;
-    [SerializeField] public GameObject UpScorePF;
     [SerializeField] public Animator FlashScreenAnim;
     [Header("Ranked")]
     [SerializeField] public Image[] OpIcos;
@@ -45,6 +44,7 @@ public class RookHuntGameController : MonoBehaviour
     [SerializeField] public TextMeshProUGUI TeamScoreText;
     [SerializeField] public GameObject LoadingScreen; // LS - LoadingScreen
     [SerializeField] public TextMeshProUGUI LSRounds;
+    [SerializeField] public TextMeshProUGUI LSTeamScore;
     [SerializeField] public TextMeshProUGUI LSTeamRole;
     [SerializeField] public GameObject LSTeamIconCenter;
     [SerializeField] public GameObject LSDefendersIcon;
@@ -62,12 +62,16 @@ public class RookHuntGameController : MonoBehaviour
     [NonSerialized] private bool IsDefender = true;
     [NonSerialized] private int Round = 0;
     [NonSerialized] private int[] TeamScore = { 0, 0 };
-    [NonSerialized] public int StatsMaxKillStreak;            
+    [NonSerialized] public int StatsMaxKillStreak;
     [NonSerialized] public int StatsShootsMissed;
     [NonSerialized] public int StatsEnemyMissed;
     [Header("Audios")]
     [SerializeField] public GameObject TVAudioSource;
     [SerializeField] public AudioClip InicialMusic;
+    [SerializeField] public AudioClip ShootSound;
+    [SerializeField] public AudioClip RunningSound;
+    [SerializeField] public AudioClip HitSound;
+    [SerializeField] public AudioClip EnemyHitSound;
 
 
     private void Start()
@@ -103,6 +107,7 @@ public class RookHuntGameController : MonoBehaviour
     {
         Round++;
         LSRounds.text = "round " + Round;
+        LSTeamScore.text = TeamScore[0] + ":" + TeamScore[1];
         LoadingScreen.transform.localPosition = Vector2.zero;
         if (Round == 4 || Round >= 7)
         {
@@ -135,7 +140,7 @@ public class RookHuntGameController : MonoBehaviour
             List<GameObject> OutedEnemies = new List<GameObject>();
             List<GameObject> OutedSpecialEnemies = new List<GameObject>();
             int SpecialOp;
-            switch(CurrentRang)
+            switch (CurrentRang)
             {
                 case < 5:
                     SpecialOp = 0;
@@ -198,12 +203,12 @@ public class RookHuntGameController : MonoBehaviour
                 }
                 _EnemyCS.id = id;
                 OpIcos[id].sprite = _EnemyCS.IcoSprite;
-                _EnemyCS.HRGC = this;
+                _EnemyCS.RHGC = this;
                 _EnemyCS.Perspective = MapCS.Perspective;
 
-                GameObject AUGO = _ScriptKing.CreateSoundGetGO(TVAudioSource, _EnemyCS.RunningSound, ScriptKing._defaultPos.TV, false);
+                GameObject AUGO = _ScriptKing.CreateSoundGetGO(TVAudioSource, RunningSound, ScriptKing._defaultPos.TV, false);
                 AudioSource AUAU = AUGO.GetComponent<AudioSource>();
-                AUAU.GetComponent<AudioSource>().clip = _EnemyCS.RunningSound;
+                AUAU.GetComponent<AudioSource>().clip = RunningSound;
                 _EnemyGO.gameObject.transform.SetParent(AUAU.transform);
 
                 float _Speed = UnityEngine.Random.Range(0.7f, 0.9f) + (0.6f / (RangImages.Length - 1) * CurrentRang);
@@ -246,7 +251,8 @@ public class RookHuntGameController : MonoBehaviour
 
                 Enemy _EnemyCS = _EnemyGO.GetComponent<Enemy>();
                 _EnemyCS.WalkType = Enemy._WalkType.Stop;
-                _EnemyCS.HRGC = this;
+                _EnemyCS.RHGC = this;
+                _EnemyCS.id = i;
                 _EnemyCS._WayCreator = WaysDef[wayID];
                 _EnemyCS.Perspective = MapCS.PerspectiveDef;
 
@@ -261,6 +267,7 @@ public class RookHuntGameController : MonoBehaviour
                 OutedWays.Add(WaysDef[wayID]);
                 WaysDef.Remove(WaysDef[wayID]);
                 Enemies.Add(_EnemyGO);
+                _EnemyGO.transform.SetParent(new GameObject().AddComponent<AudioSource>().transform);
             }
             WaysDef.AddRange(OutedWays);
             EnemyDefPF.AddRange(OutedEnemies);
@@ -400,14 +407,14 @@ public class RookHuntGameController : MonoBehaviour
         }
         _EnemyCS = _EnemyGO.GetComponent<Enemy>();
 
-        GameObject AUGO = _ScriptKing.CreateSoundGetGO(TVAudioSource, _EnemyCS.RunningSound, ScriptKing._defaultPos.TV, false);
+        GameObject AUGO = _ScriptKing.CreateSoundGetGO(TVAudioSource, RunningSound, ScriptKing._defaultPos.TV, false);
         AudioSource AUAU = AUGO.GetComponent<AudioSource>();
-        AUAU.GetComponent<AudioSource>().clip = _EnemyCS.RunningSound;
+        AUAU.GetComponent<AudioSource>().clip = RunningSound;
         _EnemyGO.gameObject.transform.SetParent(AUAU.transform);
 
         if (_EnemyCS._WayCreator == null)
             _EnemyCS._WayCreator = Ways[wayID];
-        _EnemyCS.HRGC = this;
+        _EnemyCS.RHGC = this;
         _EnemyCS.Perspective = MapCS.Perspective;
         Enemies.Add(_EnemyGO);
 
