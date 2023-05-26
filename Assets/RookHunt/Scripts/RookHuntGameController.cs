@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using UnityEngine;
 using System;
 using TMPro;
+using static ScriptKing;
+using System.Runtime.CompilerServices;
 
 public class RookHuntGameController : MonoBehaviour
 {
@@ -66,12 +68,18 @@ public class RookHuntGameController : MonoBehaviour
     [NonSerialized] public int StatsShootsMissed;
     [NonSerialized] public int StatsEnemyMissed;
     [Header("Audios")]
+    [SerializeField] public AudioClip MainMenuAudioAC;
+    [NonSerialized] public GameObject MainMenuAudioGO;
     [SerializeField] public GameObject TVAudioSource;
-    [SerializeField] public AudioClip InicialMusic;
     [SerializeField] public AudioClip ShootSound;
     [SerializeField] public AudioClip RunningSound;
     [SerializeField] public AudioClip HitSound;
     [SerializeField] public AudioClip EnemyHitSound;
+    [SerializeField] public AudioClip StartRoundMusic;
+    [SerializeField] public AudioClip DefeatMusic;
+    [SerializeField] public AudioClip WinMusic;
+    [SerializeField] public AudioClip WinMusic_Perfect;
+    [SerializeField] public AudioClip CavLaughAC;
 
 
     private void Start()
@@ -81,6 +89,7 @@ public class RookHuntGameController : MonoBehaviour
         CurrentRangImg.sprite = RangImages[CurrentRang];
         TopRecordText.text = "TOP SCORE = " + PlayerPrefs.GetInt("TopScore");
         MenuGO.transform.localPosition = Vector2.zero;
+        MainMenuAudioGO = MainBridge.CreateSoundGetGO(TVAudioSource, MainMenuAudioAC, _defaultPos.TV, true);
     }
 
     private void MapCreator()
@@ -96,6 +105,8 @@ public class RookHuntGameController : MonoBehaviour
     #region Ranked
     public void RankedGameStart()
     {
+        if(MainMenuAudioGO != null)
+            Destroy(MainMenuAudioGO);
         CurrentRang--;
         PlayerPrefs.SetInt("CurrentRang", CurrentRang);
         IsDefender = UnityEngine.Random.Range(0, 2) == 0 ? true : false;
@@ -105,10 +116,12 @@ public class RookHuntGameController : MonoBehaviour
 
     public IEnumerator RankedRoundLauncher()
     {
+        MainBridge.CreateSoundGetGO(TVAudioSource, StartRoundMusic, _defaultPos.TV, true);
         Round++;
         LSRounds.text = "round " + Round;
         LSTeamScore.text = TeamScore[0] + ":" + TeamScore[1];
         LoadingScreen.transform.localPosition = Vector2.zero;
+        float WaitingToStart = 4;
         if (Round == 4 || Round >= 7)
         {
             yield return new WaitForSeconds(1);
@@ -118,11 +131,12 @@ public class RookHuntGameController : MonoBehaviour
                 LSDefendersIcon.transform.rotation = Quaternion.identity;
                 LSAtatckersIcon.transform.rotation = Quaternion.identity;
                 yield return new WaitForSeconds(0.06f);
+                WaitingToStart -= 0.06f;
             }
             IsDefender = !IsDefender;
         }
         LSTeamRole.text = IsDefender == true ? "defend" : "atack";
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(WaitingToStart);
         LoadingScreen.transform.localPosition = new Vector2(0, 2000);
         StartCoroutine(TurnOfRoundTeamScoreStats());
 
@@ -289,6 +303,7 @@ public class RookHuntGameController : MonoBehaviour
 
     public IEnumerator EndOfTheRankedRound(bool IsWinner)
     {
+        MainBridge.CreateSoundGetGO(TVAudioSource, IsWinner? KillStreak > 5 ? WinMusic_Perfect : WinMusic : DefeatMusic, _defaultPos.TV, true);
         InvincibleEnemies = true;
         CurrentMode = _CurrentMode.Menu;
         foreach (GameObject go in Enemies)
@@ -374,6 +389,8 @@ public class RookHuntGameController : MonoBehaviour
     #region Infinite Mode
     public void InfiniteModeStart()
     {
+        if (MainMenuAudioGO != null)
+            Destroy(MainMenuAudioGO);
         MapCreator();
         StartCoroutine(EnemySpawn());
         CurrentMode = _CurrentMode.Infinite;
@@ -498,6 +515,7 @@ public class RookHuntGameController : MonoBehaviour
         Destroy(MapGO);
         MenuGO.transform.localPosition = Vector2.zero;
         CurrentMode = _CurrentMode.Menu;
+        MainMenuAudioGO = MainBridge.CreateSoundGetGO(TVAudioSource, MainMenuAudioAC, _defaultPos.TV, true);
     }
     #endregion
 
@@ -507,6 +525,8 @@ public class RookHuntGameController : MonoBehaviour
         CavLaughsGO.transform.localPosition = new Vector3(posX, -1200);
         CavLaughsGO.transform.localScale = new Vector3(scale, scale);
         yield return new WaitForSeconds(1);
+        if(!notBad)
+            MainBridge.CreateSoundGetGO(TVAudioSource, CavLaughAC, _defaultPos.TV, true);
         while (CavLaughsGO.transform.localPosition.y <= posY)
         {
             yield return new WaitForSeconds(0.03f);

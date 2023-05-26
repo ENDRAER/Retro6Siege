@@ -35,6 +35,7 @@ public class Bullet : MonoBehaviour
                     RHGC.ExitInMainMenu();
                     break;
                 default:
+                    MainBridge.CreateSoundGetGO(RHGC.TVAudioSource, RHGC.ShootSound, _defaultPos.TV, true);
                     if (RHGC.InvincibleEnemies)
                         return;
                     Collider2D cover = null;
