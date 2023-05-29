@@ -25,6 +25,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Sprite[] SpritesAnim;
     [SerializeField] private byte BackWalkTimes;
     [NonSerialized] public byte AnimID;
+    [SerializeField] public Coroutine WalkAnimCor;
     [NonSerialized] public float AnimDelay = 0.2f;
 
     [Header("Shooting")]
@@ -42,7 +43,7 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(Animation());
+        WalkAnimCor = StartCoroutine(Animation());
         switch (EnemyType)
         {
             case _EnemyType.Ying:
@@ -105,6 +106,8 @@ public class Enemy : MonoBehaviour
                             ShieldGO.transform.localRotation = Quaternion.Euler(0, 0, 66);
                             HitCollider.enabled = true;
                             AnimID += 2;
+                            StopCoroutine(WalkAnimCor);
+                            WalkAnimCor = StartCoroutine(Animation());
                             Speed *= 1.5f;
                         }
                         else
@@ -139,6 +142,8 @@ public class Enemy : MonoBehaviour
                 ShieldGO.transform.localRotation = Quaternion.Euler(0, 0, 0);
                 HitCollider.enabled = false;
                 AnimID -= 2;
+                StopCoroutine(WalkAnimCor);
+                WalkAnimCor = StartCoroutine(Animation());
                 Speed /= 1.5f;
             }
             else
@@ -153,6 +158,7 @@ public class Enemy : MonoBehaviour
         AlertGO.SetActive(true);
         yield return new WaitForSeconds(ShootingDelay);
         MainBridge.CreateSoundGetGO(RHGC.TVAudioSource, RHGC.EnemyHitSound, _defaultPos.TV, true);
+        RHGC.BloodFrameAnim.SetTrigger("Reactive");
         RHGC.Shoots -= Damage;
         RHGC.MagazineUpdate();
         AlertGO.SetActive(false);

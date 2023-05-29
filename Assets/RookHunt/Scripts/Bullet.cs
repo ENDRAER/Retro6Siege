@@ -16,7 +16,7 @@ public class Bullet : MonoBehaviour
     {
         StartCoroutine(TimeToDestroyCor());
         _BridgeForLinks = ScriptKing.MainBridge;
-        RookHuntGameController RHGC = _BridgeForLinks.BF_RookHuntGameController;
+        RookHuntGameController RHGC = _BridgeForLinks.BF_RHGC;
         RHGC.Shoots  -= RHGC.CurrentMode != _CurrentMode.GameOver ? (RHGC.CurrentMode != _CurrentMode.Menu? 1 : 0) : 0;
         bool resetMultiplier = true;
         
@@ -50,7 +50,7 @@ public class Bullet : MonoBehaviour
                         if (_coll.GetComponentInParent<Enemy>() != null && _coll.transform.position.z < (cover == null ? 0 : cover.transform.position.z))
                         {
                             Enemy EnemyCS = _coll.GetComponentInParent<Enemy>();
-                            if (EnemyCS.EnemyType != Enemy._EnemyType.IanaClone)
+                            if (EnemyCS.EnemyType != Enemy._EnemyType.IanaClone && EnemyCS.EnemyType != _EnemyType.Alibi)
                             {
                                 resetMultiplier = false;
 
@@ -77,9 +77,23 @@ public class Bullet : MonoBehaviour
                                     if(RHGC.CurrentMode == _CurrentMode.Ranked)
                                         RHGC.OpIcos[EnemyCS.id].sprite = RHGC.KilledIcon;
                                     RHGC.Enemies.Remove(EnemyCS.gameObject);
-                                    _BridgeForLinks.CreateSoundGetGO(_BridgeForLinks.BF_RookHuntGameController.TVAudioSource, RHGC.HitSound, _defaultPos.TV, true);
+                                    _BridgeForLinks.CreateSoundGetGO(_BridgeForLinks.BF_RHGC.TVAudioSource, RHGC.HitSound, _defaultPos.TV, true);
                                     Destroy(EnemyCS.gameObject.transform.parent.gameObject);
                                 }
+                            }
+                            else if(EnemyCS.EnemyType == _EnemyType.Alibi)
+                            {
+                                RHGC.Score -= 69;
+
+                                GameObject UpScoreGO = Instantiate(UpScorePF, transform.position, Quaternion.identity);
+                                UpScoreGO.transform.SetParent(ScriptKing.MainBridge.WorldCanvas.transform);
+                                UpScoreGO.GetComponent<RectTransform>().position = new Vector2(_coll.transform.position.x, _coll.transform.position.y);
+                                UpScoreGO.GetComponent<TextMeshProUGUI>().text = "-69";
+                                UpScoreGO.GetComponent<TextMeshProUGUI>().color = new Color(1, 0, 0);
+
+                                RHGC.Enemies.Remove(EnemyCS.gameObject);
+                                _BridgeForLinks.CreateSoundGetGO(_BridgeForLinks.BF_RHGC.TVAudioSource, RHGC.AlibiKillingAC, _defaultPos.TV, true);
+                                Destroy(EnemyCS.gameObject.transform.parent.gameObject);
                             }
                             else
                             {
@@ -91,6 +105,9 @@ public class Bullet : MonoBehaviour
                     break;
             }
         }
+        else
+            MainBridge.CreateSoundGetGO(RHGC.TVAudioSource, RHGC.ShootSound, _defaultPos.TV, true);
+
         if (resetMultiplier && RHGC.CurrentMode != _CurrentMode.Menu)
         {
             if (RHGC.KillStreak > RHGC.StatsMaxKillStreak)

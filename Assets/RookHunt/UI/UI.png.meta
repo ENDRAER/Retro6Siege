@@ -1439,6 +1439,48 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Ico_Doc
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 61
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcafcaca5674faf4ba072bdc2b43cc0f
+      internalID: 666087239
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ico_Rook
+      rect:
+        serializedVersion: 2
+        x: 112
+        y: 47
+        width: 13
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5448f8288f3a5714ba7db9d39036588d
+      internalID: 1687093823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -1459,6 +1501,7 @@ TextureImporter:
       Hit: -965777936
       Ico_Ash: 1394945848
       Ico_Blitz: -911920089
+      Ico_Doc: 1085980892
       Ico_Finka: -2030989045
       Ico_Fuze: -2039862531
       Ico_Glaz: 741040752
@@ -1470,6 +1513,7 @@ TextureImporter:
       Ico_Kali: -1346977042
       Ico_Montagne: -496168671
       Ico_Osa: -63919416
+      Ico_Rook: 1687093823
       Ico_Sledge: -605040357
       Ico_Thermite: 1402995793
       Ico_Ying: -208025927
@@ -1524,7 +1568,6 @@ TextureImporter:
       Rang_9: 1943681779
       Score: -1836107458
       Space: 531420674
-      UI_0: 1085980892
       UI_Atack: 1045636388
       UI_CircleArrow: 902617437
       UI_Defence: 1516727277

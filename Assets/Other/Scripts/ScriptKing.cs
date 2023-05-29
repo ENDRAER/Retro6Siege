@@ -1,12 +1,11 @@
 using System.Collections;
-using Unity.Burst.CompilerServices;
 using UnityEngine;
 
 public class ScriptKing : MonoBehaviour
 {
     [Header("Bridge")]
     [SerializeField] public static ScriptKing MainBridge;
-    [SerializeField] public RookHuntGameController BF_RookHuntGameController;
+    [SerializeField] public RookHuntGameController BF_RHGC;
     [SerializeField] public GameObject Canvas2D;
     [SerializeField] public GameObject WorldCanvas;
     [Header("Camera")]

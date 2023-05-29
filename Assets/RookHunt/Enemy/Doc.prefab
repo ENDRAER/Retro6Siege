@@ -154,7 +154,7 @@ MonoBehaviour:
   HitCollider: {fileID: 0}
   WalkType: 2
   Speed: 50
-  IcoSprite: {fileID: 0}
+  IcoSprite: {fileID: 666087239, guid: 6768a988f7ce75a49a0a5c751b915630, type: 3}
   _SpriteRenderer: {fileID: 956186686806893845}
   SpritesAnim:
   - {fileID: -797151029, guid: a1e82f1af2db88d40bf593a8eef25d28, type: 3}

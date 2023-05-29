@@ -6,6 +6,7 @@ public class MapScript : MonoBehaviour
     [Header("Atck")]
     [SerializeField] public GameObject Inside;
     [SerializeField] public WayCreator SnipersWay;
+    [SerializeField] public WayCreator AlibiWay;
     [SerializeField] public List<WayCreator> Ways;
     [SerializeField] public float[] Perspective;
     [Header("Def")]

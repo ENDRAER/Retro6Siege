@@ -21,6 +21,7 @@ public class RookHuntGameController : MonoBehaviour
     [SerializeField] public List<GameObject> EnemyPF;
     [SerializeField] private List<GameObject> SpecialEnemyPF;
     [SerializeField] private List<GameObject> EnemyDefPF;
+    [SerializeField] public GameObject Alibi;
     [NonSerialized] public List<GameObject> Enemies = new List<GameObject>();
     [NonSerialized] public bool InvincibleEnemies;
     [NonSerialized] public double Shoots = 3;
@@ -39,6 +40,7 @@ public class RookHuntGameController : MonoBehaviour
     [SerializeField] public TextMeshProUGUI MultiplierText;
     [SerializeField] public TextMeshProUGUI ScoreText;
     [SerializeField] public Animator FlashScreenAnim;
+    [SerializeField] public Animator BloodFrameAnim;
     [Header("Ranked")]
     [SerializeField] public Image[] OpIcos;
     [SerializeField] public Sprite KilledIcon;
@@ -80,6 +82,7 @@ public class RookHuntGameController : MonoBehaviour
     [SerializeField] public AudioClip WinMusic;
     [SerializeField] public AudioClip WinMusic_Perfect;
     [SerializeField] public AudioClip CavLaughAC;
+    [SerializeField] public AudioClip AlibiKillingAC;
 
 
     private void Start()
@@ -174,6 +177,19 @@ public class RookHuntGameController : MonoBehaviour
                 default:
                     SpecialOp = 5;
                     break;
+            }
+            if(UnityEngine.Random.Range(0,100) == 100)
+            {
+                WayCreator WC = MapCS.AlibiWay;
+                _EnemyGO = Instantiate(Alibi, WC.transform.position, Quaternion.identity);
+                _EnemyGO.GetComponent<Enemy>()._WayCreator = WC;
+                _EnemyGO.GetComponent<Enemy>().RHGC = this;
+                Enemies.Add(_EnemyGO);
+
+                GameObject AUGO = _ScriptKing.CreateSoundGetGO(TVAudioSource, RunningSound, ScriptKing._defaultPos.TV, false);
+                AudioSource AUAU = AUGO.GetComponent<AudioSource>();
+                AUAU.GetComponent<AudioSource>().clip = RunningSound;
+                _EnemyGO.gameObject.transform.SetParent(AUAU.transform);
             }
             for (int id = 0; id != 5; id++)
             {
@@ -282,6 +298,7 @@ public class RookHuntGameController : MonoBehaviour
                 WaysDef.Remove(WaysDef[wayID]);
                 Enemies.Add(_EnemyGO);
                 _EnemyGO.transform.SetParent(new GameObject().AddComponent<AudioSource>().transform);
+                OpIcos[i].sprite = _EnemyCS.IcoSprite;
             }
             WaysDef.AddRange(OutedWays);
             EnemyDefPF.AddRange(OutedEnemies);
