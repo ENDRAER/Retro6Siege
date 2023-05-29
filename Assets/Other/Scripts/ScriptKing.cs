@@ -1,5 +1,7 @@
 using System.Collections;
+using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class ScriptKing : MonoBehaviour
 {
@@ -9,6 +11,7 @@ public class ScriptKing : MonoBehaviour
     [SerializeField] public GameObject Canvas2D;
     [SerializeField] public GameObject WorldCanvas;
     [Header("Camera")]
+    [SerializeField] private Camera _2DCamera;
     [SerializeField] private bool ReadyToShoot = true;
     [SerializeField] private GameObject HitColiderGO;
     [SerializeField] private GameObject Camera;
@@ -18,7 +21,11 @@ public class ScriptKing : MonoBehaviour
     [SerializeField] private float MinRot;
     [SerializeField] private float MaxRot;
     [SerializeField] private int maxFPS;
+    [Header("RookHunt")]
+    [SerializeField] private GameObject RookHuntMenuPF;
+    [SerializeField] private GameObject RookHuntMenu;
     [Header("Audio")]
+    [SerializeField] private AudioMixerGroup UnivrsalAM;
     [SerializeField] private AudioSource LightGunAS;
     [SerializeField] private AudioClip LightGunClick;
     [SerializeField] private AudioClip LightGunUnClick;
@@ -48,9 +55,36 @@ public class ScriptKing : MonoBehaviour
                 RaycastHit hit;
                 if (Physics.Raycast(Camera.transform.position, Camera.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
                 {
-                    if (hit.transform.gameObject.tag == "Screen")
+                    switch (hit.transform.gameObject.name)
                     {
-                        Instantiate(HitColiderGO, new Vector3((hit.point.x - Zero1.position.x) * 3.365f + Zero2.position.x, (hit.point.y - Zero1.position.y) * 3.365f + Zero2.position.y, -2), new Quaternion(0, 0, 0, 0));
+                        case "Screen":
+                            if (RookHuntMenu != null)
+                                Instantiate(HitColiderGO, new Vector3((hit.point.x - Zero1.position.x) * 3.365f + Zero2.position.x, (hit.point.y - Zero1.position.y) * 3.365f + Zero2.position.y, -2), new Quaternion(0, 0, 0, 0));
+                            break;
+                        case "ResetConcole":
+                            if (RookHuntMenu != null)
+                            {
+                                BF_RHGC.ExitInMainMenu();
+                                Destroy(RookHuntMenu);
+                            }
+                            RookHuntMenu = Instantiate(RookHuntMenuPF, new Vector3(50, 0, 0), new Quaternion(0, 0, 0, 0));
+                            RookHuntMenu.GetComponentInChildren<Canvas>().worldCamera = _2DCamera;
+                            BF_RHGC = RookHuntMenu.GetComponent<RookHuntGameController>();
+                            break;
+                        case "TV_VolUp":
+                            {
+                                UnivrsalAM.audioMixer.GetFloat("TV", out float curentVol);
+                                print(math.clamp(curentVol + 20, -80, 20));
+                                UnivrsalAM.audioMixer.SetFloat("TV", math.clamp(curentVol + 20,-80,20));
+                            }
+                            break;
+                        case "TV_VolDowm":
+                            {
+                                UnivrsalAM.audioMixer.GetFloat("TV", out float curentVol);
+                                print(math.clamp(curentVol - 20, -80, 20));
+                                UnivrsalAM.audioMixer.SetFloat("TV", math.clamp(curentVol - 20, -80, 20));
+                            }//dont delete these {}
+                            break;
                     }
                 }
             }

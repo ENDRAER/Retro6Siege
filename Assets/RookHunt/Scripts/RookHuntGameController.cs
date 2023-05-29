@@ -16,7 +16,7 @@ public class RookHuntGameController : MonoBehaviour
     [NonSerialized] public List<WayCreator> Ways;
     [NonSerialized] public List<WayCreator> WaysDef;
     [NonSerialized] private WayCreator SnipersWay;
-    [SerializeField] public ScriptKing _ScriptKing;
+    [NonSerialized] public ScriptKing _ScriptKing;
     [SerializeField] private GameObject[] MapsPF;
     [SerializeField] public List<GameObject> EnemyPF;
     [SerializeField] private List<GameObject> SpecialEnemyPF;
@@ -87,6 +87,7 @@ public class RookHuntGameController : MonoBehaviour
 
     private void Start()
     {
+        _ScriptKing = MainBridge;
         CurrentRang = math.clamp(PlayerPrefs.GetInt("CurrentRang"), 0, RangImages.Length - 1);
         CurrentRang = RangImages.Length - 1;
         CurrentRangImg.sprite = RangImages[CurrentRang];
@@ -288,7 +289,7 @@ public class RookHuntGameController : MonoBehaviour
 
                 _EnemyCS.Speed *= UnityEngine.Random.Range(0.7f, 0.9f) + (0.6f / (RangImages.Length - 1) * CurrentRang);
                 _EnemyCS.ShootingDelay *= 1 - (0.4f / (RangImages.Length - 1) * CurrentRang);
-                _EnemyCS.PostShootingDelay *= 1 - (0.4f / (RangImages.Length - 1) * CurrentRang);
+                _EnemyCS.PostShootingDelay *= 1 - (0.2f / (RangImages.Length - 1) * CurrentRang);
 
                 AllCreatedEnemyCS.Add(_EnemyCS);
 
