@@ -62,7 +62,7 @@ public class Bullet : MonoBehaviour
                                 UpScoreGO.transform.SetParent(ScriptKing.MainBridge.WorldCanvas.transform);
                                 UpScoreGO.GetComponent<RectTransform>().position = new Vector2(_coll.transform.position.x, _coll.transform.position.y);
                                 UpScoreGO.GetComponent<TextMeshProUGUI>().text = "+" + (100 * (1 + RHGC.KillStreak * 0.2)).ToString();
-                                UpScoreGO.GetComponent<TextMeshProUGUI>().color = new Color(1, 1 - (0.05f * RHGC.KillStreak), 1 - (0.05f * RHGC.KillStreak));
+                                UpScoreGO.GetComponent<TextMeshProUGUI>().color = new Color(1, 1, 1 - (0.05f * RHGC.KillStreak));
 
                                 if (EnemyCS.EnemyType == _EnemyType.Osa && !EnemyCS.ShieldDestroyed)
                                 {
