@@ -1,7 +1,7 @@
 using System.Collections;
 using Unity.Mathematics;
-using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine;
 
 public class ScriptKing : MonoBehaviour
 {
@@ -80,9 +80,9 @@ public class ScriptKing : MonoBehaviour
                             break;
                         case "TV_VolDowm":
                             {
-                                UnivrsalAM.audioMixer.GetFloat("TV", out float curentVol);
-                                print(math.clamp(curentVol - 20, -80, 20));
-                                UnivrsalAM.audioMixer.SetFloat("TV", math.clamp(curentVol - 20, -80, 20));
+                                UnivrsalAM.audioMixer.GetFloat("TV", out float curentVol1);
+                                print(math.clamp(curentVol1 - 20, -80, 20));
+                                UnivrsalAM.audioMixer.SetFloat("TV", math.clamp(curentVol1 - 20, -80, 20));
                             }//dont delete these {}
                             break;
                     }
