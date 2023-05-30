@@ -2,6 +2,8 @@ using System.Collections;
 using Unity.Mathematics;
 using UnityEngine.Audio;
 using UnityEngine;
+using System.Collections.Generic;
+using System;
 
 public class ScriptKing : MonoBehaviour
 {
@@ -80,9 +82,9 @@ public class ScriptKing : MonoBehaviour
                             break;
                         case "TV_VolDowm":
                             {
-                                UnivrsalAM.audioMixer.GetFloat("TV", out float curentVol1);
-                                print(math.clamp(curentVol1 - 20, -80, 20));
-                                UnivrsalAM.audioMixer.SetFloat("TV", math.clamp(curentVol1 - 20, -80, 20));
+                                UnivrsalAM.audioMixer.GetFloat("TV", out float curentVol);
+                                print(math.clamp(curentVol - 20, -80, 20));
+                                UnivrsalAM.audioMixer.SetFloat("TV", math.clamp(curentVol - 20, -80, 20));
                             }//dont delete these {}
                             break;
                     }
@@ -101,21 +103,18 @@ public class ScriptKing : MonoBehaviour
         ReadyToShoot = true;
     }
 
-    public GameObject CreateSoundGetGO(GameObject AudioSource, AudioClip audioClip, _defaultPos defaultPos, bool shouldKillUrSelf, Vector3 Position = new Vector3())
+    public GameObject CreateSoundGetGO(GameObject AudioSource, AudioClip audioClip, _defaultPos defaultPos, bool shouldKillUrSelf = true, Transform ParentTrans = null, Vector3 Position = new Vector3())
     {
-        Vector3 v3 = Position;
+        GameObject AU = Instantiate(AudioSource, transform.position, Quaternion.identity);
+        AU.transform.SetParent(ParentTrans);
         switch (defaultPos)
         {
             case _defaultPos.TV:
-                new Vector3(0, 0, 0);
+                AU.transform.position = new Vector3();
                 break;
         }
-        GameObject AU = Instantiate(AudioSource, v3, Quaternion.identity);
+        AU.GetComponent<SoundPlayer>().enabled = shouldKillUrSelf;
         AU.GetComponent<AudioSource>().clip = audioClip;
-        if (shouldKillUrSelf)
-        {
-            AU.GetComponent<SoundPlayer>().enabled = true;
-        }
         AU.GetComponent<AudioSource>().Play();
         return AU;
     }

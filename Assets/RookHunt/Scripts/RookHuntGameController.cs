@@ -6,7 +6,6 @@ using UnityEngine;
 using System;
 using TMPro;
 using static ScriptKing;
-using System.Runtime.CompilerServices;
 
 public class RookHuntGameController : MonoBehaviour
 {
@@ -89,16 +88,16 @@ public class RookHuntGameController : MonoBehaviour
     {
         _ScriptKing = MainBridge;
         CurrentRang = math.clamp(PlayerPrefs.GetInt("CurrentRang"), 0, RangImages.Length - 1);
-        CurrentRang = RangImages.Length - 1;
         CurrentRangImg.sprite = RangImages[CurrentRang];
         TopRecordText.text = "TOP SCORE = " + PlayerPrefs.GetInt("TopScore");
         MenuGO.transform.localPosition = Vector2.zero;
-        MainMenuAudioGO = MainBridge.CreateSoundGetGO(TVAudioSource, MainMenuAudioAC, _defaultPos.TV, true);
+        MainMenuAudioGO = MainBridge.CreateSoundGetGO(TVAudioSource, MainMenuAudioAC, _defaultPos.TV, true, transform);
     }
 
     private void MapCreator()
     {
         MapGO = Instantiate(MapsPF[UnityEngine.Random.Range(0, MapsPF.Length - 1)], new Vector3(50, 1.5f, 0), Quaternion.identity);
+        MapGO.transform.SetParent(transform);
         MapCS = MapGO.GetComponent<MapScript>();
         Ways = MapCS.Ways;
         WaysDef = MapCS.WaysDef;
@@ -120,7 +119,7 @@ public class RookHuntGameController : MonoBehaviour
 
     public IEnumerator RankedRoundLauncher()
     {
-        MainBridge.CreateSoundGetGO(TVAudioSource, StartRoundMusic, _defaultPos.TV, true);
+        MainBridge.CreateSoundGetGO(TVAudioSource, StartRoundMusic, _defaultPos.TV, true, transform);
         Round++;
         LSRounds.text = "round " + Round;
         LSTeamScore.text = TeamScore[0] + ":" + TeamScore[1];
@@ -183,11 +182,12 @@ public class RookHuntGameController : MonoBehaviour
             {
                 WayCreator WC = MapCS.AlibiWay;
                 _EnemyGO = Instantiate(Alibi, WC.transform.position, Quaternion.identity);
+                _EnemyGO.transform.SetParent(transform);
                 _EnemyGO.GetComponent<Enemy>()._WayCreator = WC;
                 _EnemyGO.GetComponent<Enemy>().RHGC = this;
                 Enemies.Add(_EnemyGO);
 
-                GameObject AUGO = _ScriptKing.CreateSoundGetGO(TVAudioSource, RunningSound, ScriptKing._defaultPos.TV, false);
+                GameObject AUGO = _ScriptKing.CreateSoundGetGO(TVAudioSource, RunningSound, ScriptKing._defaultPos.TV, false, transform);
                 AudioSource AUAU = AUGO.GetComponent<AudioSource>();
                 AUAU.GetComponent<AudioSource>().clip = RunningSound;
                 _EnemyGO.gameObject.transform.SetParent(AUAU.transform);
@@ -237,7 +237,7 @@ public class RookHuntGameController : MonoBehaviour
                 _EnemyCS.RHGC = this;
                 _EnemyCS.Perspective = MapCS.Perspective;
 
-                GameObject AUGO = _ScriptKing.CreateSoundGetGO(TVAudioSource, RunningSound, ScriptKing._defaultPos.TV, false);
+                GameObject AUGO = _ScriptKing.CreateSoundGetGO(TVAudioSource, RunningSound, ScriptKing._defaultPos.TV, false, transform);
                 AudioSource AUAU = AUGO.GetComponent<AudioSource>();
                 AUAU.GetComponent<AudioSource>().clip = RunningSound;
                 _EnemyGO.gameObject.transform.SetParent(AUAU.transform);
@@ -279,6 +279,7 @@ public class RookHuntGameController : MonoBehaviour
                 int enemyID = UnityEngine.Random.Range(0, EnemyDefPF.Count - 1);
                 wayID = UnityEngine.Random.Range(0, WaysDef.Count - 1);
                 _EnemyGO = Instantiate(EnemyDefPF[enemyID], WaysDef[wayID].transform.position, Quaternion.identity);
+                _EnemyGO.transform.SetParent(transform);
 
                 Enemy _EnemyCS = _EnemyGO.GetComponent<Enemy>();
                 _EnemyCS.WalkType = Enemy._WalkType.Stop;
@@ -298,7 +299,12 @@ public class RookHuntGameController : MonoBehaviour
                 OutedWays.Add(WaysDef[wayID]);
                 WaysDef.Remove(WaysDef[wayID]);
                 Enemies.Add(_EnemyGO);
-                _EnemyGO.transform.SetParent(new GameObject().AddComponent<AudioSource>().transform);
+
+                GameObject AUGO = new GameObject();
+                AUGO.AddComponent<AudioSource>();
+                _EnemyGO.transform.SetParent(AUGO.transform);
+                AUGO.transform.SetParent(transform);
+
                 OpIcos[i].sprite = _EnemyCS.IcoSprite;
             }
             WaysDef.AddRange(OutedWays);
@@ -321,7 +327,7 @@ public class RookHuntGameController : MonoBehaviour
 
     public IEnumerator EndOfTheRankedRound(bool IsWinner)
     {
-        MainBridge.CreateSoundGetGO(TVAudioSource, IsWinner? KillStreak > 5 ? WinMusic_Perfect : WinMusic : DefeatMusic, _defaultPos.TV, true);
+        MainBridge.CreateSoundGetGO(TVAudioSource, IsWinner? KillStreak > 5 ? WinMusic_Perfect : WinMusic : DefeatMusic, _defaultPos.TV, true, transform);
         InvincibleEnemies = true;
         CurrentMode = _CurrentMode.Menu;
         foreach (GameObject go in Enemies)
@@ -442,7 +448,7 @@ public class RookHuntGameController : MonoBehaviour
         }
         _EnemyCS = _EnemyGO.GetComponent<Enemy>();
 
-        GameObject AUGO = _ScriptKing.CreateSoundGetGO(TVAudioSource, RunningSound, ScriptKing._defaultPos.TV, false);
+        GameObject AUGO = _ScriptKing.CreateSoundGetGO(TVAudioSource, RunningSound, ScriptKing._defaultPos.TV, false, transform);
         AudioSource AUAU = AUGO.GetComponent<AudioSource>();
         AUAU.GetComponent<AudioSource>().clip = RunningSound;
         _EnemyGO.gameObject.transform.SetParent(AUAU.transform);
@@ -512,7 +518,7 @@ public class RookHuntGameController : MonoBehaviour
         {
             foreach (GameObject go in Enemies)
             {
-                Destroy(go.transform.parent.gameObject.gameObject);
+                Destroy(go.transform.parent.gameObject);
             }
             Enemies.Clear();
         }
@@ -533,7 +539,7 @@ public class RookHuntGameController : MonoBehaviour
         Destroy(MapGO);
         MenuGO.transform.localPosition = Vector2.zero;
         CurrentMode = _CurrentMode.Menu;
-        MainMenuAudioGO = MainBridge.CreateSoundGetGO(TVAudioSource, MainMenuAudioAC, _defaultPos.TV, true);
+        MainMenuAudioGO = MainBridge.CreateSoundGetGO(TVAudioSource, MainMenuAudioAC, _defaultPos.TV, true, transform);
     }
     #endregion
 
