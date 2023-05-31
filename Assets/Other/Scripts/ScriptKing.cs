@@ -103,7 +103,7 @@ public class ScriptKing : MonoBehaviour
         ReadyToShoot = true;
     }
 
-    public GameObject CreateSoundGetGO(GameObject AudioSource, AudioClip audioClip, _defaultPos defaultPos, bool shouldKillUrSelf = true, Transform ParentTrans = null, Vector3 Position = new Vector3())
+    public GameObject CreateSoundGetGO(GameObject AudioSource, AudioClip audioClip, _defaultPos defaultPos, bool shouldKillUrSelf = true, Transform ParentTrans, Vector3 Position = new Vector3())
     {
         GameObject AU = Instantiate(AudioSource, transform.position, Quaternion.identity);
         AU.transform.SetParent(ParentTrans);

@@ -550,7 +550,7 @@ public class RookHuntGameController : MonoBehaviour
         CavLaughsGO.transform.localScale = new Vector3(scale, scale);
         yield return new WaitForSeconds(1);
         if(!notBad)
-            MainBridge.CreateSoundGetGO(TVAudioSource, CavLaughAC, _defaultPos.TV, true);
+            MainBridge.CreateSoundGetGO(TVAudioSource, CavLaughAC, _defaultPos.TV, true, transform);
         while (CavLaughsGO.transform.localPosition.y <= posY)
         {
             yield return new WaitForSeconds(0.03f);
