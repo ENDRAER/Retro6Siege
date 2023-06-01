@@ -157,6 +157,7 @@ MonoBehaviour:
   MainMenuAudioAC: {fileID: 8300000, guid: f80da83f6da43b444a2153aec4aa4027, type: 3}
   TVAudioSource: {fileID: 6469655515661458829, guid: 8b878ad0d2cdd944c8980721537cae55, type: 3}
   ShootSound: {fileID: 8300000, guid: eb0599fc51468774e9a66422fb35f4de, type: 3}
+  EnemySpotAC: {fileID: 8300000, guid: 60bad0bec82f7df49a0980b2525f3cdb, type: 3}
   RunningSound: {fileID: 8300000, guid: 469df7d19f376f542a93af6e4653cfde, type: 3}
   HitSound: {fileID: 8300000, guid: 8e6ceafeb777db746ad7587337d659a3, type: 3}
   EnemyHitSound: {fileID: 8300000, guid: e2224435b604b5e489e38aa7f76aedb9, type: 3}
@@ -166,6 +167,9 @@ MonoBehaviour:
   WinMusic_Perfect: {fileID: 8300000, guid: fe89fe06be04a22429a4bca2b5cd6eea, type: 3}
   CavLaughAC: {fileID: 8300000, guid: 42363f3bb078b1844a6a3d808bb32a13, type: 3}
   AlibiKillingAC: {fileID: 8300000, guid: ad990b0c67c70ee4c84116bedb1a7cd4, type: 3}
+  IanaMissingAC: {fileID: 8300000, guid: 6214ca39db6bb5c4f95e3d4b422a8d80, type: 3}
+  OsasShieldCrashAC: {fileID: 8300000, guid: ab6e0b75b3928bb4087597f29cc9fdde, type: 3}
+  YingFlash: {fileID: 8300000, guid: 80e3d63e5d78bbb4994a985a86c25695, type: 3}
 --- !u!114 &6100262732652156035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,7 +183,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   unLocker: 0
-  "RHC\u0421s": {fileID: 6100262732652156034}
+  MapCS: {fileID: 0}
   Square: {fileID: 4126051907481572850, guid: 1d07276dd7033f84e9c2ccf07e4b3c5d, type: 3}
 --- !u!1 &6100262732680584570
 GameObject:
@@ -5271,6 +5275,7 @@ GameObject:
   - component: {fileID: 6100262734676728298}
   - component: {fileID: 6100262734676728299}
   - component: {fileID: 6100262734676728296}
+  - component: {fileID: 7392028566487250621}
   m_Layer: 0
   m_Name: FlashPanel
   m_TagString: Untagged
@@ -5366,6 +5371,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7392028566487250621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6100262734676728297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc905089b9ef1914b80f3683e4f75121, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6100262734702251080
 GameObject:
   m_ObjectHideFlags: 0

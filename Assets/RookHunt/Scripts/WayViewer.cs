@@ -5,7 +5,7 @@ using System;
 public class WayViewer : MonoBehaviour
 {
     [SerializeField] private bool unLocker;
-    [SerializeField] private RookHuntGameController RHCСs;
+    [SerializeField] private MapScript MapCS;
     [SerializeField] private GameObject Square;
     [NonSerialized] private List<GameObject> AllSquares = new List<GameObject>();
     [NonSerialized] private int WayID;
@@ -20,10 +20,10 @@ public class WayViewer : MonoBehaviour
                     Destroy(GO.gameObject);
                 AllSquares.Clear();
 
-                WayID = Math.Clamp(WayID += Input.GetKeyDown(KeyCode.Equals) ? 1 : Input.GetKeyDown(KeyCode.Minus) ? -1 : 0, 0, RHCСs.Ways.Count - 1);
+                WayID = Math.Clamp(WayID += Input.GetKeyDown(KeyCode.Equals) ? 1 : Input.GetKeyDown(KeyCode.Minus) ? -1 : 0, 0, MapCS.Ways.Count - 1);
                 print(WayID);
-                Vector2 prevV2 = RHCСs.Ways[WayID].gameObject.transform.position;
-                foreach (Vector2 v2 in RHCСs.Ways[WayID].PathPoints)
+                Vector2 prevV2 = MapCS.Ways[WayID].gameObject.transform.position;
+                foreach (Vector2 v2 in MapCS.Ways[WayID].PathPoints)
                 {
                     // line 
                     AllSquares.Add(Instantiate(Square, Vector3.Lerp(v2, prevV2, 0.5f), Quaternion.Euler(0, 0, Mathf.Atan2(prevV2.y - v2.y, prevV2.x - v2.x) * Mathf.Rad2Deg)));
@@ -37,8 +37,8 @@ public class WayViewer : MonoBehaviour
             else
             {
                 int id = 0;
-                Vector2 prevV2 = RHCСs.Ways[WayID].gameObject.transform.position;
-                foreach (Vector2 v2 in RHCСs.Ways[WayID].PathPoints)
+                Vector2 prevV2 = MapCS.Ways[WayID].gameObject.transform.position;
+                foreach (Vector2 v2 in MapCS.Ways[WayID].PathPoints)
                 {
                     AllSquares[id].transform.position = Vector3.Lerp(v2, prevV2, 0.5f);
                     AllSquares[id].transform.rotation = Quaternion.Euler(0, 0, Mathf.Atan2(prevV2.y - v2.y, prevV2.x - v2.x) * Mathf.Rad2Deg);

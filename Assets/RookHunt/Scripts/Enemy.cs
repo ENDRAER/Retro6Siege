@@ -155,9 +155,10 @@ public class Enemy : MonoBehaviour
 
     public IEnumerator EnemyShoot()
     {
+        MainBridge.CreateSoundGetGO(RHGC.TVAudioSource, RHGC.EnemySpotAC, _defaultPos.TV, RHGC.transform);
         AlertGO.SetActive(true);
         yield return new WaitForSeconds(ShootingDelay);
-        MainBridge.CreateSoundGetGO(RHGC.TVAudioSource, RHGC.EnemyHitSound, _defaultPos.TV, true);
+        MainBridge.CreateSoundGetGO(RHGC.TVAudioSource, RHGC.EnemyHitSound, _defaultPos.TV, RHGC.transform);
         RHGC.BloodFrameAnim.SetTrigger("Reactive");
         RHGC.Shoots -= Damage;
         RHGC.MagazineUpdate();

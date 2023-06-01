@@ -66,7 +66,6 @@ public class ScriptKing : MonoBehaviour
                         case "ResetConcole":
                             if (RookHuntMenu != null)
                             {
-                                BF_RHGC.ExitInMainMenu();
                                 Destroy(RookHuntMenu);
                             }
                             RookHuntMenu = Instantiate(RookHuntMenuPF, new Vector3(50, 0, 0), new Quaternion(0, 0, 0, 0));
@@ -103,7 +102,7 @@ public class ScriptKing : MonoBehaviour
         ReadyToShoot = true;
     }
 
-    public GameObject CreateSoundGetGO(GameObject AudioSource, AudioClip audioClip, _defaultPos defaultPos, bool shouldKillUrSelf = true, Transform ParentTrans, Vector3 Position = new Vector3())
+    public GameObject CreateSoundGetGO(GameObject AudioSource, AudioClip audioClip, _defaultPos defaultPos, Transform ParentTrans = null, bool shouldKillUrSelf = true, Vector3 Position = new Vector3())
     {
         GameObject AU = Instantiate(AudioSource, transform.position, Quaternion.identity);
         AU.transform.SetParent(ParentTrans);

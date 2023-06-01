@@ -24,7 +24,7 @@ public class RookHuntGameController : MonoBehaviour
     [NonSerialized] public List<GameObject> Enemies = new List<GameObject>();
     [NonSerialized] public bool InvincibleEnemies;
     [NonSerialized] public double Shoots = 3;
-    [NonSerialized] public int KillStreak = 1;
+    [NonSerialized] public int KillStreak = 0;
     [NonSerialized] public int Score;
     [SerializeField] public enum _CurrentMode { Menu, GameOver, Ranked, Infinite }
     [SerializeField] public _CurrentMode CurrentMode = _CurrentMode.Menu;
@@ -62,6 +62,7 @@ public class RookHuntGameController : MonoBehaviour
     [SerializeField] public Image RSGradiend;
     [SerializeField] public TextMeshProUGUI RSMatchReport;
     [SerializeField] public GameObject RSNextButton;
+    [NonSerialized] public int KillStreakPerRound = 0;
     [NonSerialized] private bool IsDefender = true;
     [NonSerialized] private int Round = 0;
     [NonSerialized] private int[] TeamScore = { 0, 0 };
@@ -73,6 +74,7 @@ public class RookHuntGameController : MonoBehaviour
     [NonSerialized] public GameObject MainMenuAudioGO;
     [SerializeField] public GameObject TVAudioSource;
     [SerializeField] public AudioClip ShootSound;
+    [SerializeField] public AudioClip EnemySpotAC;
     [SerializeField] public AudioClip RunningSound;
     [SerializeField] public AudioClip HitSound;
     [SerializeField] public AudioClip EnemyHitSound;
@@ -82,6 +84,9 @@ public class RookHuntGameController : MonoBehaviour
     [SerializeField] public AudioClip WinMusic_Perfect;
     [SerializeField] public AudioClip CavLaughAC;
     [SerializeField] public AudioClip AlibiKillingAC;
+    [SerializeField] public AudioClip IanaMissingAC;
+    [SerializeField] public AudioClip OsasShieldCrashAC;
+    [SerializeField] public AudioClip YingFlash;
 
 
     private void Start()
@@ -91,7 +96,7 @@ public class RookHuntGameController : MonoBehaviour
         CurrentRangImg.sprite = RangImages[CurrentRang];
         TopRecordText.text = "TOP SCORE = " + PlayerPrefs.GetInt("TopScore");
         MenuGO.transform.localPosition = Vector2.zero;
-        MainMenuAudioGO = MainBridge.CreateSoundGetGO(TVAudioSource, MainMenuAudioAC, _defaultPos.TV, true, transform);
+        MainMenuAudioGO = MainBridge.CreateSoundGetGO(TVAudioSource, MainMenuAudioAC, _defaultPos.TV, transform);
     }
 
     private void MapCreator()
@@ -108,10 +113,9 @@ public class RookHuntGameController : MonoBehaviour
     #region Ranked
     public void RankedGameStart()
     {
-        if(MainMenuAudioGO != null)
+        if (MainMenuAudioGO != null)
             Destroy(MainMenuAudioGO);
-        CurrentRang--;
-        PlayerPrefs.SetInt("CurrentRang", CurrentRang);
+        PlayerPrefs.SetInt("CurrentRang", CurrentRang - 1);
         IsDefender = UnityEngine.Random.Range(0, 2) == 0 ? true : false;
         MapCreator();
         StartCoroutine(RankedRoundLauncher());
@@ -119,7 +123,8 @@ public class RookHuntGameController : MonoBehaviour
 
     public IEnumerator RankedRoundLauncher()
     {
-        MainBridge.CreateSoundGetGO(TVAudioSource, StartRoundMusic, _defaultPos.TV, true, transform);
+        KillStreakPerRound = 0;
+        MainBridge.CreateSoundGetGO(TVAudioSource, StartRoundMusic, _defaultPos.TV, transform);
         Round++;
         LSRounds.text = "round " + Round;
         LSTeamScore.text = TeamScore[0] + ":" + TeamScore[1];
@@ -178,7 +183,7 @@ public class RookHuntGameController : MonoBehaviour
                     SpecialOp = 5;
                     break;
             }
-            if(UnityEngine.Random.Range(0,100) == 100)
+            if (UnityEngine.Random.Range(0, 100) == 100)
             {
                 WayCreator WC = MapCS.AlibiWay;
                 _EnemyGO = Instantiate(Alibi, WC.transform.position, Quaternion.identity);
@@ -187,7 +192,7 @@ public class RookHuntGameController : MonoBehaviour
                 _EnemyGO.GetComponent<Enemy>().RHGC = this;
                 Enemies.Add(_EnemyGO);
 
-                GameObject AUGO = _ScriptKing.CreateSoundGetGO(TVAudioSource, RunningSound, ScriptKing._defaultPos.TV, false, transform);
+                GameObject AUGO = _ScriptKing.CreateSoundGetGO(TVAudioSource, RunningSound, ScriptKing._defaultPos.TV, transform, false);
                 AudioSource AUAU = AUGO.GetComponent<AudioSource>();
                 AUAU.GetComponent<AudioSource>().clip = RunningSound;
                 _EnemyGO.gameObject.transform.SetParent(AUAU.transform);
@@ -237,7 +242,7 @@ public class RookHuntGameController : MonoBehaviour
                 _EnemyCS.RHGC = this;
                 _EnemyCS.Perspective = MapCS.Perspective;
 
-                GameObject AUGO = _ScriptKing.CreateSoundGetGO(TVAudioSource, RunningSound, ScriptKing._defaultPos.TV, false, transform);
+                GameObject AUGO = _ScriptKing.CreateSoundGetGO(TVAudioSource, RunningSound, ScriptKing._defaultPos.TV, transform, false);
                 AudioSource AUAU = AUGO.GetComponent<AudioSource>();
                 AUAU.GetComponent<AudioSource>().clip = RunningSound;
                 _EnemyGO.gameObject.transform.SetParent(AUAU.transform);
@@ -290,7 +295,7 @@ public class RookHuntGameController : MonoBehaviour
 
                 _EnemyCS.Speed *= UnityEngine.Random.Range(0.7f, 0.9f) + (0.6f / (RangImages.Length - 1) * CurrentRang);
                 _EnemyCS.ShootingDelay *= 1 - (0.4f / (RangImages.Length - 1) * CurrentRang);
-                _EnemyCS.PostShootingDelay *= 1 - (0.2f / (RangImages.Length - 1) * CurrentRang);
+                _EnemyCS.PostShootingDelay *= 1 - (0.8f / (RangImages.Length - 1) * CurrentRang);
 
                 AllCreatedEnemyCS.Add(_EnemyCS);
 
@@ -327,7 +332,7 @@ public class RookHuntGameController : MonoBehaviour
 
     public IEnumerator EndOfTheRankedRound(bool IsWinner)
     {
-        MainBridge.CreateSoundGetGO(TVAudioSource, IsWinner? KillStreak > 5 ? WinMusic_Perfect : WinMusic : DefeatMusic, _defaultPos.TV, true, transform);
+        MainBridge.CreateSoundGetGO(TVAudioSource, IsWinner ? (IsDefender ? (KillStreakPerRound == 5 ? WinMusic_Perfect : WinMusic) : (KillStreakPerRound == (CurrentRang >= 25 ? 2 : 1) ? WinMusic_Perfect : WinMusic)) : DefeatMusic, _defaultPos.TV, transform);
         InvincibleEnemies = true;
         CurrentMode = _CurrentMode.Menu;
         foreach (GameObject go in Enemies)
@@ -372,8 +377,8 @@ public class RookHuntGameController : MonoBehaviour
 
     public void EndOfTheRankedMatch(bool IsWinner)
     {
-        CurrentRang += IsWinner ? 2 : 0;
-        RSGradiend.color = IsWinner ? new Color(0, 0.6f, 1) : new Color(1, 0.2441347f, 0);
+        CurrentRang += IsWinner ? 1 : -1;
+        RSGradiend.color = IsWinner ? new Color(0, 0.6f, 1) : new Color(1, 0.2441f, 0);
         bool HasntMoved = false;
         if (CurrentRang < 0 || CurrentRang > 35)
         {
@@ -448,7 +453,7 @@ public class RookHuntGameController : MonoBehaviour
         }
         _EnemyCS = _EnemyGO.GetComponent<Enemy>();
 
-        GameObject AUGO = _ScriptKing.CreateSoundGetGO(TVAudioSource, RunningSound, ScriptKing._defaultPos.TV, false, transform);
+        GameObject AUGO = _ScriptKing.CreateSoundGetGO(TVAudioSource, RunningSound, ScriptKing._defaultPos.TV, transform, false);
         AudioSource AUAU = AUGO.GetComponent<AudioSource>();
         AUAU.GetComponent<AudioSource>().clip = RunningSound;
         _EnemyGO.gameObject.transform.SetParent(AUAU.transform);
@@ -510,10 +515,13 @@ public class RookHuntGameController : MonoBehaviour
     {
         Shoots = 1;
         Score = 0;
-        KillStreak = 1;
+        KillStreak = 0;
         Round = 0;
         TeamScore[0] = 0;
         TeamScore[1] = 0;
+        StatsEnemyMissed = 0;
+        StatsShootsMissed = 0;
+        StatsMaxKillStreak = 0;
         if (Enemies != null)
         {
             foreach (GameObject go in Enemies)
@@ -522,9 +530,6 @@ public class RookHuntGameController : MonoBehaviour
             }
             Enemies.Clear();
         }
-        StatsEnemyMissed = 0;
-        StatsShootsMissed = 0;
-        StatsMaxKillStreak = 0;
         InvincibleEnemies = false;
         CurrentRangImg.sprite = RangImages[CurrentRang];
 
@@ -539,7 +544,7 @@ public class RookHuntGameController : MonoBehaviour
         Destroy(MapGO);
         MenuGO.transform.localPosition = Vector2.zero;
         CurrentMode = _CurrentMode.Menu;
-        MainMenuAudioGO = MainBridge.CreateSoundGetGO(TVAudioSource, MainMenuAudioAC, _defaultPos.TV, true, transform);
+        MainMenuAudioGO = MainBridge.CreateSoundGetGO(TVAudioSource, MainMenuAudioAC, _defaultPos.TV, transform);
     }
     #endregion
 
@@ -549,8 +554,8 @@ public class RookHuntGameController : MonoBehaviour
         CavLaughsGO.transform.localPosition = new Vector3(posX, -1200);
         CavLaughsGO.transform.localScale = new Vector3(scale, scale);
         yield return new WaitForSeconds(1);
-        if(!notBad)
-            MainBridge.CreateSoundGetGO(TVAudioSource, CavLaughAC, _defaultPos.TV, true, transform);
+        if (!notBad)
+            MainBridge.CreateSoundGetGO(TVAudioSource, CavLaughAC, _defaultPos.TV, transform);
         while (CavLaughsGO.transform.localPosition.y <= posY)
         {
             yield return new WaitForSeconds(0.03f);
