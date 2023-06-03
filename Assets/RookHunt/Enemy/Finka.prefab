@@ -52,7 +52,7 @@ MonoBehaviour:
   HitCollider: {fileID: 0}
   WalkType: 0
   Speed: 50
-  IcoSprite: {fileID: -2030989045, guid: 6768a988f7ce75a49a0a5c751b915630, type: 3}
+  IcoSprite: {fileID: 303829251, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
   _SpriteRenderer: {fileID: 6316989874765650920}
   SpritesAnim:
   - {fileID: 173145109, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
@@ -65,8 +65,6 @@ MonoBehaviour:
   ShieldGO: {fileID: 0}
   ShieldCol: {fileID: 0}
   ShieldDestroyed: 0
-  RunningSound: {fileID: 8300000, guid: 469df7d19f376f542a93af6e4653cfde, type: 3}
-  EnemyHitSound: {fileID: 8300000, guid: e2224435b604b5e489e38aa7f76aedb9, type: 3}
 --- !u!50 &6316989873102447415
 Rigidbody2D:
   serializedVersion: 4

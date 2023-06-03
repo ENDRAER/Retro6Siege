@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 956186686806893844}
   - component: {fileID: 956186686806893845}
-  - component: {fileID: 7557473096804790772}
+  - component: {fileID: 683306209389745935}
   m_Layer: 0
   m_Name: Sprite
-  m_TagString: Enemy
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -74,18 +74,18 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1907749874, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
+  m_Sprite: {fileID: -597427337, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.23, y: 0.72}
+  m_Size: {x: 0.66, y: 0.93}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!70 &7557473096804790772
+--- !u!70 &683306209389745935
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -98,8 +98,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.2, y: 0.7}
+  m_Offset: {x: 0, y: -0.01}
+  m_Size: {x: 0.25, y: 0.71}
   m_Direction: 0
 --- !u!1 &956186687328918987
 GameObject:
@@ -113,7 +113,7 @@ GameObject:
   - component: {fileID: 956186687328918985}
   - component: {fileID: 956186687328918986}
   m_Layer: 0
-  m_Name: Sledge
+  m_Name: Montagne
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -148,16 +148,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyType: 0
-  BalancerGO: {fileID: 956186686806893846}
+  BalancerGO: {fileID: 0}
   RB2D: {fileID: 956186687328918986}
   HitCollider: {fileID: 0}
   WalkType: 0
-  Speed: 50
-  IcoSprite: {fileID: -605040357, guid: 6768a988f7ce75a49a0a5c751b915630, type: 3}
+  Speed: 10
+  IcoSprite: {fileID: 1244835044, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
   _SpriteRenderer: {fileID: 956186686806893845}
   SpritesAnim:
-  - {fileID: 1907749874, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
-  - {fileID: -603458648, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
+  - {fileID: -597427337, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
+  - {fileID: -597427337, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
+  - {fileID: -1969868684, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
+  - {fileID: 756153483, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
   BackWalkTimes: 0
   AlertGO: {fileID: 0}
   Damage: 0
@@ -166,8 +168,6 @@ MonoBehaviour:
   ShieldGO: {fileID: 0}
   ShieldCol: {fileID: 0}
   ShieldDestroyed: 0
-  RunningSound: {fileID: 8300000, guid: 469df7d19f376f542a93af6e4653cfde, type: 3}
-  EnemyHitSound: {fileID: 8300000, guid: e2224435b604b5e489e38aa7f76aedb9, type: 3}
 --- !u!50 &956186687328918986
 Rigidbody2D:
   serializedVersion: 4

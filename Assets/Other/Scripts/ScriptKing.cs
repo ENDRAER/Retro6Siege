@@ -2,23 +2,20 @@ using System.Collections;
 using Unity.Mathematics;
 using UnityEngine.Audio;
 using UnityEngine;
-using System.Collections.Generic;
 using System;
 
 public class ScriptKing : MonoBehaviour
 {
     [Header("Bridge")]
-    [SerializeField] public static ScriptKing MainBridge;
-    [SerializeField] public RookHuntGameController BF_RHGC;
-    [SerializeField] public GameObject Canvas2D;
     [SerializeField] public GameObject WorldCanvas;
+    [NonSerialized] public RookHuntGameController BF_RHGC;
+    [NonSerialized] public static ScriptKing MainBridge;
     [Header("Camera")]
-    [SerializeField] private Camera _2DCamera;
     [SerializeField] private bool ReadyToShoot = true;
     [SerializeField] private GameObject HitColiderGO;
     [SerializeField] private GameObject Camera;
-    [SerializeField] private Transform Zero1;
-    [SerializeField] private Transform Zero2;
+    [SerializeField] private Transform ScreenPos;
+    [SerializeField] private Vector3 TVGamesPos = new Vector3(50,0);
     [SerializeField] private float RotSpeed;
     [SerializeField] private float MinRot;
     [SerializeField] private float MaxRot;
@@ -61,15 +58,14 @@ public class ScriptKing : MonoBehaviour
                     {
                         case "Screen":
                             if (RookHuntMenu != null)
-                                Instantiate(HitColiderGO, new Vector3((hit.point.x - Zero1.position.x) * 3.365f + Zero2.position.x, (hit.point.y - Zero1.position.y) * 3.365f + Zero2.position.y, -2), new Quaternion(0, 0, 0, 0));
+                                Instantiate(HitColiderGO, new Vector3((hit.point.x - ScreenPos.position.x) * 3.365f + TVGamesPos.x, (hit.point.y - ScreenPos.position.y) * 3.365f + TVGamesPos.y, -2), new Quaternion(0, 0, 0, 0));
                             break;
                         case "ResetConcole":
                             if (RookHuntMenu != null)
                             {
                                 Destroy(RookHuntMenu);
                             }
-                            RookHuntMenu = Instantiate(RookHuntMenuPF, new Vector3(50, 0, 0), new Quaternion(0, 0, 0, 0));
-                            RookHuntMenu.GetComponentInChildren<Canvas>().worldCamera = _2DCamera;
+                            RookHuntMenu = Instantiate(RookHuntMenuPF, TVGamesPos, new Quaternion(0, 0, 0, 0));
                             BF_RHGC = RookHuntMenu.GetComponent<RookHuntGameController>();
                             break;
                         case "TV_VolUp":

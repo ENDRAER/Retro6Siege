@@ -120,8 +120,8 @@ TextureImporter:
       name: KillStrak
       rect:
         serializedVersion: 2
-        x: 0
-        y: 101
+        x: 35
+        y: 35
         width: 133
         height: 25
       alignment: 0
@@ -142,7 +142,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 75
+        y: 9
         width: 63
         height: 25
       alignment: 0
@@ -162,8 +162,8 @@ TextureImporter:
       name: Bullets
       rect:
         serializedVersion: 2
-        x: 64
-        y: 75
+        x: 0
+        y: 35
         width: 34
         height: 25
       alignment: 0
@@ -183,8 +183,8 @@ TextureImporter:
       name: Hit
       rect:
         serializedVersion: 2
-        x: 105
-        y: 85
+        x: 175
+        y: 45
         width: 5
         height: 5
       alignment: 0
@@ -204,8 +204,8 @@ TextureImporter:
       name: BulletSprite
       rect:
         serializedVersion: 2
-        x: 99
-        y: 82
+        x: 169
+        y: 42
         width: 5
         height: 8
       alignment: 9
@@ -225,8 +225,8 @@ TextureImporter:
       name: Space
       rect:
         serializedVersion: 2
-        x: 108
-        y: 95
+        x: 178
+        y: 56
         width: 1
         height: 1
       alignment: 0
@@ -246,8 +246,8 @@ TextureImporter:
       name: UI_Atack
       rect:
         serializedVersion: 2
-        x: 99
-        y: 91
+        x: 169
+        y: 51
         width: 9
         height: 9
       alignment: 0
@@ -267,8 +267,8 @@ TextureImporter:
       name: UI_Defence
       rect:
         serializedVersion: 2
-        x: 109
-        y: 91
+        x: 179
+        y: 51
         width: 9
         height: 9
       alignment: 0
@@ -288,8 +288,8 @@ TextureImporter:
       name: UI_CircleArrow
       rect:
         serializedVersion: 2
-        x: 119
-        y: 91
+        x: 189
+        y: 51
         width: 10
         height: 9
       alignment: 9
@@ -309,8 +309,8 @@ TextureImporter:
       name: Rang_1
       rect:
         serializedVersion: 2
-        x: 149
-        y: 112
+        x: 226
+        y: 46
         width: 14
         height: 14
       alignment: 0
@@ -330,8 +330,8 @@ TextureImporter:
       name: Rang_2
       rect:
         serializedVersion: 2
-        x: 164
-        y: 112
+        x: 241
+        y: 46
         width: 14
         height: 14
       alignment: 0
@@ -351,8 +351,8 @@ TextureImporter:
       name: Rang_3
       rect:
         serializedVersion: 2
-        x: 179
-        y: 112
+        x: 256
+        y: 46
         width: 14
         height: 14
       alignment: 0
@@ -372,8 +372,8 @@ TextureImporter:
       name: Rang_4
       rect:
         serializedVersion: 2
-        x: 194
-        y: 112
+        x: 271
+        y: 46
         width: 14
         height: 14
       alignment: 0
@@ -393,8 +393,8 @@ TextureImporter:
       name: Rang_5
       rect:
         serializedVersion: 2
-        x: 134
-        y: 96
+        x: 286
+        y: 46
         width: 14
         height: 14
       alignment: 0
@@ -414,8 +414,8 @@ TextureImporter:
       name: Rang_6
       rect:
         serializedVersion: 2
-        x: 149
-        y: 96
+        x: 301
+        y: 46
         width: 14
         height: 14
       alignment: 0
@@ -435,8 +435,8 @@ TextureImporter:
       name: Rang_7
       rect:
         serializedVersion: 2
-        x: 164
-        y: 96
+        x: 316
+        y: 46
         width: 14
         height: 14
       alignment: 0
@@ -456,8 +456,8 @@ TextureImporter:
       name: Rang_8
       rect:
         serializedVersion: 2
-        x: 179
-        y: 96
+        x: 331
+        y: 46
         width: 14
         height: 14
       alignment: 0
@@ -477,8 +477,8 @@ TextureImporter:
       name: Rang_9
       rect:
         serializedVersion: 2
-        x: 194
-        y: 96
+        x: 346
+        y: 46
         width: 14
         height: 14
       alignment: 0
@@ -498,8 +498,8 @@ TextureImporter:
       name: Rang_10
       rect:
         serializedVersion: 2
-        x: 134
-        y: 80
+        x: 211
+        y: 31
         width: 14
         height: 14
       alignment: 0
@@ -519,8 +519,8 @@ TextureImporter:
       name: Rang_11
       rect:
         serializedVersion: 2
-        x: 149
-        y: 80
+        x: 226
+        y: 31
         width: 14
         height: 14
       alignment: 0
@@ -540,8 +540,8 @@ TextureImporter:
       name: Rang_12
       rect:
         serializedVersion: 2
-        x: 164
-        y: 80
+        x: 241
+        y: 31
         width: 14
         height: 14
       alignment: 0
@@ -561,8 +561,8 @@ TextureImporter:
       name: Rang_13
       rect:
         serializedVersion: 2
-        x: 179
-        y: 80
+        x: 256
+        y: 31
         width: 14
         height: 14
       alignment: 0
@@ -582,8 +582,8 @@ TextureImporter:
       name: Rang_14
       rect:
         serializedVersion: 2
-        x: 194
-        y: 80
+        x: 271
+        y: 31
         width: 14
         height: 14
       alignment: 0
@@ -603,8 +603,8 @@ TextureImporter:
       name: Rang_15
       rect:
         serializedVersion: 2
-        x: 134
-        y: 64
+        x: 286
+        y: 31
         width: 14
         height: 14
       alignment: 0
@@ -624,8 +624,8 @@ TextureImporter:
       name: Rang_16
       rect:
         serializedVersion: 2
-        x: 149
-        y: 64
+        x: 301
+        y: 31
         width: 14
         height: 14
       alignment: 0
@@ -645,8 +645,8 @@ TextureImporter:
       name: Rang_17
       rect:
         serializedVersion: 2
-        x: 164
-        y: 64
+        x: 316
+        y: 31
         width: 14
         height: 14
       alignment: 0
@@ -666,8 +666,8 @@ TextureImporter:
       name: Rang_18
       rect:
         serializedVersion: 2
-        x: 179
-        y: 64
+        x: 331
+        y: 31
         width: 14
         height: 14
       alignment: 0
@@ -687,8 +687,8 @@ TextureImporter:
       name: Rang_19
       rect:
         serializedVersion: 2
-        x: 194
-        y: 64
+        x: 346
+        y: 31
         width: 14
         height: 14
       alignment: 0
@@ -708,8 +708,8 @@ TextureImporter:
       name: Rang_20
       rect:
         serializedVersion: 2
-        x: 134
-        y: 48
+        x: 211
+        y: 16
         width: 14
         height: 14
       alignment: 0
@@ -729,8 +729,8 @@ TextureImporter:
       name: Rang_21
       rect:
         serializedVersion: 2
-        x: 149
-        y: 48
+        x: 226
+        y: 16
         width: 14
         height: 14
       alignment: 0
@@ -750,8 +750,8 @@ TextureImporter:
       name: Rang_22
       rect:
         serializedVersion: 2
-        x: 164
-        y: 48
+        x: 241
+        y: 16
         width: 14
         height: 14
       alignment: 0
@@ -771,8 +771,8 @@ TextureImporter:
       name: Rang_23
       rect:
         serializedVersion: 2
-        x: 179
-        y: 48
+        x: 256
+        y: 16
         width: 14
         height: 14
       alignment: 0
@@ -792,8 +792,8 @@ TextureImporter:
       name: Rang_24
       rect:
         serializedVersion: 2
-        x: 194
-        y: 48
+        x: 271
+        y: 16
         width: 14
         height: 14
       alignment: 0
@@ -813,8 +813,8 @@ TextureImporter:
       name: Rang_25
       rect:
         serializedVersion: 2
-        x: 134
-        y: 32
+        x: 286
+        y: 16
         width: 14
         height: 14
       alignment: 0
@@ -834,8 +834,8 @@ TextureImporter:
       name: Rang_26
       rect:
         serializedVersion: 2
-        x: 149
-        y: 32
+        x: 301
+        y: 16
         width: 14
         height: 14
       alignment: 0
@@ -855,8 +855,8 @@ TextureImporter:
       name: Rang_27
       rect:
         serializedVersion: 2
-        x: 164
-        y: 32
+        x: 316
+        y: 16
         width: 14
         height: 14
       alignment: 0
@@ -876,8 +876,8 @@ TextureImporter:
       name: Rang_28
       rect:
         serializedVersion: 2
-        x: 179
-        y: 32
+        x: 331
+        y: 16
         width: 14
         height: 14
       alignment: 0
@@ -897,8 +897,8 @@ TextureImporter:
       name: Rang_29
       rect:
         serializedVersion: 2
-        x: 194
-        y: 32
+        x: 346
+        y: 16
         width: 14
         height: 14
       alignment: 0
@@ -918,8 +918,8 @@ TextureImporter:
       name: Rang_30
       rect:
         serializedVersion: 2
-        x: 134
-        y: 16
+        x: 211
+        y: 1
         width: 14
         height: 14
       alignment: 0
@@ -939,8 +939,8 @@ TextureImporter:
       name: Rang_31
       rect:
         serializedVersion: 2
-        x: 149
-        y: 16
+        x: 226
+        y: 1
         width: 14
         height: 14
       alignment: 0
@@ -960,8 +960,8 @@ TextureImporter:
       name: Rang_32
       rect:
         serializedVersion: 2
-        x: 164
-        y: 16
+        x: 241
+        y: 1
         width: 14
         height: 14
       alignment: 0
@@ -981,8 +981,8 @@ TextureImporter:
       name: Rang_33
       rect:
         serializedVersion: 2
-        x: 179
-        y: 16
+        x: 256
+        y: 1
         width: 14
         height: 14
       alignment: 0
@@ -1002,8 +1002,8 @@ TextureImporter:
       name: Rang_34
       rect:
         serializedVersion: 2
-        x: 194
-        y: 16
+        x: 271
+        y: 1
         width: 14
         height: 14
       alignment: 0
@@ -1023,7 +1023,7 @@ TextureImporter:
       name: Rang_35
       rect:
         serializedVersion: 2
-        x: 194
+        x: 286
         y: 0
         width: 14
         height: 15
@@ -1041,368 +1041,11 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ico_Blitz
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 61
-        width: 13
-        height: 13
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cee0b7f33bcb2a44d9fdc67d1ace5be6
-      internalID: -911920089
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Ico_Ash
-      rect:
-        serializedVersion: 2
-        x: 14
-        y: 61
-        width: 13
-        height: 13
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c508f709a1664054c962015d20047c15
-      internalID: 1394945848
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Ico_Kali
-      rect:
-        serializedVersion: 2
-        x: 28
-        y: 61
-        width: 13
-        height: 13
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 255c21297cd8c6a41a7bb9346e36c074
-      internalID: -1346977042
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Ico_Gridlock
-      rect:
-        serializedVersion: 2
-        x: 42
-        y: 61
-        width: 13
-        height: 13
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 22e7009c65370844b81e727260859e34
-      internalID: 131966861
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Ico_Iana
-      rect:
-        serializedVersion: 2
-        x: 56
-        y: 61
-        width: 13
-        height: 13
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 9b64972f7f0b8674ea2877ba7a6ad024
-      internalID: 740789459
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Ico_Finka
-      rect:
-        serializedVersion: 2
-        x: 70
-        y: 61
-        width: 13
-        height: 13
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 31cf4300b6120364c935653fb35e6b81
-      internalID: -2030989045
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Ico_Sledge
-      rect:
-        serializedVersion: 2
-        x: 98
-        y: 61
-        width: 13
-        height: 13
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a31df507e82b77b45a8fc33ae449cdcc
-      internalID: -605040357
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Ico_IQ
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 47
-        width: 13
-        height: 13
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5bd25ea0c5ad508489774f779b98574e
-      internalID: 2119358180
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Ico_Osa
-      rect:
-        serializedVersion: 2
-        x: 14
-        y: 47
-        width: 13
-        height: 13
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: fc4e1080302e6e64a8bff351acc62b5f
-      internalID: -63919416
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Ico_Jackal
-      rect:
-        serializedVersion: 2
-        x: 28
-        y: 47
-        width: 13
-        height: 13
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7ad4fe1ada2dc864c93ecd0f0b36988a
-      internalID: -1761951126
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Ico_Hibana
-      rect:
-        serializedVersion: 2
-        x: 42
-        y: 47
-        width: 13
-        height: 13
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1e1c5726740087e4da55ab696712e26a
-      internalID: -1460310731
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Ico_Thermite
-      rect:
-        serializedVersion: 2
-        x: 56
-        y: 47
-        width: 13
-        height: 13
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b5de0ba59da1e8749ae59f06aabd1d82
-      internalID: 1402995793
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Ico_Montagne
-      rect:
-        serializedVersion: 2
-        x: 70
-        y: 47
-        width: 13
-        height: 13
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c324be4c76fe3264f900cc6a197b19e9
-      internalID: -496168671
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Ico_Fuze
-      rect:
-        serializedVersion: 2
-        x: 98
-        y: 47
-        width: 13
-        height: 13
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: dbbfda0177249b949940df54eb92c801
-      internalID: -2039862531
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Ico_Glaz
-      rect:
-        serializedVersion: 2
-        x: 84
-        y: 47
-        width: 13
-        height: 13
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2131793d66fd4ef488736dd84f43b17b
-      internalID: 741040752
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Ico_Ying
-      rect:
-        serializedVersion: 2
-        x: 84
-        y: 61
-        width: 13
-        height: 13
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e8afdbd89f6388740bd9a76ee2f81ce1
-      internalID: -208025927
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Ico_killed
-      rect:
-        serializedVersion: 2
-        x: 112
-        y: 75
-        width: 13
-        height: 13
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2caa46d8d4e68f84cb068f4b305fa902
-      internalID: 1233959208
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: NextButton
       rect:
         serializedVersion: 2
-        x: 0
-        y: 21
+        x: 64
+        y: 9
         width: 59
         height: 25
       alignment: 0
@@ -1422,8 +1065,8 @@ TextureImporter:
       name: Rang_0
       rect:
         serializedVersion: 2
-        x: 134
-        y: 112
+        x: 211
+        y: 46
         width: 14
         height: 14
       alignment: 0
@@ -1440,43 +1083,22 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Ico_Doc
+      name: MainMenu
       rect:
         serializedVersion: 2
-        x: 112
+        x: 0
         y: 61
-        width: 13
-        height: 13
+        width: 360
+        height: 270
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bcafcaca5674faf4ba072bdc2b43cc0f
-      internalID: 666087239
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Ico_Rook
-      rect:
-        serializedVersion: 2
-        x: 112
-        y: 47
-        width: 13
-        height: 13
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5448f8288f3a5714ba7db9d39036588d
-      internalID: 1687093823
+      spriteID: c2ad430ec108e67479d0ebee8f814ddc
+      internalID: -1398704205
       vertices: []
       indices: 
       edges: []
@@ -1519,6 +1141,7 @@ TextureImporter:
       Ico_Ying: -208025927
       Ico_killed: 1233959208
       KillStrak: 246229653
+      MainMenu: -1398704205
       NextButton: -498895211
       Op_Capitao: 432410216
       Op_Glaz: 432410216

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 956186686806893844}
   - component: {fileID: 956186686806893845}
-  - component: {fileID: 609459524493533095}
+  - component: {fileID: 49819650863833369}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Enemy
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2110899675, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
+  m_Sprite: {fileID: -1994050798, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!70 &609459524493533095
+--- !u!70 &49819650863833369
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -113,7 +113,7 @@ GameObject:
   - component: {fileID: 956186687328918985}
   - component: {fileID: 956186687328918986}
   m_Layer: 0
-  m_Name: Thermite
+  m_Name: Fuze
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -127,7 +127,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 956186687328918987}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -152,12 +152,12 @@ MonoBehaviour:
   RB2D: {fileID: 956186687328918986}
   HitCollider: {fileID: 0}
   WalkType: 0
-  Speed: 50
-  IcoSprite: {fileID: 1402995793, guid: 6768a988f7ce75a49a0a5c751b915630, type: 3}
+  Speed: 45
+  IcoSprite: {fileID: 1320869773, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
   _SpriteRenderer: {fileID: 956186686806893845}
   SpritesAnim:
-  - {fileID: 2110899675, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
-  - {fileID: -1675518919, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
+  - {fileID: -1994050798, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
+  - {fileID: 505128392, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
   BackWalkTimes: 0
   AlertGO: {fileID: 0}
   Damage: 0
@@ -166,8 +166,6 @@ MonoBehaviour:
   ShieldGO: {fileID: 0}
   ShieldCol: {fileID: 0}
   ShieldDestroyed: 0
-  RunningSound: {fileID: 8300000, guid: 469df7d19f376f542a93af6e4653cfde, type: 3}
-  EnemyHitSound: {fileID: 8300000, guid: e2224435b604b5e489e38aa7f76aedb9, type: 3}
 --- !u!50 &956186687328918986
 Rigidbody2D:
   serializedVersion: 4

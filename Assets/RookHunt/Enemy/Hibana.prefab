@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1408242986, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
+  m_Sprite: {fileID: 1038502080, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -113,7 +113,7 @@ GameObject:
   - component: {fileID: 956186687328918985}
   - component: {fileID: 956186687328918986}
   m_Layer: 0
-  m_Name: Jackal
+  m_Name: Hibana
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -152,12 +152,12 @@ MonoBehaviour:
   RB2D: {fileID: 956186687328918986}
   HitCollider: {fileID: 0}
   WalkType: 0
-  Speed: 50
-  IcoSprite: {fileID: -1761951126, guid: 6768a988f7ce75a49a0a5c751b915630, type: 3}
+  Speed: 55
+  IcoSprite: {fileID: 1812247446, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
   _SpriteRenderer: {fileID: 956186686806893845}
   SpritesAnim:
-  - {fileID: 1408242986, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
-  - {fileID: 2116855010, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
+  - {fileID: 1038502080, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
+  - {fileID: -1002951984, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
   BackWalkTimes: 0
   AlertGO: {fileID: 0}
   Damage: 0
@@ -166,8 +166,6 @@ MonoBehaviour:
   ShieldGO: {fileID: 0}
   ShieldCol: {fileID: 0}
   ShieldDestroyed: 0
-  RunningSound: {fileID: 8300000, guid: 469df7d19f376f542a93af6e4653cfde, type: 3}
-  EnemyHitSound: {fileID: 8300000, guid: e2224435b604b5e489e38aa7f76aedb9, type: 3}
 --- !u!50 &956186687328918986
 Rigidbody2D:
   serializedVersion: 4

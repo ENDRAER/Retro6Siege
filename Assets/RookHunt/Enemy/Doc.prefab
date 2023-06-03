@@ -75,12 +75,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -797151029, guid: a1e82f1af2db88d40bf593a8eef25d28, type: 3}
+  m_Sprite: {fileID: 796636870, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.22, y: 0.66}
+  m_Size: {x: 0.21, y: 0.65}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -154,11 +154,11 @@ MonoBehaviour:
   HitCollider: {fileID: 0}
   WalkType: 2
   Speed: 50
-  IcoSprite: {fileID: 666087239, guid: 6768a988f7ce75a49a0a5c751b915630, type: 3}
+  IcoSprite: {fileID: -1473101113, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
   _SpriteRenderer: {fileID: 956186686806893845}
   SpritesAnim:
-  - {fileID: -797151029, guid: a1e82f1af2db88d40bf593a8eef25d28, type: 3}
-  - {fileID: 718363467, guid: a1e82f1af2db88d40bf593a8eef25d28, type: 3}
+  - {fileID: 796636870, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
+  - {fileID: -692307160, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
   BackWalkTimes: 0
   AlertGO: {fileID: 6648476660633975428}
   Damage: 1
