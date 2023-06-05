@@ -20,6 +20,7 @@ public class RookHuntGameController : MonoBehaviour
     [SerializeField] public List<GameObject> EnemyPF;
     [SerializeField] private List<GameObject> SpecialEnemyPF;
     [SerializeField] private List<GameObject> EnemyDefPF;
+    [SerializeField] public GameObject DynamicCanvas;
     [SerializeField] public GameObject Alibi;
     [NonSerialized] public List<GameObject> Enemies = new List<GameObject>();
     [NonSerialized] public bool InvincibleEnemies;
@@ -32,9 +33,13 @@ public class RookHuntGameController : MonoBehaviour
     [SerializeField] public GameObject MenuGO;
     [SerializeField] public Image CurrentRangImg;
     [SerializeField] public TextMeshProUGUI TopRecordText;
+    [SerializeField] public GameObject CavPortraitGO;
     [SerializeField] public GameObject CavLaughsGO;
     [SerializeField] public GameObject CavLaughsHeadGO;
-    [SerializeField] public Collider2D CavLaughsRestartColl;
+    [SerializeField] public GameObject CavNotBadGO;
+    [SerializeField] public Collider2D CavRestartColl;
+    [SerializeField] public TextMeshProUGUI ShootToRestartTXT;
+    [SerializeField] public TextMeshProUGUI CavNewRecordCallerTXT;
     [SerializeField] public Image[] BulletsImg;
     [SerializeField] public TextMeshProUGUI MultiplierText;
     [SerializeField] public TextMeshProUGUI ScoreText;
@@ -535,9 +540,12 @@ public class RookHuntGameController : MonoBehaviour
 
         RSNextButton.transform.localPosition = new Vector3(1232, -486.71f);
         RewardScreen.transform.localPosition = new Vector3(0, 2000);
-        CavLaughsRestartColl.enabled = false;
-        CavLaughsGO.GetComponentInChildren<TextMeshProUGUI>().fontSize = 0;
-        CavLaughsGO.transform.localPosition = new Vector2(0, -1200);
+        CavRestartColl.enabled = false;
+        ShootToRestartTXT.fontSize = 0;
+        CavPortraitGO.transform.localPosition = new Vector2(0, -1200);
+        CavLaughsGO.transform.localScale = new Vector2(1, 0);
+        CavNotBadGO.transform.localScale = new Vector2(1, 0);
+        CavNewRecordCallerTXT.text = "";
 
         StatUpdate();
         StopAllCoroutines();
@@ -551,17 +559,29 @@ public class RookHuntGameController : MonoBehaviour
     #region Animations
     private IEnumerator CavLaughANIM(float posX, float posY, float scale, bool isRanked, bool notBad)
     {
-        CavLaughsGO.transform.localPosition = new Vector3(posX, -1200);
-        CavLaughsGO.transform.localScale = new Vector3(scale, scale);
+        if (!isRanked && Score >= PlayerPrefs.GetInt("TopScore"))
+                notBad = true;
+        CavPortraitGO.transform.localPosition = new Vector3(posX, -1200);
+        CavPortraitGO.transform.localScale = new Vector3(scale, scale);
         yield return new WaitForSeconds(1);
-        if (!notBad)
+        if (notBad)
+        {
+            MainBridge.CreateSoundGetGO(TVAudioSource, WinMusic_Perfect, _defaultPos.TV, transform);
+            CavNotBadGO.transform.localScale = new Vector2(1, 1);
+        }
+        else
+        {
             MainBridge.CreateSoundGetGO(TVAudioSource, CavLaughAC, _defaultPos.TV, transform);
-        while (CavLaughsGO.transform.localPosition.y <= posY)
+            CavLaughsGO.transform.localScale = new Vector2(1, 1);
+        }
+        while (CavPortraitGO.transform.localPosition.y <= posY)
         {
             yield return new WaitForSeconds(0.03f);
-            CavLaughsGO.transform.localPosition += new Vector3(0, 5000 * Time.deltaTime);
+            CavPortraitGO.transform.localPosition += new Vector3(0, 5000 * Time.deltaTime);
         }
-        CavLaughsGO.transform.localPosition = new Vector3(posX, posY);
+        CavPortraitGO.transform.localPosition = new Vector3(posX, posY);
+        if(!isRanked && notBad)
+            CavNewRecordCallerTXT.text = "MEW RECORD: " + Score + "!";
         int a = 0;
         while (true)
         {
@@ -572,11 +592,13 @@ public class RookHuntGameController : MonoBehaviour
                     RSNextButton.transform.localPosition = new Vector3(540, -486.71f);
                 else
                 {
-                    CavLaughsGO.GetComponentInChildren<TextMeshProUGUI>().fontSize = 44;
-                    CavLaughsRestartColl.enabled = true;
+                    ShootToRestartTXT.fontSize = 0.001f;
+                    CavRestartColl.enabled = true;
                 }
                 a++;
             }
+            if (!isRanked && a % 3 == 0)
+                ShootToRestartTXT.fontSize = ShootToRestartTXT.fontSize == 0.001f ? 60 : 0.001f;
             CavLaughsHeadGO.transform.localPosition = new Vector3(0, CavLaughsHeadGO.transform.localPosition.y == 280 ? 300 : 280);
             yield return new WaitForSeconds(0.12f);
         }

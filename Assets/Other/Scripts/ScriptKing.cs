@@ -1,5 +1,4 @@
 using System.Collections;
-using Unity.Mathematics;
 using UnityEngine.Audio;
 using UnityEngine;
 using System;
@@ -7,13 +6,12 @@ using System;
 public class ScriptKing : MonoBehaviour
 {
     [Header("Bridge")]
-    [SerializeField] public GameObject WorldCanvas;
     [NonSerialized] public RookHuntGameController BF_RHGC;
     [NonSerialized] public static ScriptKing MainBridge;
-    [Header("Camera")]
+    [Header("CameraGO")]
     [SerializeField] private bool ReadyToShoot = true;
     [SerializeField] private GameObject HitColiderGO;
-    [SerializeField] private GameObject Camera;
+    [SerializeField] private GameObject CameraGO;
     [SerializeField] private Transform ScreenPos;
     [SerializeField] private Vector3 TVGamesPos = new Vector3(50,0);
     [SerializeField] private float RotSpeed;
@@ -22,7 +20,7 @@ public class ScriptKing : MonoBehaviour
     [SerializeField] private int maxFPS;
     [Header("RookHunt")]
     [SerializeField] private GameObject RookHuntMenuPF;
-    [SerializeField] private GameObject RookHuntMenu;
+    [NonSerialized] private GameObject RookHuntMenu;
     [Header("Audio")]
     [SerializeField] private AudioMixerGroup UnivrsalAM;
     [SerializeField] private AudioSource LightGunAS;
@@ -33,14 +31,15 @@ public class ScriptKing : MonoBehaviour
 
     private void Awake()
     {
+        UnivrsalAM.audioMixer.SetFloat("TVVol", PlayerPrefs.GetFloat("TVVol"));
         MainBridge = this;
         Cursor.lockState = CursorLockMode.Locked;
     }
 
     void LateUpdate()
     {
-        Camera.transform.eulerAngles += new Vector3(-Input.GetAxis("Mouse Y") * RotSpeed, Input.GetAxis("Mouse X") * RotSpeed);
-        Camera.transform.eulerAngles = new Vector3(Mathf.Clamp((Camera.transform.eulerAngles.x > 200 ? -(360 - Camera.transform.eulerAngles.x) : Camera.transform.eulerAngles.x), MinRot, MaxRot), Camera.transform.eulerAngles.y);
+        CameraGO.transform.eulerAngles += new Vector3(-Input.GetAxis("Mouse Y") * RotSpeed, Input.GetAxis("Mouse X") * RotSpeed);
+        CameraGO.transform.eulerAngles = new Vector3(Mathf.Clamp((CameraGO.transform.eulerAngles.x > 200 ? -(360 - CameraGO.transform.eulerAngles.x) : CameraGO.transform.eulerAngles.x), MinRot, MaxRot), CameraGO.transform.eulerAngles.y);
 
         Application.targetFrameRate = maxFPS;//nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
         if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -52,7 +51,7 @@ public class ScriptKing : MonoBehaviour
                 ReadyToShoot = false;
                 StartCoroutine(ShootCD());
                 RaycastHit hit;
-                if (Physics.Raycast(Camera.transform.position, Camera.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
+                if (Physics.Raycast(CameraGO.transform.position, CameraGO.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
                 {
                     switch (hit.transform.gameObject.name)
                     {
@@ -70,17 +69,31 @@ public class ScriptKing : MonoBehaviour
                             break;
                         case "TV_VolUp":
                             {
-                                UnivrsalAM.audioMixer.GetFloat("TV", out float curentVol);
-                                print(math.clamp(curentVol + 20, -80, 20));
-                                UnivrsalAM.audioMixer.SetFloat("TV", math.clamp(curentVol + 20,-80,20));
+                                UnivrsalAM.audioMixer.GetFloat("TVVol", out float curentVol);
+                                switch (curentVol)
+                                {
+                                    case -80:
+                                        curentVol = -40;
+                                        break;
+                                    case -40:
+                                        curentVol = -20;
+                                        break;
+                                    case -20:
+                                        curentVol = -10;
+                                        break;
+                                    case -10:
+                                        curentVol = -5;
+                                        break;
+                                    case -5:
+                                        curentVol = 0;
+                                        break;
+                                    case 0:
+                                        curentVol = -80;
+                                        break;
+                                }
+                                UnivrsalAM.audioMixer.SetFloat("TVVol", curentVol);
+                                PlayerPrefs.SetFloat("TVVol", curentVol);
                             }
-                            break;
-                        case "TV_VolDowm":
-                            {
-                                UnivrsalAM.audioMixer.GetFloat("TV", out float curentVol);
-                                print(math.clamp(curentVol - 20, -80, 20));
-                                UnivrsalAM.audioMixer.SetFloat("TV", math.clamp(curentVol - 20, -80, 20));
-                            }//dont delete these {}
                             break;
                     }
                 }
@@ -90,6 +103,10 @@ public class ScriptKing : MonoBehaviour
         {
             LightGunAS.clip = LightGunUnClick;
             LightGunAS.Play();
+        }
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            CameraGO.GetComponent<Camera>().fieldOfView = CameraGO.GetComponent<Camera>().fieldOfView == 45 ? 60 : 45;
         }
     }
     private IEnumerator ShootCD()

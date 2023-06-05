@@ -15,7 +15,7 @@ public class Bullet : MonoBehaviour
     void Awake()
     {
         StartCoroutine(TimeToDestroyCor());
-        _BridgeForLinks = ScriptKing.MainBridge;
+        _BridgeForLinks = MainBridge;
         RookHuntGameController RHGC = _BridgeForLinks.BF_RHGC;
         RHGC.Shoots -= RHGC.CurrentMode != _CurrentMode.GameOver ? (RHGC.CurrentMode != _CurrentMode.Menu ? 1 : 0) : 0;
         bool resetMultiplier = true;
@@ -55,7 +55,7 @@ public class Bullet : MonoBehaviour
                                 resetMultiplier = false;
                                 RHGC.Score += (int)(100 * (1 + RHGC.KillStreak * 0.2));
                                 GameObject UpScoreGO = Instantiate(UpScorePF, transform.position, Quaternion.identity);
-                                UpScoreGO.transform.SetParent(MainBridge.WorldCanvas.transform);
+                                UpScoreGO.transform.SetParent(RHGC.DynamicCanvas.transform);
                                 UpScoreGO.GetComponent<RectTransform>().position = new Vector2(_coll.transform.position.x, _coll.transform.position.y);
                                 UpScoreGO.GetComponent<TextMeshProUGUI>().text = "+" + (100 * (1 + RHGC.KillStreak * 0.2)).ToString();
                                 UpScoreGO.GetComponent<TextMeshProUGUI>().color = new Color(1, 1, 1 - (0.05f * RHGC.KillStreak));
@@ -87,7 +87,7 @@ public class Bullet : MonoBehaviour
                                 RHGC.Score -= 69;
 
                                 GameObject UpScoreGO = Instantiate(UpScorePF, transform.position, Quaternion.identity);
-                                UpScoreGO.transform.SetParent(MainBridge.WorldCanvas.transform);
+                                UpScoreGO.transform.SetParent(RHGC.DynamicCanvas.transform);
                                 UpScoreGO.GetComponent<RectTransform>().position = new Vector2(_coll.transform.position.x, _coll.transform.position.y);
                                 UpScoreGO.GetComponent<TextMeshProUGUI>().text = "-69";
                                 UpScoreGO.GetComponent<TextMeshProUGUI>().color = new Color(1, 0, 0);
