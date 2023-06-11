@@ -292,7 +292,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ReadyToShoot: 1
   HitColiderGO: {fileID: 4060668376003707211, guid: 1d4b532917e8fe34db5ce364a47113b5, type: 3}
-  Camera: {fileID: 70688286}
+  CameraGO: {fileID: 70688286}
+  CameraAnimator: {fileID: 70688291}
   ScreenPos: {fileID: 1737000559}
   TVGamesPos: {x: 50, y: 0, z: 0}
   RotSpeed: 1

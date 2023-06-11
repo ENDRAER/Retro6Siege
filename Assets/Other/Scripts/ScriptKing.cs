@@ -12,6 +12,7 @@ public class ScriptKing : MonoBehaviour
     [SerializeField] private bool ReadyToShoot = true;
     [SerializeField] private GameObject HitColiderGO;
     [SerializeField] private GameObject CameraGO;
+    [SerializeField] private Animator CameraAnimator;
     [SerializeField] private Transform ScreenPos;
     [SerializeField] private Vector3 TVGamesPos = new Vector3(50,0);
     [SerializeField] private float RotSpeed;
@@ -57,7 +58,7 @@ public class ScriptKing : MonoBehaviour
                     {
                         case "Screen":
                             if (RookHuntMenu != null)
-                                Instantiate(HitColiderGO, new Vector3((hit.point.x - ScreenPos.position.x) * 3.365f + TVGamesPos.x, (hit.point.y - ScreenPos.position.y) * 3.365f + TVGamesPos.y, -2), new Quaternion(0, 0, 0, 0));
+                                Instantiate(HitColiderGO, new Vector3((hit.point.x - ScreenPos.position.x) * 16.7f + TVGamesPos.x, (hit.point.y - ScreenPos.position.y) * 16.7f + TVGamesPos.y, -2), new Quaternion(0, 0, 0, 0));
                             break;
                         case "ResetConcole":
                             if (RookHuntMenu != null)
@@ -106,7 +107,7 @@ public class ScriptKing : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
-            CameraGO.GetComponent<Camera>().fieldOfView = CameraGO.GetComponent<Camera>().fieldOfView == 45 ? 60 : 45;
+            CameraAnimator.SetTrigger("ChangeFov");
         }
     }
     private IEnumerator ShootCD()
