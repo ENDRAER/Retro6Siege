@@ -8,6 +8,8 @@ public class ScriptKing : MonoBehaviour
     [Header("Bridge")]
     [NonSerialized] public RookHuntGameController BF_RHGC;
     [NonSerialized] public static ScriptKing MainBridge;
+    [Header("Other")]
+    [SerializeField] private GameObject TVVolCircle;
     [Header("CameraGO")]
     [SerializeField] private bool ReadyToShoot = true;
     [SerializeField] private GameObject HitColiderGO;
@@ -33,6 +35,7 @@ public class ScriptKing : MonoBehaviour
     private void Awake()
     {
         UnivrsalAM.audioMixer.SetFloat("TVVol", PlayerPrefs.GetFloat("TVVol"));
+        TVVolCircle.transform.eulerAngles = new Vector3(0, 0, (-PlayerPrefs.GetFloat("TVVol") * 3) - 100);
         MainBridge = this;
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -92,6 +95,7 @@ public class ScriptKing : MonoBehaviour
                                         curentVol = -80;
                                         break;
                                 }
+                                TVVolCircle.transform.eulerAngles = new Vector3(0, 0, (-curentVol * 3) - 100);
                                 UnivrsalAM.audioMixer.SetFloat("TVVol", curentVol);
                                 PlayerPrefs.SetFloat("TVVol", curentVol);
                             }
