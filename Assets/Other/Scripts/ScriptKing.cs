@@ -12,15 +12,15 @@ public class ScriptKing : MonoBehaviour
     [SerializeField] private GameObject TVVolCircle;
     [Header("CameraGO")]
     [SerializeField] private bool ReadyToShoot = true;
+    [SerializeField] private SpriteRenderer LaserMark;
     [SerializeField] private GameObject HitColiderGO;
     [SerializeField] private GameObject CameraGO;
     [SerializeField] private Animator CameraAnimator;
     [SerializeField] private Transform ScreenPos;
-    [SerializeField] private Vector3 TVGamesPos = new Vector3(50,0);
+    [SerializeField] private Vector3 TVGamesPos = new Vector3(50, 0);
     [SerializeField] private float RotSpeed;
     [SerializeField] private float MinRot;
     [SerializeField] private float MaxRot;
-    [SerializeField] private int maxFPS;
     [Header("RookHunt")]
     [SerializeField] private GameObject RookHuntMenuPF;
     [NonSerialized] private GameObject RookHuntMenu;
@@ -47,18 +47,21 @@ public class ScriptKing : MonoBehaviour
         CameraGO.transform.eulerAngles += new Vector3(-Input.GetAxis("Mouse Y") * RotSpeed, Input.GetAxis("Mouse X") * RotSpeed);
         CameraGO.transform.eulerAngles = new Vector3(Mathf.Clamp((CameraGO.transform.eulerAngles.x > 200 ? -(360 - CameraGO.transform.eulerAngles.x) : CameraGO.transform.eulerAngles.x), MinRot, MaxRot), CameraGO.transform.eulerAngles.y);
 
-        Application.targetFrameRate = maxFPS;//nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        RaycastHit hit;
+        if (Physics.Raycast(CameraGO.transform.position, CameraGO.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
         {
-            LightGunAS.clip = LightGunClick;
-            LightGunAS.Play();
-            if (ReadyToShoot)
+            if (hit.collider.gameObject.layer == 3 && hit.collider.gameObject.layer != 6)
+                LaserMark.color = new Color(0, 1, 0, 0.6f);
+            else
+                LaserMark.color = new Color(1, 0, 0, 0.6f);
+            if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                ReadyToShoot = false;
-                StartCoroutine(ShootCD());
-                RaycastHit hit;
-                if (Physics.Raycast(CameraGO.transform.position, CameraGO.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
+                LightGunAS.clip = LightGunClick;
+                LightGunAS.Play();
+                if (ReadyToShoot)
                 {
+                    ReadyToShoot = false;
+                    StartCoroutine(ShootCD());
                     switch (hit.transform.gameObject.name)
                     {
                         case "Screen":
@@ -102,11 +105,11 @@ public class ScriptKing : MonoBehaviour
                     }
                 }
             }
-        }
-        else if (Input.GetKeyUp(KeyCode.Mouse0))
-        {
-            LightGunAS.clip = LightGunUnClick;
-            LightGunAS.Play();
+            else if (Input.GetKeyUp(KeyCode.Mouse0))
+            {
+                LightGunAS.clip = LightGunUnClick;
+                LightGunAS.Play();
+            }
         }
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
