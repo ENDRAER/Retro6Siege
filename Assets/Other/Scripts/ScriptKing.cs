@@ -34,6 +34,8 @@ public class ScriptKing : MonoBehaviour
 
     private void Awake()
     {
+        RookHuntMenu = Instantiate(RookHuntMenuPF, TVGamesPos, new Quaternion(0, 0, 0, 0));
+        BF_RHGC = RookHuntMenu.GetComponent<RookHuntGameController>();
         UnivrsalAM.audioMixer.SetFloat("TVVol", PlayerPrefs.GetFloat("TVVol"));
         TVVolCircle.transform.eulerAngles = new Vector3(0, 0, (-PlayerPrefs.GetFloat("TVVol") * 3) - 100);
         MainBridge = this;
@@ -64,10 +66,7 @@ public class ScriptKing : MonoBehaviour
                                 Instantiate(HitColiderGO, new Vector3((hit.point.x - ScreenPos.position.x) * 16.7f + TVGamesPos.x, (hit.point.y - ScreenPos.position.y) * 16.7f + TVGamesPos.y, -2), new Quaternion(0, 0, 0, 0));
                             break;
                         case "ResetConcole":
-                            if (RookHuntMenu != null)
-                            {
-                                Destroy(RookHuntMenu);
-                            }
+                            Destroy(RookHuntMenu);
                             RookHuntMenu = Instantiate(RookHuntMenuPF, TVGamesPos, new Quaternion(0, 0, 0, 0));
                             BF_RHGC = RookHuntMenu.GetComponent<RookHuntGameController>();
                             break;
@@ -127,7 +126,7 @@ public class ScriptKing : MonoBehaviour
         switch (defaultPos)
         {
             case _defaultPos.TV:
-                AU.transform.position = new Vector3();
+                AU.transform.position = new Vector3(0, 0.025f, -8);
                 break;
         }
         AU.GetComponent<SoundPlayer>().enabled = shouldKillUrSelf;
