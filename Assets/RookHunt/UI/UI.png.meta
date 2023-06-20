@@ -1091,7 +1091,7 @@ TextureImporter:
         width: 360
         height: 270
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1099,6 +1099,27 @@ TextureImporter:
       bones: []
       spriteID: c2ad430ec108e67479d0ebee8f814ddc
       internalID: -1398704205
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DarkPixel
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 61
+        width: 1
+        height: 1
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f8eb14188121fc48b47419418da457b
+      internalID: -262876040
       vertices: []
       indices: 
       edges: []
@@ -1120,6 +1141,7 @@ TextureImporter:
       BulletSprite_2: -1632961517
       BulletSprite_4: 861801798
       Bullets: 572752722
+      DarkPixel: -262876040
       Hit: -965777936
       Ico_Ash: 1394945848
       Ico_Blitz: -911920089

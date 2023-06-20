@@ -10,6 +10,7 @@ public class ScriptKing : MonoBehaviour
     [NonSerialized] public static ScriptKing MainBridge;
     [Header("Other")]
     [SerializeField] private GameObject TVVolCircle;
+    [SerializeField] private Light LampLight;
     [Header("CameraGO")]
     [SerializeField] private bool ReadyToShoot = true;
     [SerializeField] private SpriteRenderer LaserMark;
@@ -54,10 +55,8 @@ public class ScriptKing : MonoBehaviour
                 LaserMark.color = new Color(0, 1, 0, 0.6f);
             else
                 LaserMark.color = new Color(1, 0, 0, 0.6f);
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            if (Input.GetKey(KeyCode.Mouse0))
             {
-                LightGunAS.clip = LightGunClick;
-                LightGunAS.Play();
                 if (ReadyToShoot)
                 {
                     ReadyToShoot = false;
@@ -66,7 +65,7 @@ public class ScriptKing : MonoBehaviour
                     {
                         case "Screen":
                             if (RookHuntMenu != null)
-                                Instantiate(HitColiderGO, new Vector3((hit.point.x - ScreenPos.position.x) * 16.7f + TVGamesPos.x, (hit.point.y - ScreenPos.position.y) * 16.7f + TVGamesPos.y, -2), new Quaternion(0, 0, 0, 0));
+                                Instantiate(HitColiderGO, new Vector3((hit.point.x - ScreenPos.position.x) * 17.6f + TVGamesPos.x, (hit.point.y - ScreenPos.position.y) * 17.6f + TVGamesPos.y, -2), new Quaternion(0, 0, 0, 0));
                             break;
                         case "ResetConcole":
                             Destroy(RookHuntMenu);
@@ -102,8 +101,16 @@ public class ScriptKing : MonoBehaviour
                                 PlayerPrefs.SetFloat("TVVol", curentVol);
                             }
                             break;
+                        case "LightSwitch":
+                            LampLight.intensity = LampLight.intensity == 1 ? 0 : 1;
+                            break;
                     }
                 }
+            }
+            if(Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                LightGunAS.clip = LightGunClick;
+                LightGunAS.Play();
             }
             else if (Input.GetKeyUp(KeyCode.Mouse0))
             {
