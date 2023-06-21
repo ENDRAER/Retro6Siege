@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.013631063, g: 0.010727052, b: 0.0078885965, a: 1}
+  m_IndirectSpecularColor: {r: 0.013631015, g: 0.010727058, b: 0.007888602, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -410,11 +410,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1120555232}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.7}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.039, y: -0.104}
+  m_AnchoredPosition: {x: 0.037, y: -0.198}
   m_SizeDelta: {x: 84.8215, y: 14.9844}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &40957548
@@ -1179,7 +1179,7 @@ GameObject:
   - component: {fileID: 341739052}
   - component: {fileID: 341739051}
   m_Layer: 0
-  m_Name: doom 1993
+  m_Name: doom1993
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1868,7 +1868,7 @@ GameObject:
   - component: {fileID: 1041528411}
   - component: {fileID: 1041528410}
   m_Layer: 0
-  m_Name: NoMoreLosingKillStreak (1)
+  m_Name: NoMoreShieldHitBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1881,17 +1881,17 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1041528408}
-  m_LocalRotation: {x: 0, y: 0, z: 0.0061086393, w: 0.99998134}
+  m_LocalRotation: {x: 0, y: 0, z: 0.008726558, w: 0.999962}
   m_LocalPosition: {x: 0, y: 0, z: -0.0002}
   m_LocalScale: {x: 0.01, y: 0.007, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1120555232}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.7}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 1}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.119, y: -0.186}
+  m_AnchoredPosition: {x: 0.068, y: -0.11}
   m_SizeDelta: {x: 84.8215, y: 14.9844}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1041528410
@@ -1914,7 +1914,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: kill enemy when blind from ying xxxxxxxxxx
+  m_text: shoot to at shield for 10 tines xxxxxxxxxx
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3681d05e6c4ec45409b42c2a046b3879, type: 2}
   m_sharedMaterial: {fileID: -6573853761639733593, guid: 3681d05e6c4ec45409b42c2a046b3879, type: 2}
@@ -1941,19 +1941,19 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 9
-  m_fontSizeBase: 9
+  m_fontSize: 10.02
+  m_fontSizeBase: 10.02
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: -1.12
   m_wordSpacing: 0
-  m_lineSpacing: -37.6
+  m_lineSpacing: -25.36
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
@@ -1977,7 +1977,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: -3.0781631, y: 0, z: -1.2223244, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2214,7 +2214,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1120555231}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -15.008, y: -199.45, z: -7.98}
+  m_LocalPosition: {x: -15.0145, y: -199.4438, z: -7.98}
   m_LocalScale: {x: 0.17, y: 0.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2223,8 +2223,8 @@ Transform:
   - {fileID: 389615072}
   - {fileID: 201399015}
   - {fileID: 1593528903}
-  - {fileID: 40957547}
   - {fileID: 1041528409}
+  - {fileID: 40957547}
   - {fileID: 1283783239}
   - {fileID: 341739050}
   m_Father: {fileID: 107530021}
@@ -3029,7 +3029,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: reach champion
+  m_text: 'beat champion '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3681d05e6c4ec45409b42c2a046b3879, type: 2}
   m_sharedMaterial: {fileID: -6573853761639733593, guid: 3681d05e6c4ec45409b42c2a046b3879, type: 2}
@@ -3056,8 +3056,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 11
-  m_fontSizeBase: 11
+  m_fontSize: 12.2
+  m_fontSizeBase: 12.2
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -4225,7 +4225,7 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 0.96967655, b: 0.7877358, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0
   m_Range: 10
   m_SpotAngle: 146
   m_InnerSpotAngle: 21.80208
