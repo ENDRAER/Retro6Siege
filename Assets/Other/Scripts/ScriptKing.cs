@@ -11,6 +11,8 @@ public class ScriptKing : MonoBehaviour
     [Header("Other")]
     [SerializeField] private GameObject TVVolCircle;
     [SerializeField] private Light LampLight;
+    [SerializeField] public enum _ObjectType { Screen, ResetConcole, TV_VolUp, LightSwitch, PaperWithModifers };
+    [SerializeField] private Animator PaperAnim;
     [Header("CameraGO")]
     [SerializeField] private bool ReadyToShoot = true;
     [SerializeField] private SpriteRenderer LaserMark;
@@ -49,62 +51,63 @@ public class ScriptKing : MonoBehaviour
         CameraGO.transform.eulerAngles = new Vector3(Mathf.Clamp((CameraGO.transform.eulerAngles.x > 200 ? -(360 - CameraGO.transform.eulerAngles.x) : CameraGO.transform.eulerAngles.x), MinRot, MaxRot), CameraGO.transform.eulerAngles.y);
 
         RaycastHit hit;
-        if (Physics.Raycast(CameraGO.transform.position, CameraGO.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
+        if (Physics.Raycast(CameraGO.transform.position, CameraGO.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity) && hit.transform.GetComponent<InteractableObjects>() != null)
         {
-            if (hit.collider.gameObject.layer == 3 && hit.collider.gameObject.layer != 6)
+            InteractableObjects _object = hit.transform.GetComponent<InteractableObjects>();
+            if (_object.ObjectType != _ObjectType.Screen)
                 LaserMark.color = new Color(0, 1, 0, 0.6f);
             else
                 LaserMark.color = new Color(1, 0, 0, 0.6f);
-            if (Input.GetKey(KeyCode.Mouse0))
+            if (Input.GetKeyDown(KeyCode.Mouse0) && ReadyToShoot)
             {
-                if (ReadyToShoot)
+                ReadyToShoot = false;
+                StartCoroutine(ShootCD());
+                switch (hit.transform.GetComponent<InteractableObjects>().ObjectType)
                 {
-                    ReadyToShoot = false;
-                    StartCoroutine(ShootCD());
-                    switch (hit.transform.gameObject.name)
-                    {
-                        case "Screen":
-                            if (RookHuntMenu != null)
-                                Instantiate(HitColiderGO, new Vector3((hit.point.x - ScreenPos.position.x) * 17.6f + TVGamesPos.x, (hit.point.y - ScreenPos.position.y) * 17.6f + TVGamesPos.y, -2), new Quaternion(0, 0, 0, 0));
-                            break;
-                        case "ResetConcole":
-                            Destroy(RookHuntMenu);
-                            RookHuntMenu = Instantiate(RookHuntMenuPF, TVGamesPos, new Quaternion(0, 0, 0, 0));
-                            BF_RHGC = RookHuntMenu.GetComponent<RookHuntGameController>();
-                            break;
-                        case "TV_VolUp":
+                    case _ObjectType.Screen:
+                        if (RookHuntMenu != null)
+                            Instantiate(HitColiderGO, new Vector3((hit.point.x - ScreenPos.position.x) * 17.6f + TVGamesPos.x, (hit.point.y - ScreenPos.position.y) * 17.6f + TVGamesPos.y, -2), new Quaternion(0, 0, 0, 0));
+                        break;
+                    case _ObjectType.ResetConcole:
+                        Destroy(RookHuntMenu);
+                        RookHuntMenu = Instantiate(RookHuntMenuPF, TVGamesPos, new Quaternion(0, 0, 0, 0));
+                        BF_RHGC = RookHuntMenu.GetComponent<RookHuntGameController>();
+                        break;
+                    case _ObjectType.TV_VolUp:
+                        {
+                            UnivrsalAM.audioMixer.GetFloat("TVVol", out float curentVol);
+                            switch (curentVol)
                             {
-                                UnivrsalAM.audioMixer.GetFloat("TVVol", out float curentVol);
-                                switch (curentVol)
-                                {
-                                    case -80:
-                                        curentVol = -40;
-                                        break;
-                                    case -40:
-                                        curentVol = -20;
-                                        break;
-                                    case -20:
-                                        curentVol = -10;
-                                        break;
-                                    case -10:
-                                        curentVol = -5;
-                                        break;
-                                    case -5:
-                                        curentVol = 0;
-                                        break;
-                                    case 0:
-                                        curentVol = -80;
-                                        break;
-                                }
-                                TVVolCircle.transform.eulerAngles = new Vector3(0, 0, (-curentVol * 3) - 100);
-                                UnivrsalAM.audioMixer.SetFloat("TVVol", curentVol);
-                                PlayerPrefs.SetFloat("TVVol", curentVol);
+                                case -80:
+                                    curentVol = -40;
+                                    break;
+                                case -40:
+                                    curentVol = -20;
+                                    break;
+                                case -20:
+                                    curentVol = -10;
+                                    break;
+                                case -10:
+                                    curentVol = -5;
+                                    break;
+                                case -5:
+                                    curentVol = 0;
+                                    break;
+                                case 0:
+                                    curentVol = -80;
+                                    break;
                             }
-                            break;
-                        case "LightSwitch":
-                            LampLight.intensity = LampLight.intensity == 1 ? 0 : 1;
-                            break;
-                    }
+                            TVVolCircle.transform.eulerAngles = new Vector3(0, 0, (-curentVol * 3) - 100);
+                            UnivrsalAM.audioMixer.SetFloat("TVVol", curentVol);
+                            PlayerPrefs.SetFloat("TVVol", curentVol);
+                        }
+                        break;
+                    case _ObjectType.LightSwitch:
+                        LampLight.intensity = LampLight.intensity == 1 ? 0 : 1;
+                        break;
+                    case _ObjectType.PaperWithModifers:
+                        PaperAnim.SetBool("Focussed", !PaperAnim.GetBool("Focussed"));
+                        break;
                 }
             }
             if(Input.GetKeyDown(KeyCode.Mouse0))
@@ -118,6 +121,9 @@ public class ScriptKing : MonoBehaviour
                 LightGunAS.Play();
             }
         }
+        else
+            LaserMark.color = new Color(1, 0, 0, 0.6f);
+
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             CameraAnimator.SetTrigger("ChangeFov");
@@ -125,7 +131,7 @@ public class ScriptKing : MonoBehaviour
     }
     private IEnumerator ShootCD()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.12f);
         ReadyToShoot = true;
     }
 
