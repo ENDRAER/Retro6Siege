@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine.Audio;
 using UnityEngine;
 using System;
+using TMPro;
 
 public class ScriptKing : MonoBehaviour
 {
@@ -11,8 +12,21 @@ public class ScriptKing : MonoBehaviour
     [Header("Other")]
     [SerializeField] private GameObject TVVolCircle;
     [SerializeField] private Light LampLight;
-    [SerializeField] public enum _ObjectType { Screen, ResetConcole, TV_VolUp, LightSwitch, PaperWithModifers };
+    [Header("Paper")]
+    [SerializeField] private TextMeshProUGUI[] ModText;
+    [SerializeField] private GameObject[] CheckBoxes;
+    [SerializeField] private GameObject[] CheckMarks;
     [SerializeField] private Animator PaperAnim;
+    [SerializeField] public enum _ObjectType { Screen, ResetConcole, TV_VolUp, LightSwitch, PaperWithModifers, ModButton };
+    [NonSerialized] public bool InfiniteAmmo;
+    [NonSerialized] public bool FullAutoShooting;
+    [NonSerialized] public bool NoOpLeft;
+    [NonSerialized] public bool BigBullet;
+    [NonSerialized] public bool AllOpGotAshSpeed;
+    [NonSerialized] public bool NoMoreShieldHitBox;
+    [NonSerialized] public bool NoMoreLosingKillStreak;
+    [NonSerialized] public bool glock;
+    [NonSerialized] public bool doom1993;
     [Header("CameraGO")]
     [SerializeField] private bool ReadyToShoot = true;
     [SerializeField] private SpriteRenderer LaserMark;
@@ -43,6 +57,12 @@ public class ScriptKing : MonoBehaviour
         TVVolCircle.transform.eulerAngles = new Vector3(0, 0, (-PlayerPrefs.GetFloat("TVVol") * 3) - 100);
         MainBridge = this;
         Cursor.lockState = CursorLockMode.Locked;
+        #region CheckModifersProgress
+        if (PlayerPrefs.GetInt("ShootTimes") >= 100)
+        {
+            CheckBoxes[0].SetActive(true);
+        }
+        #endregion
     }
 
     void LateUpdate()
@@ -54,10 +74,12 @@ public class ScriptKing : MonoBehaviour
         if (Physics.Raycast(CameraGO.transform.position, CameraGO.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity) && hit.transform.GetComponent<InteractableObjects>() != null)
         {
             InteractableObjects _object = hit.transform.GetComponent<InteractableObjects>();
+            #region ColorOfPointer
             if (_object.ObjectType != _ObjectType.Screen)
                 LaserMark.color = new Color(0, 1, 0, 0.6f);
             else
                 LaserMark.color = new Color(1, 0, 0, 0.6f);
+            #endregion
             if (Input.GetKeyDown(KeyCode.Mouse0) && ReadyToShoot)
             {
                 ReadyToShoot = false;
@@ -106,23 +128,35 @@ public class ScriptKing : MonoBehaviour
                         LampLight.intensity = LampLight.intensity == 1 ? 0 : 1;
                         break;
                     case _ObjectType.PaperWithModifers:
-                        PaperAnim.SetBool("Focussed", !PaperAnim.GetBool("Focussed"));
+                        PaperAnim.SetBool("Focussed", _object.modifer == 0? true : false);
+                        break;
+                    case _ObjectType.ModButton:
+                        switch(_object.modifer)
+                        {
+                            case 0:
+                                print("ass");
+                                break;
+                        }
                         break;
                 }
             }
-            if(Input.GetKeyDown(KeyCode.Mouse0))
-            {
-                LightGunAS.clip = LightGunClick;
-                LightGunAS.Play();
-            }
-            else if (Input.GetKeyUp(KeyCode.Mouse0))
-            {
-                LightGunAS.clip = LightGunUnClick;
-                LightGunAS.Play();
-            }
+
         }
         else
             LaserMark.color = new Color(1, 0, 0, 0.6f);
+
+        #region ClickSound
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            LightGunAS.clip = LightGunClick;
+            LightGunAS.Play();
+        }
+        else if (Input.GetKeyUp(KeyCode.Mouse0))
+        {
+            LightGunAS.clip = LightGunUnClick;
+            LightGunAS.Play();
+        }
+        #endregion
 
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {

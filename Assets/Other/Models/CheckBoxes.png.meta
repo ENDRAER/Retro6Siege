@@ -120,12 +120,12 @@ TextureImporter:
       name: CheckBoxes_0
       rect:
         serializedVersion: 2
-        x: 5
+        x: 0
         y: 412
         width: 213
         height: 184
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -146,7 +146,7 @@ TextureImporter:
         width: 134
         height: 192
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -162,12 +162,12 @@ TextureImporter:
       name: CheckBoxes_2
       rect:
         serializedVersion: 2
-        x: 383
+        x: 378
         y: 412
-        width: 205
-        height: 184
+        width: 206
+        height: 185
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -183,12 +183,12 @@ TextureImporter:
       name: CheckBoxes_3
       rect:
         serializedVersion: 2
-        x: 9
-        y: 189
+        x: 4
+        y: 190
         width: 178
-        height: 204
+        height: 203
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -204,12 +204,12 @@ TextureImporter:
       name: CheckBoxes_4
       rect:
         serializedVersion: 2
-        x: 208
+        x: 203
         y: 213
         width: 171
         height: 183
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -225,12 +225,12 @@ TextureImporter:
       name: CheckBoxes_5
       rect:
         serializedVersion: 2
-        x: 400
+        x: 395
         y: 217
         width: 197
         height: 187
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -246,12 +246,12 @@ TextureImporter:
       name: CheckBoxes_6
       rect:
         serializedVersion: 2
-        x: 415
+        x: 410
         y: 5
         width: 185
         height: 197
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -267,12 +267,12 @@ TextureImporter:
       name: CheckBoxes_7
       rect:
         serializedVersion: 2
-        x: 212
+        x: 207
         y: 1
         width: 203
         height: 180
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -288,12 +288,12 @@ TextureImporter:
       name: CheckBoxes_8
       rect:
         serializedVersion: 2
-        x: 22
+        x: 17
         y: 0
         width: 181
         height: 183
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -301,6 +301,195 @@ TextureImporter:
       bones: []
       spriteID: 1f9fc36df4b5fe24888c4ca39069caf1
       internalID: 1536646867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CheckMark_0
+      rect:
+        serializedVersion: 2
+        x: 614
+        y: 411
+        width: 123
+        height: 158
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9299acce7ca4634c808be7fd5260cc5
+      internalID: 1860833267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CheckMark_1
+      rect:
+        serializedVersion: 2
+        x: 771
+        y: 406
+        width: 61
+        height: 156
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 448fd5b44450efa428ca5478bb8e1ece
+      internalID: -1843672591
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CheckMark_2
+      rect:
+        serializedVersion: 2
+        x: 882
+        y: 417
+        width: 112
+        height: 162
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f15fa9273465b6444ad82005fdf7c7aa
+      internalID: 2087937787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CheckMark_5
+      rect:
+        serializedVersion: 2
+        x: 896
+        y: 248
+        width: 93
+        height: 153
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dead9e9e74e598a4bacb84a6da0549ca
+      internalID: 22772756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CheckMark_4
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 253
+        width: 96
+        height: 133
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 875a25d563bb16f4b8c9ed9ce4f4cf02
+      internalID: 830102263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CheckMark_3
+      rect:
+        serializedVersion: 2
+        x: 618
+        y: 247
+        width: 99
+        height: 143
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 82ca5b0bfca5c2b41bc8d3681604cd5c
+      internalID: 1254652227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CheckMark_6
+      rect:
+        serializedVersion: 2
+        x: 652
+        y: 57
+        width: 66
+        height: 104
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4db4b0851cee85749807242c5353b5ed
+      internalID: 678276765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CheckMark_7
+      rect:
+        serializedVersion: 2
+        x: 740
+        y: 59
+        width: 118
+        height: 127
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff66eca02844634449c2a6e5739328f7
+      internalID: 1062371490
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: CheckMark_8
+      rect:
+        serializedVersion: 2
+        x: 891
+        y: 61
+        width: 44
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b22b0ebd2e9123342a33802768d11be2
+      internalID: -626990007
       vertices: []
       indices: 
       edges: []
@@ -325,6 +514,15 @@ TextureImporter:
       CheckBoxes_6: 211560121
       CheckBoxes_7: 941038203
       CheckBoxes_8: 1536646867
+      CheckMark_0: 1860833267
+      CheckMark_1: -1843672591
+      CheckMark_2: 2087937787
+      CheckMark_3: 1254652227
+      CheckMark_4: 830102263
+      CheckMark_5: 22772756
+      CheckMark_6: 678276765
+      CheckMark_7: 1062371490
+      CheckMark_8: -626990007
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
