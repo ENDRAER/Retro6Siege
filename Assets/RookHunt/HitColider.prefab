@@ -46,7 +46,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UpScorePF: {fileID: 6169367417636358497, guid: 9f24c874fa910954fbcc0e143809ebe2, type: 3}
-  HitSound: {fileID: 8300000, guid: 8e6ceafeb777db746ad7587337d659a3, type: 3}
 --- !u!212 &2645367442998763702
 SpriteRenderer:
   m_ObjectHideFlags: 0

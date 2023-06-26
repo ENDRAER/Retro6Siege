@@ -222,6 +222,7 @@ public class RookHuntGameController : MonoBehaviour
                         _EnemyGO.transform.position = SnipersWay.transform.position;
                         _EnemyCS = _EnemyGO.GetComponent<Enemy>();
                         _EnemyCS._WayCreator = SnipersWay;
+                        _EnemyCS.IsOnKaliWay = true;
                         SnipersWay = null;
                     }
                     else
@@ -449,6 +450,7 @@ public class RookHuntGameController : MonoBehaviour
                 _EnemyGO = Instantiate(SpecialEnemyPF[enemyID], SnipersWay.transform.position, Quaternion.identity);
                 _EnemyCS = _EnemyGO.GetComponent<Enemy>();
                 _EnemyCS._WayCreator = SnipersWay;
+                _EnemyCS.IsOnKaliWay = true;
             }
             else
             {
@@ -560,7 +562,10 @@ public class RookHuntGameController : MonoBehaviour
     private IEnumerator CavLaughANIM(float posX, float posY, float scale, bool isRanked, bool notBad)
     {
         if (!isRanked && Score >= PlayerPrefs.GetInt("TopScore"))
-                notBad = true;
+        {
+            notBad = true;
+            TopRecordText.text = "TOP SCORE = " + Score;
+        }
         CavPortraitGO.transform.localPosition = new Vector3(posX, -1200);
         CavPortraitGO.transform.localScale = new Vector3(scale, scale);
         yield return new WaitForSeconds(1);

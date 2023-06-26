@@ -10,6 +10,7 @@ public class Enemy : MonoBehaviour
     [NonSerialized] private int Step;
     [NonSerialized] public float[] Perspective = { 1.77f, 0.2f}; // default values
     [NonSerialized] public WayCreator _WayCreator;
+    [NonSerialized] public bool IsOnKaliWay;
     [SerializeField] public enum _EnemyType { Standart, Sniper, Blitz, Ying, Osa, Iana, IanaClone, Alibi }
     [SerializeField] public _EnemyType EnemyType;
     [SerializeField] private GameObject BalancerGO;
@@ -80,14 +81,17 @@ public class Enemy : MonoBehaviour
                     {
                         if (EnemyType != _EnemyType.IanaClone)
                         {
-                            RHGC.Shoots--;
+                            if(!RHGC._ScriptKing.NoOpLeft)
+                                RHGC.Shoots--;
                             RHGC.StatsEnemyMissed++;
+
+                            RHGC._ScriptKing.BuffersCounter(2, "MissedEnemies", 20, 1, "miss 20 atackers\n", "no more losing kill streak");
                         }
                         RHGC.Enemies.Remove(gameObject);
                         RHGC.MagazineUpdate();
                         Destroy(gameObject.transform.parent.gameObject);
                     }
-                    else if (EnemyType == _EnemyType.Sniper)
+                    else if (EnemyType == _EnemyType.Sniper && IsOnKaliWay)
                     {
                         RB2D.velocity = Vector3.zero;
                         StartCoroutine(YouShouldKillUrSelf(10));

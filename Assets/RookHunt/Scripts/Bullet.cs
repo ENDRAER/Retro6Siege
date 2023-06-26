@@ -9,42 +9,26 @@ using TMPro;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private GameObject UpScorePF;
-    [NonSerialized] private ScriptKing _BridgeForLinks;
+    [NonSerialized] private ScriptKing _SK;
     [NonSerialized] private Collider2D[] CollidersInZone;
 
     void Awake()
     {
-        _BridgeForLinks = MainBridge;
-        RookHuntGameController RHGC = _BridgeForLinks.BF_RHGC;
+        _SK = MainBridge;
+        RookHuntGameController RHGC = _SK.BF_RHGC;
         StartCoroutine(TimeToDestroyCor());
         bool resetMultiplier = true;
 
         if (RHGC.CurrentMode != _CurrentMode.GameOver && RHGC.CurrentMode != _CurrentMode.Menu)
         {
-            RHGC.Shoots -= _BridgeForLinks.InfiniteAmmo ? 0 : 1;
+            RHGC.Shoots -= _SK.InfiniteAmmo ? 0 : 1;
             int ShootTimes = PlayerPrefs.GetInt("ShootTimes") + 1;
             PlayerPrefs.SetInt("ShootTimes", ShootTimes);
-            if (ShootTimes >= 100)
-            {
-                _BridgeForLinks.CheckBoxes[0].SetActive(true);
-                _BridgeForLinks.ModText[0].text = "infinite ammo";
-
-                if (ShootTimes >= 1000)
-                {
-                    _BridgeForLinks.CheckBoxes[1].SetActive(true);
-                    _BridgeForLinks.ModText[1].text = "full auto shooting";
-                }
-                else
-                    _BridgeForLinks.ModText[1].text = "Shoot for 1000 times \n" + new string('x', ShootTimes / 100) + new string('-', 10 - ShootTimes / 100);
-            }
-            else
-            {
-                _BridgeForLinks.ModText[0].text = "Shoot for 100 times \n" + new string('x', ShootTimes / 10) + new string('-', 10 - ShootTimes / 10);
-                _BridgeForLinks.ModText[1].text = "unlock prewious";
-            }
+            _SK.BuffersCounter(0, "ShootTimes", 100, 0, "Shoot for 100 times\n", "infinite ammo");
+            _SK.BuffersCounter(0, "ShootTimes", 1000, 0, "Shoot for 1000 times\n", "full auto shooting");
         }
 
-        CollidersInZone = Physics2D.OverlapCircleAll(transform.position, 0.005f);
+        CollidersInZone = Physics2D.OverlapCircleAll(transform.position, 0.015f);
         if (CollidersInZone.Length != 0)
         {
             switch (CollidersInZone[0].gameObject.name)
@@ -65,9 +49,14 @@ public class Bullet : MonoBehaviour
                     Collider2D cover = null;
                     foreach (Collider2D _coll in CollidersInZone)
                     {
-                        if (_coll.CompareTag("Cover") || _coll.CompareTag("Shield"))
+                        if (_coll.CompareTag("Cover"))
                             cover = cover == null ? _coll : cover.transform.position.z < _coll.transform.position.z ? cover : _coll;
-
+                        else if (_coll.CompareTag("Shield"))
+                        {
+                            cover = cover == null ? _coll : cover.transform.position.z < _coll.transform.position.z ? cover : _coll;
+                            _SK.BuffersCounter(5, "ShieldHits", 25, 1, "shoot to the shield for 25 times ", "no more shield hitbox");
+                            _SK.CreateSoundGetGO(_SK.BF_RHGC.TVAudioSource, RHGC.OsasShieldCrashAC, _defaultPos.TV, RHGC.transform);
+                        }
                     }
                     foreach (Collider2D _coll in CollidersInZone)
                     {
@@ -87,6 +76,8 @@ public class Bullet : MonoBehaviour
                                 RHGC.KillStreakPerRound++;
                                 RHGC.KillStreak++;
                                 RHGC.Shoots += 1.5;
+                                if (RHGC.KillStreak == 20)
+                                    _SK.BuffersCounter(6, "KillSteakEarned", 1, 1, "Get Streak of 20 kills", "no more losing kill streak");
 
                                 if (EnemyCS.EnemyType == _EnemyType.Osa && !EnemyCS.ShieldDestroyed)
                                 {
@@ -95,7 +86,8 @@ public class Bullet : MonoBehaviour
                                     EnemyCS.ShieldDestroyed = true;
                                     EnemyCS.Speed *= 1.5f;
                                     EnemyCS.AnimID += 2;
-                                    _BridgeForLinks.CreateSoundGetGO(_BridgeForLinks.BF_RHGC.TVAudioSource, RHGC.OsasShieldCrashAC, _defaultPos.TV, RHGC.transform);
+                                    _SK.BuffersCounter(5, "ShieldHits", 25, 1, "shoot to the shield for 25 times ", "no more shield hitbox");
+                                    _SK.CreateSoundGetGO(_SK.BF_RHGC.TVAudioSource, RHGC.OsasShieldCrashAC, _defaultPos.TV, RHGC.transform);
                                 }
                                 else
                                 {
@@ -103,7 +95,7 @@ public class Bullet : MonoBehaviour
                                         RHGC.OpIcos[EnemyCS.id].sprite = RHGC.KilledIcon;
                                     RHGC.Enemies.Remove(EnemyCS.gameObject);
                                     Destroy(EnemyCS.gameObject.transform.parent.gameObject);
-                                    _BridgeForLinks.CreateSoundGetGO(_BridgeForLinks.BF_RHGC.TVAudioSource, RHGC.HitSound, _defaultPos.TV, RHGC.transform);
+                                    _SK.CreateSoundGetGO(_SK.BF_RHGC.TVAudioSource, RHGC.HitSound, _defaultPos.TV, RHGC.transform);
                                 }
                             }
                             else if (EnemyCS.EnemyType == _EnemyType.Alibi)
@@ -117,14 +109,14 @@ public class Bullet : MonoBehaviour
                                 UpScoreGO.GetComponent<TextMeshProUGUI>().color = new Color(1, 0, 0);
 
                                 RHGC.Enemies.Remove(EnemyCS.gameObject);
-                                _BridgeForLinks.CreateSoundGetGO(_BridgeForLinks.BF_RHGC.TVAudioSource, RHGC.AlibiKillingAC, _defaultPos.TV, RHGC.transform);
+                                _SK.CreateSoundGetGO(_SK.BF_RHGC.TVAudioSource, RHGC.AlibiKillingAC, _defaultPos.TV, RHGC.transform);
                                 Destroy(EnemyCS.gameObject.transform.parent.gameObject);
                             }
                             else if (EnemyCS.EnemyType == _EnemyType.IanaClone)
                             {
                                 RHGC.Enemies.Remove(EnemyCS.gameObject);
                                 Destroy(EnemyCS.gameObject.transform.parent.gameObject);
-                                _BridgeForLinks.CreateSoundGetGO(_BridgeForLinks.BF_RHGC.TVAudioSource, RHGC.IanaMissingAC, _defaultPos.TV, RHGC.transform);
+                                _SK.CreateSoundGetGO(_SK.BF_RHGC.TVAudioSource, RHGC.IanaMissingAC, _defaultPos.TV, RHGC.transform);
                             }
                         }
                     }
@@ -136,10 +128,13 @@ public class Bullet : MonoBehaviour
 
         if (resetMultiplier && RHGC.CurrentMode != _CurrentMode.Menu)
         {
-            if (RHGC.KillStreak > RHGC.StatsMaxKillStreak)
-                RHGC.StatsMaxKillStreak = RHGC.KillStreak;
-            RHGC.KillStreak = 0;
-            RHGC.KillStreakPerRound = 0;
+            if (!_SK.NoMoreLosingKillStreak)
+            {
+                if (RHGC.KillStreak > RHGC.StatsMaxKillStreak)
+                    RHGC.StatsMaxKillStreak = RHGC.KillStreak;
+                RHGC.KillStreak = 0;
+                RHGC.KillStreakPerRound = 0;
+            }
             RHGC.StatsShootsMissed++;
         }
         RHGC.StatUpdate();

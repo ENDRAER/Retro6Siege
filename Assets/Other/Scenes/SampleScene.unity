@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.013631015, g: 0.010727058, b: 0.007888602, a: 1}
+  m_IndirectSpecularColor: {r: 0.013631063, g: 0.010727052, b: 0.0078885965, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -182,7 +182,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: unlock prewious
+  m_text: "Shoot for 1000 times \nxxxxxxxxxx"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3681d05e6c4ec45409b42c2a046b3879, type: 2}
   m_sharedMaterial: {fileID: -6573853761639733593, guid: 3681d05e6c4ec45409b42c2a046b3879, type: 2}
@@ -440,7 +440,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Get Streak of 10 kills xxxxxxxxxx
+  m_text: 'Get Streak of 20 kills '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3681d05e6c4ec45409b42c2a046b3879, type: 2}
   m_sharedMaterial: {fileID: -6573853761639733593, guid: 3681d05e6c4ec45409b42c2a046b3879, type: 2}
@@ -660,7 +660,7 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 20
-  field of view: 50
+  field of view: 69
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -1229,7 +1229,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: earn a double kill for 5 times xxxxxxxxxx
+  m_text: "earn a double kill for 5 times \nxxxxxxxxxx"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3681d05e6c4ec45409b42c2a046b3879, type: 2}
   m_sharedMaterial: {fileID: -6573853761639733593, guid: 3681d05e6c4ec45409b42c2a046b3879, type: 2}
@@ -1887,7 +1887,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: miss 20 atackers xxxxxxxxxx
+  m_text: 'miss 20 atackers
+
+    xxxxxxxxxx'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3681d05e6c4ec45409b42c2a046b3879, type: 2}
   m_sharedMaterial: {fileID: -6573853761639733593, guid: 3681d05e6c4ec45409b42c2a046b3879, type: 2}
@@ -3005,7 +3007,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: shoot to at shield for 10 tines xxxxxxxxxx
+  m_text: shoot to the shield for 25 times xxxxxxxxxx
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3681d05e6c4ec45409b42c2a046b3879, type: 2}
   m_sharedMaterial: {fileID: -6573853761639733593, guid: 3681d05e6c4ec45409b42c2a046b3879, type: 2}
@@ -3032,8 +3034,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 10.02
-  m_fontSizeBase: 10.02
+  m_fontSize: 9.82
+  m_fontSizeBase: 9.82
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -3990,7 +3992,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Shoot for 100 times xxxxxxxxxx
+  m_text: "Shoot for 100 times \nxxxxxxxxxx"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3681d05e6c4ec45409b42c2a046b3879, type: 2}
   m_sharedMaterial: {fileID: -6573853761639733593, guid: 3681d05e6c4ec45409b42c2a046b3879, type: 2}
@@ -5268,7 +5270,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: kill Ash for 20 times xxxxxxxxxx
+  m_text: "kill Ash for 20 times \nxxxxxxxxxx"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3681d05e6c4ec45409b42c2a046b3879, type: 2}
   m_sharedMaterial: {fileID: -6573853761639733593, guid: 3681d05e6c4ec45409b42c2a046b3879, type: 2}
@@ -5576,7 +5578,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1636838053
 RectTransform:
   m_ObjectHideFlags: 0

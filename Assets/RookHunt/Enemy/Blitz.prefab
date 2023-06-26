@@ -192,7 +192,7 @@ MonoBehaviour:
   BackWalkTimes: 3
   AlertGO: {fileID: 1674855937548124617}
   Damage: 1
-  ShootingDelay: 3
+  ShootingDelay: 2
   PostShootingDelay: 0
   ShieldGO: {fileID: 5203992943117732631}
   ShieldCol: {fileID: 0}

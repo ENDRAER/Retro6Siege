@@ -59,27 +59,11 @@ public class ScriptKing : MonoBehaviour
         MainBridge = this;
         Cursor.lockState = CursorLockMode.Locked;
         #region CheckModifersProgress
-        // 0 - infinite ammo
-        int ShootTimes = PlayerPrefs.GetInt("ShootTimes") + 1;
-        PlayerPrefs.SetInt("ShootTimes", ShootTimes);
-        if (ShootTimes >= 100)
-        {
-            CheckBoxes[0].SetActive(true);
-            ModText[0].text = "infinite ammo";
-
-            if (ShootTimes >= 1000)
-            {
-                CheckBoxes[1].SetActive(true);
-                ModText[1].text = "full auto shooting";
-            }
-            else
-                ModText[1].text = "Shoot for 1000 times \n" + new string('x', ShootTimes / 100) + new string('-', 10 - ShootTimes / 100);
-        }
-        else
-        {
-            ModText[0].text = "Shoot for 100 times \n" + new string('x', ShootTimes / 10) + new string('-', 10 - ShootTimes / 10);
-            ModText[1].text = "unlock prewious";
-        }
+        BuffersCounter(0, "ShootTimes", 100, 0, "Shoot for 100 times\n", "infinite ammo");
+        BuffersCounter(0, "ShootTimes", 1000, 0, "Shoot for 1000 times\n", "full auto shooting");
+        BuffersCounter(2, "MissedEnemies", 20, 0, "miss 20 atackers\n", "missing enemies do not take ammo");
+        BuffersCounter(5, "ShieldHits", 25, 0, "shoot to the shield for 25 times ", "no more shield hitbox");
+        BuffersCounter(6, "KillSteakEarned", 1, 0, "Get Streak of 20 kills", "no more losing kill streak");
         #endregion
     }
 
@@ -158,6 +142,14 @@ public class ScriptKing : MonoBehaviour
                                 FullAutoShooting = !FullAutoShooting;
                                 CheckMarks[1].SetActive(FullAutoShooting);
                                 break;
+                            case 2:
+                                NoOpLeft = !NoOpLeft;
+                                CheckMarks[2].SetActive(NoOpLeft);
+                                break;
+                            case 6:
+                                NoMoreLosingKillStreak = !NoMoreLosingKillStreak;
+                                CheckMarks[6].SetActive(NoMoreLosingKillStreak);
+                                break;
                         }
                         break;
                 }
@@ -205,5 +197,19 @@ public class ScriptKing : MonoBehaviour
         AU.GetComponent<AudioSource>().clip = audioClip;
         AU.GetComponent<AudioSource>().Play();
         return AU;
+    }
+
+    public void BuffersCounter(int BuffId, string PlPrName, int HowMuch, int add, string CounterText, string EarnedText)
+    {
+        int Counter = PlayerPrefs.GetInt(PlPrName) + add;
+        if (add != 0)
+            PlayerPrefs.SetInt(PlPrName, Counter);
+        if (Counter >= HowMuch)
+        {
+            CheckBoxes[BuffId].SetActive(true);
+            ModText[BuffId].text = EarnedText;
+        }
+        else if(HowMuch != 1)
+            ModText[BuffId].text = CounterText + new string('x', Counter / (HowMuch/10)) + new string('-', 10 - Counter / (HowMuch / 10));
     }
 }
