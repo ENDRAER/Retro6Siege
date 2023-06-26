@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.013631063, g: 0.010727052, b: 0.0078885965, a: 1}
+  m_IndirectSpecularColor: {r: 0.013631015, g: 0.010727058, b: 0.007888602, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -159,7 +159,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -1}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.119, y: 0.314}
+  m_AnchoredPosition: {x: 0.039, y: 0.3114}
   m_SizeDelta: {x: 84.8215, y: 14.9844}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &13117874
@@ -293,8 +293,9 @@ Transform:
   - {fileID: 1054514932}
   - {fileID: 1363705562}
   - {fileID: 805128716}
+  - {fileID: 408220700}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &40547992
 GameObject:
@@ -699,18 +700,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TVVolCircle: {fileID: 165948927}
   LampLight: {fileID: 2096920185}
-  ModText: []
+  ModText:
+  - {fileID: 1166187096}
+  - {fileID: 13117874}
+  - {fileID: 389615073}
+  - {fileID: 201399016}
+  - {fileID: 1593528904}
+  - {fileID: 1041528410}
+  - {fileID: 40957548}
+  - {fileID: 1283783240}
+  - {fileID: 341739051}
   CheckBoxes:
-  - {fileID: 1166187094}
-  - {fileID: 13117872}
-  - {fileID: 389615071}
-  - {fileID: 201399014}
-  - {fileID: 1593528902}
-  - {fileID: 1041528408}
-  - {fileID: 40957546}
-  - {fileID: 1283783238}
-  - {fileID: 341739049}
-  CheckMarks: []
+  - {fileID: 933988473}
+  - {fileID: 1636838052}
+  - {fileID: 1607282310}
+  - {fileID: 1465855447}
+  - {fileID: 2012492604}
+  - {fileID: 205931687}
+  - {fileID: 851925929}
+  - {fileID: 1070856990}
+  - {fileID: 2041601836}
+  CheckMarks:
+  - {fileID: 1256037375}
+  - {fileID: 1091524018}
+  - {fileID: 234775007}
+  - {fileID: 1205143973}
+  - {fileID: 534939507}
+  - {fileID: 377178314}
+  - {fileID: 111773953}
+  - {fileID: 360293064}
+  - {fileID: 1102644523}
   PaperAnim: {fileID: 1120555237}
   ReadyToShoot: 1
   LaserMark: {fileID: 40547994}
@@ -860,7 +879,7 @@ RectTransform:
   - {fileID: 1222757728}
   - {fileID: 1120555232}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -883,7 +902,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &111773954
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1052,7 +1071,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &165948932
 MonoBehaviour:
@@ -1300,7 +1319,7 @@ GameObject:
   - component: {fileID: 205931691}
   - component: {fileID: 205931690}
   m_Layer: 0
-  m_Name: CheckBox (1)
+  m_Name: CheckBox (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1422,7 +1441,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &234775008
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1647,7 +1666,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &360293065
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1736,7 +1755,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &377178315
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1969,7 +1988,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 408220699}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -0.863, y: -1.022, z: -8.771}
+  m_LocalPosition: {x: 0.13700002, y: -4.022, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1986,7 +2005,8 @@ Transform:
   - {fileID: 1796521281}
   - {fileID: 2096920184}
   - {fileID: 1868448481}
-  m_Father: {fileID: 0}
+  - {fileID: 948083044}
+  m_Father: {fileID: 34067404}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &490572375
@@ -2000,7 +2020,6 @@ GameObject:
   - component: {fileID: 490572379}
   - component: {fileID: 490572378}
   - component: {fileID: 490572377}
-  - component: {fileID: 490572376}
   m_Layer: 0
   m_Name: Screen PlaceHolder
   m_TagString: Screen
@@ -2008,20 +2027,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!64 &490572376
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 490572375}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &490572377
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2080,12 +2085,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 490572375}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.025, z: -7.913}
-  m_LocalScale: {x: 0.8, y: 0.6, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.0009999275}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_Father: {fileID: 1737000559}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &515348613
 GameObject:
@@ -2201,7 +2206,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &534939508
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2385,7 +2390,7 @@ GameObject:
   - component: {fileID: 851925933}
   - component: {fileID: 851925932}
   m_Layer: 0
-  m_Name: CheckBox
+  m_Name: CheckBox (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2769,13 +2774,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 948083042}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.352, y: 0.229, z: -5.024}
+  m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
+  m_LocalPosition: {x: 1.4890001, y: 1.2509999, z: -3.7469997}
   m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_Father: {fileID: 408220700}
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1033991544
 GameObject:
@@ -3188,7 +3193,7 @@ GameObject:
   - component: {fileID: 1070856994}
   - component: {fileID: 1070856993}
   m_Layer: 0
-  m_Name: CheckBox (1)
+  m_Name: CheckBox (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3310,7 +3315,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1091524019
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3497,7 +3502,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1102644524
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4260,7 +4265,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1205143974
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4484,7 +4489,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1256037376
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5098,7 +5103,7 @@ GameObject:
   - component: {fileID: 1465855451}
   - component: {fileID: 1465855450}
   m_Layer: 0
-  m_Name: CheckBox (1)
+  m_Name: CheckBox (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5353,7 +5358,7 @@ GameObject:
   - component: {fileID: 1607282314}
   - component: {fileID: 1607282313}
   m_Layer: 0
-  m_Name: CheckBox
+  m_Name: CheckBox (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5551,7 +5556,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: -370.968, y: -30, z: 0}
 --- !u!1 &1636838052
 GameObject:
@@ -5571,7 +5576,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1636838053
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5590,7 +5595,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -55.4, y: -1.7}
+  m_AnchoredPosition: {x: -47.1, y: -1.3}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!212 &1636838054
@@ -5767,9 +5772,10 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.025, z: -7.914}
   m_LocalScale: {x: 0.8, y: 0.6, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 490572379}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1737000560
 MonoBehaviour:
@@ -6058,7 +6064,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1895058329
 MonoBehaviour:
@@ -6170,7 +6176,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2000157713
 MonoBehaviour:
@@ -6199,7 +6205,7 @@ GameObject:
   - component: {fileID: 2012492608}
   - component: {fileID: 2012492607}
   m_Layer: 0
-  m_Name: CheckBox
+  m_Name: CheckBox (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6318,7 +6324,7 @@ GameObject:
   - component: {fileID: 2041601840}
   - component: {fileID: 2041601839}
   m_Layer: 0
-  m_Name: CheckBox
+  m_Name: CheckBox (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

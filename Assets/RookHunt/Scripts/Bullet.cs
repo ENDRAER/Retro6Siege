@@ -14,11 +14,35 @@ public class Bullet : MonoBehaviour
 
     void Awake()
     {
-        StartCoroutine(TimeToDestroyCor());
         _BridgeForLinks = MainBridge;
         RookHuntGameController RHGC = _BridgeForLinks.BF_RHGC;
-        RHGC.Shoots -= RHGC.CurrentMode != _CurrentMode.GameOver ? (RHGC.CurrentMode != _CurrentMode.Menu ? 1 : 0) : 0;
+        StartCoroutine(TimeToDestroyCor());
         bool resetMultiplier = true;
+
+        if (RHGC.CurrentMode != _CurrentMode.GameOver && RHGC.CurrentMode != _CurrentMode.Menu)
+        {
+            RHGC.Shoots -= _BridgeForLinks.InfiniteAmmo ? 0 : 1;
+            int ShootTimes = PlayerPrefs.GetInt("ShootTimes") + 1;
+            PlayerPrefs.SetInt("ShootTimes", ShootTimes);
+            if (ShootTimes >= 100)
+            {
+                _BridgeForLinks.CheckBoxes[0].SetActive(true);
+                _BridgeForLinks.ModText[0].text = "infinite ammo";
+
+                if (ShootTimes >= 1000)
+                {
+                    _BridgeForLinks.CheckBoxes[1].SetActive(true);
+                    _BridgeForLinks.ModText[1].text = "full auto shooting";
+                }
+                else
+                    _BridgeForLinks.ModText[1].text = "Shoot for 1000 times \n" + new string('x', ShootTimes / 100) + new string('-', 10 - ShootTimes / 100);
+            }
+            else
+            {
+                _BridgeForLinks.ModText[0].text = "Shoot for 100 times \n" + new string('x', ShootTimes / 10) + new string('-', 10 - ShootTimes / 10);
+                _BridgeForLinks.ModText[1].text = "unlock prewious";
+            }
+        }
 
         CollidersInZone = Physics2D.OverlapCircleAll(transform.position, 0.005f);
         if (CollidersInZone.Length != 0)

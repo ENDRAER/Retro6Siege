@@ -3,6 +3,7 @@ using UnityEngine.Audio;
 using UnityEngine;
 using System;
 using TMPro;
+using System.Linq;
 
 public class ScriptKing : MonoBehaviour
 {
@@ -13,9 +14,9 @@ public class ScriptKing : MonoBehaviour
     [SerializeField] private GameObject TVVolCircle;
     [SerializeField] private Light LampLight;
     [Header("Paper")]
-    [SerializeField] private TextMeshProUGUI[] ModText;
-    [SerializeField] private GameObject[] CheckBoxes;
-    [SerializeField] private GameObject[] CheckMarks;
+    [SerializeField] public TextMeshProUGUI[] ModText;
+    [SerializeField] public GameObject[] CheckBoxes;
+    [SerializeField] public GameObject[] CheckMarks;
     [SerializeField] private Animator PaperAnim;
     [SerializeField] public enum _ObjectType { Screen, ResetConcole, TV_VolUp, LightSwitch, PaperWithModifers, ModButton };
     [NonSerialized] public bool InfiniteAmmo;
@@ -58,9 +59,26 @@ public class ScriptKing : MonoBehaviour
         MainBridge = this;
         Cursor.lockState = CursorLockMode.Locked;
         #region CheckModifersProgress
-        if (PlayerPrefs.GetInt("ShootTimes") >= 100)
+        // 0 - infinite ammo
+        int ShootTimes = PlayerPrefs.GetInt("ShootTimes") + 1;
+        PlayerPrefs.SetInt("ShootTimes", ShootTimes);
+        if (ShootTimes >= 100)
         {
             CheckBoxes[0].SetActive(true);
+            ModText[0].text = "infinite ammo";
+
+            if (ShootTimes >= 1000)
+            {
+                CheckBoxes[1].SetActive(true);
+                ModText[1].text = "full auto shooting";
+            }
+            else
+                ModText[1].text = "Shoot for 1000 times \n" + new string('x', ShootTimes / 100) + new string('-', 10 - ShootTimes / 100);
+        }
+        else
+        {
+            ModText[0].text = "Shoot for 100 times \n" + new string('x', ShootTimes / 10) + new string('-', 10 - ShootTimes / 10);
+            ModText[1].text = "unlock prewious";
         }
         #endregion
     }
@@ -80,15 +98,14 @@ public class ScriptKing : MonoBehaviour
             else
                 LaserMark.color = new Color(1, 0, 0, 0.6f);
             #endregion
-            if (Input.GetKeyDown(KeyCode.Mouse0) && ReadyToShoot)
+            if (ReadyToShoot && (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKey(KeyCode.Mouse0) && FullAutoShooting))
             {
                 ReadyToShoot = false;
                 StartCoroutine(ShootCD());
                 switch (hit.transform.GetComponent<InteractableObjects>().ObjectType)
                 {
                     case _ObjectType.Screen:
-                        if (RookHuntMenu != null)
-                            Instantiate(HitColiderGO, new Vector3((hit.point.x - ScreenPos.position.x) * 17.6f + TVGamesPos.x, (hit.point.y - ScreenPos.position.y) * 17.6f + TVGamesPos.y, -2), new Quaternion(0, 0, 0, 0));
+                        Instantiate(HitColiderGO, new Vector3((hit.point.x - ScreenPos.position.x) * 17.6f + TVGamesPos.x, (hit.point.y - ScreenPos.position.y) * 17.6f + TVGamesPos.y, -2), new Quaternion(0, 0, 0, 0));
                         break;
                     case _ObjectType.ResetConcole:
                         Destroy(RookHuntMenu);
@@ -134,7 +151,12 @@ public class ScriptKing : MonoBehaviour
                         switch(_object.modifer)
                         {
                             case 0:
-                                print("ass");
+                                InfiniteAmmo = !InfiniteAmmo;
+                                CheckMarks[0].SetActive(InfiniteAmmo);
+                                break;
+                            case 1:
+                                FullAutoShooting = !FullAutoShooting;
+                                CheckMarks[1].SetActive(FullAutoShooting);
                                 break;
                         }
                         break;
@@ -165,7 +187,7 @@ public class ScriptKing : MonoBehaviour
     }
     private IEnumerator ShootCD()
     {
-        yield return new WaitForSeconds(0.12f);
+        yield return new WaitForSeconds(FullAutoShooting? 0.05f : 0.15f);
         ReadyToShoot = true;
     }
 
