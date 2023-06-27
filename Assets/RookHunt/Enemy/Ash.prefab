@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21095960e2641f046af35cad99842490, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyType: 0
+  EnemyType: 8
   BalancerGO: {fileID: 956186686806893846}
   RB2D: {fileID: 956186687328918986}
   HitCollider: {fileID: 0}

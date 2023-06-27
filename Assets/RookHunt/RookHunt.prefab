@@ -467,6 +467,7 @@ MonoBehaviour:
   EnemyDefPF:
   - {fileID: 956186687328918987, guid: 479aa203f05d1da4586314395ee9ed7b, type: 3}
   - {fileID: 956186687328918987, guid: fa4801529441164488fc906ee63f8694, type: 3}
+  TheAshOne: {fileID: 956186687328918987, guid: 5ff984e82ab099b4caf3ee071403f790, type: 3}
   DynamicCanvas: {fileID: 3383885847898657357}
   Alibi: {fileID: 956186687328918987, guid: 8e266b580e371714f9a84a690c9987f2, type: 3}
   CurrentMode: 0

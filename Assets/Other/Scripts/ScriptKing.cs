@@ -23,7 +23,7 @@ public class ScriptKing : MonoBehaviour
     [NonSerialized] public bool FullAutoShooting;
     [NonSerialized] public bool NoOpLeft;
     [NonSerialized] public bool BigBullet;
-    [NonSerialized] public bool AllOpGotAshSpeed;
+    [NonSerialized] public bool AllEnemyAreAsh;
     [NonSerialized] public bool NoMoreShieldHitBox;
     [NonSerialized] public bool NoMoreLosingKillStreak;
     [NonSerialized] public bool glock;
@@ -31,16 +31,16 @@ public class ScriptKing : MonoBehaviour
     [Header("CameraGO")]
     [SerializeField] private bool ReadyToShoot = true;
     [SerializeField] private SpriteRenderer LaserMark;
-    [SerializeField] private GameObject HitColiderGO;
     [SerializeField] private GameObject CameraGO;
     [SerializeField] private Animator CameraAnimator;
     [SerializeField] private Transform ScreenPos;
-    [SerializeField] private Vector3 TVGamesPos = new Vector3(50, 0);
+    [SerializeField] private Vector3 TVGamesPos = new(50, 0);
     [SerializeField] private float RotSpeed;
     [SerializeField] private float MinRot;
     [SerializeField] private float MaxRot;
     [Header("RookHunt")]
     [SerializeField] private GameObject RookHuntMenuPF;
+    [SerializeField] private GameObject HitColiderGO;
     [NonSerialized] private GameObject RookHuntMenu;
     [Header("Audio")]
     [SerializeField] private AudioMixerGroup UnivrsalAM;
@@ -60,10 +60,13 @@ public class ScriptKing : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         #region CheckModifersProgress
         BuffersCounter(0, "ShootTimes", 100, 0, "Shoot for 100 times\n", "infinite ammo");
-        BuffersCounter(0, "ShootTimes", 1000, 0, "Shoot for 1000 times\n", "full auto shooting");
+        BuffersCounter(1, "ShootTimes", 1000, 1000, "Shoot for 1000 times\n", "full auto shooting");
         BuffersCounter(2, "MissedEnemies", 20, 0, "miss 20 atackers\n", "missing enemies do not take ammo");
+        BuffersCounter(4, "AshKills", 20, 0, "kill Ash for 20 times \n", "all enemies are Ash now\n(infinite game mode only)");
         BuffersCounter(5, "ShieldHits", 25, 0, "shoot to the shield for 25 times ", "no more shield hitbox");
         BuffersCounter(6, "KillSteakEarned", 1, 0, "Get Streak of 20 kills", "no more losing kill streak");
+        BuffersCounter(7, "ChampionEarned", 1, 0, "beat champion", "GLOCK");
+        BuffersCounter(8, "DoomUnlocked", 1, 0, "secret", "back to the 1993");
         #endregion
     }
 
@@ -72,8 +75,7 @@ public class ScriptKing : MonoBehaviour
         CameraGO.transform.eulerAngles += new Vector3(-Input.GetAxis("Mouse Y") * RotSpeed, Input.GetAxis("Mouse X") * RotSpeed);
         CameraGO.transform.eulerAngles = new Vector3(Mathf.Clamp((CameraGO.transform.eulerAngles.x > 200 ? -(360 - CameraGO.transform.eulerAngles.x) : CameraGO.transform.eulerAngles.x), MinRot, MaxRot), CameraGO.transform.eulerAngles.y);
 
-        RaycastHit hit;
-        if (Physics.Raycast(CameraGO.transform.position, CameraGO.transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity) && hit.transform.GetComponent<InteractableObjects>() != null)
+        if (Physics.Raycast(CameraGO.transform.position, CameraGO.transform.TransformDirection(Vector3.forward), out RaycastHit hit, Mathf.Infinity) && hit.transform.GetComponent<InteractableObjects>() != null)
         {
             InteractableObjects _object = hit.transform.GetComponent<InteractableObjects>();
             #region ColorOfPointer
@@ -82,15 +84,14 @@ public class ScriptKing : MonoBehaviour
             else
                 LaserMark.color = new Color(1, 0, 0, 0.6f);
             #endregion
-            if (ReadyToShoot && (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKey(KeyCode.Mouse0) && FullAutoShooting))
+            if (ReadyToShoot && (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKey(KeyCode.Mouse0) && FullAutoShooting && hit.transform.GetComponent<InteractableObjects>().ObjectType == _ObjectType.Screen))
             {
                 ReadyToShoot = false;
                 StartCoroutine(ShootCD());
                 switch (hit.transform.GetComponent<InteractableObjects>().ObjectType)
                 {
                     case _ObjectType.Screen:
-                        Instantiate(HitColiderGO, new Vector3((hit.point.x - ScreenPos.position.x) * 17.6f + TVGamesPos.x, (hit.point.y - ScreenPos.position.y) * 17.6f + TVGamesPos.y, -2), new Quaternion(0, 0, 0, 0));
-                        break;
+                        Instantiate(HitColiderGO, new((hit.point.x - ScreenPos.position.x) * 16.66f + TVGamesPos.x, (hit.point.y - ScreenPos.position.y) * 16.66f + TVGamesPos.y, -2), new Quaternion(0, 0, 0, 0)); break;
                     case _ObjectType.ResetConcole:
                         Destroy(RookHuntMenu);
                         RookHuntMenu = Instantiate(RookHuntMenuPF, TVGamesPos, new Quaternion(0, 0, 0, 0));
@@ -120,7 +121,7 @@ public class ScriptKing : MonoBehaviour
                                     curentVol = -80;
                                     break;
                             }
-                            TVVolCircle.transform.eulerAngles = new Vector3(0, 0, (-curentVol * 3) - 100);
+                            TVVolCircle.transform.eulerAngles = new(0, 0, (-curentVol * 3) - 100);
                             UnivrsalAM.audioMixer.SetFloat("TVVol", curentVol);
                             PlayerPrefs.SetFloat("TVVol", curentVol);
                         }
@@ -129,10 +130,10 @@ public class ScriptKing : MonoBehaviour
                         LampLight.intensity = LampLight.intensity == 1 ? 0 : 1;
                         break;
                     case _ObjectType.PaperWithModifers:
-                        PaperAnim.SetBool("Focussed", _object.modifer == 0? true : false);
+                        PaperAnim.SetBool("Focussed", _object.modifer == 0);
                         break;
                     case _ObjectType.ModButton:
-                        switch(_object.modifer)
+                        switch (_object.modifer)
                         {
                             case 0:
                                 InfiniteAmmo = !InfiniteAmmo;
@@ -145,6 +146,14 @@ public class ScriptKing : MonoBehaviour
                             case 2:
                                 NoOpLeft = !NoOpLeft;
                                 CheckMarks[2].SetActive(NoOpLeft);
+                                break;
+                            case 4:
+                                AllEnemyAreAsh = !AllEnemyAreAsh;
+                                CheckMarks[4].SetActive(AllEnemyAreAsh);
+                                break;
+                            case 5:
+                                NoMoreShieldHitBox = !NoMoreShieldHitBox;
+                                CheckMarks[5].SetActive(NoMoreShieldHitBox);
                                 break;
                             case 6:
                                 NoMoreLosingKillStreak = !NoMoreLosingKillStreak;
@@ -179,18 +188,21 @@ public class ScriptKing : MonoBehaviour
     }
     private IEnumerator ShootCD()
     {
-        yield return new WaitForSeconds(FullAutoShooting? 0.05f : 0.15f);
+        yield return new WaitForSeconds(FullAutoShooting ? 0.08f : 0.16f);
         ReadyToShoot = true;
     }
 
-    public GameObject CreateSoundGetGO(GameObject AudioSource, AudioClip audioClip, _defaultPos defaultPos, Transform ParentTrans = null, bool shouldKillUrSelf = true, Vector3 Position = new Vector3())
+    public GameObject CreateSoundGetGO(GameObject AudioSource, AudioClip audioClip, _defaultPos defaultPos, Transform ParentTrans = null, bool shouldKillUrSelf = true, Vector3 _Position = new())
     {
         GameObject AU = Instantiate(AudioSource, transform.position, Quaternion.identity);
         AU.transform.SetParent(ParentTrans);
         switch (defaultPos)
         {
             case _defaultPos.TV:
-                AU.transform.position = new Vector3(0, 0.025f, -8);
+                AU.transform.position = new(0, 0.025f, -8);
+                break;
+            case _defaultPos.Custom:
+                AU.transform.position = _Position;
                 break;
         }
         AU.GetComponent<SoundPlayer>().enabled = shouldKillUrSelf;
@@ -209,7 +221,7 @@ public class ScriptKing : MonoBehaviour
             CheckBoxes[BuffId].SetActive(true);
             ModText[BuffId].text = EarnedText;
         }
-        else if(HowMuch != 1)
-            ModText[BuffId].text = CounterText + new string('x', Counter / (HowMuch/10)) + new string('-', 10 - Counter / (HowMuch / 10));
+        else if (HowMuch != 1)
+            ModText[BuffId].text = CounterText + new string('x', Counter / (HowMuch / 10)) + new string('-', 10 - Counter / (HowMuch / 10));
     }
 }

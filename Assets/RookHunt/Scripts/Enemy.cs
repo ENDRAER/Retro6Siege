@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour
     [NonSerialized] public float[] Perspective = { 1.77f, 0.2f}; // default values
     [NonSerialized] public WayCreator _WayCreator;
     [NonSerialized] public bool IsOnKaliWay;
-    [SerializeField] public enum _EnemyType { Standart, Sniper, Blitz, Ying, Osa, Iana, IanaClone, Alibi }
+    [SerializeField] public enum _EnemyType { Standart, Sniper, Blitz, Ying, Osa, Iana, IanaClone, Alibi, Ash}
     [SerializeField] public _EnemyType EnemyType;
     [SerializeField] private GameObject BalancerGO;
     [SerializeField] private Rigidbody2D RB2D;
@@ -77,25 +77,26 @@ public class Enemy : MonoBehaviour
                 Step++;
                 if (Step == _WayCreator.PathPoints.Length)
                 {
-                    if (EnemyType != _EnemyType.Sniper)
+                    if (!IsOnKaliWay)
                     {
                         if (EnemyType != _EnemyType.IanaClone)
                         {
-                            if(!RHGC._ScriptKing.NoOpLeft)
+                            if(!RHGC._SK.NoOpLeft)
                                 RHGC.Shoots--;
                             RHGC.StatsEnemyMissed++;
 
-                            RHGC._ScriptKing.BuffersCounter(2, "MissedEnemies", 20, 1, "miss 20 atackers\n", "no more losing kill streak");
+                            RHGC._SK.BuffersCounter(2, "MissedEnemies", 20, 1, "miss 20 atackers\n", "no more losing kill streak");
                         }
                         RHGC.Enemies.Remove(gameObject);
                         RHGC.MagazineUpdate();
                         Destroy(gameObject.transform.parent.gameObject);
                     }
-                    else if (EnemyType == _EnemyType.Sniper && IsOnKaliWay)
+                    else
                     {
                         RB2D.velocity = Vector3.zero;
                         StartCoroutine(YouShouldKillUrSelf(10));
-                        StartCoroutine(EnemyShoot());
+                        if(EnemyType == _EnemyType.Sniper)
+                            StartCoroutine(EnemyShoot());
                         WalkType = _WalkType.Stop;
                         gameObject.GetComponentInParent<AudioSource>().Stop();
                     }
@@ -106,8 +107,7 @@ public class Enemy : MonoBehaviour
                     {
                         if (EnemyType == _EnemyType.Blitz)
                         {
-                            ShieldGO.transform.localPosition = new Vector3(-0.11f, 0.13f, ShieldGO.transform.position.z);
-                            ShieldGO.transform.localRotation = Quaternion.Euler(0, 0, 66);
+                            ShieldGO.transform.SetLocalPositionAndRotation(new Vector3(-0.11f, 0.13f, ShieldGO.transform.position.z), Quaternion.Euler(0, 0, 66));
                             HitCollider.enabled = true;
                             AnimID += 2;
                             StopCoroutine(WalkAnimCor);
@@ -142,8 +142,7 @@ public class Enemy : MonoBehaviour
         {
             if (EnemyType == _EnemyType.Blitz)
             {
-                ShieldGO.transform.localPosition = new Vector3(0, 0, ShieldGO.transform.position.z);
-                ShieldGO.transform.localRotation = Quaternion.Euler(0, 0, 0);
+                ShieldGO.transform.SetLocalPositionAndRotation(new Vector3(0, 0, ShieldGO.transform.position.z), Quaternion.Euler(0, 0, 0));
                 HitCollider.enabled = false;
                 AnimID -= 2;
                 StopCoroutine(WalkAnimCor);

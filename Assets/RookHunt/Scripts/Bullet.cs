@@ -5,6 +5,7 @@ using System.Collections;
 using UnityEngine;
 using System;
 using TMPro;
+using Unity.Mathematics;
 
 public class Bullet : MonoBehaviour
 {
@@ -22,10 +23,7 @@ public class Bullet : MonoBehaviour
         if (RHGC.CurrentMode != _CurrentMode.GameOver && RHGC.CurrentMode != _CurrentMode.Menu)
         {
             RHGC.Shoots -= _SK.InfiniteAmmo ? 0 : 1;
-            int ShootTimes = PlayerPrefs.GetInt("ShootTimes") + 1;
-            PlayerPrefs.SetInt("ShootTimes", ShootTimes);
-            _SK.BuffersCounter(0, "ShootTimes", 100, 0, "Shoot for 100 times\n", "infinite ammo");
-            _SK.BuffersCounter(0, "ShootTimes", 1000, 0, "Shoot for 1000 times\n", "full auto shooting");
+            RHGC.ShootTimesPerMatch++;
         }
 
         CollidersInZone = Physics2D.OverlapCircleAll(transform.position, 0.015f);
@@ -51,7 +49,7 @@ public class Bullet : MonoBehaviour
                     {
                         if (_coll.CompareTag("Cover"))
                             cover = cover == null ? _coll : cover.transform.position.z < _coll.transform.position.z ? cover : _coll;
-                        else if (_coll.CompareTag("Shield"))
+                        else if (_coll.CompareTag("Shield") && !_SK.NoMoreShieldHitBox)
                         {
                             cover = cover == null ? _coll : cover.transform.position.z < _coll.transform.position.z ? cover : _coll;
                             _SK.BuffersCounter(5, "ShieldHits", 25, 1, "shoot to the shield for 25 times ", "no more shield hitbox");
@@ -63,14 +61,14 @@ public class Bullet : MonoBehaviour
                         if (_coll.GetComponentInParent<Enemy>() != null && _coll.transform.position.z < (cover == null ? 0 : cover.transform.position.z))
                         {
                             Enemy EnemyCS = _coll.GetComponentInParent<Enemy>();
-                            if (EnemyCS.EnemyType != Enemy._EnemyType.IanaClone && EnemyCS.EnemyType != _EnemyType.Alibi)
+                            if (EnemyCS.EnemyType != _EnemyType.IanaClone && EnemyCS.EnemyType != _EnemyType.Alibi)
                             {
                                 resetMultiplier = false;
-                                RHGC.Score += (int)(100 * (1 + RHGC.KillStreak * 0.2));
+                                RHGC.Score += (int)(100 * math.clamp(1 + RHGC.KillStreak * 0.2,0,20));
                                 GameObject UpScoreGO = Instantiate(UpScorePF, transform.position, Quaternion.identity);
                                 UpScoreGO.transform.SetParent(RHGC.DynamicCanvas.transform);
                                 UpScoreGO.GetComponent<RectTransform>().position = new Vector2(_coll.transform.position.x, _coll.transform.position.y);
-                                UpScoreGO.GetComponent<TextMeshProUGUI>().text = "+" + (100 * (1 + RHGC.KillStreak * 0.2)).ToString();
+                                UpScoreGO.GetComponent<TextMeshProUGUI>().text = "+" + (100 * math.clamp(1 + RHGC.KillStreak * 0.2, 0, 20)).ToString();
                                 UpScoreGO.GetComponent<TextMeshProUGUI>().color = new Color(1, 1, 1 - (0.05f * RHGC.KillStreak));
 
                                 RHGC.KillStreakPerRound++;
@@ -78,8 +76,10 @@ public class Bullet : MonoBehaviour
                                 RHGC.Shoots += 1.5;
                                 if (RHGC.KillStreak == 20)
                                     _SK.BuffersCounter(6, "KillSteakEarned", 1, 1, "Get Streak of 20 kills", "no more losing kill streak");
+                                if(EnemyCS.EnemyType == _EnemyType.Ash)
+                                    _SK.BuffersCounter(4, "AshKills", 20, 1, "kill Ash for 20 times \n", "all enemies are Ash now\n(infinite game mode only)");
 
-                                if (EnemyCS.EnemyType == _EnemyType.Osa && !EnemyCS.ShieldDestroyed)
+                                if (EnemyCS.EnemyType == _EnemyType.Osa && !EnemyCS.ShieldDestroyed && !_SK.NoMoreShieldHitBox)
                                 {
                                     EnemyCS.ShieldCol.enabled = false;
                                     EnemyCS.HitCollider.enabled = true;
