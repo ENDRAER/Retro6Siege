@@ -3,7 +3,6 @@ using UnityEngine.Audio;
 using UnityEngine;
 using System;
 using TMPro;
-using System.Linq;
 
 public class ScriptKing : MonoBehaviour
 {
@@ -11,7 +10,6 @@ public class ScriptKing : MonoBehaviour
     [NonSerialized] public RookHuntGameController BF_RHGC;
     [NonSerialized] public static ScriptKing MainBridge;
     [Header("Other")]
-    [SerializeField] private GameObject TVVolCircle;
     [SerializeField] private Light LampLight;
     [Header("Paper")]
     [SerializeField] public TextMeshProUGUI[] ModText;
@@ -22,7 +20,7 @@ public class ScriptKing : MonoBehaviour
     [NonSerialized] public bool InfiniteAmmo;
     [NonSerialized] public bool FullAutoShooting;
     [NonSerialized] public bool NoOpLeft;
-    [NonSerialized] public bool BigBullet;
+    [NonSerialized] public bool LargeBullet;
     [NonSerialized] public bool AllEnemyAreAsh;
     [NonSerialized] public bool NoMoreShieldHitBox;
     [NonSerialized] public bool NoMoreLosingKillStreak;
@@ -55,13 +53,13 @@ public class ScriptKing : MonoBehaviour
         RookHuntMenu = Instantiate(RookHuntMenuPF, TVGamesPos, new Quaternion(0, 0, 0, 0));
         BF_RHGC = RookHuntMenu.GetComponent<RookHuntGameController>();
         UnivrsalAM.audioMixer.SetFloat("TVVol", PlayerPrefs.GetFloat("TVVol"));
-        TVVolCircle.transform.eulerAngles = new Vector3(0, 0, (-PlayerPrefs.GetFloat("TVVol") * 3) - 100);
         MainBridge = this;
         Cursor.lockState = CursorLockMode.Locked;
         #region CheckModifersProgress
         BuffersCounter(0, "ShootTimes", 100, 0, "Shoot for 100 times\n", "infinite ammo");
-        BuffersCounter(1, "ShootTimes", 1000, 1000, "Shoot for 1000 times\n", "full auto shooting");
+        BuffersCounter(1, "ShootTimes", 1000, 0, "Shoot for 1000 times\n", "full auto shooting");
         BuffersCounter(2, "MissedEnemies", 20, 0, "miss 20 atackers\n", "missing enemies do not stole ammo");
+        BuffersCounter(3, "MultipleKills", 5, 0, "hit two rabbits with one shot for 5 times ", "LARGE BULLET");
         BuffersCounter(4, "AshKills", 20, 0, "kill Ash for 20 times \n", "all enemies are Ash now\n(infinite game mode only)");
         BuffersCounter(5, "ShieldHits", 25, 0, "shoot to the shield for 25 times ", "no more shield hitbox");
         BuffersCounter(6, "KillSteakEarned", 1, 0, "Get Streak of 20 kills", "no more losing kill streak");
@@ -121,7 +119,7 @@ public class ScriptKing : MonoBehaviour
                                     curentVol = -80;
                                     break;
                             }
-                            TVVolCircle.transform.eulerAngles = new(0, 0, (-curentVol * 3) - 100);
+                            //TVVolCircle.transform.eulerAngles = new(0, 0, (-curentVol * 3) - 100);
                             UnivrsalAM.audioMixer.SetFloat("TVVol", curentVol);
                             PlayerPrefs.SetFloat("TVVol", curentVol);
                         }
@@ -146,6 +144,10 @@ public class ScriptKing : MonoBehaviour
                             case 2:
                                 NoOpLeft = !NoOpLeft;
                                 CheckMarks[2].SetActive(NoOpLeft);
+                                break;
+                            case 3:
+                                LargeBullet = !LargeBullet;
+                                CheckMarks[3].SetActive(LargeBullet);
                                 break;
                             case 4:
                                 AllEnemyAreAsh = !AllEnemyAreAsh;

@@ -559,6 +559,7 @@ public class RookHuntGameController : MonoBehaviour
         }
         _SK.BuffersCounter(0, "ShootTimes", 100, ShootTimesPerMatch, "Shoot for 100 times\n", "infinite ammo");
         _SK.BuffersCounter(1, "ShootTimes", 1000, ShootTimesPerMatch, "Shoot for 1000 times\n", "full auto shooting");
+
         CavPortraitGO.transform.localPosition = new Vector3(posX, -1200);
         CavPortraitGO.transform.localScale = new Vector3(scale, scale);
         yield return new WaitForSeconds(1);
@@ -572,10 +573,11 @@ public class RookHuntGameController : MonoBehaviour
             MainBridge.CreateSoundGetGO(TVAudioSource, CavLaughAC, _defaultPos.TV, transform);
             CavLaughsGO.transform.localScale = new Vector2(1, 1);
         }
+
         while (CavPortraitGO.transform.localPosition.y <= posY)
         {
             yield return new WaitForSeconds(0.03f);
-            CavPortraitGO.transform.localPosition += new Vector3(0, 5000 * Time.deltaTime);
+            CavPortraitGO.transform.localPosition += new Vector3(0, 50);
         }
         CavPortraitGO.transform.localPosition = new Vector3(posX, posY);
         if (!isRanked && notBad)

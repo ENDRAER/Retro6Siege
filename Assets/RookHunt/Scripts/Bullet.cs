@@ -1,11 +1,11 @@
-using static RookHuntGameController;
-using static ScriptKing;
-using static Enemy;
 using System.Collections;
+using Unity.Mathematics;
 using UnityEngine;
 using System;
 using TMPro;
-using Unity.Mathematics;
+using static RookHuntGameController;
+using static ScriptKing;
+using static Enemy;
 
 public class Bullet : MonoBehaviour
 {
@@ -18,15 +18,17 @@ public class Bullet : MonoBehaviour
         _SK = MainBridge;
         RookHuntGameController RHGC = _SK.BF_RHGC;
         StartCoroutine(TimeToDestroyCor());
-        bool resetMultiplier = true;
 
+        bool resetMultiplier = true;
+        if(_SK.LargeBullet)
+            transform.localScale = new(7,7,7);
         if (RHGC.CurrentMode != _CurrentMode.GameOver && RHGC.CurrentMode != _CurrentMode.Menu)
         {
             RHGC.Shoots -= _SK.InfiniteAmmo ? 0 : 1;
             RHGC.ShootTimesPerMatch++;
         }
 
-        CollidersInZone = Physics2D.OverlapCircleAll(transform.position, 0.015f);
+        CollidersInZone = Physics2D.OverlapCircleAll(transform.position, _SK.LargeBullet? 0.03f : 0.025f);
         if (CollidersInZone.Length != 0)
         {
             switch (CollidersInZone[0].gameObject.name)
@@ -56,6 +58,8 @@ public class Bullet : MonoBehaviour
                             _SK.CreateSoundGetGO(_SK.BF_RHGC.TVAudioSource, RHGC.OsasShieldCrashAC, _defaultPos.TV, RHGC.transform);
                         }
                     }
+
+                    int MultipleHit = 0;
                     foreach (Collider2D _coll in CollidersInZone)
                     {
                         if (_coll.GetComponentInParent<Enemy>() != null && _coll.transform.position.z < (cover == null ? 0 : cover.transform.position.z))
@@ -63,6 +67,7 @@ public class Bullet : MonoBehaviour
                             Enemy EnemyCS = _coll.GetComponentInParent<Enemy>();
                             if (EnemyCS.EnemyType != _EnemyType.IanaClone && EnemyCS.EnemyType != _EnemyType.Alibi)
                             {
+                                MultipleHit++;
                                 resetMultiplier = false;
                                 RHGC.Score += (int)(100 * math.clamp(1 + RHGC.KillStreak * 0.2,0,20));
                                 GameObject UpScoreGO = Instantiate(UpScorePF, transform.position, Quaternion.identity);
@@ -120,6 +125,8 @@ public class Bullet : MonoBehaviour
                             }
                         }
                     }
+                    if(MultipleHit != 0)
+                        _SK.BuffersCounter(3, "MultipleKills", 5, MultipleHit, "hit two rabbits with one shot for 5 times ", "LARGE BULLET");
                     break;
             }
         }
@@ -142,7 +149,7 @@ public class Bullet : MonoBehaviour
 
     private IEnumerator TimeToDestroyCor()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.25f);
         Destroy(gameObject);
     }
 }
