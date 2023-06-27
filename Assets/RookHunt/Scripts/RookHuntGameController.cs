@@ -286,6 +286,7 @@ public class RookHuntGameController : MonoBehaviour
                 _EnemyCS.id = i;
                 _EnemyCS._WayCreator = WaysDef[wayID];
                 _EnemyCS.Perspective = MapCS.PerspectiveDef;
+                _EnemyCS.IsOnKaliWay = true;
 
                 _EnemyCS.Speed *= UnityEngine.Random.Range(0.7f, 0.9f) + (0.6f / (RangImages.Length - 1) * CurrentRang);
                 _EnemyCS.ShootingDelay *= 1 - (0.4f / (RangImages.Length - 1) * CurrentRang);

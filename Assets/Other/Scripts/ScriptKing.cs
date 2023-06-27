@@ -61,7 +61,7 @@ public class ScriptKing : MonoBehaviour
         #region CheckModifersProgress
         BuffersCounter(0, "ShootTimes", 100, 0, "Shoot for 100 times\n", "infinite ammo");
         BuffersCounter(1, "ShootTimes", 1000, 1000, "Shoot for 1000 times\n", "full auto shooting");
-        BuffersCounter(2, "MissedEnemies", 20, 0, "miss 20 atackers\n", "missing enemies do not take ammo");
+        BuffersCounter(2, "MissedEnemies", 20, 0, "miss 20 atackers\n", "missing enemies do not stole ammo");
         BuffersCounter(4, "AshKills", 20, 0, "kill Ash for 20 times \n", "all enemies are Ash now\n(infinite game mode only)");
         BuffersCounter(5, "ShieldHits", 25, 0, "shoot to the shield for 25 times ", "no more shield hitbox");
         BuffersCounter(6, "KillSteakEarned", 1, 0, "Get Streak of 20 kills", "no more losing kill streak");
@@ -211,17 +211,17 @@ public class ScriptKing : MonoBehaviour
         return AU;
     }
 
-    public void BuffersCounter(int BuffId, string PlPrName, int HowMuch, int add, string CounterText, string EarnedText)
+    public void BuffersCounter(int BuffId, string PlPrName, float HowMuch, int add, string CounterText, string EarnedText)
     {
-        int Counter = PlayerPrefs.GetInt(PlPrName) + add;
+        float Counter = PlayerPrefs.GetInt(PlPrName) + add;
         if (add != 0)
-            PlayerPrefs.SetInt(PlPrName, Counter);
+            PlayerPrefs.SetInt(PlPrName, (int)(Counter));
         if (Counter >= HowMuch)
         {
             CheckBoxes[BuffId].SetActive(true);
             ModText[BuffId].text = EarnedText;
         }
-        else if (HowMuch != 1)
-            ModText[BuffId].text = CounterText + new string('x', Counter / (HowMuch / 10)) + new string('-', 10 - Counter / (HowMuch / 10));
+        else if (HowMuch != 1) 
+            ModText[BuffId].text = CounterText + new string('x', (int)(Counter / (HowMuch / 10))) + new string('-', (int)(10 - Counter / (HowMuch / 10)));
     }
 }
