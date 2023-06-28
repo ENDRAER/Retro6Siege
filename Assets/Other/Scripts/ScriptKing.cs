@@ -26,8 +26,7 @@ public class ScriptKing : MonoBehaviour
     [NonSerialized] public bool NoMoreLosingKillStreak;
     [NonSerialized] public bool glock;
     [NonSerialized] public bool doom1993;
-    [Header("CameraGO")]
-    [SerializeField] private bool ReadyToShoot = true;
+    [Header("Camera")]
     [SerializeField] private SpriteRenderer LaserMark;
     [SerializeField] private GameObject CameraGO;
     [SerializeField] private Animator CameraAnimator;
@@ -36,6 +35,8 @@ public class ScriptKing : MonoBehaviour
     [SerializeField] private float RotSpeed;
     [SerializeField] private float MinRot;
     [SerializeField] private float MaxRot;
+    [NonSerialized] private bool ReadyToShoot = true;
+    [NonSerialized] private bool Focused = false;
     [Header("RookHunt")]
     [SerializeField] private GameObject RookHuntMenuPF;
     [SerializeField] private GameObject HitColiderGO;
@@ -70,7 +71,7 @@ public class ScriptKing : MonoBehaviour
 
     void LateUpdate()
     {
-        CameraGO.transform.eulerAngles += new Vector3(-Input.GetAxis("Mouse Y") * RotSpeed, Input.GetAxis("Mouse X") * RotSpeed);
+        CameraGO.transform.eulerAngles += new Vector3(-Input.GetAxis("Mouse Y") * (RotSpeed / (Focused ? 2 : 1)), Input.GetAxis("Mouse X") * (RotSpeed / (Focused? 2 : 1)));
         CameraGO.transform.eulerAngles = new Vector3(Mathf.Clamp((CameraGO.transform.eulerAngles.x > 200 ? -(360 - CameraGO.transform.eulerAngles.x) : CameraGO.transform.eulerAngles.x), MinRot, MaxRot), CameraGO.transform.eulerAngles.y);
 
         if (Physics.Raycast(CameraGO.transform.position, CameraGO.transform.TransformDirection(Vector3.forward), out RaycastHit hit, Mathf.Infinity) && hit.transform.GetComponent<InteractableObjects>() != null)
@@ -89,7 +90,7 @@ public class ScriptKing : MonoBehaviour
                 switch (hit.transform.GetComponent<InteractableObjects>().ObjectType)
                 {
                     case _ObjectType.Screen:
-                        Instantiate(HitColiderGO, new((hit.point.x - ScreenPos.position.x) * 16.66f + TVGamesPos.x, (hit.point.y - ScreenPos.position.y) * 16.66f + TVGamesPos.y, -2), new Quaternion(0, 0, 0, 0)); break;
+                        Instantiate(HitColiderGO, new((hit.point.x - ScreenPos.position.x) * (13.333333f / ScreenPos.localScale.x) + TVGamesPos.x, (hit.point.y - ScreenPos.position.y) * (10 / ScreenPos.localScale.y) + TVGamesPos.y, -2), new Quaternion(0, 0, 0, 0)); break;
                     case _ObjectType.ResetConcole:
                         Destroy(RookHuntMenu);
                         RookHuntMenu = Instantiate(RookHuntMenuPF, TVGamesPos, new Quaternion(0, 0, 0, 0));
@@ -186,6 +187,7 @@ public class ScriptKing : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             CameraAnimator.SetTrigger("ChangeFov");
+            Focused = !Focused;
         }
     }
     private IEnumerator ShootCD()
