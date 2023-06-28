@@ -17,7 +17,7 @@ public class ScriptKing : MonoBehaviour
     [SerializeField] public GameObject[] CheckBoxes;
     [SerializeField] public GameObject[] CheckMarks;
     [SerializeField] private Animator PaperAnim;
-    [SerializeField] public enum _ObjectType { Screen, ResetConcole, TV_VolUp, LightSwitch, PaperWithModifers, ModButton };
+    [SerializeField] public enum _ObjectType { Screen, ResetConcole, TV_VolUp, LightSwitch, PaperWithModifers, ModButton, Settings };
     [NonSerialized] public bool InfiniteAmmo;
     [NonSerialized] public bool FullAutoShooting;
     [NonSerialized] public bool NoOpLeft;
@@ -129,8 +129,7 @@ public class ScriptKing : MonoBehaviour
                     case _ObjectType.LightSwitch:
                         LampLight.SetActive(!LampLight.activeSelf);
                         OtsideLight.SetActive(!OtsideLight.activeSelf);
-                        hit.collider.transform.localEulerAngles = new Vector3 (3, 90, -90);
-                        print(hit.collider.transform.localEulerAngles.x);
+                        hit.collider.transform.localEulerAngles += new Vector3 (0, LampLight.activeSelf ? -20 : 20, 0);
                         break;
                     case _ObjectType.PaperWithModifers:
                         PaperAnim.SetBool("Focussed", _object.modifer == 0);
@@ -167,6 +166,9 @@ public class ScriptKing : MonoBehaviour
                                 CheckMarks[6].SetActive(NoMoreLosingKillStreak);
                                 break;
                         }
+                        break;
+                    case _ObjectType.Settings:
+
                         break;
                 }
             }
