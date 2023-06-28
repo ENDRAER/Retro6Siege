@@ -10,7 +10,8 @@ public class ScriptKing : MonoBehaviour
     [NonSerialized] public RookHuntGameController BF_RHGC;
     [NonSerialized] public static ScriptKing MainBridge;
     [Header("Other")]
-    [SerializeField] private Light LampLight;
+    [SerializeField] private GameObject LampLight;
+    [SerializeField] private GameObject OtsideLight;
     [Header("Paper")]
     [SerializeField] public TextMeshProUGUI[] ModText;
     [SerializeField] public GameObject[] CheckBoxes;
@@ -126,7 +127,10 @@ public class ScriptKing : MonoBehaviour
                         }
                         break;
                     case _ObjectType.LightSwitch:
-                        LampLight.intensity = LampLight.intensity == 1 ? 0 : 1;
+                        LampLight.SetActive(!LampLight.activeSelf);
+                        OtsideLight.SetActive(!OtsideLight.activeSelf);
+                        hit.collider.transform.localEulerAngles = new Vector3 (3, 90, -90);
+                        print(hit.collider.transform.localEulerAngles.x);
                         break;
                     case _ObjectType.PaperWithModifers:
                         PaperAnim.SetBool("Focussed", _object.modifer == 0);

@@ -564,6 +564,7 @@ MonoBehaviour:
   RunningSound: {fileID: 8300000, guid: 469df7d19f376f542a93af6e4653cfde, type: 3}
   HitSound: {fileID: 8300000, guid: 8e6ceafeb777db746ad7587337d659a3, type: 3}
   EnemyHitSound: {fileID: 8300000, guid: e2224435b604b5e489e38aa7f76aedb9, type: 3}
+  EnemyMissedSound: {fileID: 8300000, guid: f67103dcd3dc7e642846c434eda2aa52, type: 3}
   StartRoundMusic: {fileID: 8300000, guid: 8be9f24836889d94ca30e12becfe89b7, type: 3}
   DefeatMusic: {fileID: 8300000, guid: 832b340244ac7654086e1f835ca47787, type: 3}
   WinMusic: {fileID: 8300000, guid: 270a8b531fbd6b643834e7f21616ae27, type: 3}

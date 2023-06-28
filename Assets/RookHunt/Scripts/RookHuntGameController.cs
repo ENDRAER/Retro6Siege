@@ -31,6 +31,8 @@ public class RookHuntGameController : MonoBehaviour
     [SerializeField] public enum _CurrentMode { Menu, GameOver, Ranked, Infinite }
     [SerializeField] public _CurrentMode CurrentMode = _CurrentMode.Menu;
     [NonSerialized] public int ShootTimesPerMatch;
+    [NonSerialized] public float InfModeSpeedScaler = 1;
+    [NonSerialized] public float InfModeSpawnSpeedScaler = 1;
     [Header("UI")]
     [SerializeField] public GameObject MenuGO;
     [SerializeField] public Image CurrentRangImg;
@@ -85,6 +87,7 @@ public class RookHuntGameController : MonoBehaviour
     [SerializeField] public AudioClip RunningSound;
     [SerializeField] public AudioClip HitSound;
     [SerializeField] public AudioClip EnemyHitSound;
+    [SerializeField] public AudioClip EnemyMissedSound;
     [SerializeField] public AudioClip StartRoundMusic;
     [SerializeField] public AudioClip DefeatMusic;
     [SerializeField] public AudioClip WinMusic;
@@ -415,6 +418,8 @@ public class RookHuntGameController : MonoBehaviour
     #region Infinite Mode
     public void InfiniteModeStart()
     {
+        InfModeSpeedScaler = 1;
+        InfModeSpawnSpeedScaler = 1;
         if (MainMenuAudioGO != null)
             Destroy(MainMenuAudioGO);
         MapCreator();
@@ -431,7 +436,7 @@ public class RookHuntGameController : MonoBehaviour
         {
             int enemyID = UnityEngine.Random.Range(0, EnemyPF.Count - 1);
             wayID = UnityEngine.Random.Range(0, Ways.Count - 1);
-            _EnemyGO = Instantiate(_SK.AllEnemyAreAsh? TheAshOne : EnemyPF[enemyID], Ways[wayID].transform.position, Quaternion.identity);
+            _EnemyGO = Instantiate(_SK.AllEnemyAreAsh ? TheAshOne : EnemyPF[enemyID], Ways[wayID].transform.position, Quaternion.identity);
         }
         else
         {
@@ -456,14 +461,22 @@ public class RookHuntGameController : MonoBehaviour
         AUAU.GetComponent<AudioSource>().clip = RunningSound;
         _EnemyGO.transform.SetParent(AUAU.transform);
 
+        _EnemyCS.Speed *= InfModeSpeedScaler;
+        _EnemyCS.AnimDelay *= InfModeSpeedScaler;
+        if (InfModeSpeedScaler <= 1.4)
+            InfModeSpeedScaler += 0.01f;
+        if (InfModeSpawnSpeedScaler <= 2)
+            InfModeSpawnSpeedScaler += 0.01f;
+
         if (_EnemyCS._WayCreator == null)
             _EnemyCS._WayCreator = Ways[wayID];
         _EnemyCS.RHGC = this;
         _EnemyCS.Perspective = MapCS.Perspective;
         Enemies.Add(_EnemyGO);
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1.5f / InfModeSpawnSpeedScaler);
         StartCoroutine(EnemySpawn());
+
     }
     #endregion
 

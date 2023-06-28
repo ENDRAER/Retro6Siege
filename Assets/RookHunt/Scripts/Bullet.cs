@@ -20,8 +20,8 @@ public class Bullet : MonoBehaviour
         StartCoroutine(TimeToDestroyCor());
 
         bool resetMultiplier = true;
-        if(_SK.LargeBullet)
-            transform.localScale = new(7,7,7);
+        if (_SK.LargeBullet)
+            transform.localScale = new(6, 6, 6);
         if (RHGC.CurrentMode != _CurrentMode.GameOver && RHGC.CurrentMode != _CurrentMode.Menu)
         {
             RHGC.Shoots -= _SK.InfiniteAmmo ? 0 : 1;
