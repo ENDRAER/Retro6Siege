@@ -1,8 +1,11 @@
+using System.Collections.Generic;
+using UnityEngine.UIElements;
 using System.Collections;
 using UnityEngine.Audio;
 using UnityEngine;
 using System;
 using TMPro;
+using Unity.VisualScripting;
 
 public class ScriptKing : MonoBehaviour
 {
@@ -47,6 +50,15 @@ public class ScriptKing : MonoBehaviour
     [SerializeField] private AudioSource LightGunAS;
     [SerializeField] private AudioClip LightGunClick;
     [SerializeField] private AudioClip LightGunUnClick;
+    [Header("SettingsUI")]
+    [SerializeField] private GameObject SettCanvasGO;
+    [NonSerialized] private bool FullScreen;
+    [NonSerialized] private bool VSync;
+    [NonSerialized] private int MaxFPS;
+    [NonSerialized] private double Sensitivity;
+    [SerializeField] private TMP_Dropdown ResolutionDD;
+    [NonSerialized] private List<Resolution> AllResolutions = new ();
+    [NonSerialized] private Resolution CurrectResolution;
 
     public enum _defaultPos { Custom, TV };
 
@@ -54,9 +66,8 @@ public class ScriptKing : MonoBehaviour
     {
         RookHuntMenu = Instantiate(RookHuntMenuPF, TVGamesPos, new Quaternion(0, 0, 0, 0));
         BF_RHGC = RookHuntMenu.GetComponent<RookHuntGameController>();
-        UnivrsalAM.audioMixer.SetFloat("TVVol", PlayerPrefs.GetFloat("TVVol"));
         MainBridge = this;
-        Cursor.lockState = CursorLockMode.Locked;
+        //UnityEngine.Cursor.lockState = CursorLockMode.Locked;
         #region CheckModifersProgress
         BuffersCounter(0, "ShootTimes", 100, 0, "Shoot for 100 times\n", "infinite ammo");
         BuffersCounter(1, "ShootTimes", 1000, 0, "Shoot for 1000 times\n", "full auto shooting");
@@ -68,10 +79,17 @@ public class ScriptKing : MonoBehaviour
         BuffersCounter(7, "ChampionEarned", 1, 0, "beat champion", "GLOCK");
         BuffersCounter(8, "DoomUnlocked", 1, 0, "secret", "back to the 1993");
         #endregion
+
+        if (PlayerPrefs.GetInt("FirstStart") == 0)
+        {
+            SettCanvasGO.SetActive(true);
+            PlayerPrefs.SetInt("FirstStart", 1);
+        }
     }
 
     void LateUpdate()
     {
+        if (SettCanvasGO.activeSelf) return;
         CameraGO.transform.eulerAngles += new Vector3(-Input.GetAxis("Mouse Y") * (RotSpeed / (Focused ? 2 : 1)), Input.GetAxis("Mouse X") * (RotSpeed / (Focused? 2 : 1)));
         CameraGO.transform.eulerAngles = new Vector3(Mathf.Clamp((CameraGO.transform.eulerAngles.x > 200 ? -(360 - CameraGO.transform.eulerAngles.x) : CameraGO.transform.eulerAngles.x), MinRot, MaxRot), CameraGO.transform.eulerAngles.y);
 
@@ -168,7 +186,13 @@ public class ScriptKing : MonoBehaviour
                         }
                         break;
                     case _ObjectType.Settings:
-
+                        SettCanvasGO.SetActive(!SettCanvasGO.activeSelf);
+                        ResolutionDD.ClearOptions();
+                        AllResolutions.AddRange(Screen.resolutions);
+                        List<string> res = new List<string>();
+                        foreach(Resolution r in AllResolutions)
+                            res.Add(r.ToString());
+                        ResolutionDD.AddOptions(res);
                         break;
                 }
             }
@@ -234,4 +258,27 @@ public class ScriptKing : MonoBehaviour
         else if (HowMuch != 1) 
             ModText[BuffId].text = CounterText + new string('x', (int)(Counter / (HowMuch / 10))) + new string('-', (int)(10 - Counter / (HowMuch / 10)));
     }
+
+    #region SettUI
+    public void SetVsync(bool _VSync)
+    {
+        VSync = _VSync;
+    }
+    public void SetFullScreen(bool _FullScreen)
+    {
+        FullScreen = _FullScreen;
+    }
+    public void SetMaxFPS(string _MaxFPS)
+    {
+        MaxFPS = int.Parse(_MaxFPS);
+    }
+    public void SetSensitivity(string _Sensitivity)
+    {
+        Sensitivity = double.Parse(_Sensitivity);
+    }
+    public void SetRes(int ResolID)
+    {
+
+    }
+    #endregion
 }
