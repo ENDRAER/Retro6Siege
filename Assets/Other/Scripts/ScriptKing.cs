@@ -1,11 +1,10 @@
 using System.Collections.Generic;
-using UnityEngine.UIElements;
 using System.Collections;
+using System;
 using UnityEngine.Audio;
 using UnityEngine;
-using System;
+using Unity.Mathematics;
 using TMPro;
-using Unity.VisualScripting;
 
 public class ScriptKing : MonoBehaviour
 {
@@ -52,13 +51,12 @@ public class ScriptKing : MonoBehaviour
     [SerializeField] private AudioClip LightGunUnClick;
     [Header("SettingsUI")]
     [SerializeField] private GameObject SettCanvasGO;
-    [NonSerialized] private bool FullScreen;
-    [NonSerialized] private bool VSync;
-    [NonSerialized] private int MaxFPS;
-    [NonSerialized] private double Sensitivity;
+    [SerializeField] private UnityEngine.UI.Toggle FullScreenToggle;
+    [SerializeField] private UnityEngine.UI.Toggle VSyncToggle;
+    [SerializeField] private TMP_InputField MaxFPSIF;
+    [SerializeField] private TMP_InputField SensitivityIF;
     [SerializeField] private TMP_Dropdown ResolutionDD;
     [NonSerialized] private List<Resolution> AllResolutions = new ();
-    [NonSerialized] private Resolution CurrectResolution;
 
     public enum _defaultPos { Custom, TV };
 
@@ -67,7 +65,8 @@ public class ScriptKing : MonoBehaviour
         RookHuntMenu = Instantiate(RookHuntMenuPF, TVGamesPos, new Quaternion(0, 0, 0, 0));
         BF_RHGC = RookHuntMenu.GetComponent<RookHuntGameController>();
         MainBridge = this;
-        //UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+
         #region CheckModifersProgress
         BuffersCounter(0, "ShootTimes", 100, 0, "Shoot for 100 times\n", "infinite ammo");
         BuffersCounter(1, "ShootTimes", 1000, 0, "Shoot for 1000 times\n", "full auto shooting");
@@ -80,11 +79,28 @@ public class ScriptKing : MonoBehaviour
         BuffersCounter(8, "DoomUnlocked", 1, 0, "secret", "back to the 1993");
         #endregion
 
+        #region SetSettings
         if (PlayerPrefs.GetInt("FirstStart") == 0)
         {
+            PlayerPrefs.SetInt("VSync", 1);
+            PlayerPrefs.SetInt("MaxFPS", 60);
+            PlayerPrefs.SetFloat("Sensitivity", 0.8f);
             SettCanvasGO.SetActive(true);
+            UnityEngine.Cursor.lockState = CursorLockMode.None;
             PlayerPrefs.SetInt("FirstStart", 1);
         }
+        FullScreenToggle.isOn = Screen.fullScreen;
+
+        int VS = PlayerPrefs.GetInt("VSync");
+        VSyncToggle.isOn = VS == 1;
+        QualitySettings.vSyncCount = VS;
+        int FPasS = PlayerPrefs.GetInt("MaxFPS");
+        MaxFPSIF.text = FPasS.ToString();
+        Application.targetFrameRate = FPasS;
+        float SensaEbat = PlayerPrefs.GetFloat("Sensitivity");
+        SensitivityIF.text = SensaEbat.ToString();
+        RotSpeed = SensaEbat;
+        #endregion
     }
 
     void LateUpdate()
@@ -117,6 +133,7 @@ public class ScriptKing : MonoBehaviour
                         break;
                     case _ObjectType.TV_VolUp:
                         {
+                            /*
                             UnivrsalAM.audioMixer.GetFloat("TVVol", out float curentVol);
                             switch (curentVol)
                             {
@@ -142,6 +159,7 @@ public class ScriptKing : MonoBehaviour
                             //TVVolCircle.transform.eulerAngles = new(0, 0, (-curentVol * 3) - 100);
                             UnivrsalAM.audioMixer.SetFloat("TVVol", curentVol);
                             PlayerPrefs.SetFloat("TVVol", curentVol);
+                            */
                         }
                         break;
                     case _ObjectType.LightSwitch:
@@ -186,10 +204,11 @@ public class ScriptKing : MonoBehaviour
                         }
                         break;
                     case _ObjectType.Settings:
+                        UnityEngine.Cursor.lockState = CursorLockMode.None;
                         SettCanvasGO.SetActive(!SettCanvasGO.activeSelf);
                         ResolutionDD.ClearOptions();
                         AllResolutions.AddRange(Screen.resolutions);
-                        List<string> res = new List<string>();
+                        List<string> res = new();
                         foreach(Resolution r in AllResolutions)
                             res.Add(r.ToString());
                         ResolutionDD.AddOptions(res);
@@ -259,26 +278,40 @@ public class ScriptKing : MonoBehaviour
             ModText[BuffId].text = CounterText + new string('x', (int)(Counter / (HowMuch / 10))) + new string('-', (int)(10 - Counter / (HowMuch / 10)));
     }
 
-    #region SettUI
+    #region SettingsUI
     public void SetVsync(bool _VSync)
     {
-        VSync = _VSync;
+        QualitySettings.vSyncCount = _VSync? 1 : 0;
+        PlayerPrefs.SetInt("VSync", QualitySettings.vSyncCount);
     }
     public void SetFullScreen(bool _FullScreen)
     {
-        FullScreen = _FullScreen;
+        Screen.fullScreen = _FullScreen;
     }
-    public void SetMaxFPS(string _MaxFPS)
+    public void SetMaxFPS(string _MaxFPSstr)
     {
-        MaxFPS = int.Parse(_MaxFPS);
+        int FPasS = int.Parse(_MaxFPSstr);
+        MaxFPSIF.text = FPasS.ToString();
+        if (FPasS < 1)
+            FPasS = 1;
+        Application.targetFrameRate = FPasS;
+        PlayerPrefs.SetInt("MaxFPS", FPasS);
     }
-    public void SetSensitivity(string _Sensitivity)
+    public void SetSensitivity(string _Sensitivity_str)
     {
-        Sensitivity = double.Parse(_Sensitivity);
+        float SensaEbat = math.clamp(float.Parse(_Sensitivity_str), 0.05f, 20);
+        SensitivityIF.text = SensaEbat.ToString();
+        RotSpeed = SensaEbat;
+        PlayerPrefs.SetFloat("Sensitivity", SensaEbat);
     }
     public void SetRes(int ResolID)
     {
-
+        Screen.SetResolution(AllResolutions[ResolID].width, AllResolutions[ResolID].height, Screen.fullScreen);
+    }
+    public void CloseSettingsUI()
+    {
+        SettCanvasGO.SetActive(false);
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
     }
     #endregion
 }
