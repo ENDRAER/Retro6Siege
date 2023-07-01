@@ -81,7 +81,7 @@ public class ScriptKing : MonoBehaviour
         #endregion
 
         #region SetSettings
-        //if (PlayerPrefs.GetInt("FirstStart") == 0)
+        if (PlayerPrefs.GetInt("FirstStart") == 0)
         {
             PlayerPrefs.SetInt("VSync", 1);
             PlayerPrefs.SetInt("MaxFPS", 60);
