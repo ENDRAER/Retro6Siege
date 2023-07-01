@@ -32,6 +32,7 @@ public class ScriptKing : MonoBehaviour
     [Header("Camera")]
     [SerializeField] private SpriteRenderer LaserMark;
     [SerializeField] private GameObject CameraGO;
+    [SerializeField] private GameObject PistolTrigger;
     [SerializeField] private Animator CameraAnimator;
     [SerializeField] private Transform ScreenPos;
     [SerializeField] private Vector3 TVGamesPos = new(50, 0);
@@ -80,7 +81,7 @@ public class ScriptKing : MonoBehaviour
         #endregion
 
         #region SetSettings
-        if (PlayerPrefs.GetInt("FirstStart") == 0)
+        //if (PlayerPrefs.GetInt("FirstStart") == 0)
         {
             PlayerPrefs.SetInt("VSync", 1);
             PlayerPrefs.SetInt("MaxFPS", 60);
@@ -223,11 +224,13 @@ public class ScriptKing : MonoBehaviour
         #region ClickSound
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
+            PistolTrigger.transform.localEulerAngles += new Vector3(0, 0, 15);
             LightGunAS.clip = LightGunClick;
             LightGunAS.Play();
         }
         else if (Input.GetKeyUp(KeyCode.Mouse0))
         {
+            PistolTrigger.transform.localEulerAngles += new Vector3(0, 0, -15);
             LightGunAS.clip = LightGunUnClick;
             LightGunAS.Play();
         }
