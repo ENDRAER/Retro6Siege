@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 956186686806893844}
   - component: {fileID: 956186686806893845}
   - component: {fileID: 609459524493533095}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sprite
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1038502080, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
+  m_Sprite: {fileID: -1494205783, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -112,8 +112,8 @@ GameObject:
   - component: {fileID: 956186687328918984}
   - component: {fileID: 956186687328918985}
   - component: {fileID: 956186687328918986}
-  m_Layer: 0
-  m_Name: Hibana
+  m_Layer: 6
+  m_Name: Iana
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -147,17 +147,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21095960e2641f046af35cad99842490, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyType: 0
+  EnemyType: 5
   BalancerGO: {fileID: 956186686806893846}
   RB2D: {fileID: 956186687328918986}
   HitCollider: {fileID: 0}
   WalkType: 0
-  Speed: 55
-  IcoSprite: {fileID: 1812247446, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
+  Speed: 50
+  IcoSprite: {fileID: 638549953, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
   _SpriteRenderer: {fileID: 956186686806893845}
   SpritesAnim:
-  - {fileID: 1038502080, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
-  - {fileID: -1002951984, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
+  - {fileID: -1494205783, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
+  - {fileID: -1673058585, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
   BackWalkTimes: 0
   AlertGO: {fileID: 0}
   Damage: 0

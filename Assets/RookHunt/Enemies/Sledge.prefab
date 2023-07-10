@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 956186686806893844}
   - component: {fileID: 956186686806893845}
-  - component: {fileID: 49819650863833369}
-  m_Layer: 0
+  - component: {fileID: 7557473096804790772}
+  m_Layer: 6
   m_Name: Sprite
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -74,18 +74,18 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 678744326, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
+  m_Sprite: {fileID: 1907749874, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.66, y: 0.93}
+  m_Size: {x: 0.23, y: 0.72}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!70 &49819650863833369
+--- !u!70 &7557473096804790772
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -99,7 +99,7 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.3, y: 0.7}
+  m_Size: {x: 0.2, y: 0.7}
   m_Direction: 0
 --- !u!1 &956186687328918987
 GameObject:
@@ -112,8 +112,8 @@ GameObject:
   - component: {fileID: 956186687328918984}
   - component: {fileID: 956186687328918985}
   - component: {fileID: 956186687328918986}
-  m_Layer: 0
-  m_Name: Gridlock
+  m_Layer: 6
+  m_Name: Sledge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -152,12 +152,12 @@ MonoBehaviour:
   RB2D: {fileID: 956186687328918986}
   HitCollider: {fileID: 0}
   WalkType: 0
-  Speed: 45
-  IcoSprite: {fileID: -1628115249, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
+  Speed: 50
+  IcoSprite: {fileID: 566622936, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
   _SpriteRenderer: {fileID: 956186686806893845}
   SpritesAnim:
-  - {fileID: 678744326, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
-  - {fileID: -1094779467, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
+  - {fileID: 1907749874, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
+  - {fileID: -603458648, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
   BackWalkTimes: 0
   AlertGO: {fileID: 0}
   Damage: 0

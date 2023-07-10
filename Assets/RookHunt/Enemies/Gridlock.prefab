@@ -10,9 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 956186686806893844}
   - component: {fileID: 956186686806893845}
-  - component: {fileID: 5037967617246715708}
-  - component: {fileID: 4855018686453684253}
-  m_Layer: 0
+  - component: {fileID: 49819650863833369}
+  m_Layer: 6
   m_Name: Sprite
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -75,35 +74,19 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2083588180, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
+  m_Sprite: {fileID: 678744326, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.55, y: 0.72}
+  m_Size: {x: 0.66, y: 0.93}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!70 &5037967617246715708
+--- !u!70 &49819650863833369
 CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 956186686806893846}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.25, y: 0.66}
-  m_Direction: 0
---- !u!61 &4855018686453684253
-BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -112,22 +95,12 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.085}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.3, y: 0.66}
-    newSize: {x: 0.55, y: 0.72}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.3, y: 0.49}
-  m_EdgeRadius: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.3, y: 0.7}
+  m_Direction: 0
 --- !u!1 &956186687328918987
 GameObject:
   m_ObjectHideFlags: 0
@@ -139,8 +112,8 @@ GameObject:
   - component: {fileID: 956186687328918984}
   - component: {fileID: 956186687328918985}
   - component: {fileID: 956186687328918986}
-  m_Layer: 0
-  m_Name: Osa
+  m_Layer: 6
+  m_Name: Gridlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -174,26 +147,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21095960e2641f046af35cad99842490, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyType: 4
+  EnemyType: 0
   BalancerGO: {fileID: 956186686806893846}
   RB2D: {fileID: 956186687328918986}
-  HitCollider: {fileID: 5037967617246715708}
+  HitCollider: {fileID: 0}
   WalkType: 0
-  Speed: 35
-  IcoSprite: {fileID: 866322157, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
+  Speed: 45
+  IcoSprite: {fileID: -1628115249, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
   _SpriteRenderer: {fileID: 956186686806893845}
   SpritesAnim:
-  - {fileID: -2083588180, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
-  - {fileID: -2083588180, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
-  - {fileID: 439382807, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
-  - {fileID: -815487650, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
+  - {fileID: 678744326, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
+  - {fileID: -1094779467, guid: ebbc00ba4912508439dcdc624e749df8, type: 3}
   BackWalkTimes: 0
   AlertGO: {fileID: 0}
   Damage: 0
   ShootingDelay: 0
   PostShootingDelay: 0
   ShieldGO: {fileID: 0}
-  ShieldCol: {fileID: 4855018686453684253}
+  ShieldCol: {fileID: 0}
   ShieldDestroyed: 0
 --- !u!50 &956186687328918986
 Rigidbody2D:

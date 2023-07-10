@@ -34,10 +34,10 @@ public class RookHuntGameController : MonoBehaviour
     [NonSerialized] public float InfModeSpeedScaler = 1;
     [NonSerialized] public float InfModeSpawnSpeedScaler = 1;
     [Header("UI")]
-    [SerializeField] public GameObject MenuGO;
+    [SerializeField] public GameObject MenuCanvasGO;
     [SerializeField] public Image CurrentRangImg;
     [SerializeField] public TextMeshProUGUI TopRecordText;
-    [SerializeField] public GameObject CavPortraitGO;
+    [SerializeField] public GameObject CavPortraitCanvasGO;
     [SerializeField] public GameObject CavLaughsGO;
     [SerializeField] public GameObject CavLaughsHeadGO;
     [SerializeField] public GameObject CavNotBadGO;
@@ -54,7 +54,7 @@ public class RookHuntGameController : MonoBehaviour
     [SerializeField] public Sprite KilledIcon;
     [SerializeField] public Sprite SpaceSprite;
     [SerializeField] public TextMeshProUGUI TeamScoreText;
-    [SerializeField] public GameObject LoadingScreen; // LS - LoadingScreen
+    [SerializeField] public GameObject LoadingScreenCanvas; // LS - LoadingScreenCanvas
     [SerializeField] public TextMeshProUGUI LSRounds;
     [SerializeField] public TextMeshProUGUI LSTeamScore;
     [SerializeField] public TextMeshProUGUI LSTeamRole;
@@ -64,7 +64,7 @@ public class RookHuntGameController : MonoBehaviour
     [SerializeField] public GameObject Outro;
     [SerializeField] public TextMeshProUGUI OutroRoundStatusText;
     [SerializeField] public TextMeshProUGUI OutroReasonOfEndText;
-    [SerializeField] public GameObject RewardScreen; // RS
+    [SerializeField] public GameObject RewardScreenCanvas; // RS
     [SerializeField] public Animator RSAnimator;
     [SerializeField] public Image[] RSRangs;
     [SerializeField] public Sprite[] RangImages;
@@ -102,22 +102,22 @@ public class RookHuntGameController : MonoBehaviour
     private void Start()
     {
         _SK = MainBridge;
+        MenuCanvasGO.SetActive(true);
         CurrentRang = math.clamp(PlayerPrefs.GetInt("CurrentRang"), 0, RangImages.Length - 1);
         CurrentRangImg.sprite = RangImages[CurrentRang];
         TopRecordText.text = "TOP SCORE = " + PlayerPrefs.GetInt("TopScore");
-        MenuGO.transform.localPosition = Vector2.zero;
         MainMenuAudioGO = MainBridge.CreateSoundGetGO(TVAudioSource, MainMenuAudioAC, _defaultPos.TV, transform);
     }
 
     private void MapCreator()
     {
-        MapGO = Instantiate(MapsPF[UnityEngine.Random.Range(0, MapsPF.Length - 1)], new Vector3(50, 1.5f, 0), Quaternion.identity);
+        MapGO = Instantiate(MapsPF[UnityEngine.Random.Range(0, MapsPF.Length - 1)], new(50, 1.5f, 0), Quaternion.identity);
         MapGO.transform.SetParent(transform);
         MapCS = MapGO.GetComponent<MapScript>();
         Ways = MapCS.Ways;
         WaysDef = MapCS.WaysDef;
         SnipersWay = MapCS.SnipersWay;
-        MenuGO.transform.localPosition = new(0, 2000);
+        MenuCanvasGO.SetActive(false);
     }
 
     #region Ranked
@@ -133,12 +133,12 @@ public class RookHuntGameController : MonoBehaviour
 
     public IEnumerator RankedRoundLauncher()
     {
+        LoadingScreenCanvas.SetActive(true);
         KillStreakPerRound = 0;
         MainBridge.CreateSoundGetGO(TVAudioSource, StartRoundMusic, _defaultPos.TV, transform);
         Round++;
         LSRounds.text = "round " + Round;
         LSTeamScore.text = TeamScore[0] + ":" + TeamScore[1];
-        LoadingScreen.transform.localPosition = Vector2.zero;
         float WaitingToStart = 4;
         if (Round == 4 || Round >= 7)
         {
@@ -155,7 +155,7 @@ public class RookHuntGameController : MonoBehaviour
         }
         LSTeamRole.text = IsDefender == true ? "defend" : "atack";
         yield return new WaitForSeconds(WaitingToStart);
-        LoadingScreen.transform.localPosition = new(0, 2000);
+        LoadingScreenCanvas.SetActive(false);
         StartCoroutine(TurnOfRoundTeamScoreStats());
 
         #region defend
@@ -208,7 +208,7 @@ public class RookHuntGameController : MonoBehaviour
                 else
                 {
                     int enemyID = UnityEngine.Random.Range(0, SpecialEnemyPF.Count - 1);
-                    _EnemyGO = Instantiate(SpecialEnemyPF[enemyID], new Vector3(50, 50), Quaternion.identity);
+                    _EnemyGO = Instantiate(SpecialEnemyPF[enemyID], new(50, 50), Quaternion.identity);
                     if ((_EnemyGO.name.StartsWith("Kali") || _EnemyGO.name.StartsWith("Glaz")) && SnipersWay != null)
                     {
                         _EnemyGO.transform.position = SnipersWay.transform.position;
@@ -344,12 +344,12 @@ public class RookHuntGameController : MonoBehaviour
         TeamScore[IsWinner ? 0 : 1]++;
         for (int i = 1; Outro.transform.localScale.y < 1; i++)
         {
-            Outro.transform.localScale = new Vector3(1, (float)i / 10, 1);
+            Outro.transform.localScale = new(1, (float)i / 10, 1);
             yield return new WaitForSeconds(0.06f);
         }
-        Outro.transform.localScale = new Vector3(1, 1, 1);
+        Outro.transform.localScale = new(1, 1, 1);
         yield return new WaitForSeconds(2);
-        Outro.transform.localScale = new Vector3(1, 0, 1);
+        Outro.transform.localScale = new(1, 0, 1);
         foreach (Image icon in OpIcos)
         {
             icon.sprite = SpaceSprite;
@@ -375,6 +375,7 @@ public class RookHuntGameController : MonoBehaviour
 
     public void EndOfTheRankedMatch(bool IsWinner)
     {
+        RewardScreenCanvas.SetActive(true);
         CurrentRang += IsWinner ? 1 : -1;
         if (CurrentRang == 35)
             _SK.BuffersCounter(7, "ChampionEarned", 1, 1, "beat champion", "glock");
@@ -404,7 +405,6 @@ public class RookHuntGameController : MonoBehaviour
             }
             RangsRange++;
         }
-        RewardScreen.transform.localPosition = Vector3.zero;
         StartCoroutine(CavLaughANIM(-428, -530, 0.7f, true, IsWinner));
         RSMatchReport.text =
             TeamScore[0] + " : " + TeamScore[1] +
@@ -544,19 +544,19 @@ public class RookHuntGameController : MonoBehaviour
         InvincibleEnemies = false;
         CurrentRangImg.sprite = RangImages[CurrentRang];
 
-        RSNextButton.transform.localPosition = new Vector3(1232, -486.71f);
-        RewardScreen.transform.localPosition = new Vector3(0, 2000);
+        RSNextButton.transform.localPosition = new(1232, -486.71f);
+        RewardScreenCanvas.SetActive(false);
         CavRestartColl.enabled = false;
         ShootToRestartTXT.fontSize = 0;
-        CavPortraitGO.transform.localPosition = new Vector2(0, -1200);
-        CavLaughsGO.transform.localScale = new Vector2(1, 0);
-        CavNotBadGO.transform.localScale = new Vector2(1, 0);
+        CavPortraitCanvasGO.transform.localPosition = new(0, -1200, -0.1f);
+        CavLaughsGO.transform.localScale = new(1, 0);
+        CavNotBadGO.transform.localScale = new(1, 0);
         CavNewRecordCallerTXT.text = "";
 
         StatUpdate();
         StopAllCoroutines();
         Destroy(MapGO);
-        MenuGO.transform.localPosition = Vector2.zero;
+        MenuCanvasGO.SetActive(true);
         CurrentMode = _CurrentMode.Menu;
         MainMenuAudioGO = MainBridge.CreateSoundGetGO(TVAudioSource, MainMenuAudioAC, _defaultPos.TV, transform);
     }
@@ -573,8 +573,8 @@ public class RookHuntGameController : MonoBehaviour
         _SK.BuffersCounter(0, "ShootTimes", 100, ShootTimesPerMatch, "Shoot for 100 times\n", "infinite ammo");
         _SK.BuffersCounter(1, "ShootTimes", 1000, ShootTimesPerMatch, "Shoot for 1000 times\n", "full auto shooting");
 
-        CavPortraitGO.transform.localPosition = new Vector3(posX, -1200);
-        CavPortraitGO.transform.localScale = new Vector3(scale, scale);
+        CavPortraitCanvasGO.transform.localPosition = new(posX, -1200, -0.1f);
+        CavPortraitCanvasGO.transform.localScale = new(scale, scale);
         yield return new WaitForSeconds(1);
         if (notBad)
         {
@@ -587,12 +587,12 @@ public class RookHuntGameController : MonoBehaviour
             CavLaughsGO.transform.localScale = new Vector2(1, 1);
         }
 
-        while (CavPortraitGO.transform.localPosition.y <= posY)
+        while (CavPortraitCanvasGO.transform.localPosition.y <= posY)
         {
             yield return new WaitForSeconds(0.03f);
-            CavPortraitGO.transform.localPosition += new Vector3(0, 50);
+            CavPortraitCanvasGO.transform.localPosition += new Vector3(0, 50, -0.1f);
         }
-        CavPortraitGO.transform.localPosition = new Vector3(posX, posY);
+        CavPortraitCanvasGO.transform.localPosition = new(posX, posY, -0.1f);
         if (!isRanked && notBad)
             CavNewRecordCallerTXT.text = "MEW RECORD: " + Score + "!";
         int a = 0;
@@ -602,7 +602,7 @@ public class RookHuntGameController : MonoBehaviour
             if (a == 8)
             {
                 if (isRanked)
-                    RSNextButton.transform.localPosition = new Vector3(540, -486.71f);
+                    RSNextButton.transform.localPosition = new(540, -486.71f);
                 else
                 {
                     ShootToRestartTXT.fontSize = 0.001f;
@@ -612,7 +612,7 @@ public class RookHuntGameController : MonoBehaviour
             }
             if (!isRanked && a % 3 == 0)
                 ShootToRestartTXT.fontSize = ShootToRestartTXT.fontSize == 0.001f ? 60 : 0.001f;
-            CavLaughsHeadGO.transform.localPosition = new Vector3(0, CavLaughsHeadGO.transform.localPosition.y == 280 ? 300 : 280);
+            CavLaughsHeadGO.transform.localPosition = new(0, CavLaughsHeadGO.transform.localPosition.y == 280 ? 300 : 280);
             yield return new WaitForSeconds(0.12f);
         }
     }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.013631063, g: 0.010727052, b: 0.0078885965, a: 1}
+  m_IndirectSpecularColor: {r: 0.013631015, g: 0.010727058, b: 0.007888602, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3214,8 +3214,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 477966713}
   m_LocalRotation: {x: -0, y: -0.7071067, z: 0.7071068, w: 0}
-  m_LocalPosition: {x: 0.007806355, y: -0.010083772, z: -0.006766684}
-  m_LocalScale: {x: -0.00035451504, y: -0.0005333335, z: -0.0005933154}
+  m_LocalPosition: {x: 0.00787, y: -0.010084, z: -0.006629}
+  m_LocalScale: {x: -0.00027672751, y: -0.00041630972, z: -0.00046313042}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 8731845712291161578}
@@ -10904,7 +10904,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5733712436041241636}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 2
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
@@ -11455,7 +11455,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 274303612100959016}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 2
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0

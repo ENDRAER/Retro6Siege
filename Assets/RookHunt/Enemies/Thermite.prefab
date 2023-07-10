@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 956186686806893844}
   - component: {fileID: 956186686806893845}
   - component: {fileID: 609459524493533095}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sprite
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 956186687328918984}
   - component: {fileID: 956186687328918985}
   - component: {fileID: 956186687328918986}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Thermite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
