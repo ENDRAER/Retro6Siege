@@ -31,6 +31,7 @@ public class ScriptKing : MonoBehaviour
     [NonSerialized] public bool doom1993;
     [Header("Camera")]
     [SerializeField] private SpriteRenderer LaserMark;
+    [SerializeField] private SpriteRenderer LaserHalo;
     [SerializeField] private GameObject CameraGO;
     [SerializeField] private GameObject PistolTrigger;
     [SerializeField] private Animator CameraAnimator;
@@ -115,9 +116,15 @@ public class ScriptKing : MonoBehaviour
             InteractableObjects _object = hit.transform.GetComponent<InteractableObjects>();
             #region ColorOfPointer
             if (_object.ObjectType != _ObjectType.Screen)
+            {
+                LaserHalo.color = new Color(0, 1, 0, 0.6f);
                 LaserMark.color = new Color(0, 1, 0, 0.6f);
+            }
             else
+            {
+                LaserHalo.color = new Color(1, 0, 0, 0.6f);
                 LaserMark.color = new Color(1, 0, 0, 0.6f);
+            }
             #endregion
             if (ReadyToShoot && (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKey(KeyCode.Mouse0) && FullAutoShooting && hit.transform.GetComponent<InteractableObjects>().ObjectType == _ObjectType.Screen))
             {
@@ -219,7 +226,10 @@ public class ScriptKing : MonoBehaviour
 
         }
         else
+        {
+            LaserHalo.color = new Color(1, 0, 0, 0.6f);
             LaserMark.color = new Color(1, 0, 0, 0.6f);
+        }
 
         #region ClickSound
         if (Input.GetKeyDown(KeyCode.Mouse0))
