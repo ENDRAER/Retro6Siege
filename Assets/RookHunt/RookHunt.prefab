@@ -815,7 +815,7 @@ MonoBehaviour:
   MenuCanvasGO: {fileID: 7106317466489387798}
   CurrentRangImg: {fileID: 6100262734401688483}
   TopRecordText: {fileID: 6100262732975422360}
-  CavPortraitCanvasGO: {fileID: 6067599593276098171}
+  CavPortraitGO: {fileID: 7881935586793085326}
   CavLaughsGO: {fileID: 6100262734220675210}
   CavLaughsHeadGO: {fileID: 6100262734613681691}
   CavNotBadGO: {fileID: 9018112419438080693}

@@ -37,7 +37,7 @@ public class RookHuntGameController : MonoBehaviour
     [SerializeField] public GameObject MenuCanvasGO;
     [SerializeField] public Image CurrentRangImg;
     [SerializeField] public TextMeshProUGUI TopRecordText;
-    [SerializeField] public GameObject CavPortraitCanvasGO;
+    [SerializeField] public GameObject CavPortraitGO;
     [SerializeField] public GameObject CavLaughsGO;
     [SerializeField] public GameObject CavLaughsHeadGO;
     [SerializeField] public GameObject CavNotBadGO;
@@ -548,7 +548,7 @@ public class RookHuntGameController : MonoBehaviour
         RewardScreenCanvas.SetActive(false);
         CavRestartColl.enabled = false;
         ShootToRestartTXT.fontSize = 0;
-        CavPortraitCanvasGO.transform.localPosition = new(0, -1200, -0.1f);
+        CavPortraitGO.transform.localPosition = new(0, -1200, -0.1f);
         CavLaughsGO.transform.localScale = new(1, 0);
         CavNotBadGO.transform.localScale = new(1, 0);
         CavNewRecordCallerTXT.text = "";
@@ -573,8 +573,8 @@ public class RookHuntGameController : MonoBehaviour
         _SK.BuffersCounter(0, "ShootTimes", 100, ShootTimesPerMatch, "Shoot for 100 times\n", "infinite ammo");
         _SK.BuffersCounter(1, "ShootTimes", 1000, ShootTimesPerMatch, "Shoot for 1000 times\n", "full auto shooting");
 
-        CavPortraitCanvasGO.transform.localPosition = new(posX, -1200, -0.1f);
-        CavPortraitCanvasGO.transform.localScale = new(scale, scale);
+        CavPortraitGO.transform.localPosition = new(posX, -1200, -0.1f);
+        CavPortraitGO.transform.localScale = new(scale, scale);
         yield return new WaitForSeconds(1);
         if (notBad)
         {
@@ -587,12 +587,12 @@ public class RookHuntGameController : MonoBehaviour
             CavLaughsGO.transform.localScale = new Vector2(1, 1);
         }
 
-        while (CavPortraitCanvasGO.transform.localPosition.y <= posY)
+        while (CavPortraitGO.transform.localPosition.y <= posY)
         {
             yield return new WaitForSeconds(0.03f);
-            CavPortraitCanvasGO.transform.localPosition += new Vector3(0, 50, -0.1f);
+            CavPortraitGO.transform.localPosition += new Vector3(0, 50, -0.1f);
         }
-        CavPortraitCanvasGO.transform.localPosition = new(posX, posY, -0.1f);
+        CavPortraitGO.transform.localPosition = new(posX, posY, -0.1f);
         if (!isRanked && notBad)
             CavNewRecordCallerTXT.text = "MEW RECORD: " + Score + "!";
         int a = 0;
