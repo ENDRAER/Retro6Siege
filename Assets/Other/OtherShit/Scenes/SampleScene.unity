@@ -2899,7 +2899,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'miss 20 attackers
+  m_text: 'Let 20 attackers escape
 
     xxxxxxxxxx'
   m_isRightToLeft: 0

@@ -172,7 +172,7 @@ public class RookHuntGameController : MonoBehaviour
             }
             IsDefender = !IsDefender;
         }
-        LSTeamRole.text = IsDefender == true ? "defend" : "atack";
+        LSTeamRole.text = IsDefender == true ? "defend" : "attack";
         yield return new WaitForSeconds(WaitingToStart);
         LoadingScreenCanvas.SetActive(false);
         StartCoroutine(TurnOfRoundTeamScoreStats());
@@ -429,8 +429,8 @@ public class RookHuntGameController : MonoBehaviour
             TeamScore[0] + " : " + TeamScore[1] +
             "\r\nSCORE: " + Score +
             "\r\nMax killstreak: " + (StatsMaxKillStreak > KillStreak ? StatsMaxKillStreak : KillStreak) +
-            "\r\nenemy missed: " + StatsEnemyMissed +
-            "\r\nShots missed: " + StatsShotsMissed;
+            "\r\nEscaped enemies: " + StatsEnemyMissed +
+            "\r\nMissed shots: " + StatsShotsMissed;
     }
     #endregion
 
@@ -613,7 +613,7 @@ public class RookHuntGameController : MonoBehaviour
         }
         CavPortraitGO.transform.localPosition = new(posX, posY, -0.1f);
         if (!isRanked && notBad)
-            CavNewRecordCallerTXT.text = "MEW RECORD: " + Score + "!";
+            CavNewRecordCallerTXT.text = "NEW RECORD: " + Score + "!";
         int a = 0;
         while (true)
         {
