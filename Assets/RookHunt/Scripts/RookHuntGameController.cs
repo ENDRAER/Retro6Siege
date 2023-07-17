@@ -6,6 +6,7 @@ using UnityEngine;
 using System;
 using TMPro;
 using static ScriptKing;
+using UnityEditor;
 
 public class RookHuntGameController : MonoBehaviour
 {
@@ -59,8 +60,12 @@ public class RookHuntGameController : MonoBehaviour
     [SerializeField] public TextMeshProUGUI LSTeamScore;
     [SerializeField] public TextMeshProUGUI LSTeamRole;
     [SerializeField] public GameObject LSTeamIconCenter;
-    [SerializeField] public GameObject LSDefendersIcon;
-    [SerializeField] public GameObject LSAtatckersIcon;
+    [SerializeField] public GameObject LSTeam1IcoGO;
+    [SerializeField] public GameObject LSTeam2IcoGO;
+    [SerializeField] public Image LSTeam1IcoImg;
+    [SerializeField] public Image LSTeam2IcoImg;
+    [SerializeField] public Sprite LSDefendSpr;
+    [SerializeField] public Sprite LSAtackSpr;
     [SerializeField] public GameObject Outro;
     [SerializeField] public TextMeshProUGUI OutroRoundStatusText;
     [SerializeField] public TextMeshProUGUI OutroReasonOfEndText;
@@ -126,7 +131,20 @@ public class RookHuntGameController : MonoBehaviour
         if (MainMenuAudioGO != null)
             Destroy(MainMenuAudioGO);
         PlayerPrefs.SetInt("CurrentRang", CurrentRang - 1);
+
         IsDefender = UnityEngine.Random.Range(0, 2) == 0;
+        LSTeamIconCenter.transform.rotation = Quaternion.identity;
+        if (IsDefender)
+        {
+            LSTeam1IcoImg.sprite = LSDefendSpr;
+            LSTeam2IcoImg.sprite = LSAtackSpr;
+        }
+        else
+        {
+            LSTeam1IcoImg.sprite = LSAtackSpr;
+            LSTeam2IcoImg.sprite = LSDefendSpr;
+        }
+
         MapCreator();
         StartCoroutine(RankedRoundLauncher());
     }
@@ -142,12 +160,13 @@ public class RookHuntGameController : MonoBehaviour
         float WaitingToStart = 4;
         if (Round == 4 || Round >= 7)
         {
+            LSTeamIconCenter.transform.rotation = Quaternion.identity;
             yield return new WaitForSeconds(1);
             for (int i = 0; i != 18; i++)
             {
                 LSTeamIconCenter.transform.Rotate(0, 0, 10);
-                LSDefendersIcon.transform.rotation = Quaternion.identity;
-                LSAtatckersIcon.transform.rotation = Quaternion.identity;
+                LSTeam1IcoGO.transform.rotation = Quaternion.identity;
+                LSTeam2IcoGO.transform.rotation = Quaternion.identity;
                 yield return new WaitForSeconds(0.06f);
                 WaitingToStart -= 0.06f;
             }
@@ -378,7 +397,7 @@ public class RookHuntGameController : MonoBehaviour
         RewardScreenCanvas.SetActive(true);
         CurrentRang += IsWinner ? 1 : -1;
         if (CurrentRang == 35)
-            _SK.BuffersCounter(7, "ChampionEarned", 1, 1, "beat champion", "glock");
+            _SK.BuffersCounter(7, "ChampionEarned", 1, 1, "Get champion rank", "GLOCK");
         RSGradiend.color = IsWinner ? new Color(0, 0.6f, 1) : new Color(1, 0.2441f, 0);
         bool HasntMoved = false;
         if (CurrentRang < 0 || CurrentRang > 35)
@@ -570,8 +589,8 @@ public class RookHuntGameController : MonoBehaviour
             notBad = true;
             TopRecordText.text = "TOP SCORE = " + Score;
         }
-        _SK.BuffersCounter(0, "ShotTimes", 100, ShootTimesPerMatch, "Shot for 100 times\n", "infinite ammo");
-        _SK.BuffersCounter(1, "ShotTimes", 1000, ShootTimesPerMatch, "Shot for 1000 times\n", "full auto shoting");
+        _SK.BuffersCounter(0, "ShotTimes", 100, ShootTimesPerMatch, "Shoot 100 times\n", "Infinite ammo");
+        _SK.BuffersCounter(1, "ShotTimes", 1000, 0, "shoot 1000 times\n", "Full auto");
 
         CavPortraitGO.transform.localPosition = new(posX, -1200, -0.1f);
         CavPortraitGO.transform.localScale = new(scale, scale);

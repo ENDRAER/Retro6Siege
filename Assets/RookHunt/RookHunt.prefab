@@ -844,8 +844,12 @@ MonoBehaviour:
   LSTeamScore: {fileID: 6100262734304889455}
   LSTeamRole: {fileID: 6100262733137128982}
   LSTeamIconCenter: {fileID: 6100262733009798037}
-  LSDefendersIcon: {fileID: 6100262734102102262}
-  LSAtatckersIcon: {fileID: 6100262732958292815}
+  LSTeam1IcoGO: {fileID: 6100262734102102262}
+  LSTeam2IcoGO: {fileID: 6100262732958292815}
+  LSTeam1IcoImg: {fileID: 6100262734102102264}
+  LSTeam2IcoImg: {fileID: 6100262732958292817}
+  LSDefendSpr: {fileID: 1516727277, guid: 6768a988f7ce75a49a0a5c751b915630, type: 3}
+  LSAtackSpr: {fileID: 1045636388, guid: 6768a988f7ce75a49a0a5c751b915630, type: 3}
   Outro: {fileID: 6100262732680584570}
   OutroRoundStatusText: {fileID: 6100262734338030491}
   OutroReasonOfEndText: {fileID: 6100262733232250028}
@@ -4494,7 +4498,7 @@ GameObject:
   - component: {fileID: 6100262733967980735}
   - component: {fileID: 6100262733967980732}
   m_Layer: 5
-  m_Name: ShootToRestart
+  m_Name: ShotToRestart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5275,7 +5279,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 2:3
+  m_text: 6:9
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3ddc82a9260a92d4dae4d03cbb70f282, type: 2}
   m_sharedMaterial: {fileID: 6664717805218027384, guid: 3ddc82a9260a92d4dae4d03cbb70f282, type: 2}
@@ -6136,7 +6140,7 @@ GameObject:
   - component: {fileID: 6100262734702251085}
   - component: {fileID: 6100262734702251082}
   m_Layer: 5
-  m_Name: ShootToRestart
+  m_Name: ShotToRestart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

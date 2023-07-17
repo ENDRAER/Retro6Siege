@@ -54,7 +54,7 @@ public class Bullet : MonoBehaviour
                         else if (_coll.CompareTag("Shield") && !_SK.NoMoreShieldHitBox)
                         {
                             cover = cover == null ? _coll : cover.transform.position.z < _coll.transform.position.z ? cover : _coll;
-                            _SK.BuffersCounter(5, "ShieldHits", 25, 1, "Shot to the shield for 25 times ", "no more shield hitbox");
+                            _SK.BuffersCounter(5, "ShieldHits", 25, 1, "Shoot any shield 25 times", "Instant shield break");
                             _SK.CreateSoundGetGO(_SK.BF_RHGC.TVAudioSource, RHGC.OsasShieldCrashAC, _defaultPos.TV, RHGC.transform);
                         }
                     }
@@ -80,9 +80,9 @@ public class Bullet : MonoBehaviour
                                 RHGC.KillStreak++;
                                 RHGC.Shots += 1.5;
                                 if (RHGC.KillStreak == 20)
-                                    _SK.BuffersCounter(6, "KillSteakEarned", 1, 1, "Get Streak of 20 kills", "no more losing kill streak");
-                                if(EnemyCS.EnemyType == _EnemyType.Ash)
-                                    _SK.BuffersCounter(4, "AshKills", 20, 1, "kill Ash for 20 times \n", "all enemies are Ash now\n(infinite game mode only)");
+                                    _SK.BuffersCounter(6, "KillSteakEarned", 1, 1, "Get a 20 kill streak", "Don't lose killstreak on miss");
+                                if (EnemyCS.EnemyType == _EnemyType.Ash)
+                                    _SK.BuffersCounter(4, "AshKills", 20, 1, "Kill Ash 20 times \n", "Ashpocalipse\n(infinite game mode only)");
 
                                 if (EnemyCS.EnemyType == _EnemyType.Osa && !EnemyCS.ShieldDestroyed && !_SK.NoMoreShieldHitBox)
                                 {
@@ -91,7 +91,7 @@ public class Bullet : MonoBehaviour
                                     EnemyCS.ShieldDestroyed = true;
                                     EnemyCS.Speed *= 1.5f;
                                     EnemyCS.AnimID += 2;
-                                    _SK.BuffersCounter(5, "ShieldHits", 25, 1, "Shot to the shield for 25 times ", "no more shield hitbox");
+                                    _SK.BuffersCounter(5, "ShieldHits", 25, 1, "Shoot any shield 25 times", "Instant shield break");
                                     _SK.CreateSoundGetGO(_SK.BF_RHGC.TVAudioSource, RHGC.OsasShieldCrashAC, _defaultPos.TV, RHGC.transform);
                                 }
                                 else
@@ -126,7 +126,7 @@ public class Bullet : MonoBehaviour
                         }
                     }
                     if(MultipleHit != 0)
-                        _SK.BuffersCounter(3, "MultipleKills", 5, MultipleHit, "hit two rabbits with one shot for 5 times ", "LARGE BULLET");
+                        _SK.BuffersCounter(3, "MultipleKills", 5, MultipleHit, "hit two attackers with one shot 5 times", "Big bullets");
                     break;
             }
         }

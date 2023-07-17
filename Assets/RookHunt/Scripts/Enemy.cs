@@ -85,7 +85,7 @@ public class Enemy : MonoBehaviour
                                 RHGC.Shots--;
                             RHGC.StatsEnemyMissed++;
 
-                            RHGC._SK.BuffersCounter(2, "MissedEnemies", 20, 1, "miss 20 atackers\n", "missing enemies do not stole ammo");
+                            RHGC._SK.BuffersCounter(2, "MissedEnemies", 20, 1, "Let 20 attackers escape\n", "Don't lose ammo when attackers escape");
                             MainBridge.CreateSoundGetGO(RHGC.TVAudioSource, RHGC.EnemyMissedSound, _defaultPos.TV, RHGC.transform);
                         }
                         RHGC.Enemies.Remove(gameObject);

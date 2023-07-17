@@ -70,15 +70,15 @@ public class ScriptKing : MonoBehaviour
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
 
         #region CheckModifersProgress
-        BuffersCounter(0, "ShotTimes", 100, 0, "Shot for 100 times\n", "infinite ammo");
-        BuffersCounter(1, "ShotTimes", 1000, 0, "Shot for 1000 times\n", "full auto Shoting");
-        BuffersCounter(2, "MissedEnemies", 20, 0, "miss 20 atackers\n", "missing enemies do not stole ammo");
-        BuffersCounter(3, "MultipleKills", 5, 0, "hit two rabbits with one shot for 5 times ", "LARGE BULLET");
-        BuffersCounter(4, "AshKills", 20, 0, "kill Ash for 20 times \n", "all enemies are Ash now\n(infinite game mode only)");
-        BuffersCounter(5, "ShieldHits", 25, 0, "Shot to the shield for 25 times ", "no more shield hitbox");
-        BuffersCounter(6, "KillSteakEarned", 1, 0, "Get Streak of 20 kills", "no more losing kill streak");
-        BuffersCounter(7, "ChampionEarned", 1, 0, "beat champion", "GLOCK");
-        BuffersCounter(8, "DoomUnlocked", 1, 0, "secret", "back to the 1993");
+        BuffersCounter(0, "ShotTimes", 100, 0, "Shoot 100 times\n", "Infinite ammo");
+        BuffersCounter(1, "ShotTimes", 1000, 0, "shoot 1000 times\n", "Full auto");
+        BuffersCounter(2, "MissedEnemies", 20, 0, "Let 20 attackers escape\n", "Don't lose ammo when attackers escape");
+        BuffersCounter(3, "MultipleKills", 5, 0, "hit two attackers with one shot 5 times", "Big bullets");
+        BuffersCounter(4, "AshKills", 20, 0, "Kill Ash 20 times \n", "Ashpocalipse\n(infinite game mode only)");
+        BuffersCounter(5, "ShieldHits", 25, 0, "Shoot any shield 25 times", "Instant shield break");
+        BuffersCounter(6, "KillSteakEarned", 1, 0, "Get a 20 kill streak", "Don't lose killstreak on miss");
+        BuffersCounter(7, "ChampionEarned", 1, 0, "Get champion rank", "GLOCK");
+        BuffersCounter(8, "DoomUnlocked", 1, 0, "Secret", "Back to the 90's");
         #endregion
 
         #region SetSettings
@@ -173,7 +173,7 @@ public class ScriptKing : MonoBehaviour
                     case _ObjectType.LightSwitch:
                         LampLight.SetActive(!LampLight.activeSelf);
                         OtsideLight.SetActive(!OtsideLight.activeSelf);
-                        hit.collider.transform.localEulerAngles += new Vector3 (0, LampLight.activeSelf ? -20 : 20, 0);
+                        hit.collider.transform.localEulerAngles = new Vector3 (0, LampLight.activeSelf ? -10 : 10, 0);
                         break;
                     case _ObjectType.PaperWithModifers:
                         PaperAnim.SetBool("Focussed", _object.modifer == 0);
@@ -234,13 +234,13 @@ public class ScriptKing : MonoBehaviour
         #region ClickSound
         if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            PistolTrigger.transform.localEulerAngles += new Vector3(0, 0, 15);
+            PistolTrigger.transform.localEulerAngles = new Vector3(0, 0, 15);
             LightGunAS.clip = LightGunClick;
             LightGunAS.Play();
         }
         else if (Input.GetKeyUp(KeyCode.Mouse0))
         {
-            PistolTrigger.transform.localEulerAngles += new Vector3(0, 0, -15);
+            PistolTrigger.transform.localEulerAngles = new Vector3(0, 0, 0);
             LightGunAS.clip = LightGunUnClick;
             LightGunAS.Play();
         }
@@ -249,13 +249,16 @@ public class ScriptKing : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             CameraAnimator.SetTrigger("ChangeFov");
-            Focused = !Focused;
         }
     }
     private IEnumerator ShotCD()
     {
         yield return new WaitForSeconds(FullAutoShoting ? 0.08f : 0.16f);
         ReadyToShot = true;
+    }
+    public void SetFocused(int boolean)
+    {
+        Focused = boolean == 1;
     }
 
     public GameObject CreateSoundGetGO(GameObject AudioSource, AudioClip audioClip, _defaultPos defaultPos, Transform ParentTrans = null, bool shouldKillUrSelf = true, Vector3 _Position = new())

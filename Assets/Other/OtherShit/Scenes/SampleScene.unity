@@ -182,7 +182,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Shot for 1000 times \nxxxxxxxxxx"
+  m_text: "shoot 1000 times \nxxxxxxxxxx"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3681d05e6c4ec45409b42c2a046b3879, type: 2}
   m_sharedMaterial: {fileID: -6573853761639733593, guid: 3681d05e6c4ec45409b42c2a046b3879, type: 2}
@@ -402,7 +402,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Get Streak of 20 kills '
+  m_text: Get a 20 kill streak
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3681d05e6c4ec45409b42c2a046b3879, type: 2}
   m_sharedMaterial: {fileID: -6573853761639733593, guid: 3681d05e6c4ec45409b42c2a046b3879, type: 2}
@@ -1412,7 +1412,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: hit two rabbits with one shot for 5 times xxxxxxxxxx
+  m_text: hit two attackers with one shot 5 times xxxxxxxxxx
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3681d05e6c4ec45409b42c2a046b3879, type: 2}
   m_sharedMaterial: {fileID: -6573853761639733593, guid: 3681d05e6c4ec45409b42c2a046b3879, type: 2}
@@ -1439,8 +1439,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 7.97
-  m_fontSizeBase: 7.97
+  m_fontSize: 9
+  m_fontSizeBase: 9
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2899,7 +2899,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'miss 20 atackers
+  m_text: 'miss 20 attackers
 
     xxxxxxxxxx'
   m_isRightToLeft: 0
@@ -2928,8 +2928,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 11
-  m_fontSizeBase: 11
+  m_fontSize: 10
+  m_fontSizeBase: 10
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -4902,7 +4902,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: shot to the shield for 25 times xxxxxxxxxx
+  m_text: Shoot any shield 25 times xxxxxxxxxx
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3681d05e6c4ec45409b42c2a046b3879, type: 2}
   m_sharedMaterial: {fileID: -6573853761639733593, guid: 3681d05e6c4ec45409b42c2a046b3879, type: 2}
@@ -5744,7 +5744,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Shot for 100 times \nxxxxxxxxxx"
+  m_text: "Shoot 100 times \nxxxxxxxxxx"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3681d05e6c4ec45409b42c2a046b3879, type: 2}
   m_sharedMaterial: {fileID: -6573853761639733593, guid: 3681d05e6c4ec45409b42c2a046b3879, type: 2}
@@ -7483,7 +7483,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "kill Ash for 20 times \nxxxxxxxxxx"
+  m_text: 'Kill Ash 20 times
+
+    xxxxxxxxxx'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3681d05e6c4ec45409b42c2a046b3879, type: 2}
   m_sharedMaterial: {fileID: -6573853761639733593, guid: 3681d05e6c4ec45409b42c2a046b3879, type: 2}
@@ -8317,7 +8319,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1732349998}
-  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 2.2255425, y: 1.0530766, z: 1.3565626}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -11393,6 +11395,9 @@ GameObject:
   - component: {fileID: 1497121098324400881}
   - component: {fileID: 2481798812935400325}
   - component: {fileID: 2516662836858940519}
+  - component: {fileID: 6810959792023906099}
+  - component: {fileID: 6810959792023906100}
+  - component: {fileID: 6810959792023906098}
   m_Layer: 0
   m_Name: "\u043F\u0440\u0438\u0441\u0442\u0430\u0432\u043A\u0430."
   m_TagString: Untagged
@@ -11400,6 +11405,46 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
   m_IsActive: 1
+--- !u!114 &6810959792023906098
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6810959792023906097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97deb2ff3dd3adf4ca869aaf2b93db5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjectType: 1
+  modifer: 0
+--- !u!65 &6810959792023906099
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6810959792023906097}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: -0.0023, y: 0.0005, z: 0.03559444}
+  m_Center: {x: -0.0003, y: 0, z: 0}
+--- !u!65 &6810959792023906100
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6810959792023906097}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.0051333327, y: 0.0048988783, z: 0.02}
+  m_Center: {x: 0.0007069943, y: -0.00005454383, z: -0.01}
 --- !u!33 &6841993434320225909
 MeshFilter:
   m_ObjectHideFlags: 0
