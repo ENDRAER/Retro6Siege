@@ -21,7 +21,7 @@ public class ScriptKing : MonoBehaviour
     [SerializeField] private Animator PaperAnim;
     [SerializeField] public enum _ObjectType { Screen, ResetConcole, TV_VolUp, LightSwitch, PaperWithModifers, ModButton, Settings };
     [NonSerialized] public bool InfiniteAmmo;
-    [NonSerialized] public bool FullAutoShooting;
+    [NonSerialized] public bool FullAutoShoting;
     [NonSerialized] public bool NoOpLeft;
     [NonSerialized] public bool LargeBullet;
     [NonSerialized] public bool AllEnemyAreAsh;
@@ -40,7 +40,7 @@ public class ScriptKing : MonoBehaviour
     [SerializeField] private float RotSpeed;
     [SerializeField] private float MinRot;
     [SerializeField] private float MaxRot;
-    [NonSerialized] private bool ReadyToShoot = true;
+    [NonSerialized] private bool ReadyToShot = true;
     [NonSerialized] private bool Focused = false;
     [Header("RookHunt")]
     [SerializeField] private GameObject RookHuntMenuPF;
@@ -70,12 +70,12 @@ public class ScriptKing : MonoBehaviour
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
 
         #region CheckModifersProgress
-        BuffersCounter(0, "ShootTimes", 100, 0, "Shoot for 100 times\n", "infinite ammo");
-        BuffersCounter(1, "ShootTimes", 1000, 0, "Shoot for 1000 times\n", "full auto shooting");
+        BuffersCounter(0, "ShotTimes", 100, 0, "Shot for 100 times\n", "infinite ammo");
+        BuffersCounter(1, "ShotTimes", 1000, 0, "Shot for 1000 times\n", "full auto Shoting");
         BuffersCounter(2, "MissedEnemies", 20, 0, "miss 20 atackers\n", "missing enemies do not stole ammo");
         BuffersCounter(3, "MultipleKills", 5, 0, "hit two rabbits with one shot for 5 times ", "LARGE BULLET");
         BuffersCounter(4, "AshKills", 20, 0, "kill Ash for 20 times \n", "all enemies are Ash now\n(infinite game mode only)");
-        BuffersCounter(5, "ShieldHits", 25, 0, "shoot to the shield for 25 times ", "no more shield hitbox");
+        BuffersCounter(5, "ShieldHits", 25, 0, "Shot to the shield for 25 times ", "no more shield hitbox");
         BuffersCounter(6, "KillSteakEarned", 1, 0, "Get Streak of 20 kills", "no more losing kill streak");
         BuffersCounter(7, "ChampionEarned", 1, 0, "beat champion", "GLOCK");
         BuffersCounter(8, "DoomUnlocked", 1, 0, "secret", "back to the 1993");
@@ -126,10 +126,10 @@ public class ScriptKing : MonoBehaviour
                 LaserMark.color = new Color(1, 0, 0, 0.6f);
             }
             #endregion
-            if (ReadyToShoot && (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKey(KeyCode.Mouse0) && FullAutoShooting && hit.transform.GetComponent<InteractableObjects>().ObjectType == _ObjectType.Screen))
+            if (ReadyToShot && (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKey(KeyCode.Mouse0) && FullAutoShoting && hit.transform.GetComponent<InteractableObjects>().ObjectType == _ObjectType.Screen))
             {
-                ReadyToShoot = false;
-                StartCoroutine(ShootCD());
+                ReadyToShot = false;
+                StartCoroutine(ShotCD());
                 switch (hit.transform.GetComponent<InteractableObjects>().ObjectType)
                 {
                     case _ObjectType.Screen:
@@ -186,8 +186,8 @@ public class ScriptKing : MonoBehaviour
                                 CheckMarks[0].SetActive(InfiniteAmmo);
                                 break;
                             case 1:
-                                FullAutoShooting = !FullAutoShooting;
-                                CheckMarks[1].SetActive(FullAutoShooting);
+                                FullAutoShoting = !FullAutoShoting;
+                                CheckMarks[1].SetActive(FullAutoShoting);
                                 break;
                             case 2:
                                 NoOpLeft = !NoOpLeft;
@@ -252,10 +252,10 @@ public class ScriptKing : MonoBehaviour
             Focused = !Focused;
         }
     }
-    private IEnumerator ShootCD()
+    private IEnumerator ShotCD()
     {
-        yield return new WaitForSeconds(FullAutoShooting ? 0.08f : 0.16f);
-        ReadyToShoot = true;
+        yield return new WaitForSeconds(FullAutoShoting ? 0.08f : 0.16f);
+        ReadyToShot = true;
     }
 
     public GameObject CreateSoundGetGO(GameObject AudioSource, AudioClip audioClip, _defaultPos defaultPos, Transform ParentTrans = null, bool shouldKillUrSelf = true, Vector3 _Position = new())

@@ -25,7 +25,7 @@ public class RookHuntGameController : MonoBehaviour
     [SerializeField] public GameObject Alibi;
     [NonSerialized] public List<GameObject> Enemies = new();
     [NonSerialized] public bool InvincibleEnemies;
-    [NonSerialized] public double Shoots = 3;
+    [NonSerialized] public double Shots = 3;
     [NonSerialized] public int KillStreak = 0;
     [NonSerialized] public int Score;
     [SerializeField] public enum _CurrentMode { Menu, GameOver, Ranked, Infinite }
@@ -76,13 +76,13 @@ public class RookHuntGameController : MonoBehaviour
     [NonSerialized] private int Round = 0;
     [NonSerialized] private int[] TeamScore = { 0, 0 };
     [NonSerialized] public int StatsMaxKillStreak;
-    [NonSerialized] public int StatsShootsMissed;
+    [NonSerialized] public int StatsShotsMissed;
     [NonSerialized] public int StatsEnemyMissed;
     [Header("Audios")]
     [SerializeField] public AudioClip MainMenuAudioAC;
     [NonSerialized] public GameObject MainMenuAudioGO;
     [SerializeField] public GameObject TVAudioSource;
-    [SerializeField] public AudioClip ShootSound;
+    [SerializeField] public AudioClip ShotSound;
     [SerializeField] public AudioClip EnemySpotAC;
     [SerializeField] public AudioClip RunningSound;
     [SerializeField] public AudioClip HitSound;
@@ -265,7 +265,7 @@ public class RookHuntGameController : MonoBehaviour
         #region atack
         else
         {
-            Shoots = CurrentRang >= 10 ? 0 : 1;
+            Shots = CurrentRang >= 10 ? 0 : 1;
             MagazineUpdate();
             MapCS.Inside.SetActive(false);
             MapCS.Outside.SetActive(true);
@@ -355,7 +355,7 @@ public class RookHuntGameController : MonoBehaviour
             icon.sprite = SpaceSprite;
         }
 
-        Shoots = 1;
+        Shots = 1;
         if (Enemies != null)
         {
             foreach (GameObject go in Enemies)
@@ -411,7 +411,7 @@ public class RookHuntGameController : MonoBehaviour
             "\r\nSCORE: " + Score +
             "\r\nMax killstreak: " + (StatsMaxKillStreak > KillStreak ? StatsMaxKillStreak : KillStreak) +
             "\r\nenemy missed: " + StatsEnemyMissed +
-            "\r\nshoots missed: " + StatsShootsMissed;
+            "\r\nShots missed: " + StatsShotsMissed;
     }
     #endregion
 
@@ -490,13 +490,13 @@ public class RookHuntGameController : MonoBehaviour
 
     public void MagazineUpdate()
     {
-        Shoots = math.clamp(Shoots, -2, 1);
+        Shots = math.clamp(Shots, -2, 1);
         for (int i = 0; i < BulletsImg.Length; i++)
         {
-            BulletsImg[i].fillAmount = i + (float)Shoots;
+            BulletsImg[i].fillAmount = i + (float)Shots;
         }
 
-        if (CurrentMode == _CurrentMode.Infinite && Shoots < -1)
+        if (CurrentMode == _CurrentMode.Infinite && Shots < -1)
         {
             CurrentMode = _CurrentMode.GameOver;
             TeamScoreText.text = null;
@@ -517,21 +517,21 @@ public class RookHuntGameController : MonoBehaviour
         {
             if (Enemies.Count == 0)
                 StartCoroutine(EndOfTheRankedRound(true));
-            else if (Shoots < -1)
+            else if (Shots < -1)
                 StartCoroutine(EndOfTheRankedRound(false));
         }
     }
 
     public void ExitInMainMenu()
     {
-        Shoots = 1;
+        Shots = 1;
         Score = 0;
         KillStreak = 0;
         Round = 0;
         TeamScore[0] = 0;
         TeamScore[1] = 0;
         StatsEnemyMissed = 0;
-        StatsShootsMissed = 0;
+        StatsShotsMissed = 0;
         StatsMaxKillStreak = 0;
         if (Enemies != null)
         {
@@ -570,8 +570,8 @@ public class RookHuntGameController : MonoBehaviour
             notBad = true;
             TopRecordText.text = "TOP SCORE = " + Score;
         }
-        _SK.BuffersCounter(0, "ShootTimes", 100, ShootTimesPerMatch, "Shoot for 100 times\n", "infinite ammo");
-        _SK.BuffersCounter(1, "ShootTimes", 1000, ShootTimesPerMatch, "Shoot for 1000 times\n", "full auto shooting");
+        _SK.BuffersCounter(0, "ShotTimes", 100, ShootTimesPerMatch, "Shot for 100 times\n", "infinite ammo");
+        _SK.BuffersCounter(1, "ShotTimes", 1000, ShootTimesPerMatch, "Shot for 1000 times\n", "full auto shoting");
 
         CavPortraitGO.transform.localPosition = new(posX, -1200, -0.1f);
         CavPortraitGO.transform.localScale = new(scale, scale);

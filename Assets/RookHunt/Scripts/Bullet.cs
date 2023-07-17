@@ -24,7 +24,7 @@ public class Bullet : MonoBehaviour
             transform.localScale = new(6, 6, 6);
         if (RHGC.CurrentMode != _CurrentMode.GameOver && RHGC.CurrentMode != _CurrentMode.Menu)
         {
-            RHGC.Shoots -= _SK.InfiniteAmmo ? 0 : 1;
+            RHGC.Shots -= _SK.InfiniteAmmo ? 0 : 1;
             RHGC.ShootTimesPerMatch++;
         }
 
@@ -39,11 +39,11 @@ public class Bullet : MonoBehaviour
                 case "INFINITE_PlayList":
                     RHGC.InfiniteModeStart();
                     break;
-                case "ShootToRestart":
+                case "ShotToRestart":
                     RHGC.ExitInMainMenu();
                     break;
                 default:
-                    MainBridge.CreateSoundGetGO(RHGC.TVAudioSource, RHGC.ShootSound, _defaultPos.TV);
+                    MainBridge.CreateSoundGetGO(RHGC.TVAudioSource, RHGC.ShotSound, _defaultPos.TV);
                     if (RHGC.InvincibleEnemies)
                         return;
                     Collider2D cover = null;
@@ -54,7 +54,7 @@ public class Bullet : MonoBehaviour
                         else if (_coll.CompareTag("Shield") && !_SK.NoMoreShieldHitBox)
                         {
                             cover = cover == null ? _coll : cover.transform.position.z < _coll.transform.position.z ? cover : _coll;
-                            _SK.BuffersCounter(5, "ShieldHits", 25, 1, "shoot to the shield for 25 times ", "no more shield hitbox");
+                            _SK.BuffersCounter(5, "ShieldHits", 25, 1, "Shot to the shield for 25 times ", "no more shield hitbox");
                             _SK.CreateSoundGetGO(_SK.BF_RHGC.TVAudioSource, RHGC.OsasShieldCrashAC, _defaultPos.TV, RHGC.transform);
                         }
                     }
@@ -78,7 +78,7 @@ public class Bullet : MonoBehaviour
 
                                 RHGC.KillStreakPerRound++;
                                 RHGC.KillStreak++;
-                                RHGC.Shoots += 1.5;
+                                RHGC.Shots += 1.5;
                                 if (RHGC.KillStreak == 20)
                                     _SK.BuffersCounter(6, "KillSteakEarned", 1, 1, "Get Streak of 20 kills", "no more losing kill streak");
                                 if(EnemyCS.EnemyType == _EnemyType.Ash)
@@ -91,7 +91,7 @@ public class Bullet : MonoBehaviour
                                     EnemyCS.ShieldDestroyed = true;
                                     EnemyCS.Speed *= 1.5f;
                                     EnemyCS.AnimID += 2;
-                                    _SK.BuffersCounter(5, "ShieldHits", 25, 1, "shoot to the shield for 25 times ", "no more shield hitbox");
+                                    _SK.BuffersCounter(5, "ShieldHits", 25, 1, "Shot to the shield for 25 times ", "no more shield hitbox");
                                     _SK.CreateSoundGetGO(_SK.BF_RHGC.TVAudioSource, RHGC.OsasShieldCrashAC, _defaultPos.TV, RHGC.transform);
                                 }
                                 else
@@ -131,7 +131,7 @@ public class Bullet : MonoBehaviour
             }
         }
         else
-            MainBridge.CreateSoundGetGO(RHGC.TVAudioSource, RHGC.ShootSound, _defaultPos.TV, RHGC.transform);
+            MainBridge.CreateSoundGetGO(RHGC.TVAudioSource, RHGC.ShotSound, _defaultPos.TV, RHGC.transform);
 
         if (resetMultiplier && RHGC.CurrentMode != _CurrentMode.Menu)
         {
@@ -142,7 +142,7 @@ public class Bullet : MonoBehaviour
                 RHGC.KillStreak = 0;
                 RHGC.KillStreakPerRound = 0;
             }
-            RHGC.StatsShootsMissed++;
+            RHGC.StatsShotsMissed++;
         }
         RHGC.StatUpdate();
     }

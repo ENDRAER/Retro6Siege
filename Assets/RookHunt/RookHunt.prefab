@@ -900,7 +900,7 @@ MonoBehaviour:
   RSNextButton: {fileID: 6100262734702251080}
   MainMenuAudioAC: {fileID: 8300000, guid: f80da83f6da43b444a2153aec4aa4027, type: 3}
   TVAudioSource: {fileID: 6469655515661458829, guid: 8b878ad0d2cdd944c8980721537cae55, type: 3}
-  ShootSound: {fileID: 8300000, guid: eb0599fc51468774e9a66422fb35f4de, type: 3}
+  ShotSound: {fileID: 8300000, guid: eb0599fc51468774e9a66422fb35f4de, type: 3}
   EnemySpotAC: {fileID: 8300000, guid: f67103dcd3dc7e642846c434eda2aa52, type: 3}
   RunningSound: {fileID: 8300000, guid: 469df7d19f376f542a93af6e4653cfde, type: 3}
   HitSound: {fileID: 8300000, guid: 8e6ceafeb777db746ad7587337d659a3, type: 3}

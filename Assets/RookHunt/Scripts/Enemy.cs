@@ -82,7 +82,7 @@ public class Enemy : MonoBehaviour
                         if (EnemyType != _EnemyType.IanaClone)
                         {
                             if(!RHGC._SK.NoOpLeft)
-                                RHGC.Shoots--;
+                                RHGC.Shots--;
                             RHGC.StatsEnemyMissed++;
 
                             RHGC._SK.BuffersCounter(2, "MissedEnemies", 20, 1, "miss 20 atackers\n", "missing enemies do not stole ammo");
@@ -164,7 +164,7 @@ public class Enemy : MonoBehaviour
         yield return new WaitForSeconds(ShootingDelay);
         MainBridge.CreateSoundGetGO(RHGC.TVAudioSource, RHGC.EnemyHitSound, _defaultPos.TV, RHGC.transform);
         RHGC.BloodFrameAnim.SetTrigger("Reactive");
-        RHGC.Shoots -= Damage;
+        RHGC.Shots -= Damage;
         RHGC.MagazineUpdate();
         AlertGO.SetActive(false);
         if (PostShootingDelay != 0)
