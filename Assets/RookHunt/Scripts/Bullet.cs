@@ -33,9 +33,6 @@ public class Bullet : MonoBehaviour
         {
             switch (CollidersInZone[0].gameObject.name)
             {
-                case "RANKED_PlayList":
-                    RHGC.RankedGameStart();
-                    break;
                 case "INFINITE_PlayList":
                     RHGC.InfiniteModeStart();
                     break;
