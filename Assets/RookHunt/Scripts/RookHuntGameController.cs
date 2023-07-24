@@ -134,6 +134,8 @@ public class RookHuntGameController : MonoBehaviour
 
         IsDefender = UnityEngine.Random.Range(0, 2) == 0;
         LSTeamIconCenter.transform.rotation = Quaternion.identity;
+        LSTeam1IcoGO.transform.rotation = Quaternion.identity;
+        LSTeam2IcoGO.transform.rotation = Quaternion.identity;
         if (IsDefender)
         {
             LSTeam1IcoImg.sprite = LSDefendSpr;

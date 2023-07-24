@@ -62,7 +62,7 @@ public class Bullet : MonoBehaviour
                     int MultipleHit = 0;
                     foreach (Collider2D _coll in CollidersInZone)
                     {
-                        if (_coll.GetComponentInParent<Enemy>() != null && _coll.transform.position.z < (cover == null ? 0 : cover.transform.position.z))
+                        if (_coll.GetComponentInParent<Enemy>() != null && (_coll.transform.position.z < (cover == null ? 0 : cover.transform.position.z) || _SK.LargeBullet))
                         {
                             Enemy EnemyCS = _coll.GetComponentInParent<Enemy>();
                             if (EnemyCS.EnemyType != _EnemyType.IanaClone && EnemyCS.EnemyType != _EnemyType.Alibi)

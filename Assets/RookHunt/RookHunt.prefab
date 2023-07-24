@@ -1731,7 +1731,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: oponents
+  m_text: opponents
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3ddc82a9260a92d4dae4d03cbb70f282, type: 2}
   m_sharedMaterial: {fileID: 6664717805218027384, guid: 3ddc82a9260a92d4dae4d03cbb70f282, type: 2}
@@ -1758,8 +1758,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 37.2
-  m_fontSizeBase: 37.2
+  m_fontSize: 38
+  m_fontSizeBase: 38
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -5095,8 +5095,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 42.9
-  m_fontSizeBase: 42.9
+  m_fontSize: 38
+  m_fontSizeBase: 38
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
