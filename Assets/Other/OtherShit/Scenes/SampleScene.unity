@@ -689,7 +689,7 @@ MonoBehaviour:
   ScreenPos: {fileID: 1737000559}
   TVGamesPos: {x: 50, y: 0, z: 0}
   RotSpeed: 1
-  MinRot: -50
+  MinRot: -30
   MaxRot: 50
   RookHuntMenuPF: {fileID: 6100262732652156033, guid: 6c07f1c0ef151fb43920d98f8d8dbda1, type: 3}
   HitColiderGO: {fileID: 4060668376003707211, guid: 1d4b532917e8fe34db5ce364a47113b5, type: 3}
