@@ -108,7 +108,6 @@ public class RookHuntGameController : MonoBehaviour
     {
         _SK = MainBridge;
         MenuCanvasGO.SetActive(true);
-        PlayerPrefs.SetInt("CurrentRang", 35);
         CurrentRang = math.clamp(PlayerPrefs.GetInt("CurrentRang"), 0, RangImages.Length - 1);
         CurrentRangImg.sprite = RangImages[CurrentRang];
         TopRecordText.text = "TOP SCORE = " + PlayerPrefs.GetInt("TopScore");
