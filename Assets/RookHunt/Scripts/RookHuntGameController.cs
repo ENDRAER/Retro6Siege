@@ -108,6 +108,7 @@ public class RookHuntGameController : MonoBehaviour
     {
         _SK = MainBridge;
         MenuCanvasGO.SetActive(true);
+        PlayerPrefs.SetInt("CurrentRang", 34);
         CurrentRang = math.clamp(PlayerPrefs.GetInt("CurrentRang"), 0, RangImages.Length - 1);
         CurrentRangImg.sprite = RangImages[CurrentRang];
         TopRecordText.text = "TOP SCORE = " + PlayerPrefs.GetInt("TopScore");
@@ -402,7 +403,7 @@ public class RookHuntGameController : MonoBehaviour
             _SK.BuffersCounter(7, "ChampionEarned", 1, 1, "Get champion rank", "GLOCK");
         RSGradiend.color = IsWinner ? new Color(0, 0.6f, 1) : new Color(1, 0.2441f, 0);
         bool HasntMoved = false;
-        if (CurrentRang < 0 || CurrentRang > 35)
+        if (CurrentRang < 0 || CurrentRang > 34)
         {
             CurrentRang = math.clamp(CurrentRang, 0, RangImages.Length - 1);
             RSAnimator.SetTrigger("HasNotMoved");
