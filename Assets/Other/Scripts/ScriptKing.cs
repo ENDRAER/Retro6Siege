@@ -19,7 +19,7 @@ public class ScriptKing : MonoBehaviour
     [SerializeField] public GameObject[] CheckBoxes;
     [SerializeField] public GameObject[] CheckMarks;
     [SerializeField] private Animator PaperAnim;
-    [SerializeField] public enum _ObjectType { Screen, ResetConcole, TV_VolUp, LightSwitch, PaperWithModifers, ModButton, Settings };
+    [SerializeField] public enum _ObjectType { Screen, ResetConcole, TV_VolUp, LightSwitch, PaperWithModifers, ModButton, Settings, Exit };
     [NonSerialized] public bool InfiniteAmmo;
     [NonSerialized] public bool FullAutoShoting;
     [NonSerialized] public bool NoOpLeft;
@@ -30,6 +30,7 @@ public class ScriptKing : MonoBehaviour
     [NonSerialized] public bool glock;
     [NonSerialized] public bool doom1993;
     [Header("Camera")]
+    [SerializeField] private Vector3 DeffaultCamRot;
     [SerializeField] private SpriteRenderer LaserMark;
     [SerializeField] private SpriteRenderer LaserHalo;
     [SerializeField] private GameObject CameraGO;
@@ -108,7 +109,10 @@ public class ScriptKing : MonoBehaviour
     void LateUpdate()
     {
         if (SettCanvasGO.activeSelf) return;
-        CameraGO.transform.eulerAngles += new Vector3(-Input.GetAxis("Mouse Y") * (RotSpeed / (Focused ? 2 : 1)), Input.GetAxis("Mouse X") * (RotSpeed / (Focused? 2 : 1)));
+        if (Application.platform == RuntimePlatform.Android)
+            CameraGO.transform.rotation = Quaternion.Lerp(transform.rotation, new quaternion(Input.acceleration.y * 90, Input.acceleration.x * -90, 0, 0), 0.5f  * Time.deltaTime);
+        else
+            CameraGO.transform.eulerAngles += new Vector3(-Input.GetAxis("Mouse Y") * (RotSpeed / (Focused ? 2 : 1)), Input.GetAxis("Mouse X") * (RotSpeed / (Focused ? 2 : 1)));
         CameraGO.transform.eulerAngles = new Vector3(Mathf.Clamp((CameraGO.transform.eulerAngles.x > 200 ? -(360 - CameraGO.transform.eulerAngles.x) : CameraGO.transform.eulerAngles.x), MinRot, MaxRot), CameraGO.transform.eulerAngles.y);
 
         if (Physics.Raycast(CameraGO.transform.position, CameraGO.transform.TransformDirection(Vector3.forward), out RaycastHit hit, Mathf.Infinity) && hit.transform.GetComponent<InteractableObjects>() != null)
@@ -220,6 +224,9 @@ public class ScriptKing : MonoBehaviour
                         foreach(Resolution r in AllResolutions)
                             res.Add(r.ToString());
                         ResolutionDD.AddOptions(res);
+                        break;
+                    case _ObjectType.Exit:
+                        Application.Quit();
                         break;
                 }
             }
